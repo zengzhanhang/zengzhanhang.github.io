@@ -16,7 +16,7 @@
 <meta property="og:description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Not Robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-10T21:44:16.000Z">
+<meta property="og:updated_time" content="2019-05-10T23:50:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Not Robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
@@ -147,46 +147,49 @@
                 <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
     
     <div class="card-content article ">
-            <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-                
-                    <i class="fas fa-angle-double-right"></i>DME - Data Mining and Exploration(INF11007) Revision
-                
-            </h1>
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>DME - Data Mining and Exploration(INF11007) Revision
+            
+        </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-10T21:44:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-10</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-10T23:50:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-11</time>
                 
                 
                 <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
                 <a class="has-link-grey -link" href="/categories/University-of-Edinburgh/">University of Edinburgh</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    a few seconds read (About 94 words)
+                    a few seconds read (About 102 words)
                 </span>
                 
                 
             </div>
         </div>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+        <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
                 DME - Data Mining and Exploration(INF11007) Revision
             
-        </h1>
+        </h1> -->
         <div class="content">
-            <h2 id="Exploratory-Data-Analysis"><a href="#Exploratory-Data-Analysis" class="headerlink" title="Exploratory Data Analysis"></a>Exploratory Data Analysis</h2><h3 id="Numberical-Data-Description"><a href="#Numberical-Data-Description" class="headerlink" title="Numberical Data Description"></a>Numberical Data Description</h3><h4 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h4><ul>
+            <h1 id="Exploratory-Data-Analysis"><a href="#Exploratory-Data-Analysis" class="headerlink" title="Exploratory Data Analysis"></a>Exploratory Data Analysis</h1><h2 id="Numberical-Data-Description"><a href="#Numberical-Data-Description" class="headerlink" title="Numberical Data Description"></a>Numberical Data Description</h2><h3 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h3><ul>
 <li><p><strong>Not Robust Measure</strong></p>
 <ul>
 <li>Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$<ul>
-<li>for random variable: $\mathbb{E}[x] = \int xp(x) dx$</li>
+<li>for random variable: $\mathbb{E}[x] = \int xp(x) dx$<a id="more"></a>
+</li>
 </ul>
 </li>
 </ul>
@@ -207,7 +210,34 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
 </li>
 </ul>
 <hr>
-<p><strong>Example</strong><br>$$Data_1=[0, 1, 1, 1, 2, 3, 4, 4, 5, 9]$$<br>$$Data_2=[0, 1, 1, 1, 2, 3, 4, 4, 5, 9000]$$</p>
+<p><strong>Example</strong><br>Data_1=[0, 1, 1, 1, 2, 3, 4, 4, 5, 9]<br>Data_2=[0, 1, 1, 1, 2, 3, 4, 4, 5, 9000]</p>
+<table>
+<thead>
+<tr>
+<th>DataSet</th>
+<th style="text-align:center">Mean</th>
+<th style="text-align:center">Median</th>
+<th style="text-align:center">$Q_{1}$</th>
+<th style="text-align:center">$Q_{3}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data 1</td>
+<td style="text-align:center">3.0</td>
+<td style="text-align:center">2.5</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">4.0</td>
+</tr>
+<tr>
+<td>Data 2</td>
+<td style="text-align:center">902.1</td>
+<td style="text-align:center">2.5</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">4.0</td>
+</tr>
+</tbody>
+</table>
 
         </div>
         
@@ -243,6 +273,13 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/11/test/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">test</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -299,7 +336,7 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        4
                     </p>
                 </div>
             </div>
