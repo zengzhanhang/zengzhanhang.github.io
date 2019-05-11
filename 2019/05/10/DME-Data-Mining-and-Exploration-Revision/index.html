@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Not Robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
+    <meta name="description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
 <meta name="keywords" content="CoursesRevision">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta property="og:url" content="http://yoursite.com/2019/05/10/DME-Data-Mining-and-Exploration-Revision/index.html">
 <meta property="og:site_name" content="Zhanhang Zeng">
-<meta property="og:description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Not Robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
+<meta property="og:description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-10T23:50:16.000Z">
+<meta property="og:updated_time" content="2019-05-11T16:55:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
-<meta name="twitter:description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Not Robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
+<meta name="twitter:description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -158,7 +158,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-10T23:50:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-11</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-11T16:55:04.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-11</time>
                 
                 
                 <div class="level-item">
@@ -171,7 +171,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    a few seconds read (About 102 words)
+                    3 minutes read (About 446 words)
                 </span>
                 
                 
@@ -185,7 +185,7 @@
         </h1> -->
         <div class="content">
             <h1 id="Exploratory-Data-Analysis"><a href="#Exploratory-Data-Analysis" class="headerlink" title="Exploratory Data Analysis"></a>Exploratory Data Analysis</h1><h2 id="Numberical-Data-Description"><a href="#Numberical-Data-Description" class="headerlink" title="Numberical Data Description"></a>Numberical Data Description</h2><h3 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h3><ul>
-<li><p><strong>Not Robust Measure</strong></p>
+<li><p><strong>Non-robust Measure</strong></p>
 <ul>
 <li>Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$<ul>
 <li>for random variable: $\mathbb{E}[x] = \int xp(x) dx$<a id="more"></a>
@@ -238,6 +238,65 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
 </tr>
 </tbody>
 </table>
+<h3 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h3><ul>
+<li><p><strong>Non-robust Measure</strong></p>
+<ul>
+<li>Sample Variance: $Var(x) = \frac{1}{n}\sum_{i=1}^{n} (x_{i} - \hat{x})^2$<ul>
+<li>for random variable: $Var[x] = \int [x-\mathbb{E}[x]]^2 dx$</li>
+</ul>
+</li>
+<li>Standard Deviation: $Std(x) = \sqrt{Var(x)}$</li>
+</ul>
+</li>
+<li><p><strong>Robust Measure</strong></p>
+<ul>
+<li>Median Absolute Deviation(MAD): $$MAD(x) = median[|x_{i} - median(x)|]$$</li>
+<li>IQR(interquartile range): $$IQR = Q_{3} - Q_{1}$$</li>
+</ul>
+</li>
+</ul>
+<h3 id="Shape"><a href="#Shape" class="headerlink" title="Shape:"></a>Shape:</h3><ul>
+<li><p><strong>Non-robust Measure</strong></p>
+<ul>
+<li>Skewness: measures the asymmetry of data $$skew(x) = \frac{1}{n} \sum_{i=1}^{n}[\frac{x_{i}-\hat{x}}{std(x)}]^{3}$$ </li>
+<li>Kurtosis: measures how heavy the tails of distribution are, in other word, measures how often x takes on values that are considerable larger or smaller than its standard deviation.<br>$$kurt(x) = \frac{1}{n} \sum_{i=1}^{n}[\frac{x_{i}-\hat{x}}{std(x)}]^{4}$$ </li>
+</ul>
+</li>
+<li><p><strong>Robust Measure</strong></p>
+<ul>
+<li>Galtons’s measure of skewness: $$skew(x) = \frac{(Q_{3}-Q_{2})-(Q_{2}-Q_{1})}{Q_{3}-Q_{1}}$$</li>
+<li>Robust kurtosis: $$kurt(x) = \frac{(q_{7/8}-q_{5/8})-(q_{3/8}-q_{1/8})}{Q_{3}-Q_{1}}$$</li>
+</ul>
+</li>
+</ul>
+<h3 id="Multivariate-Measure"><a href="#Multivariate-Measure" class="headerlink" title="Multivariate Measure:"></a>Multivariate Measure:</h3><ul>
+<li><p>Sample Covariance:<br>  $$Cov(x, y) = \frac{1}{n}\sum_{i=1}^{n} (x_{i} - \hat{x}) (y_{i} - \hat{y})$$</p>
+<ul>
+<li>for random variable: $Cov[x, y] = \mathbb{E}[(x-\mathbb{E}[x])(y-\mathbb{E}[y])] = \mathbb{E}[xy]-\mathbb{E}[x]\mathbb{E}[y]$</li>
+</ul>
+</li>
+<li><p>Pearson’s Correlation Coefficient:$$\rho(x,y) = \frac{\text{cov}(x,y)}{Std(x) Std(y)}$$</p>
+<ul>
+<li>$\rho=0$ doesn’t mean statistical independent, since it only measures linear correlation</li>
+<li>$-1 \le \rho \le 1$</li>
+<li>Simple way to measure non-linear correlation: $\rho(g(x),g(y)) = \frac{\text{cov}(g(x),g(y))}{Std(g(x)) Std(g(y))}$</li>
+</ul>
+</li>
+<li><p>Covariance Matrix: $$Cov[X] = \mathbb{E}[(X-\mathbb{E}[X])(X-\mathbb{E}[X])^{T}]$$</p>
+<ul>
+<li>Eigenvalue decomposition: $Cov[X] = U\Lambda U^{T}$</li>
+<li>$\sum_{i=1}^{d}Var[x_{i}]=trace(Var[X])=\sum_{i=1}^{d} \lambda_{i}$</li>
+<li>$cov[Ax+b] = Acov[x]A^{T}$</li>
+</ul>
+</li>
+<li><p>Correlation Matrix:$$\rho(X) = diag\left( \frac{1}{std(X)} \right) Cov[X]diag\left( \frac{1}{std(X)} \right)$$</p>
+</li>
+<li><p>Rank Correlation - Kendall’s $\tau$: $$\tau(x,y) = \frac{n_{c}(x,y) - n_{d}(x,y)}{n(n-1)/2}$$</p>
+<ul>
+<li>$n_c$: total number of concordant pairs, $n_d$: total number of disconcordant pairs</li>
+</ul>
+</li>
+</ul>
 
         </div>
         
@@ -443,6 +502,18 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
         <a class="is-flex" href="#Location">
         <span class="has-mr-6">1.1.1</span>
         <span>Location</span>
+        </a></li><li>
+        <a class="is-flex" href="#Scale">
+        <span class="has-mr-6">1.1.2</span>
+        <span>Scale</span>
+        </a></li><li>
+        <a class="is-flex" href="#Shape">
+        <span class="has-mr-6">1.1.3</span>
+        <span>Shape:</span>
+        </a></li><li>
+        <a class="is-flex" href="#Multivariate-Measure">
+        <span class="has-mr-6">1.1.4</span>
+        <span>Multivariate Measure:</span>
         </a></li></ul></li></ul></li></ul>
         </div>
     </div>
