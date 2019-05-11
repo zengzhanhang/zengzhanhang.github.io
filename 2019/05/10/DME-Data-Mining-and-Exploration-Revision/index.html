@@ -16,7 +16,7 @@
 <meta property="og:description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-11T16:55:04.000Z">
+<meta property="og:updated_time" content="2019-05-11T17:58:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:description" content="Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $\mathbb{E}[">
@@ -158,7 +158,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-11T16:55:04.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-11</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-11T17:58:50.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-11</time>
                 
                 
                 <div class="level-item">
@@ -171,7 +171,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    3 minutes read (About 446 words)
+                    4 minutes read (About 542 words)
                 </span>
                 
                 
@@ -297,7 +297,27 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
 </ul>
 </li>
 </ul>
+<h2 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing:"></a>Data Preprocessing:</h2><h3 id="Standardisation"><a href="#Standardisation" class="headerlink" title="Standardisation:"></a>Standardisation:</h3><p>Normalising data to have 0 (sample) mean and unit (sample) variance:</p>
+<ul>
+<li>Centering Matrix:<br>  $$C_n = I_{n} - \frac{1}{n} 1_n 1_n^{T}$$<ul>
+<li>Where, $1_n = [1, 1, \dots, 1]^T$</li>
+<li>Multiplying it from <ul>
+<li>right: removes sample mean of each row, i.e., $X = \tilde{X}C_{n}$</li>
+<li>left: removes sample mean of each column</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Outlier-Detection"><a href="#Outlier-Detection" class="headerlink" title="Outlier Detection:"></a>Outlier Detection:</h3><ul>
+<li>Tukey’s fences: $[Q_1 - k(Q_3 - Q_1), Q_3 + k(Q_3 - Q_1)] = [Q_1 - k \times IQR, Q_3 + k \times  IQR]$<ul>
+<li>Typically, $k = 1.5$ for outlier removal</li>
+</ul>
+</li>
+</ul>
+<div style="text-align:center; height: 60%"><br><img src="/images/DME/Boxplot_vs_PDF.svg" alt="Box Plot for outliers removal" title="Outlier detection example"><br></div>
 
+<h1 id="Chapter-2-Principal-Component-Analysis"><a href="#Chapter-2-Principal-Component-Analysis" class="headerlink" title="Chapter 2. Principal Component Analysis"></a>Chapter 2. Principal Component Analysis</h1>
         </div>
         
             <ul class="post-copyright">
@@ -514,7 +534,23 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
         <a class="is-flex" href="#Multivariate-Measure">
         <span class="has-mr-6">1.1.4</span>
         <span>Multivariate Measure:</span>
-        </a></li></ul></li></ul></li></ul>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Data-Preprocessing">
+        <span class="has-mr-6">1.2</span>
+        <span>Data Preprocessing:</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Standardisation">
+        <span class="has-mr-6">1.2.1</span>
+        <span>Standardisation:</span>
+        </a></li><li>
+        <a class="is-flex" href="#Outlier-Detection">
+        <span class="has-mr-6">1.2.2</span>
+        <span>Outlier Detection:</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#Chapter-2-Principal-Component-Analysis">
+        <span class="has-mr-6">2</span>
+        <span>Chapter 2. Principal Component Analysis</span>
+        </a></li></ul>
         </div>
     </div>
 </div>
