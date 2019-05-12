@@ -16,7 +16,7 @@
 <meta property="og:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-11T22:08:52.000Z">
+<meta property="og:updated_time" content="2019-05-12T01:23:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
@@ -158,7 +158,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-11T22:08:52.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-11</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-12T01:23:08.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-12</time>
                 
                 
                 <div class="level-item">
@@ -171,7 +171,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    4 minutes read (About 594 words)
+                    7 minutes read (About 1047 words)
                 </span>
                 
                 
@@ -325,9 +325,10 @@
 <div style="width:50%;height:50%"><br><div style="text-align:center"><br><img src="/images/DME/Boxplot_vs_PDF.svg" alt="Box Plot for outliers removal" title="Outlier detection example"><br></div><br></div>
 
 
-<h1 id="Chapter-2-Principal-Component-Analysis-PCA"><a href="#Chapter-2-Principal-Component-Analysis-PCA" class="headerlink" title="Chapter 2. Principal Component Analysis(PCA)"></a>Chapter 2. Principal Component Analysis(PCA)</h1><h2 id="PCA-by-Variance-Maximisation"><a href="#PCA-by-Variance-Maximisation" class="headerlink" title="PCA by Variance Maximisation"></a>PCA by Variance Maximisation</h2><h3 id="Sequentially-Approach"><a href="#Sequentially-Approach" class="headerlink" title="Sequentially Approach"></a>Sequentially Approach</h3><p>Principal Component(PC) direction: $\boldsymbol{w}$, projected data: $\boldsymbol{w}^{T} \boldsymbol{x}$</p>
+<h1 id="Chapter-2-Principal-Component-Analysis-PCA"><a href="#Chapter-2-Principal-Component-Analysis-PCA" class="headerlink" title="Chapter 2. Principal Component Analysis(PCA)"></a>Chapter 2. Principal Component Analysis(PCA)</h1><h2 id="PCA-by-Variance-Maximisation"><a href="#PCA-by-Variance-Maximisation" class="headerlink" title="PCA by Variance Maximisation"></a>PCA by Variance Maximisation</h2><h3 id="Sequential-Approach"><a href="#Sequential-Approach" class="headerlink" title="Sequential Approach"></a>Sequential Approach</h3><p>Principal Component(PC) direction: $\boldsymbol{w}$, projected data: $\boldsymbol{w}^{T} \boldsymbol{x}$</p>
 <ul>
-<li>The First Principal Component Direction:  
+<li><p>The First Principal Component Direction:</p>
+  
     $$
     \begin{aligned}
     & \underset{\boldsymbol{w_{1}}}{\text{maximise}}
@@ -336,9 +337,100 @@
     & & ||\boldsymbol{w_{1}} = 1||
     \end{aligned}
     $$
-    </li>
+    
+<p>  According to the eigenvalue decomposition of convariance matrix $\Sigma$: $\Sigma = U \Lambda U^{T}$</p>
+<p>  Let $\boldsymbol{w_{1}} = \sum_{i=1}^{n} a_{i} \boldsymbol{u_{i}} = U \boldsymbol{a}$, then </p>
+  
+    $$
+    \begin{aligned}
+    & \boldsymbol{w_{1}}^T \Sigma \boldsymbol{w_{1}} = \sum_{i=1}^{n} a_{i}^{2} \lambda_{i} \\
+    & ||\boldsymbol{w_{1}}|| = \boldsymbol{w_{1}}^{T} \boldsymbol{w_{1}} = \sum_{i=1}^{n} a_{i}^{2} = 1
+    \end{aligned}
+    $$
+    
+<p>  Thus, the optimisation problem can be written as: </p>
+  
+    $$
+    \begin{aligned}
+    & {\text{maximise}}
+    & & \sum_{i=1}^{n} a_{i}^{2} \lambda_{i} \\
+    & \text{subject to}
+    & & \sum_{i=1}^{n} a_{i}^{2} = 1
+    \end{aligned}
+    $$
+    
+<p>  $\boldsymbol{a} = (1, 0, \dots, 0)^T$  is the unique solution, if $lambda_{1} &gt; \lambda{i}$.</p>
+<p>  So the first PC direction is<br>  $$\boldsymbol{w_{1}} = U \boldsymbol{a} = \boldsymbol{u_{1}}$$<br>  , where the first PC direction given by the first eigen vector, $\boldsymbol{u_{1}}$, of  $\Sigma$  corresponding to the first(largest) eigen value $\lambda_{1}$.</p>
+<ul>
+<li>$Var(z_{1})= \boldsymbol{w_{1}}^T \Sigma \boldsymbol{w_{1}} = \lambda_{1}$</li>
+<li>$\mathbb{E}(z_{1}) = \mathbb{E}(\boldsymbol{w_{1}}^{T} \boldsymbol{x}) = \boldsymbol{w_{1}}^{T} \mathbb{E}(\boldsymbol{x}) = 0$</li>
+<li>First PC scores: $\boldsymbol{z_{1}}^{T} = \boldsymbol{w_{1}}^{T} X_{d \times n}$</li>
 </ul>
-
+</li>
+<li><p>Subsequent PC Direction \boldsymbol{w_{m}}:</p>
+  
+    $$
+    \begin{aligned}
+    & \underset{\boldsymbol{w_{m}}}{\text{maximise}}
+    & & \boldsymbol{w_{m}}^T \Sigma \boldsymbol{w_{m}} \\
+    & \text{subject to}
+    & & ||\boldsymbol{w_{m}} = 1|| \\
+    & 
+    & & \boldsymbol{w_{m}}^{T}\boldsymbol{w_{i}} = 0 & & i = 1, 2, \dots, m-1
+    \end{aligned}
+    $$
+    
+<p>  Solution: similar to the previous procedure</p>
+<p>  $\boldsymbol{w_{m}} = \boldsymbol{u_{m}}$ is the m-th PC direction given by the m-th eigen vector of $\Sigma$ corresponding to the m-th largest eigen value $\lambda_{m}$.</p>
+<ul>
+<li>$Var(z_{m}) = \lambda_{m}$,  $\mathbb{E}(z_{m}) = 0$</li>
+</ul>
+</li>
+<li><p>PCs (scores) uncorrelated:</p>
+  
+    $$
+    \begin{aligned}
+    & Cov(z_i, z_j) & = & \mathbb{E}(z_i z_j) - \mathbb{E}(z_i) \mathbb{E}(z_j)\\
+    & & = & \mathbb{E}(\boldsymbol{w_{i}}^{T} \boldsymbol{x} \boldsymbol{w_{j}}^{T} \boldsymbol{x}) - 0\\
+    & & = & \boldsymbol{w_{j}}^{T} \mathbb{E}(\boldsymbol{x} \boldsymbol{x}) \boldsymbol{w_{j}}^{T}\\
+    & & = & \boldsymbol{w_{j}}^{T} \Sigma \boldsymbol{w_{j}}^{T} \\
+    & & = & \boldsymbol{e_{i}}^T U^T U \Lambda U^T U \boldsymbol{e_{j}} \\
+    & & = & 0
+    \end{aligned}
+    $$
+    
+</li>
+<li><p>Fraction of variance explained:</p>
+  
+    $$
+    \frac{\sum_{i}^{k}lambda_{i}}{\sum_{i}^{d}lambda_{i}}
+    $$
+    
+<ul>
+<li>how much variability in data is captured by the first k principal components.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Simultaneous-Approach"><a href="#Simultaneous-Approach" class="headerlink" title="Simultaneous Approach"></a>Simultaneous Approach</h3><ul>
+<li>
+  $$
+  \begin{aligned}
+  & \text{maximise}
+  & & \sum_{i=1}^{k}\boldsymbol{w_{i}}^T \Sigma \boldsymbol{w_{i}} \\
+  & \text{subject to}
+  & & ||\boldsymbol{w_{i}} = 1|| & & i = 1, 2, \dots, m-1\\
+  & 
+  & & \boldsymbol{w_{i}}^{T}\boldsymbol{w_{j}} = 0 & & i \neq j
+  \end{aligned}
+  $$
+  
+<ul>
+<li>Subtle technical point: the sequential approach corresponds to solving this optimisation problem in greedy manner(algorithm), which doesn’t guarantee to yield optimal solution.</li>
+<li>However, sequential approach and simultaneous yield same results.</li>
+</ul>
+</li>
+</ul>
+<h2 id="PCA-by-Minimisation-of-Approximation-Error"><a href="#PCA-by-Minimisation-of-Approximation-Error" class="headerlink" title="PCA by Minimisation of Approximation Error"></a>PCA by Minimisation of Approximation Error</h2>
         </div>
         
             <ul class="post-copyright">
@@ -576,10 +668,18 @@
         <span class="has-mr-6">2.1</span>
         <span>PCA by Variance Maximisation</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Sequentially-Approach">
+        <a class="is-flex" href="#Sequential-Approach">
         <span class="has-mr-6">2.1.1</span>
-        <span>Sequentially Approach</span>
-        </a></li></ul></li></ul></li></ul>
+        <span>Sequential Approach</span>
+        </a></li><li>
+        <a class="is-flex" href="#Simultaneous-Approach">
+        <span class="has-mr-6">2.1.2</span>
+        <span>Simultaneous Approach</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#PCA-by-Minimisation-of-Approximation-Error">
+        <span class="has-mr-6">2.2</span>
+        <span>PCA by Minimisation of Approximation Error</span>
+        </a></li></ul></li></ul>
         </div>
     </div>
 </div>
