@@ -16,7 +16,7 @@
 <meta property="og:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-12T01:24:00.000Z">
+<meta property="og:updated_time" content="2019-05-12T20:55:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
@@ -158,7 +158,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-12T01:24:00.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-12</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-12T20:55:20.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-12</time>
                 
                 
                 <div class="level-item">
@@ -171,7 +171,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    7 minutes read (About 1047 words)
+                    12 minutes read (About 1856 words)
                 </span>
                 
                 
@@ -367,7 +367,7 @@
 <li>First PC scores: $\boldsymbol{z_{1}}^{T} = \boldsymbol{w_{1}}^{T} X_{d \times n}$</li>
 </ul>
 </li>
-<li><p>Subsequent PC Direction \boldsymbol{w_{m}}:</p>
+<li><p>Subsequent PC Direction $\boldsymbol{w_{m}}$:</p>
   
     $$
     \begin{aligned}
@@ -390,22 +390,17 @@
   
     $$
     \begin{aligned}
-    & Cov(z_i, z_j) & = & \mathbb{E}(z_i z_j) - \mathbb{E}(z_i) \mathbb{E}(z_j)\\
-    & & = & \mathbb{E}(\boldsymbol{w_{i}}^{T} \boldsymbol{x} \boldsymbol{w_{j}}^{T} \boldsymbol{x}) - 0\\
-    & & = & \boldsymbol{w_{j}}^{T} \mathbb{E}(\boldsymbol{x} \boldsymbol{x}) \boldsymbol{w_{j}}^{T}\\
-    & & = & \boldsymbol{w_{j}}^{T} \Sigma \boldsymbol{w_{j}}^{T} \\
-    & & = & \boldsymbol{e_{i}}^T U^T U \Lambda U^T U \boldsymbol{e_{j}} \\
-    & & = & 0
+    Cov(z_i, z_j) & = \mathbb{E}(z_i z_j) - \mathbb{E}(z_i) \mathbb{E}(z_j)\\
+                  & = \mathbb{E}(\boldsymbol{w_{i}}^{T} \boldsymbol{x} \boldsymbol{w_{j}}^{T} \boldsymbol{x}) - 0\\
+                  & = \boldsymbol{w_{j}}^{T} \mathbb{E}(\boldsymbol{x} \boldsymbol{x}) \boldsymbol{w_{j}}^{T}\\
+                  & = \boldsymbol{w_{j}}^{T} \Sigma \boldsymbol{w_{j}}^{T} \\
+                  & = \boldsymbol{e_{i}}^T U^T U \Lambda U^T U \boldsymbol{e_{j}} \\
+                  & = 0
     \end{aligned}
     $$
     
 </li>
-<li><p>Fraction of variance explained:</p>
-  
-    $$
-    \frac{\sum_{i}^{k} \lambda_{i}}{\sum_{i}^{d} \lambda_{i}}
-    $$
-    
+<li><p>Fraction of variance explained $= \frac{\sum_{i}^{k} \lambda_{i}}{\sum_{i}^{d} \lambda_{i}}$</p>
 <ul>
 <li>how much variability in data is captured by the first k principal components.</li>
 </ul>
@@ -430,7 +425,147 @@
 </ul>
 </li>
 </ul>
-<h2 id="PCA-by-Minimisation-of-Approximation-Error"><a href="#PCA-by-Minimisation-of-Approximation-Error" class="headerlink" title="PCA by Minimisation of Approximation Error"></a>PCA by Minimisation of Approximation Error</h2>
+<h2 id="PCA-by-Minimisation-of-Approximation-Error"><a href="#PCA-by-Minimisation-of-Approximation-Error" class="headerlink" title="PCA by Minimisation of Approximation Error"></a>PCA by Minimisation of Approximation Error</h2><ul>
+<li><p>Projection Matrix: </p>
+
+  $$
+  P = \sum_{i=1}^{k}\boldsymbol{w_{i}} \boldsymbol{w_{i}}^{T} = W_{k} W_{k}^{T}
+  $$
+  
+<p>, where $W_{k} = (\boldsymbol{w_{1}}, \dots, \boldsymbol{w_{k}})$ is $d \times k$ matrix .</p>
+</li>
+<li><p>Approximating $\boldsymbol{x}$ into subspace $\boldsymbol{\hat{x}} = P \boldsymbol{x} = \sum_{i=1}^{k}\boldsymbol{w_{i}} \boldsymbol{w_{i}}^{T} \boldsymbol{x}$</p>
+</li>
+<li><p>Approximation Error: $\mathbb{E}||\boldsymbol{x} - P \boldsymbol{x}||^2 = \mathbb{E}||\boldsymbol{x} - W_{k} W_{k}^T \boldsymbol{x}||^2 = \mathbb{E}||\boldsymbol{x} - \sum_{i=1}^{k}\boldsymbol{w_k} \boldsymbol{w_k}^T \boldsymbol{x}||^2$ </p>
+</li>
+<li><p>Optimisation Problem: </p>
+
+  $$
+  \begin{aligned}
+  & \text{minimise}
+  & & \mathbb{E}||\boldsymbol{x} - \sum_{i=1}^{k}\boldsymbol{w_k} \boldsymbol{w_k}^T \boldsymbol{x}||^2 \\
+  & \text{subject to}
+  & & ||\boldsymbol{w_{i}} = 1|| & & i = 1, 2, \dots, k\\
+  & 
+  & & \boldsymbol{w_{i}}^{T}\boldsymbol{w_{j}} = 0 & & i \neq j
+  \end{aligned}
+  $$
+  
+</li>
+<li><p>So,</p>
+<ul>
+<li>the optimal PC directions $\boldsymbol{w_{i}}$ are the first k eigen vectors $\boldsymbol{u_{i}}$ of $\Sigma$</li>
+<li>The optimal projection matrix is $P = U_k U_{k}^{T}$</li>
+<li>$\boldsymbol{\hat{x}} = P \boldsymbol{x} = U_{k} U_{k}^{T} \boldsymbol{x} = \sum_{i=1}^{k} \boldsymbol{u_{i}} \boldsymbol{u_{i}}^{T} \boldsymbol{x} = \sum_{i=1}^{k} \boldsymbol{u_{i}} z_{i}$</li>
+<li>$\mathbb{E}||\boldsymbol{x} - U_{k} U_{k}^T \boldsymbol{x}||^2 = \sum_{i=1}^{d} \lambda_{i} - \sum_{i=1}^{k} \lambda_{i} = \sum_{i=k+1}^{d} \lambda_{i}$, which means minimising expected error = maximising variance explained.</li>
+</ul>
+</li>
+<li><p>Relative Approximation Error: </p>
+
+  $$
+  \frac{\mathbb{E}||\boldsymbol{x} - U_{k} U_{k}^T \boldsymbol{x}||^2}{\mathbb{E}||\boldsymbol{x}||^2} = 1 - \frac{\sum_{i=1}^{k} \lambda_{i}}{\sum_{i=1}^{d} \lambda_{i}} = 1 - \text{fraction of variance explained}
+  $$
+  
+</li>
+</ul>
+<h2 id="PCA-by-Low-Rank-Matrix-Approximation"><a href="#PCA-by-Low-Rank-Matrix-Approximation" class="headerlink" title="PCA by Low Rank Matrix Approximation"></a>PCA by Low Rank Matrix Approximation</h2><h3 id="Approximation-from-Data-Matrix"><a href="#Approximation-from-Data-Matrix" class="headerlink" title="Approximation from Data Matrix"></a>Approximation from Data Matrix</h3><ul>
+<li>Let $X_{d \times n} = (\boldsymbol{x_1}, \boldsymbol{x_2}, \dots, \boldsymbol{x_n})$, where $\boldsymbol{x}$ is $d \times 1$ matrix (d-dimension). </li>
+<li>Express $X$ via its Singular Value Decomposition(SVD): $X = U S V^{T}$<ul>
+<li>, where $U_{d \times d}$ and $V_{n \times n}$ are orthonormal. $S$ is zero everwhere, but first r diagonal elements.</li>
+</ul>
+</li>
+<li><p>Optimisation Problem:</p>
+
+  $$
+  \begin{aligned}
+  & \text{minimise}
+  & & \sum_{ij} \left[ (X)_{ij} - (M)_{ij} \right]^2 = ||X - \hat{X}||_{F}  \\
+  & \text{subject to}
+  & & rank(M) = k\\
+  \end{aligned}
+  $$
+  
+</li>
+<li><p>So,</p>
+<ul>
+<li>Optimal solution: $\hat{X} = \sum_{i=1}^{k} \boldsymbol{u_i} \boldsymbol{s_i} \boldsymbol{v_i}^{T} = U_K S_K V_K^T$ ((truncated singular value decomposition).</li>
+<li>left singular vectors $\boldsymbol{u_i}$ are eigen vectors of $\Sigma$, so $\boldsymbol{u_i}$ are PC directions.</li>
+<li>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$:   $\lambda_i = \frac{s_i^2}{n}$. (<a href="#1-s-i-2-related-to-eigen-values-lambda-i-of-Sigma">Proof in Appendix A</a>)</li>
+<li>PC scores: $\boldsymbol{z_i}^T = \boldsymbol{u_i}^T X = s_i \boldsymbol{v_i}^T$<ul>
+<li>Proof: $\boldsymbol{z_i}^T = \boldsymbol{u_i}^T X = \boldsymbol{u_i}^T U S V^T = \boldsymbol{u_i}^T \sum_{j=1}^{r}\boldsymbol{u_j} s_j \boldsymbol{v_j}^T = s_i \boldsymbol{v_i}^T$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Approximation-from-Sample-Covariance-Matrix"><a href="#Approximation-from-Sample-Covariance-Matrix" class="headerlink" title="Approximation from Sample Covariance Matrix"></a>Approximation from Sample Covariance Matrix</h3><ul>
+<li><p>Optimisation Problem:</p>
+
+  $$
+  \begin{aligned}
+  & \text{minimise}
+  & & ||\Sigma - M||_{F}  \\
+  & \text{subject to}
+  & & rank(M) = k\\
+  & 
+  & & M^T = M
+  \end{aligned}
+  $$
+  
+<ul>
+<li>Optimal solution: $M = \hat{\Sigma} = U_k \Lambda_k U_k^T = \Sigma^T$, i.e., $\sum_{i=1}^{k}\lambda_i \boldsymbol{u_i} \boldsymbol{u_i}^T$</li>
+</ul>
+</li>
+</ul>
+<h3 id="Approximation-from-Gram-Matrix"><a href="#Approximation-from-Gram-Matrix" class="headerlink" title="Approximation from Gram Matrix"></a>Approximation from Gram Matrix</h3><ul>
+<li><p>Gram Matrix:<br>$$G = X^T X \text{, where} (G)_{ij} = \boldsymbol{x_i}^T\boldsymbol{x_j}$$</p>
+<ul>
+<li>Gram Matrix is positive semi-definite</li>
+</ul>
+</li>
+<li><p>According the SVD of $X$:</p>
+
+  $$
+  G = X^T X = (USV^T)^T(USV^T) = V S^T U^T U S V^T = VS^T SV^T = V \tilde{\Lambda} V^T = \sum_{i=1}^{d} \boldsymbol{v_i} \boldsymbol{v_i}^T
+  $$
+  
+</li>
+<li><p>Thus, the best rank k approximation of $G$ is $\hat{G} = \sum_{i=1}^{k} \boldsymbol{v_i} s_i^2  \boldsymbol{v_i}^T$.</p>
+</li>
+<li>Denote $\tilde{\Lambda} = S^T S$ is the top k eigen value of $G$, $V_k = (\boldsymbol{v_1}, \boldsymbol{v_2}, \dots, \boldsymbol{v_k})_{n \times k}$
+  $$
+  Z_k = \sqrt{\tilde{\Lambda}_k} V_k^T
+  $$
+  
+</li>
+</ul>
+<h3 id="Probabilistic-PCA-PPCA"><a href="#Probabilistic-PCA-PPCA" class="headerlink" title="Probabilistic PCA (PPCA)"></a>Probabilistic PCA (PPCA)</h3><ul>
+<li><p>Advantages:</p>
+<ol>
+<li>PPCA can samples artificial data points (generative model).</li>
+<li>Formulation allows us to deal with missing data.</li>
+</ol>
+</li>
+<li><p>Model:</p>
+
+  $$
+  Z \sim \mathcal{N}(0,\,I_k)\\
+  \epsilon \sim \mathcal{N}(0, \, \sigma^2 I_d)\\
+  \underset{d \times 1}{\boldsymbol{x}} = \underset{d \times k}{W} \; \underset{k \times 1}{\boldsymbol{z}} + \underset{d \times 1}{\boldsymbol{\mu}} + \underset{d \times 1}{\boldsymbol{\epsilon}}
+  $$
+  
+<h1 id="Appendix-A"><a href="#Appendix-A" class="headerlink" title="Appendix A"></a>Appendix A</h1></li>
+</ul>
+<h2 id="s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><a href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma" class="headerlink" title="$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$"></a>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</h2><p>Assume $X$ centered, then, according the SVD of $X$, the covariance matrix is<br>
+$$
+\begin{aligned}
+\Sigma & = \frac{1}{n}X X^T \\
+       & = \frac{1}{n}U S V^T (U S V^T)^T = \frac{1}{n} U (\frac{1}{n}S S^T) U^T\\
+       & = U \Lambda U^T
+\end{aligned}
+$$
+</p>
+
         </div>
         
             <ul class="post-copyright">
@@ -679,6 +814,34 @@
         <a class="is-flex" href="#PCA-by-Minimisation-of-Approximation-Error">
         <span class="has-mr-6">2.2</span>
         <span>PCA by Minimisation of Approximation Error</span>
+        </a></li><li>
+        <a class="is-flex" href="#PCA-by-Low-Rank-Matrix-Approximation">
+        <span class="has-mr-6">2.3</span>
+        <span>PCA by Low Rank Matrix Approximation</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Approximation-from-Data-Matrix">
+        <span class="has-mr-6">2.3.1</span>
+        <span>Approximation from Data Matrix</span>
+        </a></li><li>
+        <a class="is-flex" href="#Approximation-from-Sample-Covariance-Matrix">
+        <span class="has-mr-6">2.3.2</span>
+        <span>Approximation from Sample Covariance Matrix</span>
+        </a></li><li>
+        <a class="is-flex" href="#Approximation-from-Gram-Matrix">
+        <span class="has-mr-6">2.3.3</span>
+        <span>Approximation from Gram Matrix</span>
+        </a></li><li>
+        <a class="is-flex" href="#Probabilistic-PCA-PPCA">
+        <span class="has-mr-6">2.3.4</span>
+        <span>Probabilistic PCA (PPCA)</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#Appendix-A">
+        <span class="has-mr-6">3</span>
+        <span>Appendix A</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma">
+        <span class="has-mr-6">3.1</span>
+        <span>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</span>
         </a></li></ul></li></ul>
         </div>
     </div>
