@@ -16,7 +16,7 @@
 <meta property="og:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-11T18:54:54.000Z">
+<meta property="og:updated_time" content="2019-05-11T22:08:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
@@ -158,7 +158,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-11T18:54:54.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-11</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-11T22:08:52.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-11</time>
                 
                 
                 <div class="level-item">
@@ -171,7 +171,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    4 minutes read (About 543 words)
+                    4 minutes read (About 594 words)
                 </span>
                 
                 
@@ -196,12 +196,19 @@
 </li>
 <li><p><strong>Robust Measure</strong></p>
 <ul>
-<li>Median: $median(x) = <pre><code>\begin{cases}
-x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
-\frac{1}{2}[x_{(n\mathbin{/}2)}+x_{(n\mathbin{/}2)+1}]&amp; \text{; if $n$ is even}            
-\end{cases}$
-</code></pre></li>
-<li>Mode: Value that occurs most frequent</li>
+<li><p>Median: </p>
+
+    $$
+    median(x) = 
+    \begin{cases}
+    x_{[(n+1)\mathbin{/}2]}& \text{; if $n$ is odd}\\
+    \frac{1}{2}[x_{(n\mathbin{/}2)}+x_{(n\mathbin{/}2)+1}]& \text{; if $n$ is even}            
+    \end{cases}
+    $$
+    
+</li>
+<li><p>Mode: Value that occurs most frequent</p>
+</li>
 <li>$\alpha_{th}$ Sample Quantile (rough data point, i.e. $q_{\alpha} \approx x_{([n\alpha])}$)<ul>
 <li>$Q_{1} = q_{0.25}$, $Q_{2} = q_{0.5}$, $Q_{3} = q_{0.75}$</li>
 </ul>
@@ -315,10 +322,23 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
 </ul>
 </li>
 </ul>
-<div style="width:150"><br><div style="text-align:center"><br><img src="/images/DME/Boxplot_vs_PDF.svg" alt="Box Plot for outliers removal" title="Outlier detection example"><br></div><br></div>
+<div style="width:50%;height:50%"><br><div style="text-align:center"><br><img src="/images/DME/Boxplot_vs_PDF.svg" alt="Box Plot for outliers removal" title="Outlier detection example"><br></div><br></div>
 
 
-<h1 id="Chapter-2-Principal-Component-Analysis"><a href="#Chapter-2-Principal-Component-Analysis" class="headerlink" title="Chapter 2. Principal Component Analysis"></a>Chapter 2. Principal Component Analysis</h1>
+<h1 id="Chapter-2-Principal-Component-Analysis-PCA"><a href="#Chapter-2-Principal-Component-Analysis-PCA" class="headerlink" title="Chapter 2. Principal Component Analysis(PCA)"></a>Chapter 2. Principal Component Analysis(PCA)</h1><h2 id="PCA-by-Variance-Maximisation"><a href="#PCA-by-Variance-Maximisation" class="headerlink" title="PCA by Variance Maximisation"></a>PCA by Variance Maximisation</h2><h3 id="Sequentially-Approach"><a href="#Sequentially-Approach" class="headerlink" title="Sequentially Approach"></a>Sequentially Approach</h3><p>Principal Component(PC) direction: $\boldsymbol{w}$, projected data: $\boldsymbol{w}^{T} \boldsymbol{x}$</p>
+<ul>
+<li>The First Principal Component Direction:  
+    $$
+    \begin{aligned}
+    & \underset{\boldsymbol{w_{1}}}{\text{maximise}}
+    & & \boldsymbol{w_{1}}^T \Sigma \boldsymbol{w_{1}} = Var(z_{1}) \\
+    & \text{subject to}
+    & & ||\boldsymbol{w_{1}} = 1||
+    \end{aligned}
+    $$
+    </li>
+</ul>
+
         </div>
         
             <ul class="post-copyright">
@@ -355,9 +375,9 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/11/test/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/11/markdown-example/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">test</span>
+                <span class="level-item">markdown example</span>
             </a>
         </div>
         
@@ -440,7 +460,7 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        3
                     </p>
                 </div>
             </div>
@@ -548,10 +568,18 @@ x_{[(n+1)\mathbin{/}2]}&amp; \text{; if $n$ is odd}\\
         <span class="has-mr-6">1.2.2</span>
         <span>Outlier Detection:</span>
         </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#Chapter-2-Principal-Component-Analysis">
+        <a class="is-flex" href="#Chapter-2-Principal-Component-Analysis-PCA">
         <span class="has-mr-6">2</span>
-        <span>Chapter 2. Principal Component Analysis</span>
-        </a></li></ul>
+        <span>Chapter 2. Principal Component Analysis(PCA)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#PCA-by-Variance-Maximisation">
+        <span class="has-mr-6">2.1</span>
+        <span>PCA by Variance Maximisation</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Sequentially-Approach">
+        <span class="has-mr-6">2.1.1</span>
+        <span>Sequentially Approach</span>
+        </a></li></ul></li></ul></li></ul>
         </div>
     </div>
 </div>
