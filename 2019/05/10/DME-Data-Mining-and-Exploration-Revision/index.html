@@ -16,7 +16,7 @@
 <meta property="og:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-12T20:55:20.000Z">
+<meta property="og:updated_time" content="2019-05-13T02:06:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
@@ -158,7 +158,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-12T20:55:20.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-12</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-13T02:06:36.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-13</time>
                 
                 
                 <div class="level-item">
@@ -171,7 +171,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    12 minutes read (About 1856 words)
+                    15 minutes read (About 2324 words)
                 </span>
                 
                 
@@ -546,7 +546,7 @@
 <li>Formulation allows us to deal with missing data.</li>
 </ol>
 </li>
-<li><p>Model:</p>
+<li><p>Probabilistic Model:</p>
 
   $$
   Z \sim \mathcal{N}(0,\,I_k)\\
@@ -554,9 +554,98 @@
   \underset{d \times 1}{\boldsymbol{x}} = \underset{d \times k}{W} \; \underset{k \times 1}{\boldsymbol{z}} + \underset{d \times 1}{\boldsymbol{\mu}} + \underset{d \times 1}{\boldsymbol{\epsilon}}
   $$
   
-<h1 id="Appendix-A"><a href="#Appendix-A" class="headerlink" title="Appendix A"></a>Appendix A</h1></li>
+</li>
+<li><p>Joint, Conditional and Observation Distribution</p>
+<ul>
+<li><p>Conditional Distribution:</p>
+
+  $$
+  p(\boldsymbol{x}|\boldsymbol{z}) = \mathcal{N}(\boldsymbol{x};\; W \boldsymbol{z} + \boldsymbol{\mu},\; \sigma^2I_{d})
+  $$
+    
+</li>
+<li><p>Joint Distribution:</p>
+
+  $$
+  \begin{aligned}
+  p(\boldsymbol{z},\; \boldsymbol{x}) & = p(\boldsymbol{x}|\boldsymbol{z})p(\boldsymbol{z}) = \mathcal{N}(\boldsymbol{x};\; W \boldsymbol{z} + \boldsymbol{u},\; \sigma^2I_{d}) \mathcal{N}(\boldsymbol{z};\; 0,\; I_k)\\
+     & = \frac{1}{const}exp \left[ -\frac{1}{2} [(\boldsymbol{x} - W \boldsymbol{z} - \boldsymbol{\mu})^{T} (\frac{1}{\sigma^2}I_{d}) (\boldsymbol{x} - W \boldsymbol{z} - \boldsymbol{\mu}) + \boldsymbol{z}^{T} \boldsymbol{z}] \right]
+  \end{aligned}
+  $$
+    
+</li>
 </ul>
-<h2 id="s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><a href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma" class="headerlink" title="$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$"></a>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</h2><p>Assume $X$ centered, then, according the SVD of $X$, the covariance matrix is<br>
+<blockquote>
+<p><strong>Important Equations:</strong></p>
+<blockquote>
+<p>For multivariate normal distribution:</p>
+  
+    $$
+    \begin{aligned}
+    -\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^T \Sigma^{-1} (\boldsymbol{x}-\boldsymbol{\mu}) & = -\frac{1}{2}\boldsymbol{x}^T \Sigma^{-1} \boldsymbol{x} + \boldsymbol{x}^{T} \Sigma^{-1}\mu + const\\
+      & = -\frac{1}{2}\boldsymbol{x}^T A \boldsymbol{x} + \boldsymbol{x}^{T} \xi + const
+    \end{aligned}
+    $$
+     
+<p>  Thus, $\Sigma = A^{-1}$ and $\boldsymbol{\mu} = \Sigma \  \xi$  .</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>Observation Distribution:
+  $$
+  p(\boldsymbol{x}) = \mathcal{N}(\boldsymbol{x}; \; \boldsymbol{\mu}, \; W W^{T} + \sigma^2 I)
+  $$
+    
+</li>
+</ul>
+</li>
+<li><p>Maximum Likelihood:<br>The maximum likelihood solutions are shown by <a href="https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/1467-9868.00196" target="_blank" rel="noopener">Tipping and Bishop, 1999</a>: </p>
+
+  $$
+  W_{ML} = U_k (\Lambda_k - \sigma^2 I)^{\frac{1}{2}} R\\
+  \sigma_{ML}^2 = \frac{1}{d-k} \sum_{i=k+1}^{d}\lambda_{i}
+  $$
+    
+<ul>
+<li>$U_k$   are $k$ principal eigenvectors of $\hat{\Sigma} = Cov(X) = \frac{1}{n}X X^T$  .</li>
+<li>$\Lambda_k$   is diagonal matrix with eighenvalues.</li>
+<li>$R$   is arbitrary orthogonal matrix, interpreted as a rotation in the latent space, indicating not unique solutions.</li>
+<li>Another option to find $W$ and $\sigma^2$ is EM algorithm.</li>
+</ul>
+</li>
+<li><p>Relation to PCA:</p>
+<ul>
+<li><p>The closest thing to PCA mapping is the posterior distribution $p(\boldsymbol{z}| \; \boldsymbol{x})$. To find it, we can fix \boldsymbol{x} as a constant in the joint distribution $p(\boldsymbol{z},\; \boldsymbol{x})$ and use the <strong>important equation</strong> just mentioned above.</p>
+
+    $$
+    p(\boldsymbol{z}| \; \boldsymbol{x} = \mathcal{N}(\boldsymbol{z}; \; M^{-1} W^{T} (\boldsymbol{x} - \boldsymbol{\mu}), \; \sigma^2 M^{-1})
+    $$
+      
+<p>, where $M = W^T W + \sigma^2 I$  .</p>
+</li>
+<li><p>PCA projection $\hat{\boldsymbol{x}}$: </p>
+
+    $$
+    \hat{\boldsymbol{x}} = W_{ML} \mathbb{E}(\boldsymbol{z}|\; \boldsymbol{x}) = W_{ML} M_{ML}^{-1} W_{ML}^{T} \boldsymbol{x}
+    $$  
+    
+<p>, where $M_{ML} = W_{ML}^{T} W_{ML} + \sigma^{2}I \;$ and $\; W_{ML} = U_k (\Lambda_k - \sigma^2 I)^{\frac{1}{2}}$  .</p>
+</li>
+<li><p>For $\sigma^2 \rightarrow 0$, we recover the PCA projection $\hat{\boldsymbol{x}}$:</p>
+
+  $$
+  \begin{aligned}
+  W_{ML} M_{ML}^{-1} W_{ML}^{T} \boldsymbol{x} 
+  & = U_k \Lambda_k^{1/2} ((U_k \Lambda_k^{1/2})^T (U_k \Lambda_k^{1/2}))^{-1} (U_k \Lambda_k^{1/2})^{T} \boldsymbol{x}\\
+  & = U_k U_k^T \boldsymbol{x}
+  \end{aligned}
+  $$  
+  
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Chapter-3-Dimensionality-Reduction"><a href="#Chapter-3-Dimensionality-Reduction" class="headerlink" title="Chapter 3. Dimensionality Reduction"></a>Chapter 3. Dimensionality Reduction</h1><h2 id="Linear-Dimensionality-Reduction"><a href="#Linear-Dimensionality-Reduction" class="headerlink" title="Linear Dimensionality Reduction"></a>Linear Dimensionality Reduction</h2><h1 id="Appendix-A"><a href="#Appendix-A" class="headerlink" title="Appendix A"></a>Appendix A</h1><h2 id="s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><a href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma" class="headerlink" title="$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$"></a>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</h2><p>Assume $X$ centered, then, according the SVD of $X$, the covariance matrix is<br>
 $$
 \begin{aligned}
 \Sigma & = \frac{1}{n}X X^T \\
@@ -565,6 +654,7 @@ $$
 \end{aligned}
 $$
 </p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1]: Michael E Tipping and Christopher M Bishop. “Probabilistic principal component analysis”. In: Journal of the Royal Statistical Society: Series B (Statistical Methodology) 61.3 (1999), pp. 611–622</p>
 
         </div>
         
@@ -835,14 +925,26 @@ $$
         <span class="has-mr-6">2.3.4</span>
         <span>Probabilistic PCA (PPCA)</span>
         </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#Appendix-A">
+        <a class="is-flex" href="#Chapter-3-Dimensionality-Reduction">
         <span class="has-mr-6">3</span>
+        <span>Chapter 3. Dimensionality Reduction</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Linear-Dimensionality-Reduction">
+        <span class="has-mr-6">3.1</span>
+        <span>Linear Dimensionality Reduction</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Appendix-A">
+        <span class="has-mr-6">4</span>
         <span>Appendix A</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma">
-        <span class="has-mr-6">3.1</span>
+        <span class="has-mr-6">4.1</span>
         <span>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</span>
-        </a></li></ul></li></ul>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">5</span>
+        <span>Reference</span>
+        </a></li></ul>
         </div>
     </div>
 </div>
