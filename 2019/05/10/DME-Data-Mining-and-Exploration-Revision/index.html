@@ -16,7 +16,7 @@
 <meta property="og:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-14T21:40:56.000Z">
+<meta property="og:updated_time" content="2019-05-15T10:00:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
@@ -158,7 +158,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-14T21:40:56.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-14</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-15T10:00:10.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-15</time>
                 
                 
                 <div class="level-item">
@@ -171,7 +171,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    22 minutes read (About 3252 words)
+                    24 minutes read (About 3575 words)
                 </span>
                 
                 
@@ -807,9 +807,83 @@ $$
 <li><strong>Solution</strong>: choose $\ k \ $small enough to avoid negative eigen values.</li>
 </ul>
 </li>
-<li>Classical MDS solution for $\ k’ &lt; k \ $ is directly given by the first $\ k’ \ $</li>
+<li>Classical MDS solution for $\ k’ &lt; k \ $ is directly given by the first $\ k’ \ $ corordinates of $\ k \ $ dimensional $\ \boldsymbol{z} \ $.<ul>
+<li>Alternative approximate negative definite $\ \Delta \ $ by:
+    $$
+    \begin{aligned}
+    & \text{minimise}& & ||(-\frac{1}{2}C_n \Delta C_n) - M^T M||_F\\
+    & \text{subject to}& & rank(M^T M) = k
+    \end{aligned}
+    $$
+    
+</li>
 </ul>
-<h1 id="Appendix-A"><a href="#Appendix-A" class="headerlink" title="Appendix A"></a>Appendix A</h1><h2 id="s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><a href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma" class="headerlink" title="$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$"></a>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</h2><p>Assume $X$ centered, then, according the SVD of $X$, the covariance matrix is<br>
+</li>
+</ul>
+<h3 id="Isometric-Features-Mapping-Isomap"><a href="#Isometric-Features-Mapping-Isomap" class="headerlink" title="Isometric Features Mapping (Isomap)"></a>Isometric Features Mapping (Isomap)</h3><ol>
+<li>Construct</li>
+</ol>
+<h1 id="Chapter-4-Predictive-Modelling-and-Generalization"><a href="#Chapter-4-Predictive-Modelling-and-Generalization" class="headerlink" title="Chapter 4. Predictive Modelling and Generalization"></a>Chapter 4. Predictive Modelling and Generalization</h1><h2 id="Prediction-and-Training-Loss"><a href="#Prediction-and-Training-Loss" class="headerlink" title="Prediction and Training Loss"></a>Prediction and Training Loss</h2><h3 id="Prediction-Loss"><a href="#Prediction-Loss" class="headerlink" title="Prediction Loss"></a>Prediction Loss</h3>
+$$
+\mathcal{J}(h) = \mathbb{E}_{\hat{y}, \ y} \left[ \mathcal{L}(\hat{y}, \ y) \right] = \mathbb{E}_{\boldsymbol{x}, \ y} \left[ \mathcal{L}(h(\boldsymbol{x}), \ y) \right]
+$$
+
+<ul>
+<li>The term $\ \mathbb{E}_{\boldsymbol{x}, \ y} \ $ means expectation w.r.t $\ p(\boldsymbol{x},\ y) \ $ .</li>
+</ul>
+<h3 id="Training-Loss"><a href="#Training-Loss" class="headerlink" title="Training Loss"></a>Training Loss</h3>
+$$
+\mathcal{J}_{\lambda}^{*} = \underset{\theta}{min} \ \mathcal{J}_{\lambda}(\theta) = \frac{1}{n} \sum_{i=1}^{n}  \left[ \mathcal{L}(h(\boldsymbol{x}_i; \ \theta), \ y_i) \right]
+$$
+
+<h2 id="Generalisation-Performance"><a href="#Generalisation-Performance" class="headerlink" title="Generalisation Performance"></a>Generalisation Performance</h2><h3 id="Generalisation-Loss"><a href="#Generalisation-Loss" class="headerlink" title="Generalisation Loss"></a>Generalisation Loss</h3><ul>
+<li><p>For <strong>prediction function</strong></p>
+
+$$
+\mathcal{J}(\hat{h}) = \mathbb{E}_{\boldsymbol{x}, \ y} \left[ \mathcal{L}(\hat{h}(\boldsymbol{x}), \ y) \right]
+$$
+
+<ul>
+<li>Done with held-out data</li>
+</ul>
+</li>
+<li><p>For <strong>algorithm</strong></p>
+
+$$
+\bar{\mathcal{J}}(\mathcal{A}) = \mathbb{E}_{D^{train}}\left[ \mathcal{J}(\hat{h}) \right] = \mathbb{E}_{D^{train}}\left[ \mathcal{J}(\mathcal{A}(D^{train})) \right]
+$$
+
+<ul>
+<li>See <a href="/images/DME/lecture-notes.pdf">DME Lecture Notes</a> for more details.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Overfitting-and-Underfitting"><a href="#Overfitting-and-Underfitting" class="headerlink" title="Overfitting and Underfitting"></a>Overfitting and Underfitting</h3><blockquote>
+<ul>
+<li>Overfitting: Reducing the model complexity, the prediction loss decreases.</li>
+<li>Underfitting: Increasing the model complexity, the prediction loss decreases.  </li>
+</ul>
+</blockquote>
+<ul>
+<li><p>Solutions: <strong>Model Selection</strong> or <strong>Regularisation</strong> . </p>
+</li>
+<li><p>Regularisation: </p>
+  
+    $$
+    \begin{aligned}
+    & \text{minimise} & & \mathcal{J}_{\boldsymbol{\lambda}}(\boldsymbol{\theta}) + \lambda_{reg} R(\boldsymbol{\theta})
+    \end{aligned}
+    $$
+    
+<ul>
+<li>L2 regularisation: $\; \; \; R(\boldsymbol{\theta}) = \sum_{i} \theta_i^2 \; $</li>
+<li>L1 regularisation: $\; \; \; R(\boldsymbol{\theta}) = \sum_{i} |\theta_i| \; $</li>
+</ul>
+</li>
+<li>Either <strong>model complexity</strong> and <strong>size of training data</strong> matter generalisation performance, See <a href="/images/DME/example1.pdf">4.2.3 Example</a> on DME Lecture Notes.</li>
+</ul>
+<h2 id="Estimating-the-Generalisation-Performance"><a href="#Estimating-the-Generalisation-Performance" class="headerlink" title="Estimating the Generalisation Performance"></a>Estimating the Generalisation Performance</h2><p>We typically need to estimate the generalisation performance twice: Once for hyperparameter selection, and once for ﬁnal performance evaluation.</p>
+<h3 id="Methods-for-Estimating-the-Generalisation-Performance"><a href="#Methods-for-Estimating-the-Generalisation-Performance" class="headerlink" title="Methods for Estimating the Generalisation Performance"></a>Methods for Estimating the Generalisation Performance</h3><h4 id="Held-out-Approach"><a href="#Held-out-Approach" class="headerlink" title="Held-out Approach"></a>Held-out Approach</h4><h1 id="Appendix-A"><a href="#Appendix-A" class="headerlink" title="Appendix A"></a>Appendix A</h1><h2 id="s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><a href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma" class="headerlink" title="$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$"></a>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</h2><p>Assume $X$ centered, then, according the SVD of $X$, the covariance matrix is<br>
 $$
 \begin{aligned}
 \Sigma & = \frac{1}{n}X X^T \\
@@ -1128,17 +1202,57 @@ $$
         <a class="is-flex" href="#Classical-MDS">
         <span class="has-mr-6">3.3.3</span>
         <span>Classical MDS:</span>
+        </a></li><li>
+        <a class="is-flex" href="#Isometric-Features-Mapping-Isomap">
+        <span class="has-mr-6">3.3.4</span>
+        <span>Isometric Features Mapping (Isomap)</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#Chapter-4-Predictive-Modelling-and-Generalization">
+        <span class="has-mr-6">4</span>
+        <span>Chapter 4. Predictive Modelling and Generalization</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Prediction-and-Training-Loss">
+        <span class="has-mr-6">4.1</span>
+        <span>Prediction and Training Loss</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Prediction-Loss">
+        <span class="has-mr-6">4.1.1</span>
+        <span>Prediction Loss</span>
+        </a></li><li>
+        <a class="is-flex" href="#Training-Loss">
+        <span class="has-mr-6">4.1.2</span>
+        <span>Training Loss</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Generalisation-Performance">
+        <span class="has-mr-6">4.2</span>
+        <span>Generalisation Performance</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Generalisation-Loss">
+        <span class="has-mr-6">4.2.1</span>
+        <span>Generalisation Loss</span>
+        </a></li><li>
+        <a class="is-flex" href="#Overfitting-and-Underfitting">
+        <span class="has-mr-6">4.2.2</span>
+        <span>Overfitting and Underfitting</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Estimating-the-Generalisation-Performance">
+        <span class="has-mr-6">4.3</span>
+        <span>Estimating the Generalisation Performance</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Methods-for-Estimating-the-Generalisation-Performance">
+        <span class="has-mr-6">4.3.1</span>
+        <span>Methods for Estimating the Generalisation Performance</span>
         </a></li></ul></li></ul></li><li>
         <a class="is-flex" href="#Appendix-A">
-        <span class="has-mr-6">4</span>
+        <span class="has-mr-6">5</span>
         <span>Appendix A</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma">
-        <span class="has-mr-6">4.1</span>
+        <span class="has-mr-6">5.1</span>
         <span>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#Reference">
-        <span class="has-mr-6">5</span>
+        <span class="has-mr-6">6</span>
         <span>Reference</span>
         </a></li></ul>
         </div>
