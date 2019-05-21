@@ -16,7 +16,7 @@
 <meta property="og:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-15T11:38:46.000Z">
+<meta property="og:updated_time" content="2019-05-21T17:47:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:description" content="Chapter 1. Exploratory Data AnalysisNumberical Data DescriptionLocation Non-robust Measure  Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$ for random variable: $">
@@ -162,7 +162,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-15T11:38:46.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-15</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-21T17:47:04.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-21</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    24 minutes read (About 3575 words)
+                    30 minutes read (About 4455 words)
                 </span>
                 
                 
@@ -909,7 +909,215 @@ $$
 <li>Either <strong>model complexity</strong> and <strong>size of training data</strong> matter generalisation performance, See <a href="/images/DME/example1.pdf">4.2.3 Example</a> on DME Lecture Notes.</li>
 </ul>
 <h2 id="Estimating-the-Generalisation-Performance"><a href="#Estimating-the-Generalisation-Performance" class="headerlink" title="Estimating the Generalisation Performance"></a>Estimating the Generalisation Performance</h2><p>We typically need to estimate the generalisation performance twice: Once for hyperparameter selection, and once for ﬁnal performance evaluation.</p>
-<h3 id="Methods-for-Estimating-the-Generalisation-Performance"><a href="#Methods-for-Estimating-the-Generalisation-Performance" class="headerlink" title="Methods for Estimating the Generalisation Performance"></a>Methods for Estimating the Generalisation Performance</h3><h4 id="Held-out-Approach"><a href="#Held-out-Approach" class="headerlink" title="Held-out Approach"></a>Held-out Approach</h4><h1 id="Appendix-A"><a href="#Appendix-A" class="headerlink" title="Appendix A"></a>Appendix A</h1><h2 id="s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><a href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma" class="headerlink" title="$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$"></a>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</h2><p>Assume $X$ centered, then, according the SVD of $X$, the covariance matrix is<br>
+<h3 id="Methods-for-Estimating-the-Generalisation-Performance"><a href="#Methods-for-Estimating-the-Generalisation-Performance" class="headerlink" title="Methods for Estimating the Generalisation Performance"></a>Methods for Estimating the Generalisation Performance</h3><h4 id="Held-out-Approach"><a href="#Held-out-Approach" class="headerlink" title="Held-out Approach"></a>Held-out Approach</h4><ul>
+<li>Prediction function:  
+    $$
+    \begin{aligned}
+    \hat{h} = \mathcal{A}(D^{train})
+    \end{aligned}
+    $$
+    </li>
+<li><p>Prediction Loss on Testing/ Validation Sets $\ \tilde{D} \ $.</p>
+  
+    $$
+    \begin{aligned}
+    \hat{\mathcal{J}}(\hat{h}: \  \tilde{D}) = \frac{1}{n}\sum_{i=1}^{n}\mathcal{L} \left( \hat{h}(\tilde{\boldsymbol{x}}_i, \  \tilde{y}_i) \right)
+    \end{aligned}
+    $$
+    
+<ol>
+<li>Common split ratios $\ n/ \tilde{n} \ $: 60/40, 70/30 or 80/20 .</li>
+<li>If the number of (hyper-)parameters is large, let more data on training set.</li>
+<li>Split randomly.</li>
+<li>Stratification: classes are presented in same proportion  in both sets.</li>
+<li>Drawback: estimated prediction loss may varies strongly in different $\ \tilde{D} \ $, unless $\ \tilde{n} \ $ is large. <strong>Solve by Cross-Validation</strong></li>
+</ol>
+</li>
+</ul>
+<h4 id="Cross-Validation-Approach"><a href="#Cross-Validation-Approach" class="headerlink" title="Cross-Validation  Approach"></a>Cross-Validation  Approach</h4><div style="text-align:center"><br><img src="/images/DME/cross_validation.png" alt="Sketch of K-fold cross-validation for K = 5." title="Sketch of K-fold cross-validation for K = 5."><br></div>
+
+<ol>
+<li><p><strong>K-fold</strong>: Construct k pairs of $\ D^{train} \ $ and $\ D^{val} \ $.</p>
+ 
+    $$
+    \begin{aligned}
+    & D^{train} = D_{i \neq k} & & D^{val} = D_k
+    \end{aligned}
+    $$
+    
+</li>
+<li><p><strong>K Prediction functions</strong>: obtained by using k training sets . </p>
+ 
+    $$
+    \begin{aligned}
+    \hat{h}_k = \mathcal{A}(D_{k}^{train})
+    \end{aligned}
+    $$
+    
+</li>
+<li><p><strong>K performance Estimations</strong>: evaluated on k validation sets .</p>
+ 
+    $$
+    \begin{aligned}
+    \hat{\mathcal{J}}_k = \hat{\mathcal{J}}(\hat{h}_k : \ D_k^{val})
+    \end{aligned}
+    $$
+    
+</li>
+<li><p><strong>Cross Validation (CV) Score</strong>: averaging all k $\ \hat{\mathcal{J}}_k \ $</p>
+ 
+    $$
+    \begin{aligned}
+    CV = \frac{1}{K} \sum_{k=1}^{K}\hat{\mathcal{J}}_k \left(\mathcal{A} (D_k^{train}: D_k^{val}) \right) = \hat{{\bar{\mathcal{J}}}} (\mathcal{A})
+    \end{aligned}
+    $$
+    
+</li>
+</ol>
+<ul>
+<li><p>Estimate <strong>Variability</strong> of CV score</p>
+  
+    $$
+    \begin{aligned}
+    Var(CV) \approx \frac{1}{k} Var(\hat{\mathcal{J}}_k), &  & Var{\hat{\mathcal{J}}} = \frac{1}{k} = (\hat{\mathcal{J}}_k - CV) ^2  
+    \end{aligned}
+    $$
+    
+</li>
+<li><p><strong>LOOCV</strong> (Leave-One-Out Cross-Validation): $\ D^{val} \ $ contains only one data point.</p>
+<ul>
+<li>Generally expensive, but for some problems, the computation can be done quickly. For a further discussion of the choice of K, see e.g. Section 7.10 in the textbook by Hastie, Tibshirani, and Friedman <a href="#">(2009)</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Hyperparameters-Selection-and-Performance-Evaluation"><a href="#Hyperparameters-Selection-and-Performance-Evaluation" class="headerlink" title="Hyperparameters Selection and Performance Evaluation:"></a>Hyperparameters Selection and Performance Evaluation:</h3><h4 id="Option-1-Two-Times-Held-out"><a href="#Option-1-Two-Times-Held-out" class="headerlink" title="Option 1 - Two Times Held-out"></a><strong>Option 1</strong> - Two Times Held-out</h4><ol>
+<li>Split off some testing data to evaluate the final performance., e.g. typically, $\ D^{test} \ $ = 20 % of $\ D \ $.</li>
+<li>Split remaining data into $\ D^{train} \ $, $\ D^{val} \ $, e.g. 80/20 ratio.</li>
+<li>Tuning parameters $\ \boldsymbol{\lambda} \ $ on $\ D^{train} \ $, return a set of $\ \hat{\boldsymbol{\lambda}} \ $ . 
+    $$
+    \begin{aligned}
+    \hat{h}_{\boldsymbol{\lambda}} = \mathcal{A}_{\boldsymbol{\lambda}} (D^{train}) 
+    \end{aligned}
+    $$
+    </li>
+<li>Compute prediction loss $\ PL({\boldsymbol{\lambda}}) \ $ on $\ D^{val} \ $. 
+    $$
+    \begin{aligned}
+    PL(\boldsymbol{\lambda}) = \hat{\mathcal{J}} (\hat{h}_{\boldsymbol{\lambda}}: \ D^{val})
+    \end{aligned}
+    $$
+    
+ and choosing the $\ \boldsymbol{\lambda} \ $ by minimising $\ PL(\boldsymbol{\lambda}) \ $ 
+    $$
+    \begin{aligned}
+    \hat{\boldsymbol{\lambda}} = \underset{\boldsymbol{\lambda}}{\text{argmin }} PL(\boldsymbol{\lambda})
+    \end{aligned}
+    $$
+    </li>
+<li>Using $\ \hat{\boldsymbol{\lambda}} \ $, re-estimate $\ \boldsymbol{\theta} \ $ on the union of $\ D^{train} \ $ and $\ D^{val} \ $. 
+    $$
+    \begin{aligned}
+    \hat{h} = \mathcal{A}_{\hat{\boldsymbol{\lambda}}} = \left( D^{train} U D^{val} \right)
+    \end{aligned}
+    $$
+    </li>
+<li>Compute prediction loss on $\ D^{test} \ $. 
+    $$
+    \begin{aligned}
+    \hat{\mathcal{J}} = \hat{\mathcal{J}}(\hat{h}:\ D^{test})
+    \end{aligned}
+    $$
+    </li>
+<li>Re-estimate $\ \hat{h} \ $ on all data $\ D \ $</li>
+</ol>
+<h4 id="Option-2-Cross-validation-Held-out"><a href="#Option-2-Cross-validation-Held-out" class="headerlink" title="Option 2 - Cross-validation + Held-out"></a><strong>Option 2</strong> - Cross-validation + Held-out</h4><ol>
+<li>Split of $\ D^{test} \ $, e.g. $\ D^{test} \ $ = 20 % of $\ D \ $.</li>
+<li>Compute CV score on remaining data $\ D^{train} \ $. 
+    $$
+    EPL(\boldsymbol{\lambda}) = CV
+    $$
+    </li>
+<li>Choose $\ \hat{\boldsymbol{\lambda}} = \underset{\boldsymbol{\lambda}}{\text{argmin }}EPL(\boldsymbol{\lambda}) \ $ </li>
+<li>Re-estimate $\ \boldsymbol{\theta} \ $ on $\ D^{train} \ $ using $\ \hat{\boldsymbol{\lambda}} \ $. 
+    $$
+    \hat{h} = \mathcal{A}_{\boldsymbol{\lambda}} (D^{train})
+    $$
+    </li>
+<li>Compute prediction loss on $\ D^{test} \ $.</li>
+<li>Re-estimate $\ \hat{h} \ $ on all data $\ D \ $</li>
+</ol>
+<h2 id="Loss-Functions-in-Predictive-Models"><a href="#Loss-Functions-in-Predictive-Models" class="headerlink" title="Loss Functions in Predictive Models."></a>Loss Functions in Predictive Models.</h2><h3 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h3>
+$$
+\begin{aligned}
+& L(\hat{y},\ y) = \frac{1}{2}\left( \hat{y} - y \right)^2
+& & \text{(Square Loss)}\\
+& L(\hat{y},\ y) = | \hat{y} - y |
+& & \text{(Absolute Loss)}\\
+& L(\hat{y},\ y) = 
+    \begin{cases}
+        \frac{1}{2}\left( \hat{y} - y \right)^2 & \text{if } | \hat{y} - y |< \delta\\
+        \delta | \hat{y} - y | - \frac{1}{2} \delta^2 & \text{otherwise}
+    \end{cases}
+& & \text{(Huber Loss)}
+\end{aligned}
+$$
+
+<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><h4 id="Non-differentiable-Loss-Function"><a href="#Non-differentiable-Loss-Function" class="headerlink" title="Non-differentiable Loss Function"></a>Non-differentiable Loss Function</h4><ul>
+<li><p>Assume k different classes, loss function $\ L(\hat{y}, \ y) \ $ can be represented as $\ k \times k \ $ matrix.</p>
+  
+    $$
+    L(\hat{y}, \ y) = 
+    \begin{bmatrix}
+        L(1,1) & L(1,2) &  \dots  & L(1,k) \\
+        L(2,1) & L(2,2) &  \dots  & L(2,k) \\
+        \vdots & \vdots &  \ddots & \vdots \\
+        L(k,1) & L(k,2) &  \dots  & L(k,k)
+    \end{bmatrix}
+    $$
+    
+<ul>
+<li>The diagonal $\ L(i,i) \ $ are zero as correct prediction.</li>
+<li>The off-diagonal $\ L(i,j) \ $ are positive: loss incurred when predicting ‘i’ instead of ‘j’</li>
+</ul>
+</li>
+<li><p>Zero-One loss:</p>
+<ul>
+<li>If $\ L(i,\ j) = 1 \ $ for $\ i \neq j \ $, and 0 otherwise  
+        $$
+        L(\hat{y}, \ y) = 
+        \begin{cases}
+            1 & i \neq j\\
+            0 & otherwise
+        \end{cases}
+        $$
+        </li>
+<li>The expected prediction loss:  
+        $$
+        \begin{aligned}
+        \mathcal{J}(h) & = \mathbb{E}_{\boldsymbol{x}, \ y} L \left(h(\boldsymbol{x}), \ y)  \right)\\
+        & = \mathbb{E}_{\hat{y}, \ y} L \left(\hat{y}, \ y)  \right)\\
+        & = \sum_{i, j} L(i,\ j) p(i,\ j)\\
+        & = \sum_{i \neq j} p(i, \ j)\\
+        & = \mathbb{P}(y \neq \hat{y})
+        \end{aligned}
+        $$
+        
+  , where $\ p(i,\ j) = p(\hat{y} = i, \ y = j) \ $<ul>
+<li>Known as ‘missclassification rate’</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Binary Classification</p>
+</li>
+</ul>
+<div style="text-align:center"><br><img src="/images/DME/binary_classification.png" alt="Possible events and their probabilities in binary classiﬁcation." title="Possible events and their probabilities in binary classiﬁcation."><br></div>
+
+
+
+
+
+<h1 id="Appendix-A"><a href="#Appendix-A" class="headerlink" title="Appendix A"></a>Appendix A</h1><h2 id="s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><a href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma" class="headerlink" title="$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$"></a>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</h2><p>Assume $X$ centered, then, according the SVD of $X$, the covariance matrix is<br>
 $$
 \begin{aligned}
 \Sigma & = \frac{1}{n}X X^T \\
@@ -919,6 +1127,7 @@ $$
 $$
 </p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1]: Michael E Tipping and Christopher M Bishop. “Probabilistic principal component analysis”. In: Journal of the Royal Statistical Society: Series B (Statistical Methodology) 61.3 (1999), pp. 611–622</p>
+<p>[2]: T. Hastie, R. Tibshirani, and J.H. Friedman. The Elements of Statistical Learning. Springer, 2009. </p>
 
         </div>
         
@@ -991,16 +1200,7 @@ $$
 </div>
     </div>
 </div>
-
-
-<!-- <div class="content">
-    
-        <div id="toc" class="toc-article">
-            <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-1-Exploratory-Data-Analysis"><span class="toc-number">1.</span> <span class="toc-text">Chapter 1. Exploratory Data Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Numberical-Data-Description"><span class="toc-number">1.1.</span> <span class="toc-text">Numberical Data Description</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Location"><span class="toc-number">1.1.1.</span> <span class="toc-text">Location</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scale"><span class="toc-number">1.1.2.</span> <span class="toc-text">Scale</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shape"><span class="toc-number">1.1.3.</span> <span class="toc-text">Shape:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multivariate-Measure"><span class="toc-number">1.1.4.</span> <span class="toc-text">Multivariate Measure:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Preprocessing"><span class="toc-number">1.2.</span> <span class="toc-text">Data Preprocessing:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Standardisation"><span class="toc-number">1.2.1.</span> <span class="toc-text">Standardisation:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Outlier-Detection"><span class="toc-number">1.2.2.</span> <span class="toc-text">Outlier Detection:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-2-Principal-Component-Analysis-PCA"><span class="toc-number">2.</span> <span class="toc-text">Chapter 2. Principal Component Analysis(PCA)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PCA-by-Variance-Maximisation"><span class="toc-number">2.1.</span> <span class="toc-text">PCA by Variance Maximisation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sequential-Approach"><span class="toc-number">2.1.1.</span> <span class="toc-text">Sequential Approach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simultaneous-Approach"><span class="toc-number">2.1.2.</span> <span class="toc-text">Simultaneous Approach</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCA-by-Minimisation-of-Approximation-Error"><span class="toc-number">2.2.</span> <span class="toc-text">PCA by Minimisation of Approximation Error</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCA-by-Low-Rank-Matrix-Approximation"><span class="toc-number">2.3.</span> <span class="toc-text">PCA by Low Rank Matrix Approximation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Approximation-from-Data-Matrix"><span class="toc-number">2.3.1.</span> <span class="toc-text">Approximation from Data Matrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Approximation-from-Sample-Covariance-Matrix"><span class="toc-number">2.3.2.</span> <span class="toc-text">Approximation from Sample Covariance Matrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Approximation-from-Gram-Matrix"><span class="toc-number">2.3.3.</span> <span class="toc-text">Approximation from Gram Matrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Probabilistic-PCA-PPCA"><span class="toc-number">2.3.4.</span> <span class="toc-text">Probabilistic PCA (PPCA)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-3-Dimensionality-Reduction"><span class="toc-number">3.</span> <span class="toc-text">Chapter 3. Dimensionality Reduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linear-Dimensionality-Reduction"><span class="toc-number">3.1.</span> <span class="toc-text">Linear Dimensionality Reduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#From-Data-Matrix"><span class="toc-number">3.1.1.</span> <span class="toc-text">From Data Matrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#From-Inner-Product"><span class="toc-number">3.1.2.</span> <span class="toc-text">From Inner Product</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#From-Distance-Matrix"><span class="toc-number">3.1.3.</span> <span class="toc-text">From Distance Matrix</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Non-linear-Dimensionalisty-Reduction-via-Kernel-PCA"><span class="toc-number">3.2.</span> <span class="toc-text">(Non-linear) Dimensionalisty Reduction via Kernel PCA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multidimensional-Scaling-MDS"><span class="toc-number">3.3.</span> <span class="toc-text">Multidimensional Scaling (MDS)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Metric-MDS"><span class="toc-number">3.3.1.</span> <span class="toc-text">Metric MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-metric-MDS"><span class="toc-number">3.3.2.</span> <span class="toc-text">Non-metric MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Classical-MDS"><span class="toc-number">3.3.3.</span> <span class="toc-text">Classical MDS:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Isometric-Features-Mapping-Isomap"><span class="toc-number">3.3.4.</span> <span class="toc-text">Isometric Features Mapping (Isomap)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-4-Predictive-Modelling-and-Generalization"><span class="toc-number">4.</span> <span class="toc-text">Chapter 4. Predictive Modelling and Generalization</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prediction-and-Training-Loss"><span class="toc-number">4.1.</span> <span class="toc-text">Prediction and Training Loss</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prediction-Loss"><span class="toc-number">4.1.1.</span> <span class="toc-text">Prediction Loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training-Loss"><span class="toc-number">4.1.2.</span> <span class="toc-text">Training Loss</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Generalisation-Performance"><span class="toc-number">4.2.</span> <span class="toc-text">Generalisation Performance</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Generalisation-Loss"><span class="toc-number">4.2.1.</span> <span class="toc-text">Generalisation Loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Overfitting-and-Underfitting"><span class="toc-number">4.2.2.</span> <span class="toc-text">Overfitting and Underfitting</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Estimating-the-Generalisation-Performance"><span class="toc-number">4.3.</span> <span class="toc-text">Estimating the Generalisation Performance</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Methods-for-Estimating-the-Generalisation-Performance"><span class="toc-number">4.3.1.</span> <span class="toc-text">Methods for Estimating the Generalisation Performance</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Held-out-Approach"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">Held-out Approach</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix-A"><span class="toc-number">5.</span> <span class="toc-text">Appendix A</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><span class="toc-number">5.1.</span> <span class="toc-text">$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol>
-        </div>
-     
-</div> --></div>
+</div>
                 
 
 
@@ -1270,6 +1470,22 @@ $$
         <a class="is-flex" href="#Methods-for-Estimating-the-Generalisation-Performance">
         <span class="has-mr-6">4.3.1</span>
         <span>Methods for Estimating the Generalisation Performance</span>
+        </a></li><li>
+        <a class="is-flex" href="#Hyperparameters-Selection-and-Performance-Evaluation">
+        <span class="has-mr-6">4.3.2</span>
+        <span>Hyperparameters Selection and Performance Evaluation:</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Loss-Functions-in-Predictive-Models">
+        <span class="has-mr-6">4.4</span>
+        <span>Loss Functions in Predictive Models.</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Regression">
+        <span class="has-mr-6">4.4.1</span>
+        <span>Regression</span>
+        </a></li><li>
+        <a class="is-flex" href="#Classification">
+        <span class="has-mr-6">4.4.2</span>
+        <span>Classification</span>
         </a></li></ul></li></ul></li><li>
         <a class="is-flex" href="#Appendix-A">
         <span class="has-mr-6">5</span>
