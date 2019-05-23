@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="小树的面包店 (Zhanhang&#39;s blog)">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-22T11:50:10.000Z">
+<meta property="og:updated_time" content="2019-05-23T13:13:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DME - Data Mining and Exploration(INF11007) Revision">
 <meta name="twitter:image" content="https://zengzhanhang.github.io/images/og_image.png">
@@ -159,7 +159,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z">2019-05-10</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-10T15:00:46.280Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-22T11:50:10.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-22</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-23T13:13:14.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-23</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -172,7 +172,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    32 minutes read (About 4821 words)
+                    32 minutes read (About 4858 words)
                 </span>
                 
                 
@@ -845,12 +845,17 @@ $$
 </ul>
 </li>
 </ul>
-<h3 id="Isometric-Features-Mapping-Isomap"><a href="#Isometric-Features-Mapping-Isomap" class="headerlink" title="Isometric Features Mapping (Isomap)"></a>Isometric Features Mapping (Isomap)</h3><ol>
-<li>Construct the neighbourhood graph via ‘k nearest neighbour’ or all data points within a certain (Euclidean) distance.</li>
-<li>Construct </li>
+<h3 id="Isometric-Features-Mapping-Isomap"><a href="#Isometric-Features-Mapping-Isomap" class="headerlink" title="Isometric Features Mapping (Isomap)"></a>Isometric Features Mapping (Isomap)</h3><ul>
+<li><p>Steps of Isomap</p>
+<ol>
+<li>Construct the neighbourhood graph via ‘<em>k nearest neighbour</em>‘ or <em>all data points within a certain (Euclidean) distance</em>.</li>
+<li>Construct the shortest path (distances) as geodesic distance</li>
+<li>Construct the low dimensional embeding of these data via MDS so as to represent these data.</li>
 </ol>
-<ul>
-<li><em>Geodesic distance</em> is measured by the shortest distance between them when only allowed to travel on the data manifold from one neighbouring data point to the next.</li>
+</li>
+<li><p><em>Geodesic distance</em> is measured by the shortest distance between them when only allowed to travel on the data manifold from one neighbouring data point to the next.</p>
+</li>
+<li>Isomap well represents the circular structure when learned graph is connected.</li>
 </ul>
 <h1 id="Chapter-4-Predictive-Modelling-and-Generalization"><a href="#Chapter-4-Predictive-Modelling-and-Generalization" class="headerlink" title="Chapter 4. Predictive Modelling and Generalization"></a>Chapter 4. Predictive Modelling and Generalization</h1><h2 id="Prediction-and-Training-Loss"><a href="#Prediction-and-Training-Loss" class="headerlink" title="Prediction and Training Loss"></a>Prediction and Training Loss</h2><h3 id="Prediction-Loss"><a href="#Prediction-Loss" class="headerlink" title="Prediction Loss"></a>Prediction Loss</h3>
 $$
