@@ -378,6 +378,8 @@ img.thumbnail {
 }
 .content h1 {
   font-size: 1.75em;
+  border-left: 8px solid #5f9ea0 /**To highlight each chapter*/;
+  padding-left: 0.2cm;
 }
 .content h2 {
   font-size: 1.5em;
@@ -528,3 +530,9 @@ figure.highlight:hover .copy {
  * .article h3:before{content:counter(section) "." counter(sub-section) " ";counter-increment:sub-section}
  * .article h4:before{content:counter(section) "." counter(sub-section) "." counter(composite) " ";counter-increment:composite} 
  * --------------------------------- */
+/* ----------------------------------
+  * cahge button color
+  * -------------------------------- */
+.level .follow-button {
+  background-color: #5f9ea0;
+}
