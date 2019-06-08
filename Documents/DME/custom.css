@@ -154,6 +154,7 @@ h3 { color: #444; font-style: italic; font-weight: normal}
     text-align: justify;
     font-size: 11pt;
     /* font-family: monospace; */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: 0px;
     line-height: normal;
     font-weight: normal;
