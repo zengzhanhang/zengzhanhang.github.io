@@ -27,7 +27,7 @@ div #notebook { /* center the content */
 
 div.text_cell {
     text-align: justify;
-    width: 100ex /* instead of 100%, */ /* 105ex*0.85 */
+    width: 105ex /* instead of 100%, */ /* 105ex*0.85 */
 }
 
 div.text_cell_render{
@@ -35,7 +35,7 @@ div.text_cell_render{
     padding: 0em 1em 0em 1em;
     font-family: Verdana, Geneva, sans-serif;
     line-height: 145%; /* added for some line spacing of text. */
-    width: 86%;      /* instead of 'inherit' for shorter lines */ /* 842*0.85 */
+    width: 95%;      /* instead of 'inherit' for shorter lines */ /* 842*0.85 */
     font-weight: Light;
     font-size: 13pt;
 }
