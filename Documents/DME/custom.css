@@ -31,7 +31,7 @@ div.text_cell {
 }
 
 div.text_cell_render{
-    padding: 0em 1em 0em 1em;
+    padding: 0em .2em 0em .2em;
     font-family: Verdana, Geneva, sans-serif;
     line-height: 145%; /* added for some line spacing of text. */
     width: 94%;      /* instead of 'inherit' for shorter lines */ /* 842*0.85 */
