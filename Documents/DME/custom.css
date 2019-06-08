@@ -52,7 +52,7 @@ div.cell.text_cell.border-box-sizing {
     text-align: justify;
 }
 .rendered_html h1 { /* Main titles big with more space*/
-    margin-top: 2.2em;
+    margin-top: 2em;
     line-height: 1.4em;
     margin-bottom: 0.1em;
     padding: 0;
@@ -75,8 +75,8 @@ div.cell.text_cell.border-box-sizing {
 }
 
 div.cell { /* set cell width to about 80 chars */
-    margin-top:1em;
-    margin-bottom:1em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
     margin-left:auto;
     margin-right:auto;
     width: 95%; /* 842px*0.85 */
@@ -152,7 +152,7 @@ h3 { color: #444; font-style: italic; font-weight: normal}
 
 .text_cell p {
     text-align: justify;
-    font-size: 10pt;
+    font-size: 11pt;
     /* font-family: monospace; */
     letter-spacing: 0px;
     line-height: normal;
