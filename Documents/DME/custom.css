@@ -151,5 +151,7 @@ h2 { color: #444; }
 h3 { color: #444; font-style: italic; font-weight: normal}
 
 .text_cell p {
-    text-align: justify
+    text-align: justify;
+    font-size: 9pt;
+    font-family: monospace;
 }
