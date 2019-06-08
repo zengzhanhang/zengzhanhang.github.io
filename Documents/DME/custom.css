@@ -42,7 +42,7 @@ div.text_cell_render{
 
 div.text_cell_render.border-box-sizing.rendered_html {
     margin: 0;
-    padding: 1em; 
+    padding: .2em; 
     margin-left: 4ex;
     text-align: justify;
 }
