@@ -33,7 +33,7 @@ div.text_cell {
 div.text_cell_render{
     text-align: justify;
     padding: 0em 1em 0em 1em;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: sans-serif, Verdana, Geneva, sans-serif;
     line-height: 145%; /* added for some line spacing of text. */
     width: 94%;      /* instead of 'inherit' for shorter lines */ /* 842*0.85 */
     font-weight: Light;
@@ -56,20 +56,22 @@ div.cell.text_cell.border-box-sizing {
     line-height: 1.4em;
     margin-bottom: 0.1em;
     padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Open Sans";
-    font-weight: Light;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
 }
 .rendered_html h2 {
     margin-top:2.0em;
     margin-bottome:0.0em;
     margin: 0;
     padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Open Sans"; font-weight: Light;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-weight: bold;
 }
 .rendered_html h3 {
     margin: 0;
     padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Open Sans"; font-weight: Light;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-weight: bold;
 }
 
 div.cell { /* set cell width to about 80 chars */
