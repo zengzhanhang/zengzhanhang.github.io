@@ -27,7 +27,7 @@ div #notebook { /* center the content */
 
 div.text_cell {
     text-align: justify;
-    width: 90ex /* instead of 100%, */ /* 105*0.85 */
+    width: 100ex /* instead of 100%, */ /* 105ex*0.85 */
 }
 
 div.text_cell_render{
