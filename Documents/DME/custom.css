@@ -52,23 +52,23 @@ div.cell.text_cell.border-box-sizing {
     text-align: justify;
 }
 .rendered_html h1 { /* Main titles big with more space*/
-    margin-top: 2em;
-    line-height: 1.4em;
-    margin-bottom: 0.1em;
+    margin-top: 2.2em;
+    line-height: 1.6em;
+    margin-bottom: 0.2em;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
 .rendered_html h2 {
     margin-top:2.0em;
-    margin-bottome:0.0em;
+    margin-bottome:0.1em;
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
     font-weight: bold;
 }
 .rendered_html h3 {
-    padding-top: 1.5ex;
+    margin-top: 1.8ex;
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
