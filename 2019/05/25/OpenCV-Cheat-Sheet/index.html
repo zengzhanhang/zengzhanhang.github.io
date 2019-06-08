@@ -8,7 +8,7 @@
 
 
     <meta name="description" content="Opencv-python是OpenCv的python API，包括数百种计算机视觉算法。这个页面记录了一些常用的Opencv-python函数，以便作为我的快速参考。">
-<meta name="keywords" content="Python,CV">
+<meta name="keywords" content="CV,Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenCV Cheat Sheet (Python)">
 <meta property="og:url" content="https://zengzhanhang.github.io/2019/05/25/OpenCV-Cheat-Sheet/index.html">
@@ -16,7 +16,7 @@
 <meta property="og:description" content="Opencv-python是OpenCv的python API，包括数百种计算机视觉算法。这个页面记录了一些常用的Opencv-python函数，以便作为我的快速参考。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-28T16:44:06.000Z">
+<meta property="og:updated_time" content="2019-06-08T01:33:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV Cheat Sheet (Python)">
 <meta name="twitter:description" content="Opencv-python是OpenCv的python API，包括数百种计算机视觉算法。这个页面记录了一些常用的Opencv-python函数，以便作为我的快速参考。">
@@ -162,7 +162,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-25T10:32:10.260Z">2019-05-25</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-25T10:32:10.260Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-25</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-28T16:44:06.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-28</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-06-08T01:33:30.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-06-08</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -214,12 +214,12 @@
 <p>Opencv-python是OpenCv的python API，包括数百种计算机视觉算法。这个页面记录了一些常用的Opencv-python函数，以便作为我的快速参考。</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="安装和使用-Installation-and-Usage"><a href="#安装和使用-Installation-and-Usage" class="headerlink" title="安装和使用 Installation and Usage"></a>安装和使用 Installation and Usage</h1><ul>
+<h1 id="1-安装和使用-Installation-and-Usage"><a href="#1-安装和使用-Installation-and-Usage" class="headerlink" title="1. 安装和使用 Installation and Usage"></a>1. 安装和使用 Installation and Usage</h1><ul>
 <li>安装</li>
 </ul>
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></table></figure>
 <p>事实上一共有四种不同的packages，安装其中一个即可，四个packages都用同一个名字cv2（对于其他的packages，详见<a href="https://pypi.org/project/opencv-python/" target="_blank" rel="noopener">Documentation</a>）。</p>
-<h1 id="OpenCV中的GUI特性"><a href="#OpenCV中的GUI特性" class="headerlink" title="OpenCV中的GUI特性"></a>OpenCV中的GUI特性</h1><h2 id="图像基本操作-读取，显示，保存"><a href="#图像基本操作-读取，显示，保存" class="headerlink" title="图像基本操作(读取，显示，保存)"></a><a href="https://docs.opencv.org/master/dc/d2e/tutorial_py_image_display.html" target="_blank" rel="noopener">图像基本操作</a>(读取，显示，保存)</h2><blockquote>
+<h1 id="2-OpenCV中的GUI特性"><a href="#2-OpenCV中的GUI特性" class="headerlink" title="2. OpenCV中的GUI特性"></a>2. OpenCV中的GUI特性</h1><h2 id="2-1-图像基本操作-读取，显示，保存"><a href="#2-1-图像基本操作-读取，显示，保存" class="headerlink" title="2.1 图像基本操作(读取，显示，保存)"></a>2.1 <a href="https://docs.opencv.org/master/dc/d2e/tutorial_py_image_display.html" target="_blank" rel="noopener">图像基本操作</a>(读取，显示，保存)</h2><blockquote>
 <p>三个函数<strong>cv.imread()</strong>, <strong>cv.imshow()</strong>, <strong>cv.imwrite()</strong>分别用于读取；显示和保存图像。</p>
 </blockquote>
 <ul>
@@ -269,7 +269,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="色彩通道转换-Color-conversions-：RGB-Gray"><a href="#色彩通道转换-Color-conversions-：RGB-Gray" class="headerlink" title="色彩通道转换(Color conversions)：RGB - Gray"></a><a href="https://docs.opencv.org/3.1.0/de/d25/imgproc_color_conversions.html" target="_blank" rel="noopener">色彩通道转换(Color conversions)：RGB - Gray</a></h2><blockquote>
+<h2 id="2-2-色彩通道转换-Color-conversions-：RGB-Gray"><a href="#2-2-色彩通道转换-Color-conversions-：RGB-Gray" class="headerlink" title="2.2 色彩通道转换(Color conversions)：RGB - Gray"></a>2.2 <a href="https://docs.opencv.org/3.1.0/de/d25/imgproc_color_conversions.html" target="_blank" rel="noopener">色彩通道转换(Color conversions)：RGB - Gray</a></h2><blockquote>
 <p><strong>RGB ↔ GRAY</strong> 除了RGB channel到灰度Y channel的转换，还有其他通道的转换，例如RGB ↔ CIE XYZ.Rec 709 with D65 white point； RGB ↔ YCrCb JPEG (or YCC)等等，详见<a href="https://docs.opencv.org/3.1.0/de/d25/imgproc_color_conversions.html" target="_blank" rel="noopener">Documentation</a>。</p>
 </blockquote>
 <p>RGB空间内的变换，例如添加/删除Alpha通道，反转通道顺序，转换为16位RGB颜色（R5：G6：B5或R5：G5：B5），以及转换为灰度/从灰度转换使用以下方式：</p>
@@ -499,24 +499,24 @@ $$
                 Catalogue
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#安装和使用-Installation-and-Usage">
-        <span class="has-mr-6">1</span>
-        <span>安装和使用 Installation and Usage</span>
+        <a class="is-flex" href="#1-安装和使用-Installation-and-Usage">
+        <!-- <span class="has-mr-6">1</span> 注释为不编号-->
+        <span>1. 安装和使用 Installation and Usage</span>
         </a></li><li>
-        <a class="is-flex" href="#OpenCV中的GUI特性">
-        <span class="has-mr-6">2</span>
-        <span>OpenCV中的GUI特性</span>
+        <a class="is-flex" href="#2-OpenCV中的GUI特性">
+        <!-- <span class="has-mr-6">2</span> 注释为不编号-->
+        <span>2. OpenCV中的GUI特性</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#图像基本操作-读取，显示，保存">
-        <span class="has-mr-6">2.1</span>
-        <span>图像基本操作(读取，显示，保存)</span>
+        <a class="is-flex" href="#2-1-图像基本操作-读取，显示，保存">
+        <!-- <span class="has-mr-6">2.1</span> 注释为不编号-->
+        <span>2.1 图像基本操作(读取，显示，保存)</span>
         </a></li><li>
-        <a class="is-flex" href="#色彩通道转换-Color-conversions-：RGB-Gray">
-        <span class="has-mr-6">2.2</span>
-        <span>色彩通道转换(Color conversions)：RGB - Gray</span>
+        <a class="is-flex" href="#2-2-色彩通道转换-Color-conversions-：RGB-Gray">
+        <!-- <span class="has-mr-6">2.2</span> 注释为不编号-->
+        <span>2.2 色彩通道转换(Color conversions)：RGB - Gray</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#Additional-Reading">
-        <span class="has-mr-6">3</span>
+        <!-- <span class="has-mr-6">3</span> 注释为不编号-->
         <span>Additional Reading</span>
         </a></li></ul>
         </div>
