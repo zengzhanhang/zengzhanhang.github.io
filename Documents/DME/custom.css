@@ -1,5 +1,21 @@
 .container { width:100% !important; }
 
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 940px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1140px;
+  }
+}
+
 body {
     color: #333;
     background: #f6f6f6;
