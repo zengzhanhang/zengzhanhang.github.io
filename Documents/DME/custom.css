@@ -35,7 +35,7 @@ div.text_cell_render{
     font-family: Verdana, Geneva, sans-serif;
     line-height: 145%; /* added for some line spacing of text. */
     width: 94%;      /* instead of 'inherit' for shorter lines */ /* 842*0.85 */
-    font-weight: Light;
+    /* font-weight: Light; */
     font-size: 12pt;
     text-align: justify;
 }
