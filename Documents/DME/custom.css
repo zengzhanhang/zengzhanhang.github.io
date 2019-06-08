@@ -31,13 +31,13 @@ div.text_cell {
 }
 
 div.text_cell_render{
-    text-align: justify;
     padding: 0em 1em 0em 1em;
-    font-family: sans-serif, Verdana, Geneva, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
     line-height: 145%; /* added for some line spacing of text. */
     width: 94%;      /* instead of 'inherit' for shorter lines */ /* 842*0.85 */
-    font-weight: Light;
+    /* font-weight: Light; */
     font-size: 12pt;
+    text-align: justify;
 }
 
 div.text_cell_render.border-box-sizing.rendered_html {
