@@ -37,7 +37,7 @@ div.text_cell_render{
     line-height: 145%; /* added for some line spacing of text. */
     width: 94%;      /* instead of 'inherit' for shorter lines */ /* 842*0.85 */
     font-weight: Light;
-    font-size: 13pt;
+    font-size: 12pt;
 }
 
 div.text_cell_render.border-box-sizing.rendered_html {
@@ -127,7 +127,7 @@ div.input { /* box with code */
 
 div.CodeMirror { /* code font */
     font-family: "Droid Sans Mono", monospace;
-    font-size: 12pt;
+    font-size: 10pt;
 }
 
 div.prompt { /* remove In/Out prompt */
@@ -135,12 +135,12 @@ div.prompt { /* remove In/Out prompt */
 }
 
 div.cell.border-box-sizing.code_cell.rendered {
-    font-size: 12pt;
+    font-size: 10pt;
 }
  
 div.output_subarea {
     border:none;
-    font-size: 12pt;
+    font-size: 10pt;
 }
 
 /* header colors and fonts */
