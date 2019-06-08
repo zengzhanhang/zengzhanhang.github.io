@@ -3,7 +3,7 @@
 body {
     color: #333;
     background: #f6f6f6;
-    width: 833px; /* 980*0.85 */
+    width: 100%; /* 980*0.85 */
     margin: auto;
 }
 
