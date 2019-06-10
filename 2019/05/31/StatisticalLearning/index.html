@@ -16,7 +16,7 @@
 <meta property="og:description" content="统计学习方法笔记总结。最后附带用sklearn进行分类的例子。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-08T13:45:36.000Z">
+<meta property="og:updated_time" content="2019-06-10T00:43:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="统计学习 - Statistical Learning">
 <meta name="twitter:description" content="统计学习方法笔记总结。最后附带用sklearn进行分类的例子。">
@@ -162,7 +162,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-31T15:43:17.000Z">2019-05-31</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-31T15:43:17.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-31</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-06-08T13:45:36.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-06-08</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-06-10T00:43:54.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-06-10</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    13 minutes read (About 2019 words)
+                    22 minutes read (About 3250 words)
                 </span>
                 
                 
@@ -323,21 +323,31 @@ $L$ 就是训练数据的经验风险。要使经验风险最小，则使得 $\s
 </ol>
 <h1 id="2-朴素贝叶斯"><a href="#2-朴素贝叶斯" class="headerlink" title="2. 朴素贝叶斯"></a>2. 朴素贝叶斯</h1><div style="font-size: 1.2em; letter-spacing: 0.05em;"><strong>直观理解:</strong></div>
 
-<p>朴素贝叶斯和贝叶斯分类（回归）器都是基于<a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" target="_blank" rel="noopener">贝叶斯理论</a>进行预测或者分类的模型。过程是利用训练数据学习 $P(X|Y)$ 和 $P(Y)$ 的估计，得到联合概率分布 $P(X,Y)＝P(Y)P(X|Y)$ ，然后利用贝叶斯定理进行预测，将输入x分到后验概率最大的类y。<br>
+<p>朴素贝叶斯和贝叶斯分类（回归）器都是基于<a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" target="_blank" rel="noopener">贝叶斯理论</a>进行预测或者分类的模型。过程是利用训练数据学习 $P(X|Y)$ 和 $P(Y)$ 的估计，得到联合概率分布 $P(X,Y)＝P(Y)P(X|Y)$ ，然后利用贝叶斯定理进行预测，将输入 $\overrightarrow{\boldsymbol{x}}$ 分到后验概率最大的类。<br>
 $$
 P(Y|X) = \frac{P(X, Y)}{P(X)} = \frac{P(Y)P(X|Y)}{\sum_{Y}P(Y)P(X|Y)} \propto P(Y)P(X|Y) \\
-y = \underset{c_k}{\text{arg max}}P(Y=c_k) \prod_{j=1}^{n} P(X_j = x^{(j)} | Y = c_k)
+\hat{y} = \underset{c_k}{\text{argmax }}P(Y=c_k) \prod_{j=1}^{d} P(X^{(j)} = x^{(j)} | Y = c_k)
 $$
 </p>
 <p><strong>条件独立假设:</strong>  </p>
 
 $$
 \begin{aligned}
- P(X = x | Y = c_k) & = P(X^{(1)} = x^{(1)}, X^{(2)} = x^{(2)}, \dots, X^{(n)} = x^{(n)} | y = c_k) \\
-                    & = \prod_{j=1}^{n} P(X_j = x^{(j)} | Y = c_k)
+P(X = \overrightarrow{\boldsymbol{x}})  & = \prod_{j=1}^{d} P(X^{(j)} = x^{(j)} | Y = c_k)
 \end{aligned}
 $$
 
+<ul>
+<li>优点：<ul>
+<li>性能相当好，它速度快，可以避免维度灾难。</li>
+<li>支持大规模数据的并行学习，且天然的支持增量学习。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>无法给出分类概率，因此难以应用于需要分类概率的场景。</li>
+</ul>
+</li>
+</ul>
 <h2 id="2-1-贝叶斯定理"><a href="#2-1-贝叶斯定理" class="headerlink" title="2.1 贝叶斯定理"></a>2.1 贝叶斯定理</h2><ul>
 <li>全概率公式 (<a href="https://en.wikipedia.org/wiki/Law_of_total_probability" target="_blank" rel="noopener">Law of Total Probability Theorem</a>)：</li>
 </ul>
@@ -352,12 +362,141 @@ $$
 
 $$
 \begin{aligned}
-P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{\sum_{j=1}^{n}P(B|A_j)P(A_j)} \propto P(B|A) \cdot P(A)
+P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{\sum_{j=1}^{d}P(B|A_j)P(A_j)} \propto P(B|A) \cdot P(A)
 \end{aligned}
 $$
 
-<h2 id="2-2-朴素贝叶斯"><a href="#2-2-朴素贝叶斯" class="headerlink" title="2.2 朴素贝叶斯"></a>2.2 朴素贝叶斯</h2><p>朴素贝叶斯（naïve Bayes）法是基于贝叶斯定理与特征条件独立假设的分类方法。 </p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<h2 id="2-2-朴素贝叶斯"><a href="#2-2-朴素贝叶斯" class="headerlink" title="2.2 朴素贝叶斯"></a>2.2 朴素贝叶斯</h2><p>朴素贝叶斯（naïve Bayes）法是基于<strong>贝叶斯定理</strong>与特征<strong>条件独立假设</strong>的分类方法。</p>
+<h3 id="2-2-1-基本方法及解释"><a href="#2-2-1-基本方法及解释" class="headerlink" title="2.2.1 基本方法及解释"></a>2.2.1 基本方法及解释</h3><h4 id="2-2-1-1-基本方法"><a href="#2-2-1-1-基本方法" class="headerlink" title="2.2.1.1 基本方法"></a>2.2.1.1 基本方法</h4><ul>
+<li><p>设输入空间 $X \subseteq R_n$ 为 $d$ 维向量的集合，输出空间为类标记集合 $y ＝{c_1, c_2, \dots, c_K}$。输入为特征向量$\overrightarrow{\boldsymbol{x}} \in X$ ，输出为类标记（class label）$y \in Y $ 。<br>$P(X,Y)$ 是 $X$ 和 $Y$ 的联合概率分布，训练数据集 $D$ 由 $P(X,Y)$ 独立同分布产生。</p>
+
+  $$
+  D = \left\{ (\overrightarrow{\boldsymbol{x}}_1, y_1), (\overrightarrow{\boldsymbol{x}}_2, y_2), \dots, (\overrightarrow{\boldsymbol{x}}_n, y_n) \right\}
+  $$
+  
+</li>
+<li><p>步骤：</p>
+<ol>
+<li>学习以下先验概率分布及条件概率分布。
+    $$
+    \begin{aligned}
+    \text{(先验概率)} & \quad \quad P(Y=c_k), \quad \  k=1,2,\dots, k\\
+    \text{(条件概率)} & \quad \quad P(X = \overrightarrow{\boldsymbol{x}} | P(X^{(1)} = x^{(1)}, X^{(2)} = x^{(2)}, \dots, X^{(d)} = x^{(d)} | y = c_k)
+    \end{aligned}
+    $$
+    </li>
+<li>条件独立性的假设：
+    $$
+    \begin{aligned}
+    P(X = \overrightarrow{\boldsymbol{x}} | Y = c_k) & = P(X^{(1)} = x^{(1)}, X^{(2)} = x^{(2)}, \dots, X^{(d)} = x^{(d)} | y = c_k) \\
+                    & = \prod_{j=1}^{d} P(X_j = x^{(j)} | Y = c_k)
+    \end{aligned}
+    $$
+    
+<ul>
+<li>条件独立假设等于 是说用于分类的特征在类确定的条件下都是条件独立的。这一假设使朴素贝叶斯法变得简单，但<strong>有时会牺牲一定的分类准确率</strong>。</li>
+</ul>
+</li>
+<li>朴素贝叶斯法分类时，对给定的输入 $\overrightarrow{\boldsymbol{x}}$ ，通过学习到的模型计算后验概率分布 $P(Y＝ c_k|X＝\overrightarrow{\boldsymbol{x}})$。
+    $$
+    \begin{aligned}
+    P(Y = c_k | X = \overrightarrow{\boldsymbol{x}}) & = \frac{P(X = \overrightarrow{\boldsymbol{x}} | Y = c_k)}{\sum_{k} P(X = \overrightarrow{\boldsymbol{x}} | Y = c_k)}\\
+    \text{(独立性假设)} & = \frac{P(Y = c_k)\prod_{j=1}^{d} P(X_j = x^{(j)} | Y = c_k)}{\sum_{k} P(Y = c_k)\prod_{j=1}^{d} P(X_j = x^{(j)} | Y = c_k)}, \quad k = 1,2,\dots,K
+    \end{aligned}
+    $$
+    </li>
+<li>将后验概率最大的类作为x的类输出:
+    $$
+    \begin{aligned}
+    \hat{y} = f(\overrightarrow{\boldsymbol{x}}) = \underset{c_k}{\text{argmax }} P(Y = c_k) \prod_{j=1}^{d} P(X_j = x^{(j)} | Y = c_k)
+    \end{aligned}
+    $$
+    
+<ul>
+<li>Note：因为后验概率的分母都相同，因此在这可以忽略。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-2-1-2-后验概率最大的含义等价于期望风险最小化-Optional"><a href="#2-2-1-2-后验概率最大的含义等价于期望风险最小化-Optional" class="headerlink" title="2.2.1.2 后验概率最大的含义等价于期望风险最小化 (Optional)"></a>2.2.1.2 <strong>后验概率最大</strong>的含义等价于<strong>期望风险最小化</strong> (<em>Optional</em>)</h4><ul>
+<li>假设选择 0-1损失函数：
+$$
+\begin{aligned}
+L(Y, f(X)) = 
+\begin{cases}
+0, \quad \ Y = f(X)\\
+1, \quad \ Y \neq f(x)
+\end{cases}
+\end{aligned}
+$$
+</li>
+<li>期望风险函数
+$$
+\begin{aligned}
+R_{exp}(f) = \mathbb{E} \left[ L(Y, f(X)) \right] = \sum_{\overrightarrow{\boldsymbol{x}}}\sum{y \in Y} L(y, f(\overrightarrow{\boldsymbol{x}})) P(\overrightarrow{\boldsymbol{x}}, y) = \mathbb{E}_X \left[ \sum_{y \in Y} L(y, f(\overrightarrow{\boldsymbol{x}})) P(y | \overrightarrow{\boldsymbol{x}}) \right]
+\end{aligned}
+$$
+</li>
+<li>为了使期望风险最小化，只需对 $\overrightarrow{\boldsymbol{x}}$ 逐个极小化
+$$
+\begin{aligned}
+f(\overrightarrow{\boldsymbol{x}}) & = \underset{y \in Y}{\text{argmin}} \sum_{k} L(c_k, y) P(y = c_k | X = \overrightarrow{\boldsymbol{x}})\\
+    & = \underset{y \in Y}{\text{argmin}} \sum_{k} P(y \neq c_k | X = \overrightarrow{\boldsymbol{x}})\\
+    & = \underset{y \in Y}{\text{argmin}} \sum_{k} (1 - P(y = c_k | X = \overrightarrow{\boldsymbol{x}}))\\
+    & = \underset{y \in Y}{\text{argmax}} \sum_{k} P(y = c_k | X = \overrightarrow{\boldsymbol{x}})
+\end{aligned}
+$$
+
+</li>
+</ul>
+<h4 id="2-2-1-3-参数估计-极大似然估计"><a href="#2-2-1-3-参数估计-极大似然估计" class="headerlink" title="2.2.1.3 参数估计 - 极大似然估计"></a>2.2.1.3 参数估计 - 极大似然估计</h4><p>朴素贝叶斯中可以利用极大似然估计先验概率和条件概率。<br>
+$$
+\begin{aligned}
+P(Y = c_k) \frac{1}{n} \sum_{i=1}^{n} I(y_i = c_k)\\
+P(X^{(j)} = a_{jl} \ |\  Y = c_k) = \frac{\sum_{i=1}^{n} I\left( x_i^{(j)} = a_{jl} \ |\  y_i = c_k \right)}{\sum_{i=1}^{n} I(y_i=c_k)}\\
+j = 1, 2, \dots, d; \quad l = 1, 2, \dots, S_j; \quad k = 1, 2, \dots, K
+\end{aligned}
+$$
+</p>
+<p>其中，$x_i^{(j)}$ 是第 $i$ 个样本的第 $j$ 个特征；$a_{jl}$ 是第 $j$ 个特征可能取的第 $l$ 个值；$I$ 为指示函数。</p>
+<h4 id="2-2-1-4-贝叶斯估计"><a href="#2-2-1-4-贝叶斯估计" class="headerlink" title="2.2.1.4 贝叶斯估计"></a>2.2.1.4 贝叶斯估计</h4><p>用极大似然估计可能会出现所要估计的概率值为0的情况。解决这一问题的方法是采用贝叶斯估计。具体地，条件概率的贝叶斯估计（or also known as <a href="https://en.wikipedia.org/wiki/Additive_smoothing" target="_blank" rel="noopener">add-alpha smoothing</a>）是</p>
+
+$$
+\begin{aligned}
+P_{\alpha}(X^{(j)} = a_{jl} | Y = c_k) = \frac{\sum_{i=1}^{n} I\left( x_i^{(j)} = a_{jl} | y_i = c_k \right) + \alpha}{\sum_{i=1}^{n} I(y_i=c_k) + S_j \alpha}\\
+\end{aligned}
+$$
+
+<p>其中，$\alpha \geqslant 0$</p>
+<ul>
+<li>当 $\alpha = 0$ 为极大似然估计，当 $\alpha = 1$为拉普拉斯平滑（Laplace smoothing, also known as add-one smoothing）。</li>
+</ul>
+<h3 id="2-2-2-算法"><a href="#2-2-2-算法" class="headerlink" title="2.2.2 算法"></a>2.2.2 算法</h3><ul>
+<li><p>朴素贝叶斯算法（naïve Bayes algorithm）</p>
+<ol>
+<li><p>利用极大使然估计先验概率 $P(Y = c_k)$ 和条件概率 $P(X^{(j)} = a_{jl} \  |\  Y = c_k)$，如<a href="#2-2-1-3-参数估计-极大似然估计">Sec 2.2.1.2</a></p>
+</li>
+<li><p>对于给定的实例 $\overrightarrow{\boldsymbol{x}}＝(x^{(1)},x^{(2)},…,x^{(d)})^T$ ，计算</p>
+
+    $$
+    \begin{aligned}
+    P(Y = c_k)\prod_{j=1}^{d} P(X_j = x^{(j)} \ |\ Y = c_k), \quad \ k = 1, 2, \dots, K
+    \end{aligned}
+    $$
+    </li>
+<li>确定实例 $\overrightarrow{\boldsymbol{x}}$ 的类
+    $$
+    \hat{y} = \underset{c_k}{\text{argmax}} \ P(Y = c_k)\prod_{j=1}^{d} P(X_j = x^{(j)} \ |\ Y = c_k)
+    $$
+    
+</li>
+</ol>
+</li>
+<li><p>例子：</p>
+</li>
+</ul>
+<h1 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
 <li>李航. 统计学习方法[M]. 清华大学出版社， 2012年3月.</li>
 <li><a href="http://www.huaxiaozhuan.com/" target="_blank" rel="noopener">Ai算法工程师手册</a></li>
 </ol>
@@ -466,7 +605,7 @@ $$
                     
                     
                     <p class="is-size-6 is-block">
-                        MSc Student in AI
+                        Statistics, Machine Learning &amp; Ai
                     </p>
                     
                     
@@ -580,9 +719,21 @@ $$
         <a class="is-flex" href="#2-2-朴素贝叶斯">
         <!-- <span class="has-mr-6">2.2</span> 注释为不编号-->
         <span>2.2 朴素贝叶斯</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#Reference">
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-2-1-基本方法及解释">
+        <!-- <span class="has-mr-6">2.2.1</span> 注释为不编号-->
+        <span>2.2.1 基本方法及解释</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-2-算法">
+        <!-- <span class="has-mr-6">2.2.2</span> 注释为不编号-->
+        <span>2.2.2 算法</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#支持向量机">
         <!-- <span class="has-mr-6">3</span> 注释为不编号-->
+        <span>支持向量机</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <!-- <span class="has-mr-6">4</span> 注释为不编号-->
         <span>Reference</span>
         </a></li></ul>
         </div>
