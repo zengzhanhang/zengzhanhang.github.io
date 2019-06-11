@@ -536,3 +536,6 @@ figure.highlight:hover .copy {
 .level .follow-button {
   background-color: #5f9ea0;
 }
+.level .follow-button:hover {
+  background-color: #4f8587;
+}
