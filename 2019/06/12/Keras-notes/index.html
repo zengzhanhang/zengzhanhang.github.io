@@ -8,7 +8,7 @@
 
 
     <meta name="description" content="To take notes about the essential Keras elements to build basic neural networks.">
-<meta name="keywords" content="DeepLearning,Python">
+<meta name="keywords" content="Python,DeepLearning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Keras 笔记">
 <meta property="og:url" content="https://zengzhanhang.github.io/2019/06/12/Keras-notes/index.html">
@@ -16,7 +16,7 @@
 <meta property="og:description" content="To take notes about the essential Keras elements to build basic neural networks.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/0*a6XSwHsfvz_oWSSJ.jpg">
-<meta property="og:updated_time" content="2019-06-12T15:50:06.000Z">
+<meta property="og:updated_time" content="2019-06-12T15:52:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras 笔记">
 <meta name="twitter:description" content="To take notes about the essential Keras elements to build basic neural networks.">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-06-12T13:37:02.000Z">2019-06-12</time> -->
                 <time class="level-item has-text-grey" datetime="2019-06-12T13:37:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-06-12</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-06-12T15:50:06.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-06-12</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-06-12T15:52:10.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-06-12</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -224,10 +224,9 @@
 <p>单层神经网络相当于（非）线性回归模型，第一个例子是构建一个最简单一元线性回归模型。</p>
 </blockquote>
 <ol>
-<li><strong>创建数据</strong><br>单层神经网络模型需要数据进行训练，因此我们使用 <code>numpy</code> 创建一些人造数据，且我们的 $y$ 为 $y = ax+b$ 。</li>
-</ol>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf</span><br><span class="line"><span class="hljs-keyword">from</span> tensorflow.keras <span class="hljs-keyword">import</span> layers</span><br><span class="line"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</span><br><span class="line">plt.style.use(<span class="hljs-string">'seaborn'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># create data</span></span><br><span class="line">X = np.linspace(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">200</span>)</span><br><span class="line">np.random.shuffle(X) <span class="hljs-comment">#randomize the data</span></span><br><span class="line">Y = <span class="hljs-number">2</span>*X + <span class="hljs-number">10</span> + np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">0.05</span>, (<span class="hljs-number">200</span>,))</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># plot data</span></span><br><span class="line">plt.scatter(X, Y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<ol start="2">
+<li><p><strong>创建数据</strong><br> 单层神经网络模型需要数据进行训练，因此我们使用 <code>numpy</code> 创建一些人造数据，且我们的 $y$ 为 $y = ax+b$ 。</p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf</span><br><span class="line"><span class="hljs-keyword">from</span> tensorflow.keras <span class="hljs-keyword">import</span> layers</span><br><span class="line"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</span><br><span class="line">plt.style.use(<span class="hljs-string">'seaborn'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># create data</span></span><br><span class="line">X = np.linspace(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">200</span>)</span><br><span class="line">np.random.shuffle(X) <span class="hljs-comment">#randomize the data</span></span><br><span class="line">Y = <span class="hljs-number">2</span>*X + <span class="hljs-number">10</span> + np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">0.05</span>, (<span class="hljs-number">200</span>,))</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># plot data</span></span><br><span class="line">plt.scatter(X, Y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><strong>构建神经网络</strong></p>
 <ol>
 <li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/models/Sequential" target="_blank" rel="noopener">tf.keras.models.Sequential()</a></p>
