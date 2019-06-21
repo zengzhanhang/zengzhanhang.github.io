@@ -16,7 +16,7 @@
 <meta property="og:description" content="统计学习方法笔记总结。haven’t finished yet">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i1.wp.com/sitn.hms.harvard.edu/wp-content/uploads/2017/08/headline_figure1-e1503935729975.png">
-<meta property="og:updated_time" content="2019-06-21T01:45:48.000Z">
+<meta property="og:updated_time" content="2019-06-21T01:48:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="统计学习 - Statistical Learning">
 <meta name="twitter:description" content="统计学习方法笔记总结。haven’t finished yet">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-05-31T15:43:17.000Z">2019-05-31</time> -->
                 <time class="level-item has-text-grey" datetime="2019-05-31T15:43:17.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-31</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-06-21T01:45:48.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-06-21</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-06-21T01:48:02.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-06-21</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -564,7 +564,7 @@ $$
 </li>
 </ol>
 <h4 id="3-1-2-几何间隔"><a href="#3-1-2-几何间隔" class="headerlink" title="3.1.2 几何间隔"></a>3.1.2 几何间隔</h4><ol>
-<li><p>因为只要成比例地改变 \boldsymbol{W} 和 $b$ ，例如将它们改为 $2w$ 和 $2b$ ，超平面并没有改变，但函数间隔却成为原来的2倍。这一事实启示我们，可以对分离超平面的法向量 \boldsymbol{W} 加某些约束，如规范化， $||\boldsymbol{W}||＝ 1$ ，使得间隔是确定的。这时函数间隔成为几何间隔（geometric margin）。 </p>
+<li><p>因为只要成比例地改变 $\boldsymbol{W}$ 和 $b$ ，例如将它们改为 $2w$ 和 $2b$ ，超平面并没有改变，但函数间隔却成为原来的2倍。这一事实启示我们，可以对分离超平面的法向量 $\boldsymbol{W}$ 加某些约束，如规范化，$||\boldsymbol{W}||＝ 1$ ，使得间隔是确定的。这时函数间隔成为几何间隔（geometric margin）。 </p>
 </li>
 <li><p>对于给定的训练数据集 $D$ 和超平面 $(\boldsymbol{W},\overrightarrow{\boldsymbol{b}})$ ，定义超平面 $(\boldsymbol{W},\overrightarrow{\boldsymbol{b}})$ 关于样本点 $(\overrightarrow{\boldsymbol{x}}_i,y_i$ 的几何间隔为 $$\hat{\gamma}_i = y_i (\frac{\boldsymbol{W}}{||\boldsymbol{W}||} \cdot \overrightarrow{\boldsymbol{x}}_i + \frac{\overrightarrow{\boldsymbol{b}}}{||\boldsymbol{W}||} )$$ 定义超平面 $(\boldsymbol{W},\overrightarrow{\boldsymbol{b}})$ 关于训练数据集 $D$ 的几何间隔为超平面关于 $D$ 中所有样本点 $(x_i，y_i)$ 几何间隔之最小值，即 $$\hat{\gamma} = \underset{i = 1, \dots , n}{\text{min}} \hat{\gamma}_i$$</p>
 </li>
