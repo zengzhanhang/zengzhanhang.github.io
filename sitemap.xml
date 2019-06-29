@@ -17,25 +17,25 @@
   <loc>https://zengzhanhang.github.io/archives/</loc>
   <lastmod>2019-06-29T16:33:18+00:00</lastmod>
   <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://zengzhanhang.github.io/categories/</loc>
   <lastmod>2019-06-29T16:33:18+00:00</lastmod>
   <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://zengzhanhang.github.io/tags/</loc>
   <lastmod>2019-06-29T16:33:18+00:00</lastmod>
   <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://zengzhanhang.github.io/about/</loc>
   <lastmod>2019-06-29T16:33:18+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.80</priority>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://zengzhanhang.github.io/2019/06/12/Keras-notes/</loc>
@@ -145,12 +145,12 @@
 <url>
   <loc>https://zengzhanhang.github.io/2019/05/12/DME-Data-Mining-and-Exploration-Revision/</loc>
   <lastmod>2019-06-29T16:33:18+00:00</lastmod>
-  <priority>0.64</priority>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://zengzhanhang.github.io/2019/05/25/OpenCV-Cheat-Sheet/</loc>
   <lastmod>2019-06-29T16:33:18+00:00</lastmod>
-  <priority>0.64</priority>
+  <priority>0.80</priority>
 </url>
 
 
