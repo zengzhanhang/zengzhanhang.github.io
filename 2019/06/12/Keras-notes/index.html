@@ -8,7 +8,7 @@
 
 
     <meta name="description" content="To take notes about the essential Keras elements to build basic neural networks. The explainations of each section haven’t finished yet.">
-<meta name="keywords" content="Python,DeepLearning">
+<meta name="keywords" content="DeepLearning,Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Keras 笔记">
 <meta property="og:url" content="https://zengzhanhang.github.io/2019/06/12/Keras-notes/index.html">
@@ -225,18 +225,18 @@
 </blockquote>
 <ol>
 <li><p><strong>创建数据</strong><br> 单层神经网络模型需要数据进行训练，因此我们使用 <code>numpy</code> 创建一些人造数据，且我们的 $y$ 为 $y = ax+b$ 。</p>
- <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf</span><br><span class="line"><span class="hljs-keyword">from</span> tensorflow.keras <span class="hljs-keyword">import</span> layers</span><br><span class="line"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</span><br><span class="line">plt.style.use(<span class="hljs-string">'seaborn'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># create data</span></span><br><span class="line">X = np.linspace(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">200</span>)</span><br><span class="line">np.random.shuffle(X) <span class="hljs-comment">#randomize the data</span></span><br><span class="line">Y = <span class="hljs-number">2</span>*X + <span class="hljs-number">10</span> + np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">0.05</span>, (<span class="hljs-number">200</span>,))</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># plot data</span></span><br><span class="line">plt.scatter(X, Y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> layers</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.style.use(<span class="string">'seaborn'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create data</span></span><br><span class="line">X = np.linspace(<span class="number">-1</span>, <span class="number">1</span>, <span class="number">200</span>)</span><br><span class="line">np.random.shuffle(X) <span class="comment">#randomize the data</span></span><br><span class="line">Y = <span class="number">2</span>*X + <span class="number">10</span> + np.random.normal(<span class="number">0</span>, <span class="number">0.05</span>, (<span class="number">200</span>,))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot data</span></span><br><span class="line">plt.scatter(X, Y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>构建神经网络</strong></p>
 <ol>
 <li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/models/Sequential" target="_blank" rel="noopener">tf.keras.models.Sequential()</a></p>
- <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.models.Sequential(</span><br><span class="line">    layers=<span class="hljs-literal">None</span>,</span><br><span class="line">    name=<span class="hljs-literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.models.Sequential(</span><br><span class="line">    layers=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p> 用Keras创建神经网络，我们首先需要用 <code>tf.keras.models.Sequential()</code> 来建立网络，这里面只有一个argument，即 <code>layers</code>。这里添加神经层的方法有两种，一种是建立 <code>model</code> 的时候直接放入神经层，另一种是通过 <code>model.add</code> 来添加。如：</p>
- <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># option 1</span></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Dense(<span class="hljs-number">1</span>, activation = <span class="hljs-literal">None</span>, use_bias = <span class="hljs-literal">True</span>)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># option 2</span></span><br><span class="line">model = tf.keras.models.Sequential()</span><br><span class="line">model.add(tf.keras.layers.Dense(<span class="hljs-number">1</span>, activation = <span class="hljs-literal">None</span>, use_bias = <span class="hljs-literal">True</span>))</span><br></pre></td></tr></table></figure>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># option 1</span></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">1</span>, activation = <span class="literal">None</span>, use_bias = <span class="literal">True</span>)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># option 2</span></span><br><span class="line">model = tf.keras.models.Sequential()</span><br><span class="line">model.add(tf.keras.layers.Dense(<span class="number">1</span>, activation = <span class="literal">None</span>, use_bias = <span class="literal">True</span>))</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense" target="_blank" rel="noopener">tf.keras.layers.Dense()</a></p>
 <p> 上面的例子中我们给 <code>model</code> 添加了一个 <code>tf.keras.layers.Dense()</code>, 它代表最典型的全连接神经网络层，即每个输入节点连接到每个输出节点。</p>
- <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.layers.Dense(</span><br><span class="line">    units,</span><br><span class="line">    activation=<span class="hljs-literal">None</span>,</span><br><span class="line">    use_bias=<span class="hljs-literal">True</span>,</span><br><span class="line">    kernel_initializer=<span class="hljs-string">'glorot_uniform'</span>,</span><br><span class="line">    bias_initializer=<span class="hljs-string">'zeros'</span>,</span><br><span class="line">    kernel_regularizer=<span class="hljs-literal">None</span>,</span><br><span class="line">    bias_regularizer=<span class="hljs-literal">None</span>,</span><br><span class="line">    activity_regularizer=<span class="hljs-literal">None</span>,</span><br><span class="line">    kernel_constraint=<span class="hljs-literal">None</span>,</span><br><span class="line">    bias_constraint=<span class="hljs-literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.layers.Dense(</span><br><span class="line">    units,</span><br><span class="line">    activation=<span class="literal">None</span>,</span><br><span class="line">    use_bias=<span class="literal">True</span>,</span><br><span class="line">    kernel_initializer=<span class="string">'glorot_uniform'</span>,</span><br><span class="line">    bias_initializer=<span class="string">'zeros'</span>,</span><br><span class="line">    kernel_regularizer=<span class="literal">None</span>,</span><br><span class="line">    bias_regularizer=<span class="literal">None</span>,</span><br><span class="line">    activity_regularizer=<span class="literal">None</span>,</span><br><span class="line">    kernel_constraint=<span class="literal">None</span>,</span><br><span class="line">    bias_constraint=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p> <strong>Arguments:</strong></p>
 <ul>
 <li><code>units</code>: 正整数，输出空间的维数。</li>
@@ -247,7 +247,7 @@
 </li>
 <li><p>models.Sequential().compile()</p>
 <p> 给 <code>model</code> 添加完神经层后，必须进行 <code>model.compile()</code> 才能继续后续的模型训练，并且在 <code>model.compile</code> 的时候需要指定 <code>optimizer</code> 和 <code>loss</code>。</p>
- <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">model.compile(</span><br><span class="line">    optimizer,</span><br><span class="line">    loss=<span class="hljs-literal">None</span>,</span><br><span class="line">    metrics=<span class="hljs-literal">None</span>,</span><br><span class="line">    loss_weights=<span class="hljs-literal">None</span>,</span><br><span class="line">    sample_weight_mode=<span class="hljs-literal">None</span>,</span><br><span class="line">    weighted_metrics=<span class="hljs-literal">None</span>,</span><br><span class="line">    target_tensors=<span class="hljs-literal">None</span>,</span><br><span class="line">    distribute=<span class="hljs-literal">None</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">model.compile(</span><br><span class="line">    optimizer,</span><br><span class="line">    loss=<span class="literal">None</span>,</span><br><span class="line">    metrics=<span class="literal">None</span>,</span><br><span class="line">    loss_weights=<span class="literal">None</span>,</span><br><span class="line">    sample_weight_mode=<span class="literal">None</span>,</span><br><span class="line">    weighted_metrics=<span class="literal">None</span>,</span><br><span class="line">    target_tensors=<span class="literal">None</span>,</span><br><span class="line">    distribute=<span class="literal">None</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p> <strong>Arguments:</strong></p>
 <ul>
 <li><code>optimizer</code>：String（优化器名称）或优化器实例。请参阅<a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers" target="_blank" rel="noopener">tf.keras.optimizers</a>。</li>
@@ -308,6 +308,35 @@
 </div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/QRcode/alipay.jpg" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="/images/QRcode/WeChatPay.jpg" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 

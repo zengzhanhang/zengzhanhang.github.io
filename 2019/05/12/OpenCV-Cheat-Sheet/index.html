@@ -217,14 +217,14 @@
 <h1 id="1-安装和使用-Installation-and-Usage"><a href="#1-安装和使用-Installation-and-Usage" class="headerlink" title="1. 安装和使用 Installation and Usage"></a>1. 安装和使用 Installation and Usage</h1><ul>
 <li>安装</li>
 </ul>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></table></figure>
 <p>事实上一共有四种不同的packages，安装其中一个即可，四个packages都用同一个名字cv2（对于其他的packages，详见<a href="https://pypi.org/project/opencv-python/" target="_blank" rel="noopener">Documentation</a>）。</p>
 <h1 id="2-OpenCV中的GUI特性"><a href="#2-OpenCV中的GUI特性" class="headerlink" title="2. OpenCV中的GUI特性"></a>2. OpenCV中的GUI特性</h1><h2 id="2-1-图像基本操作-读取，显示，保存"><a href="#2-1-图像基本操作-读取，显示，保存" class="headerlink" title="2.1 图像基本操作(读取，显示，保存)"></a>2.1 <a href="https://docs.opencv.org/master/dc/d2e/tutorial_py_image_display.html" target="_blank" rel="noopener">图像基本操作</a>(读取，显示，保存)</h2><blockquote>
 <p>三个函数<strong>cv.imread()</strong>, <strong>cv.imshow()</strong>, <strong>cv.imwrite()</strong>分别用于读取；显示和保存图像。</p>
 </blockquote>
 <ul>
 <li><p><a href="https://docs.opencv.org/master/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56" target="_blank" rel="noopener">cv.imread()</a>：读取图像</p>
-  <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retval = cv.imread(filename[, flags])</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retval = cv.imread(filename[, flags])</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>参数 Parameters:</p>
 <ul>
@@ -233,7 +233,7 @@
 </ul>
 </li>
 <li><p>例子 Example：</p>
-  <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv</span><br><span class="line"><span class="hljs-comment"># Load an color image in grayscale</span></span><br><span class="line">img = cv.imread(<span class="hljs-string">'messi5.jpg'</span>, <span class="hljs-number">0</span>)</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="comment"># Load an color image in grayscale</span></span><br><span class="line">img = cv.imread(<span class="string">'messi5.jpg'</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -241,14 +241,14 @@
 <hr>
 <ul>
 <li><p><a href="https://docs.opencv.org/master/d7/dfc/group__highgui.html#ga453d42fe4cb60e5723281a89973ee563" target="_blank" rel="noopener">cv.imshow()</a>：显示图像</p>
-  <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-literal">None</span> = cv.imshow(winname, mat)</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">None</span> = cv.imshow(winname, mat)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>参数 parameters:<ul>
 <li>winname：显示窗的名字 (Name of the window.)</li>
 <li>mat： 要显示的图像名 (Image to be shown.)</li>
 </ul>
 </li>
-<li>例子 Example:  <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv.imshow(<span class="hljs-string">'image'</span>,img)</span><br></pre></td></tr></table></figure>
+<li>例子 Example:  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv.imshow(<span class="string">'image'</span>,img)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -256,7 +256,7 @@
 <hr>
 <ul>
 <li><p><a href="https://docs.opencv.org/master/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce" target="_blank" rel="noopener">cv.imwrite()</a>：保存图像</p>
-  <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retval = cv.imwrite(filename, img[, params])</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retval = cv.imwrite(filename, img[, params])</span><br></pre></td></tr></table></figure>
 <ul>
 <li>参数 Parameters：<ul>
 <li>filename：文件名（Name of the file.）</li>
@@ -264,7 +264,7 @@
 <li>params：Format-specific parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, … .) see cv::ImwriteFlags</li>
 </ul>
 </li>
-<li>例子 Example：  <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv.imwrite(<span class="hljs-string">'messigray.png'</span>,img)</span><br></pre></td></tr></table></figure>
+<li>例子 Example：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv.imwrite(<span class="string">'messigray.png'</span>,img)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -284,7 +284,7 @@ $$
 \text{Gray to RGB[A]:    R←Y,G←Y,B←Y,A←max(}ChannelRange\text{)}
 $$
 
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cvtColor(src, dst, code, dstCn = <span class="hljs-number">0</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cvtColor(src, dst, code, dstCn = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>参数 Parameters：</p>
 <ul>
@@ -295,7 +295,7 @@ $$
 </ul>
 </li>
 <li><p>例子 Examples：</p>
-  <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> cv2 <span class="hljs-keyword">as</span> cv</span><br><span class="line"><span class="hljs-comment"># Load an color image in grayscale</span></span><br><span class="line">img = cv.imread(<span class="hljs-string">'messi5.jpg'</span>, <span class="hljs-number">0</span>)</span><br><span class="line"><span class="hljs-comment"># Convert image from Y channel to RGB channel</span></span><br><span class="line">img2 = cv.cvtColor(img, cv.COLOR_GRAY2BGR)</span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="comment"># Load an color image in grayscale</span></span><br><span class="line">img = cv.imread(<span class="string">'messi5.jpg'</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># Convert image from Y channel to RGB channel</span></span><br><span class="line">img2 = cv.cvtColor(img, cv.COLOR_GRAY2BGR)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h1 id="Additional-Reading"><a href="#Additional-Reading" class="headerlink" title="Additional Reading"></a>Additional Reading</h1><p><a href="https://github.com/zengzhanhang/zengzhanhang.github.io/blob/master/Documents/OpenCV/OpenCV%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E4%B8%AD%E6%96%87%E7%89%88.pdf" target="_blank" rel="noopener">OpenCV官方教程中文版（For Python）</a>，段力辉 译（搬运自：<a href="https://www.linuxidc.com/Linux/2015-08/121400.htm）" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2015-08/121400.htm）</a></p>
@@ -335,6 +335,35 @@ $$
 </div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/QRcode/alipay.jpg" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="/images/QRcode/WeChatPay.jpg" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
