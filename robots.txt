@@ -1,4 +1,4 @@
-Sitemap: https://zengzhanhang.com/sitemap.xml
+Sitemap: https://zengzhanhang.github.io/sitemap.xml
 
 User-agent: *
 Disallow: 
