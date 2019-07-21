@@ -16,7 +16,7 @@
 <meta property="og:description" content="论文阅读笔记，如果我有什么理解错误的地方，欢迎大家指正。论文：Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-21T14:06:20.000Z">
+<meta property="og:updated_time" content="2019-07-21T22:54:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation">
 <meta name="twitter:description" content="论文阅读笔记，如果我有什么理解错误的地方，欢迎大家指正。论文：Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation">
@@ -162,7 +162,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-07-18T17:38:56.000Z">2019-07-18</time> -->
                 <time class="level-item has-text-grey" datetime="2019-07-18T17:38:56.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-18</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-21T14:06:20.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-21</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-21T22:54:18.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-21</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    15 minutes read (About 2303 words)
+                    15 minutes read (About 2308 words)
                 </span>
                 
                 
@@ -242,7 +242,7 @@
 <p>作者为上述deeper networks增加了第二个pathway networks，对down-sampling的图像进行操作。这种dual pathways 3D CNN 同时对高/低分辨率图像进行训练，文中提到第二个网络(低分辨率)用于捕捉一些high level的信息，例如 location。而第一个网络（高分辨率）用于捕捉一些细节信息。为了使得最后输出的feature maps尺寸一致，要对第二个网络的输出进行上采样以匹配第一个网络输出的feature maps的尺寸。</p>
 <h1 id="5-3D-fully-connected-CRF"><a href="#5-3D-fully-connected-CRF" class="headerlink" title="5. 3D fully connected CRF"></a>5. 3D fully connected CRF</h1><p>作者认为CNN网络输出的结果偏向与smooth（如何smooth可以见下图），因此对DeepMedic网络（11层，dual pathways）网络的输出认为是soft segmentation。最后作者用CRF对soft segmentations 进行后处理（post-processing）改善其边缘信息。<br><br><br></p>
 <p><img src="/Documents/deepmedic/smooth.png" alt></p>
-<h2 id="5-1-为什么CRF可以用于处理图像任务？"><a href="#5-1-为什么CRF可以用于处理图像任务？" class="headerlink" title="5.1 为什么CRF可以用于处理图像任务？"></a>5.1 为什么CRF可以用于处理图像任务？</h2><p>首先对于图像任务，我们可以把每个像素认为是一个单独的节点（node），像素与像素之间就构成了边（edge），同时，相邻像素之间相互影响，而这种影响是对称的，因此构成了一个概率无向图。</p>
+<h2 id="5-1-为什么CRF可以用于处理图像任务？"><a href="#5-1-为什么CRF可以用于处理图像任务？" class="headerlink" title="5.1 为什么CRF可以用于处理图像任务？"></a>5.1 为什么CRF可以用于处理图像任务？</h2><p>首先对于图像任务，我们可以把每个像素认为是一个单独的节点（node），像素与像素之间就构成了边（edge），同时，相邻像素之间相互影响，而这种影响是对称的，相当于edge，因此构成了一个概率无向图。</p>
 <h2 id="5-2-全连接条件随机场"><a href="#5-2-全连接条件随机场" class="headerlink" title="5.2 全连接条件随机场"></a>5.2 全连接条件随机场</h2><p>对于每个像素 $i$ 具有类别标签 $x_i$ 还有对应的观测值 $y_i$，这样每个像素点作为节点，像素与像素间的关系作为边，即构成了一个条件随机场。而且我们通过观测变量 $y_i$ 来推测像素 $i$ 对应的类别标签 $x_i$。条件随机场如下：</p>
 <p><img src="/Documents/deepmedic/CRF.png" alt></p>
 <p>条件随机场符合吉布斯分布：(此处的 $x$ 即上面说的观测值)<br>
