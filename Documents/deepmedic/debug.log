@@ -1,2 +1,5 @@
 [0719/015438:INFO:exception_record.cc(518)] [QB]Process ID: 9964 Type: 2
 [0719/015439:INFO:http_cache_transaction.cc(72)] IgnoreZeroCacheError: 0
+[0720/025436:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0720/025440:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0720/152928:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.

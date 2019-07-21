@@ -2,24 +2,24 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
+<title>综述：DenseNet—Dense卷积网络（图像分类） - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="论文阅读笔记，如果我有什么理解错误的地方，欢迎大家指正。论文：Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation">
-<meta name="keywords" content="CV,Image Segmentation,Medical Imaging">
+    <meta name="description" content="【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。 作者 | Sik-Ho Tsang (原文：Review: DenseNet — Dense Convolutional Network (Image Classification))编译 | Xiaowen">
+<meta name="keywords" content="CV,Image Classification">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation">
-<meta property="og:url" content="https://zengzhanhang.github.io/2019/07/18/deepmedic/index.html">
+<meta property="og:title" content="综述：DenseNet—Dense卷积网络（图像分类）">
+<meta property="og:url" content="https://zengzhanhang.github.io/2019/07/21/densenet/index.html">
 <meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
-<meta property="og:description" content="论文阅读笔记，如果我有什么理解错误的地方，欢迎大家指正。论文：Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation">
+<meta property="og:description" content="【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。 作者 | Sik-Ho Tsang (原文：Review: DenseNet — Dense Convolutional Network (Image Classification))编译 | Xiaowen">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-21T14:06:20.000Z">
+<meta property="og:updated_time" content="2019-07-21T15:52:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation">
-<meta name="twitter:description" content="论文阅读笔记，如果我有什么理解错误的地方，欢迎大家指正。论文：Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation">
+<meta name="twitter:title" content="综述：DenseNet—Dense卷积网络（图像分类）">
+<meta name="twitter:description" content="【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。 作者 | Sik-Ho Tsang (原文：Review: DenseNet — Dense Convolutional Network (Image Classification))编译 | Xiaowen">
 <meta name="twitter:image" content="https://zengzhanhang.github.io/images/og_image.png">
 
 
@@ -99,7 +99,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.png" alt="DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation" height="28">
+                <img src="/images/logo1.png" alt="综述：DenseNet—Dense卷积网络（图像分类）" height="28">
             
             </a>
         </div>
@@ -153,16 +153,16 @@
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation
+                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>综述：DenseNet—Dense卷积网络（图像分类）
             
         </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-bottom: 0;">
             <div class="level-left">
-                <!-- <time class="level-item has-text-grey" datetime="2019-07-18T17:38:56.000Z">2019-07-18</time> -->
-                <time class="level-item has-text-grey" datetime="2019-07-18T17:38:56.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-18</time>
+                <!-- <time class="level-item has-text-grey" datetime="2019-07-21T13:57:55.000Z">2019-07-21</time> -->
+                <time class="level-item has-text-grey" datetime="2019-07-21T13:57:55.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-21</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-21T14:06:20.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-21</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-21T15:52:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-21</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    15 minutes read (About 2303 words)
+                    12 minutes read (About 1760 words)
                 </span>
                 
                 
@@ -198,7 +198,7 @@
                 <div class="level-item">
                     <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
                     <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/CV/">CV</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Image-Segmentation/">Image Segmentation</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Medical-Imaging/">Medical Imaging</a>
+                    <a class="has-link-grey -link" href="/tags/CV/">CV</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Image-Classification/">Image Classification</a>
                 </div>
                 
             </div>
@@ -206,76 +206,135 @@
         
         <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation
+                综述：DenseNet—Dense卷积网络（图像分类）
             
         </h1> -->
         <div class="content">
             <blockquote>
-<p>论文阅读笔记，如果我有什么理解错误的地方，欢迎大家指正。<br>论文：<a href="https://www.sciencedirect.com/science/article/pii/S1361841516301839" target="_blank" rel="noopener">Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation</a></p>
+<p>【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。</p>
+<p>作者 | Sik-Ho Tsang (原文：<a href="https://towardsdatascience.com/review-densenet-image-classification-b6631a8ef803" target="_blank" rel="noopener">Review: DenseNet — Dense Convolutional Network (Image Classification)</a>)<br>编译 | Xiaowen</p>
 </blockquote>
 <a id="more"></a>
-<blockquote>
-<p>摘要：作者提出一种双路径，11层深的3D卷积神经网络用于brain lesion segmentation任务，主要解决了医学图像处理上的三个方面的问题。一是作者设计了一种dense training scheme的方案，采用全卷积神经网络，一次把相邻像素的image segments传入网络输出dense prediction (dense-inference)，从而节省了计算代价。作者使用更深的网络使模型判别能力更强。作者使用一种dual pathway architecture，即同时训练两个网络，使模型同时对高/低分辨率图像进行处理。最后作者采用全连接条件随机场(Fully connected Conditional Random Field)对网络output进行后处理(post-processing)改善图像类之间的边缘信息。</p>
-</blockquote>
-<h1 id="1-Dense-Training"><a href="#1-Dense-Training" class="headerlink" title="1. Dense Training"></a>1. Dense Training</h1><p>在传统patch-wise的分类中，输入patch的尺寸和cnn最后一层神经元的感受野大小相同，这样网络得到一个single prediction对应输入patch的中心像素的值。而用全卷积实现的神经网络，因为其输入的patch的尺寸可以大于最后一层神经元的感受野，因此模型可以同时输出多个prediction，即dense-inference，而每一个prediction对应cnn’s receptive field的在输入patch上的每一步stride。<br><br><br></p>
-<p><img src="https://ars.els-cdn.com/content/image/1-s2.0-S1361841516301839-gr2_lrg.jpg" alt="Fig.2. Our baseline CNN consists of four layers with $5^3$ kernels for feature extraction, leading to a receptive field of size $17^3$. The classification layer is implemented as convolutional with $1^3$ kernels, which enables efficient dense-inference. When the network segments an input it predicts multiple voxels simultaneously, one for each shift of its receptive field over the input. Number of FMs and their size depicted as (Number × Size)."></p>
-<p>同时作者认为，这样dense-inference得到的每一个prediction都是可信的，只要感受野是完全在input patch上扫过，并且只捕捉到原始信息，因此没有使用padding。</p>
-<p>Dense Training Scheme 的优点</p>
-<ul>
-<li>节省计算代价和内存消耗</li>
-<li>灵活：作者提到最佳的性能为将整个图像送入网络，但是这个做法不现实。如果GPU内存限制不允许，例如在需要缓存大量FM的大型3D网络的情况下，则将图像分成多个image-segments，这样会比单个segment大，但是可以去fit内存。（原文：If GPU memory constraints do not allow it, such as in the case of large 3D networks where a large number of FMs need to be cached, the volume is tiled in multiple image-segments, which are larger than individual patches, but small enough to fit into memory.）</li>
-</ul>
-<p>CNNs are trained patch-by-patch: 个人认为论文中提到的这个操作是在图像上randomly crop出一个individual patch作为网络的输入来训练网络，以此计算loss和进行gradient descent。</p>
-<h1 id="2-Class-Balance"><a href="#2-Class-Balance" class="headerlink" title="2. Class Balance"></a>2. Class Balance</h1><p>(这里不太确定自己理解对不对)</p>
-<p>在原文的Section 2.2中作者提到，这种dense training scheme的方案中的sampling input segments (即上面提到的randomly crop individual patches) 提供了一种灵活的方式去平衡training samples中的segmentation classes（正负类）的分布，而不同的分布对模型的性能有很大的影响。</p>
-<p><img src="/Documents/deepmedic/fig_3.png" alt="Fig.3. Consider a network with a 2D receptive field of $3^2$ (for illustration) densely-applied on the depicted lesion-centred image segments of size $7^2$ or $9^2$. Relatively more background (green) is captured by larger segments and around smaller lesions. (For interpretation of the references to colour, the reader is referred to the web version of this article.)"></p>
-<p>从上图和原文Section 3.2的实验结果来看，感觉有点类似过采样的意思。上图说明，如果是crop一个以病变为中心 (lesion-centered) 的image segments，分别用 $7 \times 7$ 和 $9 \times 9$ 的框去crop下来，可以看到用 $9 \times 9$ 的框去crop出这个image segment的话，绿色的内容会相对更多一点。</p>
-<p>作者在Section 3.2的最后一段也提到，这个segments size在模型中是一个超参数，提到segment size会提升模型的性能，但是很快这种性能的提升久会达到平稳(level off)，并且在一系列的segment size中都会得到相似的性能。</p>
-<h1 id="3-构建更深的网络"><a href="#3-构建更深的网络" class="headerlink" title="3. 构建更深的网络"></a>3. 构建更深的网络</h1><blockquote>
-<p>该部分总结：Deeper Networks + Smaller Kernel + Batch Norm + (p)ReLU + $ \mathcal{N}\left(0,\ \sqrt{2/n^{in}_{l}} \right)$</p>
-</blockquote>
-<p>更深的网络有更好的判别能力，但是更深的网络同时意味着更高的计算代价和更吃内存。所以在这里作者采用的策略是层数增加，但是把kernel size从 $5^3$ 缩小到 $3^3$ 从而减少计算代价和节省内存。作者认为这里kernel size减小说明需要训练的parameters的数量减少，一定程度上有正则的效果。（但是原文好像只是给了个简单的  $\frac{5^3}{3^3} \approx 4.6$，但是层数的增加会增加参数的数量，不知道作者有没有算对，我也没去算它….）</p>
-<p>因为更深的网络变得容易train不下去，所以作者采用了 ReLU-based 的网络 (在github文件看，DeepMedic的网络好像采用的是pReLU)。同时，作者不采用标准正态分布去初始化kernel weights，才是采用了 $ \mathcal{N}\left(0,\ \sqrt{2/n^{in}_{l}} \right)$ 。</p>
-<p>Batch Normalisation</p>
-<h1 id="4-Dual-Pathways-Networks"><a href="#4-Dual-Pathways-Networks" class="headerlink" title="4. Dual Pathways Networks"></a>4. Dual Pathways Networks</h1><p><br><br></p>
-<p><img src="https://ars.els-cdn.com/content/image/1-s2.0-S1361841516301839-gr5_lrg.jpg" alt="Fig.5. Multi-scale 3D CNN with two convolutional pathways. The kernels of the two pathways are here of size $5^3$ (for illustration only to reduce the number of layers in the figure). The neurons of the last layers of the two pathways thus have receptive fields of size $17^3$ voxels. The inputs of the two pathways are centred at the same image location, but the second segment is extracted from a down-sampled version of the image by a factor of 3. The second pathway processes context in an actual area of size $51^3$ voxels. DeepMedic, our proposed 11-layers architecture, results by replacing each layer of the depicted pathways with two that use $3^3$ kernels (see Section 2.3). Number of FMs and their size depicted as (Number × Size)."></p>
-<p>作者为上述deeper networks增加了第二个pathway networks，对down-sampling的图像进行操作。这种dual pathways 3D CNN 同时对高/低分辨率图像进行训练，文中提到第二个网络(低分辨率)用于捕捉一些high level的信息，例如 location。而第一个网络（高分辨率）用于捕捉一些细节信息。为了使得最后输出的feature maps尺寸一致，要对第二个网络的输出进行上采样以匹配第一个网络输出的feature maps的尺寸。</p>
-<h1 id="5-3D-fully-connected-CRF"><a href="#5-3D-fully-connected-CRF" class="headerlink" title="5. 3D fully connected CRF"></a>5. 3D fully connected CRF</h1><p>作者认为CNN网络输出的结果偏向与smooth（如何smooth可以见下图），因此对DeepMedic网络（11层，dual pathways）网络的输出认为是soft segmentation。最后作者用CRF对soft segmentations 进行后处理（post-processing）改善其边缘信息。<br><br><br></p>
-<p><img src="/Documents/deepmedic/smooth.png" alt></p>
-<h2 id="5-1-为什么CRF可以用于处理图像任务？"><a href="#5-1-为什么CRF可以用于处理图像任务？" class="headerlink" title="5.1 为什么CRF可以用于处理图像任务？"></a>5.1 为什么CRF可以用于处理图像任务？</h2><p>首先对于图像任务，我们可以把每个像素认为是一个单独的节点（node），像素与像素之间就构成了边（edge），同时，相邻像素之间相互影响，而这种影响是对称的，因此构成了一个概率无向图。</p>
-<h2 id="5-2-全连接条件随机场"><a href="#5-2-全连接条件随机场" class="headerlink" title="5.2 全连接条件随机场"></a>5.2 全连接条件随机场</h2><p>对于每个像素 $i$ 具有类别标签 $x_i$ 还有对应的观测值 $y_i$，这样每个像素点作为节点，像素与像素间的关系作为边，即构成了一个条件随机场。而且我们通过观测变量 $y_i$ 来推测像素 $i$ 对应的类别标签 $x_i$。条件随机场如下：</p>
-<p><img src="/Documents/deepmedic/CRF.png" alt></p>
-<p>条件随机场符合吉布斯分布：(此处的 $x$ 即上面说的观测值)<br>
-$$P(\boldsymbol{X} = \mathbf{x} | \boldsymbol{I}) = \frac{1}{Z(\boldsymbol{I})} exp\left( -\mathbb{E}(\mathbf{x}|\boldsymbol{I}) \right) $$
-</p>
-<p>其中的 $\mathbb{E}(\mathbf{x}|\boldsymbol{I})$ 是能量函数，为了简便，以下省略全局观测 $\boldsymbol{I}$：</p>
-
-$$
-E(\mathbf{x})=\sum_i{\Psi_u(x_i)}+\sum_{i,j}\Psi_p(x_i, x_j)
-$$
-
-<p>其中的一元势函数 $\sum_i{\Psi_u(x_i)}$ 即来自于前端FCN的输出。而二元势函数如下：</p>
-
-$$\Psi_p(x_i, x_j)=u(x_i, x_j)\sum_{m=1}^M{\omega^{(m)}k_G^{(m)}(\boldsymbol{f_i, f_j)}}$$
-
-<p>二元势函数就是描述像素点与像素点之间的关系，鼓励相似像素分配相同的标签，而相差较大的像素分配不同标签，而这个“距离”的定义与颜色值和实际相对距离有关。所以这样CRF能够使图片尽量在边界处分割。</p>
-<p>而全连接条件随机场的不同就在于，二元势函数描述的是每一个像素与其他所有像素的关系，所以叫“全连接”。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
-<li><p>Harvard Referencing: Kamnitsas, K., Ledig, C., Newcombe, V.F., Simpson, J.P., Kane, A.D., Menon, D.K., Rueckert, D. and Glocker, B., 2017. Efficient multi-scale 3D CNN with fully connected CRF for accurate brain lesion segmentation. Medical image analysis, 36, pp.61-78. </p>
-</li>
-<li><p><a href="https://yq.aliyun.com/articles/232455" target="_blank" rel="noopener">https://yq.aliyun.com/articles/232455</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/22308032" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/22308032</a></p>
-</li>
+<p>该译文转载自：<a href="https://mp.weixin.qq.com/s/F2GRDen0v2zbnHlB-xHioA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/F2GRDen0v2zbnHlB-xHioA</a></p>
+<hr>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>Dense Block</li>
+<li>DenseNet 结构</li>
+<li>DenseNet 的优势</li>
+<li>CIFAR &amp; SVHN 小规模数据集结果</li>
+<li>ImageNet 大规模数据集结果</li>
+<li>特征复用的进一步分析</li>
 </ol>
+<hr>
+<h1 id="1-Dense-Block"><a href="#1-Dense-Block" class="headerlink" title="1. Dense Block"></a>1. Dense Block</h1><p><img src="/Documents/ReadingNote/DenseNet/StandardCNN.png" alt="Standard ConvNet Concept"></p>
+<p>在 <strong>andard ConvNet</strong> 中，输入图像经过多次卷积，得到高层次特征。</p>
+<p><img src="/Documents/ReadingNote/DenseNet/ResNet.png" alt="ResNet Concept"></p>
+<p>在 <strong>ResNet</strong> 中，提出了恒等映射（ <strong>identity mapping</strong> ）来促进梯度传播，同时使用使用 <strong>Element-wise addition</strong> 。它可以看作是将状态从一个 ResNet 模块传递到另一个 ResNet 模块的算法。 (It can be viewed as algorithms with a state passed from one ResNet module to another one.)</p>
+<p><img src="/Documents/ReadingNote/DenseNet/DenseNet.png" alt="One Dense Block in DenseNet"></p>
+<p>在 <strong>DenseNet</strong> 中，每个层从前面的所有层获得额外的输入，并将自己的特征映射传递到后续的所有层，使用级联(<strong>Concatenation</strong>)方式，每一层都在接受来自前几层的“集体知识（collective knowledge）”。(Concatenation is used. Each layer is receiving a “collective knowledge” from all preceding layers.)</p>
+<p><img src="/Documents/ReadingNote/DenseNet/k_growthDenseBlock.png" alt="Dense Block in DenseNet with Growth Rate k"></p>
+<p>由于每个层从前面的所有层接收特征映射，所以网络可以更薄、更紧凑，即信道数可以更少。增长速率k是每个层的附加信道数。</p>
+<p>因此，它具有较高的计算效率和存储效率。下图显示了前向传播中级联的概念：</p>
+<p><img src="/Documents/ReadingNote/DenseNet/DenseNet.gif" alt="Concatenation during Forward Propagation"></p>
+<hr>
+<h1 id="2-DenseNet-结构"><a href="#2-DenseNet-结构" class="headerlink" title="2. DenseNet 结构"></a>2. DenseNet 结构</h1><h2 id="2-1-基础-DenseNet-组成层"><a href="#2-1-基础-DenseNet-组成层" class="headerlink" title="2.1 基础 DenseNet 组成层"></a>2.1 基础 DenseNet 组成层</h2><p><img src="/Documents/ReadingNote/DenseNet/compositionlayer.gif" alt="Composition Layer"></p>
+<p>对于每个组成层使用 <strong>Pre-Activation Batch Norm (BN)</strong> 和 <strong>ReLU</strong>，然后用k通道的输出特征映射进行 $\boldsymbol{3 \times 3}$ <strong>卷积</strong>，例如，将$x_0$、$x_1$、$x_2$、$x_3$ 转换为 $x_4$。这是     <strong><em>Pre-Activation ResNet</em></strong> 的想法。</p>
+<h2 id="2-2-DenseNet-B-Bottleneck-层"><a href="#2-2-DenseNet-B-Bottleneck-层" class="headerlink" title="2.2 DenseNet-B (Bottleneck 层)"></a>2.2 DenseNet-B (Bottleneck 层)</h2><p><img src="/Documents/ReadingNote/DenseNet/DenseNet_b.png" alt="DenseNet-B"></p>
+<p>为了降低模型的复杂度和规模，在 <strong>BN-ReLU-3×3 conv</strong> 之前进行了 <strong>BN-ReLU-1×1 conv</strong> .</p>
+<h2 id="2-3-具有转换层（transition-layer）的多Dense块"><a href="#2-3-具有转换层（transition-layer）的多Dense块" class="headerlink" title="2.3 具有转换层（transition layer）的多Dense块"></a>2.3 具有转换层（transition layer）的多Dense块</h2><p><img src="/Documents/ReadingNote/DenseNet/multipleDenseBlock.png" alt="Multiple Dense Blocks"></p>
+<ul>
+<li><p>采用1×1 Conv和2×2平均池化作为相邻 dense block 之间的转换层。</p>
+</li>
+<li><p>特征映射大小在 dense block 中是相同的，因此它们可以很容易地连接在一起。</p>
+</li>
+<li><p>在最后一个 dense block 的末尾，执行一个全局平均池化，然后附加一个 Softmax 分类器。</p>
+</li>
+</ul>
+<h2 id="2-4-DenseNet-BC-进一步压缩"><a href="#2-4-DenseNet-BC-进一步压缩" class="headerlink" title="2.4 DenseNet-BC (进一步压缩)"></a>2.4 DenseNet-BC (进一步压缩)</h2><ul>
+<li><p><strong>如果 Dense Block 包含 $m$ 个特征映射，则转换层（transition layer）生成 $\theta_m$ 输出特征映射</strong>，其中 $0 &lt; \theta \leq 1$ 称为压缩因子。</p>
+</li>
+<li><p>当 $\theta = 1$ 时，跨转换层的特征映射数保持不变。$\boldsymbol{\theta &lt; 1}$ 的 DenseNet 称为 <strong>DenseNet-C</strong>，在实验中采用 $\theta = 0.5$ 。</p>
+</li>
+<li><p>当同时使用 <strong>bottleneck</strong> 和 $\boldsymbol{\theta &lt; 1}$ 时的转换层时，该模型称为 <strong>DenseNet-BC</strong> 模型。</p>
+</li>
+<li><p>最后，训练 <strong>with/without B/C</strong> 和不同 <strong>L 层</strong> 和 <strong>k growth rate</strong> 的 DenseNet。</p>
+</li>
+</ul>
+<hr>
+<h1 id="3-DenseNet-的优势"><a href="#3-DenseNet-的优势" class="headerlink" title="3. DenseNet 的优势"></a>3. DenseNet 的优势</h1><h2 id="3-1-Strong-Gradient-Flow"><a href="#3-1-Strong-Gradient-Flow" class="headerlink" title="3.1 Strong Gradient Flow"></a>3.1 Strong Gradient Flow</h2><p><img src="/Documents/ReadingNote/DenseNet/DeepSupervision.png" alt="Implicit “Deep Supervision”"></p>
+<p>误差信号可以更直接地传播到早期的层中。这是一种隐含的深度监督，因为早期的层可以从最终的分类层直接获得监督。</p>
+<h2 id="3-2-Parameter-amp-Computational-Efficiency"><a href="#3-2-Parameter-amp-Computational-Efficiency" class="headerlink" title="3.2 Parameter &amp; Computational Efficiency"></a>3.2 Parameter &amp; Computational Efficiency</h2><p><img src="/Documents/ReadingNote/DenseNet/parameterefficient.png" alt="Number of Parameters for ResNet and DenseNet"></p>
+<p>对于每个层，RetNet 中的参数与c×c成正比，而 DenseNet 中的参数与1×k×k成正比。</p>
+<p>由于 k &lt;&lt; C, 所以 DenseNet 比 ResNet 的size更小。</p>
+<h2 id="3-3-More-Diversified-Features"><a href="#3-3-More-Diversified-Features" class="headerlink" title="3.3 More Diversified Features"></a>3.3 More Diversified Features</h2><p><img src="/Documents/ReadingNote/DenseNet/Features.png" alt="More Diversified Features in DenseNet"></p>
+<p>由于 DenseNet 中的每一层都接收前面的所有层作为输入，因此特征更加多样化，并且倾向于有更丰富的模式。</p>
+<h2 id="3-4-Maintains-Low-Complexity-Features"><a href="#3-4-Maintains-Low-Complexity-Features" class="headerlink" title="3.4 Maintains Low Complexity Features"></a>3.4 Maintains Low Complexity Features</h2><p><img src="/Documents/ReadingNote/DenseNet/CNN.png" alt="Standard ConvNet"></p>
+<p>在标准ConvNet中，分类器使用最复杂的特征。</p>
+<p><img src="/Documents/ReadingNote/DenseNet/Dense.png" alt="DenseNet"></p>
+<p>在 DenseNet 中，分类器使用所有复杂级别的特征。它倾向于给出更平滑的决策边界。它还解释了为什么 DenseNet 在训练数据不足时表现良好。</p>
+<hr>
+<h1 id="4-CIFAR-amp-SVHN-小规模数据集结果"><a href="#4-CIFAR-amp-SVHN-小规模数据集结果" class="headerlink" title="4. CIFAR &amp; SVHN 小规模数据集结果"></a>4. CIFAR &amp; SVHN 小规模数据集结果</h1><h2 id="4-1-CIFAR-10"><a href="#4-1-CIFAR-10" class="headerlink" title="4.1 CIFAR-10"></a>4.1 CIFAR-10</h2><p><img src="/Documents/ReadingNote/DenseNet/CIFAR10_results.png" alt="CIFAR-10 Results"></p>
+<p>Pre-Activation ResNet is used in detailed comparison.</p>
+<ul>
+<li><p>数据增强（C10+），测试误差：</p>
+<ol>
+<li>Small-size ResNet-110: 6.41%</li>
+<li>Large-size ResNet-1001 (10.2M parameters): 4.62%</li>
+<li>State-of-the-art (SOTA) 4.2%</li>
+<li>Small-size DenseNet-BC (L=100, k=12) (Only 0.8M parameters): 4.5%</li>
+<li>Large-size DenseNet (L=250, k=24): 3.6%</li>
+</ol>
+</li>
+<li><p>无数据增强（C10），测试误差：</p>
+<ol>
+<li>Small-size ResNet-110: 11.26%</li>
+<li>Large-size ResNet-1001 (10.2M parameters): 10.56%</li>
+<li>State-of-the-art (SOTA) 7.3%</li>
+<li>Small-size DenseNet-BC (L=100, k=12) (Only 0.8M parameters): 5.9%</li>
+<li>Large-size DenseNet (L=250, k=24): 4.2%</li>
+</ol>
+</li>
+</ul>
+<p>在 <a href="https://towardsdatascience.com/resnet-with-identity-mapping-over-1000-layers-reached-image-classification-bb50a42af03e" target="_blank" rel="noopener">Pre-Activation ResNet</a> 中出现严重的过拟合，而 DenseNet 在训练数据不足时表现良好，因为DenseNet 使用了复杂的特征。</p>
+<p><img src="/Documents/ReadingNote/DenseNet/Results.png" alt="C10+: Different DenseNet Variants (Left), DenseNet vs ResNet (Middle), Training and Testing Curves of DenseNet and ResNet (Right)"></p>
+<ul>
+<li>左：DenseNet-BC 获得最佳效果。</li>
+<li>中：Pre-Activation ResNet 已经比 alexnet 和 vggnet 获得更少的参数，DenseNet-BC(k=12)的参数比 Pre-Activation ResNet 少3×10，测试误差相同。</li>
+<li>右：与 Pre-Activation ResNet-1001有10.2m 参数相比，0.8 参数的 DenseNet-BC-100 具有相似的测试误差。</li>
+</ul>
+<h2 id="4-2-CIFAR-100"><a href="#4-2-CIFAR-100" class="headerlink" title="4.2 CIFAR-100"></a>4.2 CIFAR-100</h2><p>CIFAR-100类似的趋势如下：</p>
+<p><img src="/Documents/ReadingNote/DenseNet/CIFAR100_results.png" alt="CIFAR-100 Results"></p>
+<h2 id="4-3-Detailed-Results"><a href="#4-3-Detailed-Results" class="headerlink" title="4.3 Detailed Results"></a>4.3 Detailed Results</h2><p><img src="/Documents/ReadingNote/DenseNet/Details_results.png" alt="Detailed Results, + means data augmentation"></p>
+<p>SVHN 是街景房屋编号的数据集。蓝色代表最好的效果。DenseNet-BC 不能得到比基本 DenseNet 更好的结果，作者认为 SVHN 是一项相对容易的任务，非常深的模型可能会过拟合。</p>
+<hr>
+<h1 id="5-ImageNet-大规模数据集结果"><a href="#5-ImageNet-大规模数据集结果" class="headerlink" title="5. ImageNet 大规模数据集结果"></a>5. ImageNet 大规模数据集结果</h1><p><img src="/Documents/ReadingNote/DenseNet/imagenetresults.png" alt="Different DenseNet Top-1 and Top-5 Error Rates with Single-Crop (10-Crop) Results"></p>
+<p><img src="/Documents/ReadingNote/DenseNet/results2.png" alt="ImageNet Validation Set Results Compared with Original ResNet"></p>
+<ul>
+<li>左：20M参数的DenseNet-201与大于40M参数的ResNet-101产生类似的验证错误。</li>
+<li>右：相似的计算次数趋势(GOLOPS)。</li>
+<li>底部：DenseNet-264(k=48)最高误差为20.27%，前5误差为5.17%。</li>
+</ul>
+<hr>
+<h1 id="6-特征复用的进一步分析"><a href="#6-特征复用的进一步分析" class="headerlink" title="6. 特征复用的进一步分析"></a>6. 特征复用的进一步分析</h1><p><img src="/Documents/ReadingNote/DenseNet/results3.png" alt="Heat map on the average absolute weights of how Target layer (l) reuses the source layer (s)"></p>
+<ul>
+<li>从非常早期的层中提取的特征被同一 Dense Block 中的较深层直接使用。</li>
+<li>转换层的权重也分布在前面的所有层中。</li>
+<li>第二和第三 dense block 内的各层一贯地将最小权重分配给转换层的输出。(第一行)</li>
+<li>在最终分类层，权重似乎集中在最终 feature map 上。一些更高级的特性在网络中产生得很晚。</li>
+</ul>
+<hr>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[2017 CVPR] [DenseNet]<br><a href="http://openaccess.thecvf.com/content_cvpr_2017/html/Huang_Densely_Connected_Convolutional_CVPR_2017_paper.html" target="_blank" rel="noopener">Densely Connected Convolutional Networks</a></p>
+<hr>
+<p>原文链接：<br><a href="https://towardsdatascience.com/review-densenet-image-classification-b6631a8ef803" target="_blank" rel="noopener">https://towardsdatascience.com/review-densenet-image-classification-b6631a8ef803</a></p>
+<hr>
 
         </div>
         
             <ul class="post-copyright">
-            <li><strong>本文标题：</strong><a href="https://zengzhanhang.github.io/2019/07/18/deepmedic/">DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation</a></li>
+            <li><strong>本文标题：</strong><a href="https://zengzhanhang.github.io/2019/07/21/densenet/">综述：DenseNet—Dense卷积网络（图像分类）</a></li>
             <li><strong>本文作者：</strong><a href="https://zengzhanhang.github.io">曾展航(Zhanhang ZENG)</a></li>
-            <li><strong>本文链接：</strong><a href="https://zengzhanhang.github.io/2019/07/18/deepmedic/">https://zengzhanhang.github.io/2019/07/18/deepmedic/</a></li>
-            <li><strong>发布时间：</strong>2019-07-18</li>
+            <li><strong>本文链接：</strong><a href="https://zengzhanhang.github.io/2019/07/21/densenet/">https://zengzhanhang.github.io/2019/07/21/densenet/</a></li>
+            <li><strong>发布时间：</strong>2019-07-21</li>
             <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
             </li>
             </ul>
@@ -287,7 +346,7 @@ $$\Psi_p(x_i, x_j)=u(x_i, x_j)\sum_{m=1}^M{\omega^{(m)}k_G^{(m)}(\boldsymbol{f_i
                 <div class="level-item">
                     <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
                     <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/CV/">CV</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Image-Segmentation/">Image Segmentation</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Medical-Imaging/">Medical Imaging</a>
+                    <a class="has-link-grey -link" href="/tags/CV/">CV</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Image-Classification/">Image Classification</a>
                 </div>
             </div>
         </div>
@@ -339,17 +398,10 @@ $$\Psi_p(x_i, x_j)=u(x_i, x_j)\sum_{m=1}^M{\omega^{(m)}k_G^{(m)}(\boldsymbol{f_i
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/21/densenet/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">综述：DenseNet—Dense卷积网络（图像分类）</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/12/Keras-notes/">
-                <span class="level-item">Keras 笔记</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/18/deepmedic/">
+                <span class="level-item">DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -365,8 +417,8 @@ $$\Psi_p(x_i, x_j)=u(x_i, x_j)\sum_{m=1}^M{\omega^{(m)}k_G^{(m)}(\boldsymbol{f_i
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://zengzhanhang.github.io/2019/07/18/deepmedic/';
-        this.page.identifier = '2019/07/18/deepmedic/';
+        this.page.url = 'https://zengzhanhang.github.io/2019/07/21/densenet/';
+        this.page.identifier = '2019/07/21/densenet/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -497,36 +549,80 @@ $$\Psi_p(x_i, x_j)=u(x_i, x_j)\sum_{m=1}^M{\omega^{(m)}k_G^{(m)}(\boldsymbol{f_i
                 Catalogue
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-Dense-Training">
+        <a class="is-flex" href="#目录">
         <!-- <span class="has-mr-6">1</span> 注释为不编号-->
-        <span>1. Dense Training</span>
+        <span>目录</span>
         </a></li><li>
-        <a class="is-flex" href="#2-Class-Balance">
+        <a class="is-flex" href="#1-Dense-Block">
         <!-- <span class="has-mr-6">2</span> 注释为不编号-->
-        <span>2. Class Balance</span>
+        <span>1. Dense Block</span>
         </a></li><li>
-        <a class="is-flex" href="#3-构建更深的网络">
+        <a class="is-flex" href="#2-DenseNet-结构">
         <!-- <span class="has-mr-6">3</span> 注释为不编号-->
-        <span>3. 构建更深的网络</span>
-        </a></li><li>
-        <a class="is-flex" href="#4-Dual-Pathways-Networks">
-        <!-- <span class="has-mr-6">4</span> 注释为不编号-->
-        <span>4. Dual Pathways Networks</span>
-        </a></li><li>
-        <a class="is-flex" href="#5-3D-fully-connected-CRF">
-        <!-- <span class="has-mr-6">5</span> 注释为不编号-->
-        <span>5. 3D fully connected CRF</span>
+        <span>2. DenseNet 结构</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#5-1-为什么CRF可以用于处理图像任务？">
-        <!-- <span class="has-mr-6">5.1</span> 注释为不编号-->
-        <span>5.1 为什么CRF可以用于处理图像任务？</span>
+        <a class="is-flex" href="#2-1-基础-DenseNet-组成层">
+        <!-- <span class="has-mr-6">3.1</span> 注释为不编号-->
+        <span>2.1 基础 DenseNet 组成层</span>
         </a></li><li>
-        <a class="is-flex" href="#5-2-全连接条件随机场">
-        <!-- <span class="has-mr-6">5.2</span> 注释为不编号-->
-        <span>5.2 全连接条件随机场</span>
+        <a class="is-flex" href="#2-2-DenseNet-B-Bottleneck-层">
+        <!-- <span class="has-mr-6">3.2</span> 注释为不编号-->
+        <span>2.2 DenseNet-B (Bottleneck 层)</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-具有转换层（transition-layer）的多Dense块">
+        <!-- <span class="has-mr-6">3.3</span> 注释为不编号-->
+        <span>2.3 具有转换层（transition layer）的多Dense块</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-4-DenseNet-BC-进一步压缩">
+        <!-- <span class="has-mr-6">3.4</span> 注释为不编号-->
+        <span>2.4 DenseNet-BC (进一步压缩)</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#Reference">
+        <a class="is-flex" href="#3-DenseNet-的优势">
+        <!-- <span class="has-mr-6">4</span> 注释为不编号-->
+        <span>3. DenseNet 的优势</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-Strong-Gradient-Flow">
+        <!-- <span class="has-mr-6">4.1</span> 注释为不编号-->
+        <span>3.1 Strong Gradient Flow</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-Parameter-amp-Computational-Efficiency">
+        <!-- <span class="has-mr-6">4.2</span> 注释为不编号-->
+        <span>3.2 Parameter &amp; Computational Efficiency</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-More-Diversified-Features">
+        <!-- <span class="has-mr-6">4.3</span> 注释为不编号-->
+        <span>3.3 More Diversified Features</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-Maintains-Low-Complexity-Features">
+        <!-- <span class="has-mr-6">4.4</span> 注释为不编号-->
+        <span>3.4 Maintains Low Complexity Features</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-CIFAR-amp-SVHN-小规模数据集结果">
+        <!-- <span class="has-mr-6">5</span> 注释为不编号-->
+        <span>4. CIFAR &amp; SVHN 小规模数据集结果</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-CIFAR-10">
+        <!-- <span class="has-mr-6">5.1</span> 注释为不编号-->
+        <span>4.1 CIFAR-10</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-CIFAR-100">
+        <!-- <span class="has-mr-6">5.2</span> 注释为不编号-->
+        <span>4.2 CIFAR-100</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-3-Detailed-Results">
+        <!-- <span class="has-mr-6">5.3</span> 注释为不编号-->
+        <span>4.3 Detailed Results</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#5-ImageNet-大规模数据集结果">
         <!-- <span class="has-mr-6">6</span> 注释为不编号-->
+        <span>5. ImageNet 大规模数据集结果</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-特征复用的进一步分析">
+        <!-- <span class="has-mr-6">7</span> 注释为不编号-->
+        <span>6. 特征复用的进一步分析</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <!-- <span class="has-mr-6">8</span> 注释为不编号-->
         <span>Reference</span>
         </a></li></ul>
         </div>
@@ -551,7 +647,7 @@ $$\Psi_p(x_i, x_j)=u(x_i, x_j)\sum_{m=1}^M{\omega^{(m)}k_G^{(m)}(\boldsymbol{f_i
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.png" alt="DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation" height="28">
+                    <img src="/images/logo1.png" alt="综述：DenseNet—Dense卷积网络（图像分类）" height="28">
                 
                 </a>
                 <p class="is-size-7">
