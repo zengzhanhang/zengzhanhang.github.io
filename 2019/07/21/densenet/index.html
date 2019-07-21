@@ -16,7 +16,7 @@
 <meta property="og:description" content="【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。 作者 | Sik-Ho Tsang (原文：Review: DenseNet — Dense Convolutional Network (Image Classification))编译 | Xiaowen">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-21T15:52:16.000Z">
+<meta property="og:updated_time" content="2019-07-21T15:56:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="综述：DenseNet—Dense卷积网络（图像分类）">
 <meta name="twitter:description" content="【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。 作者 | Sik-Ho Tsang (原文：Review: DenseNet — Dense Convolutional Network (Image Classification))编译 | Xiaowen">
@@ -162,7 +162,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-07-21T13:57:55.000Z">2019-07-21</time> -->
                 <time class="level-item has-text-grey" datetime="2019-07-21T13:57:55.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-21</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-21T15:52:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-21</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-21T15:56:28.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-21</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    12 minutes read (About 1760 words)
+                    12 minutes read (About 1799 words)
                 </span>
                 
                 
@@ -218,12 +218,12 @@
 <p>该译文转载自：<a href="https://mp.weixin.qq.com/s/F2GRDen0v2zbnHlB-xHioA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/F2GRDen0v2zbnHlB-xHioA</a></p>
 <hr>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
-<li>Dense Block</li>
-<li>DenseNet 结构</li>
-<li>DenseNet 的优势</li>
-<li>CIFAR &amp; SVHN 小规模数据集结果</li>
-<li>ImageNet 大规模数据集结果</li>
-<li>特征复用的进一步分析</li>
+<li><a href="#1-Dense-Block">Dense Block</a></li>
+<li><a href="#2-DenseNet-结构">DenseNet 结构</a></li>
+<li><a href="#3-DenseNet-的优势">DenseNet 的优势</a></li>
+<li><a href="#4-CIFAR-amp-SVHN-小规模数据集结果">CIFAR &amp; SVHN 小规模数据集结果</a></li>
+<li><a href="#5-ImageNet-大规模数据集结果">ImageNet 大规模数据集结果</a></li>
+<li><a href="#6-特征复用的进一步分析">特征复用的进一步分析</a></li>
 </ol>
 <hr>
 <h1 id="1-Dense-Block"><a href="#1-Dense-Block" class="headerlink" title="1. Dense Block"></a>1. Dense Block</h1><p><img src="/Documents/ReadingNote/DenseNet/StandardCNN.png" alt="Standard ConvNet Concept"></p>
