@@ -16,7 +16,7 @@
 <meta property="og:description" content="【导读】：本综述将会以时间顺序总结一些基于 Deep Learning 的人体姿态估计 (Human Pose Estimation) 有代表意义的论文。这些文章最早从 Google 提出的 DeepPose 开始，代表了 Pose Estimation 领域的发展。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-12-31T08:11:34.000Z">
+<meta property="og:updated_time" content="2019-12-31T08:28:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="综述：Human Pose Estimation Literature Review">
 <meta name="twitter:description" content="【导读】：本综述将会以时间顺序总结一些基于 Deep Learning 的人体姿态估计 (Human Pose Estimation) 有代表意义的论文。这些文章最早从 Google 提出的 DeepPose 开始，代表了 Pose Estimation 领域的发展。">
@@ -162,7 +162,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-12-31T07:36:02.000Z">2019-12-31</time> -->
                 <time class="level-item has-text-grey" datetime="2019-12-31T07:36:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-12-31</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-12-31T08:11:34.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-12-31</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-12-31T08:28:34.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-12-31</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    2 minutes read (About 265 words)
+                    4 minutes read (About 620 words)
                 </span>
                 
                 
@@ -218,9 +218,22 @@
 <p>Declaration：写这个 blog 是因为目前在做 pose estimation 领域的 literature review，并且读到了两篇觉得不错的 blog，分别是：<a href="https://nanonets.com/blog/human-pose-estimation-2d-guide/" target="_blank" rel="noopener">A 2019 guide to Human Pose Estimation with Deep Learning</a> 和 <a href="https://nanonets.com/blog/human-pose-estimation-3d-guide/" target="_blank" rel="noopener">A 2019 guide to 3D Human Pose Estimation</a>。</p>
 </blockquote>
 <h1 id="2D-Human-Pose-Estimation"><a href="#2D-Human-Pose-Estimation" class="headerlink" title="2D Human Pose Estimation"></a>2D Human Pose Estimation</h1><h2 id="What-is-Human-Pose-Estimation"><a href="#What-is-Human-Pose-Estimation" class="headerlink" title="What is Human Pose Estimation?"></a>What is Human Pose Estimation?</h2><ul>
-<li><strong>Human Pose Estimation</strong> is defined as the problem of localization of human joints (also known as keypoints - elbows, wrists, etc) in images or videos. It is also defined as the search for a specific pose in space of all articulated poses.<br><img src="/Documents/ReadingNote/HumanPoseEstimation/example.png" alt></li>
+<li><strong>Human Pose Estimation</strong> 主要是在图像或视频中检测估计人体的一些关键点（例如，关节，五官等）的问题。它也可以被定义成在所有关节姿势的空间中搜索特定姿势的问题。<!-- is defined as the problem of localization of human joints (also known as keypoints - elbows, wrists, etc) in images or videos. It is also defined as the search for a specific pose in space of all articulated poses. --></li>
+</ul>
+<p><img src="/Documents/ReadingNote/HumanPoseEstimation/example.png" alt></p>
+<ul>
 <li><strong>2D 2D Pose Estimation</strong> - 从图像中估计2D姿态（关键点）坐标，即 2D pose (x,y) coordinates。</li>
-<li><strong>3D Pose Estimation</strong> - 估计出关键点的3D坐标，即Estimate a 3D pose (x,y,z) coordinates a RGB image.<br><img src="/Documents/ReadingNote/HumanPoseEstimation/Screen-Shot-2019-04-11-at-5.17.56-PM.png" alt="Photograph taken from Pexels"></li>
+<li><strong>3D Pose Estimation</strong> - 估计出关键点的3D坐标，即Estimate a 3D pose (x,y,z) coordinates a RGB image.</li>
+</ul>
+<p><img src="/Documents/ReadingNote/HumanPoseEstimation/Screen-Shot-2019-04-11-at-5.17.56-PM.png" alt="Photograph taken from Pexels"></p>
+<ul>
+<li><p><strong>应用</strong> - Human Pose Estimation 有很多应用，主要被用于 Action recognition, Animation, Gaming, Gait recognition 等等。具体的应用场景集中在在智能视频监控，病人监护系统，人机交互，虚拟现实，人体动画，智能家居，智能安防，运动员辅助训练等等。</p>
+<ul>
+<li>例如：<a href="https://www.homecourt.ai/" target="_blank" rel="noopener">HomeCourt</a> 使用 Pose Estimation 去分析篮球运动员的运动。</li>
+</ul>
+</li>
+<li><p><strong>Why is it hard?</strong> - 由于人体具有相当的柔性，会出现各种姿态和形状，人体任何一个部位的微小变化都会产生一种新的姿态，同时其关键点的可见性受穿着、姿态、视角等影响非常大，而且还面临着遮挡、光照、雾等环境的影响，除此之外，2D人体关键点和3D人体关键点在视觉上会有明显的差异，身体不同部位都会有视觉上缩短的效果（foreshortening），使得人体骨骼关键点检测成为计算机视觉领域中一个极具挑战性的课题。</p>
+</li>
 </ul>
 
         </div>
