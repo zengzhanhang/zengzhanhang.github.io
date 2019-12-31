@@ -2,24 +2,24 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Human Pose Estimation Literature Review - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
+<title>综述：Human Pose Estimation Literature Review - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="曾展航的个人博客 | Zhanhang Zeng&apos;s Blog">
+    <meta name="description" content="【导读】：本综述将会以时间顺序总结一些基于 Deep Learning 的人体姿态估计 (Human Pose Estimation) 有代表意义的论文。这些文章最早从 Google 提出的 DeepPose 开始，代表了 Pose Estimation 领域的发展。">
 <meta name="keywords" content="DeepLearning,CV,PoseEstimation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Human Pose Estimation Literature Review">
-<meta property="og:url" content="https://zengzhanhang.github.io/2019/06/12/Human-Pose-Estimation-Review/index.html">
+<meta property="og:title" content="综述：Human Pose Estimation Literature Review">
+<meta property="og:url" content="https://zengzhanhang.github.io/2019/12/31/Human-Pose-Estimation-Review/index.html">
 <meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
-<meta property="og:description" content="曾展航的个人博客 | Zhanhang Zeng&apos;s Blog">
+<meta property="og:description" content="【导读】：本综述将会以时间顺序总结一些基于 Deep Learning 的人体姿态估计 (Human Pose Estimation) 有代表意义的论文。这些文章最早从 Google 提出的 DeepPose 开始，代表了 Pose Estimation 领域的发展。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-12-31T07:15:58.000Z">
+<meta property="og:updated_time" content="2019-12-31T07:36:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Human Pose Estimation Literature Review">
-<meta name="twitter:description" content="曾展航的个人博客 | Zhanhang Zeng&apos;s Blog">
+<meta name="twitter:title" content="综述：Human Pose Estimation Literature Review">
+<meta name="twitter:description" content="【导读】：本综述将会以时间顺序总结一些基于 Deep Learning 的人体姿态估计 (Human Pose Estimation) 有代表意义的论文。这些文章最早从 Google 提出的 DeepPose 开始，代表了 Pose Estimation 领域的发展。">
 <meta name="twitter:image" content="https://zengzhanhang.github.io/images/og_image.png">
 
 
@@ -99,7 +99,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.png" alt="Human Pose Estimation Literature Review" height="28">
+                <img src="/images/logo1.png" alt="综述：Human Pose Estimation Literature Review" height="28">
             
             </a>
         </div>
@@ -153,16 +153,16 @@
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>Human Pose Estimation Literature Review
+                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>综述：Human Pose Estimation Literature Review
             
         </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-bottom: 0;">
             <div class="level-left">
-                <!-- <time class="level-item has-text-grey" datetime="2019-06-12T06:37:02.000Z">2019-06-12</time> -->
-                <time class="level-item has-text-grey" datetime="2019-06-12T06:37:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-06-12</time>
+                <!-- <time class="level-item has-text-grey" datetime="2019-12-31T07:36:02.000Z">2019-12-31</time> -->
+                <time class="level-item has-text-grey" datetime="2019-12-31T07:36:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-12-31</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-12-31T07:15:58.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-12-31</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-12-31T07:36:32.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-12-31</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    a few seconds read (About 0 words)
+                    a minute read (About 144 words)
                 </span>
                 
                 
@@ -206,18 +206,25 @@
         
         <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Human Pose Estimation Literature Review
+                综述：Human Pose Estimation Literature Review
             
         </h1> -->
         <div class="content">
-            
+            <blockquote>
+<p>【导读】：本综述将会以时间顺序总结一些基于 Deep Learning 的人体姿态估计 (Human Pose Estimation) 有代表意义的论文。这些文章最早从 Google 提出的 DeepPose 开始，代表了 Pose Estimation 领域的发展。</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>Declaration：写这个 blog 是因为目前在做 pose estimation 领域的 literature review，并且读到了两篇觉得不错的 blog，分别是：<a href="https://nanonets.com/blog/human-pose-estimation-2d-guide/" target="_blank" rel="noopener">A 2019 guide to Human Pose Estimation with Deep Learning</a> 和 <a href="https://nanonets.com/blog/human-pose-estimation-3d-guide/" target="_blank" rel="noopener">A 2019 guide to 3D Human Pose Estimation</a>。</p>
+</blockquote>
+
         </div>
         
             <ul class="post-copyright">
-            <li><strong>本文标题：</strong><a href="https://zengzhanhang.github.io/2019/06/12/Human-Pose-Estimation-Review/">Human Pose Estimation Literature Review</a></li>
+            <li><strong>本文标题：</strong><a href="https://zengzhanhang.github.io/2019/12/31/Human-Pose-Estimation-Review/">综述：Human Pose Estimation Literature Review</a></li>
             <li><strong>本文作者：</strong><a href="https://zengzhanhang.github.io">曾展航(Zhanhang ZENG)</a></li>
-            <li><strong>本文链接：</strong><a href="https://zengzhanhang.github.io/2019/06/12/Human-Pose-Estimation-Review/">https://zengzhanhang.github.io/2019/06/12/Human-Pose-Estimation-Review/</a></li>
-            <li><strong>发布时间：</strong>2019-06-12</li>
+            <li><strong>本文链接：</strong><a href="https://zengzhanhang.github.io/2019/12/31/Human-Pose-Estimation-Review/">https://zengzhanhang.github.io/2019/12/31/Human-Pose-Estimation-Review/</a></li>
+            <li><strong>发布时间：</strong>2019-12-31</li>
             <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
             </li>
             </ul>
@@ -281,17 +288,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/18/deepmedic/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/12/Keras-notes/">
-                <span class="level-item">Keras 笔记</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/21/densenet/">
+                <span class="level-item">综述：DenseNet—Dense卷积网络（图像分类）</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -307,8 +307,8 @@
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://zengzhanhang.github.io/2019/06/12/Human-Pose-Estimation-Review/';
-        this.page.identifier = '2019/06/12/Human-Pose-Estimation-Review/';
+        this.page.url = 'https://zengzhanhang.github.io/2019/12/31/Human-Pose-Estimation-Review/';
+        this.page.identifier = '2019/12/31/Human-Pose-Estimation-Review/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -461,7 +461,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.png" alt="Human Pose Estimation Literature Review" height="28">
+                    <img src="/images/logo1.png" alt="综述：Human Pose Estimation Literature Review" height="28">
                 
                 </a>
                 <p class="is-size-7">
