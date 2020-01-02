@@ -16,7 +16,7 @@
 <meta property="og:description" content="【导读】：本综述将会以时间顺序总结一些基于 Deep Learning 的人体姿态估计 (Human Pose Estimation) 有代表意义的论文。这些文章最早从 Google 提出的 DeepPose 开始，代表了 Pose Estimation 领域的发展。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-12-31T09:25:16.000Z">
+<meta property="og:updated_time" content="2020-01-02T02:05:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="综述：Human Pose Estimation Literature Review">
 <meta name="twitter:description" content="【导读】：本综述将会以时间顺序总结一些基于 Deep Learning 的人体姿态估计 (Human Pose Estimation) 有代表意义的论文。这些文章最早从 Google 提出的 DeepPose 开始，代表了 Pose Estimation 领域的发展。">
@@ -162,7 +162,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2019-12-31T07:36:02.000Z">2019-12-31</time> -->
                 <time class="level-item has-text-grey" datetime="2019-12-31T07:36:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-12-31</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-12-31T09:25:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-12-31</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-02T02:05:06.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-02</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    6 minutes read (About 949 words)
+                    7 minutes read (About 1025 words)
                 </span>
                 
                 
@@ -235,19 +235,23 @@
 <li><p><strong>Why is it hard?</strong> - 由于人体具有相当的柔性，会出现各种姿态和形状，人体任何一个部位的微小变化都会产生一种新的姿态，同时其关键点的可见性受穿着、姿态、视角等影响非常大，而且还面临着遮挡、光照、雾等环境的影响，除此之外，2D人体关键点和3D人体关键点在视觉上会有明显的差异，身体不同部位都会有视觉上缩短的效果（foreshortening），使得人体骨骼关键点检测成为计算机视觉领域中一个极具挑战性的课题。</p>
 </li>
 </ul>
-<h2 id="Relevant-Datasets"><a href="#Relevant-Datasets" class="headerlink" title="Relevant Datasets"></a>Relevant Datasets</h2><ul>
+<h2 id="Relevant-Datasets"><a href="#Relevant-Datasets" class="headerlink" title="Relevant Datasets"></a>Relevant Datasets</h2><h3 id="2D-Datasets"><a href="#2D-Datasets" class="headerlink" title="2D Datasets"></a>2D Datasets</h3><ul>
 <li><strong>LSP（Leeds Sports Pose Dataset）</strong> - 单人人体关键点检测数据集，关键点个数为14，样本数2K，在目前的研究中基本上被弃用；[<a href="https://sam.johnson.io/research/lsp.html" target="_blank" rel="noopener">url</a>]</li>
 <li><strong>FLIC（Frames Labeled In Cinema）</strong> - 单人人体关键点检测数据集，关键点个数为9，样本数2W，在目前的研究中基本上被弃用；[<a href="https://bensapp.github.io/flic-dataset.html" target="_blank" rel="noopener">url</a>]</li>
 <li><strong>MPII Human Pose dataset</strong> - 单人/多人人体关键点检测数据集，关键点个数为16，样本数25K，40K People，410 human activities，全身。 [<a href="http://human-pose.mpi-inf.mpg.de/#overview" target="_blank" rel="noopener">url</a>]</li>
 <li><strong>MSCOCO</strong> - 多人，全身数据集。关键点个数为17，样本数多于300K，目前的相关研究基本上还需要在该数据集上进行验证；[<a href="http://cocodataset.org/#home" target="_blank" rel="noopener">url</a>]</li>
 <li><strong>AI Challenger</strong> - 多人，全身数据集。关键点：17，样本数约380K（210K Training, 30K Validation, 30K Testing）.[<a href="https://challenger.ai/competition/keypoint/subject" target="_blank" rel="noopener">url</a>]</li>
-<li><strong>PoseTrack</strong>[<a href="https://posetrack.net/" target="_blank" rel="noopener">url</a>] - 多人，全身视频数据集。关键点：15，主要用于多人姿态估计和追踪（Multi-person Pose Tracking）,数据集:<ul>
+<li><strong>PoseTrack</strong>[<a href="https://posetrack.net/" target="_blank" rel="noopener">url</a>] - 多人，全身视频数据集。关键点：15，主要用于多人姿态估计和<strong>姿态追（Multi-person Pose Tracking）</strong>,数据集:<ul>
 <li>$&gt;$ 1356 video sequences，</li>
 <li>$&gt;$ 46K annotated video frames</li>
 <li>$&gt;$ 276K body pose annotations</li>
 </ul>
 </li>
 <li><strong>VGG Human Pose Estimation datasets</strong> -  单人，上半身视频数据集。[<a href="https://www.robots.ox.ac.uk/~vgg/data/pose/" target="_blank" rel="noopener">url</a>]</li>
+</ul>
+<h3 id="3D-Datasets"><a href="#3D-Datasets" class="headerlink" title="3D Datasets"></a>3D Datasets</h3><ul>
+<li><strong>Human 3.6M</strong> - 室内场景，采集人数11人，3D human shape 数据集，3.6 M 图像。[<a href="http://vision.imar.ro/human3.6m/description.php" target="_blank" rel="noopener">url</a>]</li>
+<li><strong>DensePose</strong> - 用于3D shape研究的数据集。[<a href="http://densepose.org/" target="_blank" rel="noopener">url</a>]；长线来讲，3D shape 估计是非常有价值的研究方向。</li>
 </ul>
 <p>## </p>
 
@@ -483,7 +487,15 @@
         <a class="is-flex" href="#Relevant-Datasets">
         <!-- <span class="has-mr-6">1.2</span> 注释为不编号-->
         <span>Relevant Datasets</span>
-        </a></li></ul></li></ul>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2D-Datasets">
+        <!-- <span class="has-mr-6">1.2.1</span> 注释为不编号-->
+        <span>2D Datasets</span>
+        </a></li><li>
+        <a class="is-flex" href="#3D-Datasets">
+        <!-- <span class="has-mr-6">1.2.2</span> 注释为不编号-->
+        <span>3D Datasets</span>
+        </a></li></ul></li></ul></li></ul>
         </div>
     </div>
 </div>
