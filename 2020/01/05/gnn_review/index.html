@@ -2,24 +2,24 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>笔记：图神经网络 (Graph Neural Networks) - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
+<title>【Review】图神经网络 (Graph Neural Networks) - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="本文记录我在阅读清华大学孙茂松组在 arXiv 上发布预印版综述文章 Graph Neural Networks: A Review of Methods and Applications 以及一些 GNN 的相关论文后的笔记。">
+    <meta name="description" content="This page is my notes of the literature review on the Graph Neural Networks (GNN) and Graph Convolutional Networks (GCN) after I read some survey paper in the fields of GNN and GCN.">
 <meta name="keywords" content="DeepLearning,GNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="笔记：图神经网络 (Graph Neural Networks)">
+<meta property="og:title" content="【Review】图神经网络 (Graph Neural Networks)">
 <meta property="og:url" content="https://zengzhanhang.github.io/2020/01/05/gnn_review/index.html">
 <meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
-<meta property="og:description" content="本文记录我在阅读清华大学孙茂松组在 arXiv 上发布预印版综述文章 Graph Neural Networks: A Review of Methods and Applications 以及一些 GNN 的相关论文后的笔记。">
+<meta property="og:description" content="This page is my notes of the literature review on the Graph Neural Networks (GNN) and Graph Convolutional Networks (GCN) after I read some survey paper in the fields of GNN and GCN.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/GNN_review/thumbnail.png">
-<meta property="og:updated_time" content="2020-01-05T07:51:16.000Z">
+<meta property="og:updated_time" content="2020-01-12T09:37:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="笔记：图神经网络 (Graph Neural Networks)">
-<meta name="twitter:description" content="本文记录我在阅读清华大学孙茂松组在 arXiv 上发布预印版综述文章 Graph Neural Networks: A Review of Methods and Applications 以及一些 GNN 的相关论文后的笔记。">
+<meta name="twitter:title" content="【Review】图神经网络 (Graph Neural Networks)">
+<meta name="twitter:description" content="This page is my notes of the literature review on the Graph Neural Networks (GNN) and Graph Convolutional Networks (GCN) after I read some survey paper in the fields of GNN and GCN.">
 <meta name="twitter:image" content="https://zengzhanhang.github.io/Documents/GNN_review/thumbnail.png">
 
 
@@ -99,7 +99,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.png" alt="笔记：图神经网络 (Graph Neural Networks)" height="28">
+                <img src="/images/logo1.png" alt="【Review】图神经网络 (Graph Neural Networks)" height="28">
             
             </a>
         </div>
@@ -107,15 +107,15 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">首页-Home</a>
+                <a class="navbar-item" href="/">首页 - Home</a>
                 
-                <a class="navbar-item" href="/archives">归档-Archives</a>
+                <a class="navbar-item" href="/archives">归档 - Archives</a>
                 
-                <a class="navbar-item" href="/categories">分类-Categories</a>
+                <a class="navbar-item" href="/categories">分类 - Categories</a>
                 
-                <a class="navbar-item" href="/tags">标签-Tags</a>
+                <a class="navbar-item" href="/tags">标签 - Tags</a>
                 
-                <a class="navbar-item" href="/about">关于-About</a>
+                <a class="navbar-item" href="/about">关于 - About</a>
                 
             </div>
             
@@ -152,14 +152,14 @@
     
     <div class="card-image">
         <span class="image is-7by1">
-            <img class="thumbnail" src="/Documents/GNN_review/thumbnail.png" alt="笔记：图神经网络 (Graph Neural Networks)">
+            <img class="thumbnail" src="/Documents/GNN_review/thumbnail.png" alt="【Review】图神经网络 (Graph Neural Networks)">
         </span>
     </div>
     
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>笔记：图神经网络 (Graph Neural Networks)
+                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>【Review】图神经网络 (Graph Neural Networks)
             
         </h1>
         
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-05T07:44:02.000Z">2020-01-05</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-05T07:44:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-05</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-05T07:51:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-05</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-12T09:37:56.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-12</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -181,7 +181,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    a few seconds read (About 53 words)
+                    a few seconds read (About 107 words)
                 </span>
                 
                 
@@ -212,18 +212,23 @@
         
         <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                笔记：图神经网络 (Graph Neural Networks)
+                【Review】图神经网络 (Graph Neural Networks)
             
         </h1> -->
         <div class="content">
             <blockquote>
-<p>本文记录我在阅读清华大学孙茂松组在 arXiv 上发布预印版综述文章 <strong>Graph Neural Networks: A Review of Methods and Applications</strong> 以及一些 GNN 的相关论文后的笔记。</p>
+<p>This page is my notes of the literature review on the Graph Neural Networks (GNN) and Graph Convolutional Networks (GCN) after I read some survey paper in the fields of GNN and GCN.</p>
 </blockquote>
+<!-- > 本文记录我在阅读清华大学孙茂松组在 arXiv 上发布预印版综述文章 **Graph Neural Networks: A Review of Methods and Applications** 以及一些 GNN 的相关论文后的笔记。 -->
 <a id="more"></a>
+<h1 id="Graph-Neural-Networks"><a href="#Graph-Neural-Networks" class="headerlink" title="Graph Neural Networks"></a>Graph Neural Networks</h1><h1 id="Graph-convolutional-network-GCN"><a href="#Graph-convolutional-network-GCN" class="headerlink" title="Graph convolutional network (GCN)"></a>Graph convolutional network (GCN)</h1><h1 id="Graph-attention-network-GAT"><a href="#Graph-attention-network-GAT" class="headerlink" title="Graph attention network (GAT)"></a>Graph attention network (GAT)</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li>Graph Neural Networks: A Review of Methods and Applications</li>
+</ol>
+
         </div>
         
             <ul class="post-copyright">
-            <li><strong>本文标题：</strong><a href="https://zengzhanhang.github.io/2020/01/05/gnn_review/">笔记：图神经网络 (Graph Neural Networks)</a></li>
+            <li><strong>本文标题：</strong><a href="https://zengzhanhang.github.io/2020/01/05/gnn_review/">【Review】图神经网络 (Graph Neural Networks)</a></li>
             <li><strong>本文作者：</strong><a href="https://zengzhanhang.github.io">曾展航(Zhanhang ZENG)</a></li>
             <li><strong>本文链接：</strong><a href="https://zengzhanhang.github.io/2020/01/05/gnn_review/">https://zengzhanhang.github.io/2020/01/05/gnn_review/</a></li>
             <li><strong>发布时间：</strong>2020-01-05</li>
@@ -293,7 +298,7 @@
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/31/Human-Pose-Estimation-Review/">
-                <span class="level-item">综述：Human Pose Estimation Literature Review</span>
+                <span class="level-item">【Review】Human Pose Estimation Literature Review</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -440,7 +445,23 @@
             <h3 class="menu-label">
                 Catalogue
             </h3>
-            
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Graph-Neural-Networks">
+        <!-- <span class="has-mr-6">1</span> 注释为不编号-->
+        <span>Graph Neural Networks</span>
+        </a></li><li>
+        <a class="is-flex" href="#Graph-convolutional-network-GCN">
+        <!-- <span class="has-mr-6">2</span> 注释为不编号-->
+        <span>Graph convolutional network (GCN)</span>
+        </a></li><li>
+        <a class="is-flex" href="#Graph-attention-network-GAT">
+        <!-- <span class="has-mr-6">3</span> 注释为不编号-->
+        <span>Graph attention network (GAT)</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <!-- <span class="has-mr-6">4</span> 注释为不编号-->
+        <span>Reference</span>
+        </a></li></ul>
         </div>
     </div>
 </div>
@@ -463,7 +484,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.png" alt="笔记：图神经网络 (Graph Neural Networks)" height="28">
+                    <img src="/images/logo1.png" alt="【Review】图神经网络 (Graph Neural Networks)" height="28">
                 
                 </a>
                 <p class="is-size-7">
