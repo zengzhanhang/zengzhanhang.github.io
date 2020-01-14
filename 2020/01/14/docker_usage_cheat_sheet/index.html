@@ -2,25 +2,25 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Hello World - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
+<title>Using Python with Docker - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta name="keywords" content="展航, python, machine learning, data mining, artificial intelligence, data science, visualisation, 机器学习, 数据挖掘, 数据科学, 深度学习, 人工智能, 可视化">
+    <meta name="description" content="1. Docker Basic Logic Flow 2. Docker command2.1 Check docker version Usage: docker version  Example:   1234567891011121314151617181920212223242526272829$ docker versionClient: Docker Engine - Communi">
+<meta name="keywords" content="Python,General">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://zengzhanhang.github.io/2019/05/10/hello-world/index.html">
+<meta property="og:title" content="Using Python with Docker">
+<meta property="og:url" content="https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/index.html">
 <meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="1. Docker Basic Logic Flow 2. Docker command2.1 Check docker version Usage: docker version  Example:   1234567891011121314151617181920212223242526272829$ docker versionClient: Docker Engine - Communi">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-25T23:20:02.000Z">
+<meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
+<meta property="og:updated_time" content="2020-01-14T08:20:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta name="twitter:image" content="https://zengzhanhang.github.io/images/og_image.png">
+<meta name="twitter:title" content="Using Python with Docker">
+<meta name="twitter:description" content="1. Docker Basic Logic Flow 2. Docker command2.1 Check docker version Usage: docker version  Example:   1234567891011121314151617181920212223242526272829$ docker versionClient: Docker Engine - Communi">
+<meta name="twitter:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
 
 
 
@@ -99,7 +99,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo1.png" alt="Hello World" height="28">
+                <img src="/images/logo1.png" alt="Using Python with Docker" height="28">
             
             </a>
         </div>
@@ -150,27 +150,38 @@
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
     
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/Documents/Docker/docker.png" alt="Using Python with Docker">
+        </span>
+    </div>
+    
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>Hello World
+                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>Using Python with Docker
             
         </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-bottom: 0;">
             <div class="level-left">
-                <!-- <time class="level-item has-text-grey" datetime="2019-05-10T02:21:45.510Z">2019-05-10</time> -->
-                <time class="level-item has-text-grey" datetime="2019-05-10T02:21:45.510Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-10</time>
+                <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
+                <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-05-25T23:20:02.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-05-26</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T08:20:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
                 
-                <!--  -->
+                <!-- 
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                 -->
                 
                 <span class="level-item has-text-grey">
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    a minute read (About 122 words)
+                    a minute read (About 185 words)
                 </span>
                 
                 
@@ -184,38 +195,95 @@
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-top: 0;">
             <div class="level-left">
                 
+                <div class="level-item">
+                    <i class="fas fa-folder-open has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/General/">General</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Python/">Python</a>
+                </div>
                 
             </div>
         </div>
         
         <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hello World
+                Using Python with Docker
             
         </h1> -->
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <a id="more"></a>
+<h1 id="1-Docker-Basic-Logic-Flow"><a href="#1-Docker-Basic-Logic-Flow" class="headerlink" title="1. Docker Basic Logic Flow"></a>1. Docker Basic Logic Flow</h1><p><img src="/Documents/Docker/docker_logic.png" alt="Docker basic logic flow"></p>
+<h1 id="2-Docker-command"><a href="#2-Docker-command" class="headerlink" title="2. Docker command"></a>2. Docker command</h1><h2 id="2-1-Check-docker-version"><a href="#2-1-Check-docker-version" class="headerlink" title="2.1 Check docker version"></a>2.1 Check docker version</h2><ul>
+<li><p>Usage: <code>docker version</code></p>
+</li>
+<li><p>Example:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ docker version</span><br><span class="line"></span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line">Version:           19.03.5</span><br><span class="line">API version:       1.40</span><br><span class="line">Go version:        go1.12.12</span><br><span class="line">Git commit:        633a0ea</span><br><span class="line">Built:             Wed Nov 13 07:22:37 2019</span><br><span class="line">OS/Arch:           windows/amd64</span><br><span class="line">Experimental:      <span class="hljs-literal">false</span></span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line">Engine:</span><br><span class="line">Version:          19.03.5</span><br><span class="line">API version:      1.40 (minimum version 1.12)</span><br><span class="line">Go version:       go1.12.12</span><br><span class="line">Git commit:       633a0ea</span><br><span class="line">Built:            Wed Nov 13 07:29:19 2019</span><br><span class="line">OS/Arch:          linux/amd64</span><br><span class="line">Experimental:     <span class="hljs-literal">false</span></span><br><span class="line">containerd:</span><br><span class="line">Version:          v1.2.10</span><br><span class="line">GitCommit:        b34a5c8af56e510852c35414db4c1f4fa6172339</span><br><span class="line">runc:</span><br><span class="line">Version:          1.0.0-rc8+dev</span><br><span class="line">GitCommit:        3e425f80a8c931f88e6d94a8c831b9d5aa481657</span><br><span class="line">docker-init:</span><br><span class="line">Version:          0.18.0</span><br><span class="line">GitCommit:        fec3683</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-2-List-Containers"><a href="#2-2-List-Containers" class="headerlink" title="2.2 List Containers"></a>2.2 List Containers</h2><ul>
+<li><p>Usage: </p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps [options]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Options: </p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name, shorthand</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">–all , -a</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Show all containers (default shows just running)</td>
+</tr>
+<tr>
+<td style="text-align:center">–last , -n</td>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">Show n last created containers (includes all states)</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example:<br>  Running <code>docker ps</code>  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES</span><br><span class="line">4c01db0b339c        ubuntu:12.04                 bash                   17 seconds ago       Up 16 seconds       3300-3310/tcp       webapp</span><br><span class="line">d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db</span><br></pre></td></tr></table></figure></li>
+</ul>
 
         </div>
         
             <ul class="post-copyright">
-            <li><strong>本文标题：</strong><a href="https://zengzhanhang.github.io/2019/05/10/hello-world/">Hello World</a></li>
+            <li><strong>本文标题：</strong><a href="https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/">Using Python with Docker</a></li>
             <li><strong>本文作者：</strong><a href="https://zengzhanhang.github.io">曾展航(Zhanhang ZENG)</a></li>
-            <li><strong>本文链接：</strong><a href="https://zengzhanhang.github.io/2019/05/10/hello-world/">https://zengzhanhang.github.io/2019/05/10/hello-world/</a></li>
-            <li><strong>发布时间：</strong>2019-05-10</li>
+            <li><strong>本文链接：</strong><a href="https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/">https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/</a></li>
+            <li><strong>发布时间：</strong>2020-01-14</li>
             <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
             </li>
             </ul>
         
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/General/">General</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Python/">Python</a>
+                </div>
+            </div>
+        </div>
         
         
         <div style="text-align:center">
@@ -264,13 +332,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/10/Numpy-Pandas-Tutorial/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Numpy&amp;Pandas Tutorial</span>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/01/05/gnn_review/">
+                <span class="level-item">【Review】图神经网络 (Graph Neural Networks)</span>
+                <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
-        
         
     </div>
 </div>
@@ -283,8 +351,8 @@
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://zengzhanhang.github.io/2019/05/10/hello-world/';
-        this.page.identifier = '2019/05/10/hello-world/';
+        this.page.url = 'https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/';
+        this.page.identifier = '2020/01/14/docker_usage_cheat_sheet/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -415,25 +483,21 @@
                 Catalogue
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#Quick-Start">
+        <a class="is-flex" href="#1-Docker-Basic-Logic-Flow">
         <!-- <span class="has-mr-6">1</span> 注释为不编号-->
-        <span>Quick Start</span>
+        <span>1. Docker Basic Logic Flow</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-Docker-command">
+        <!-- <span class="has-mr-6">2</span> 注释为不编号-->
+        <span>2. Docker command</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Create-a-new-post">
-        <!-- <span class="has-mr-6">1.1</span> 注释为不编号-->
-        <span>Create a new post</span>
+        <a class="is-flex" href="#2-1-Check-docker-version">
+        <!-- <span class="has-mr-6">2.1</span> 注释为不编号-->
+        <span>2.1 Check docker version</span>
         </a></li><li>
-        <a class="is-flex" href="#Run-server">
-        <!-- <span class="has-mr-6">1.2</span> 注释为不编号-->
-        <span>Run server</span>
-        </a></li><li>
-        <a class="is-flex" href="#Generate-static-files">
-        <!-- <span class="has-mr-6">1.3</span> 注释为不编号-->
-        <span>Generate static files</span>
-        </a></li><li>
-        <a class="is-flex" href="#Deploy-to-remote-sites">
-        <!-- <span class="has-mr-6">1.4</span> 注释为不编号-->
-        <span>Deploy to remote sites</span>
+        <a class="is-flex" href="#2-2-List-Containers">
+        <!-- <span class="has-mr-6">2.2</span> 注释为不编号-->
+        <span>2.2 List Containers</span>
         </a></li></ul></li></ul>
         </div>
     </div>
@@ -457,7 +521,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo1.png" alt="Hello World" height="28">
+                    <img src="/images/logo1.png" alt="Using Python with Docker" height="28">
                 
                 </a>
                 <p class="is-size-7">
