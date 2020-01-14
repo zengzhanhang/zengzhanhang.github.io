@@ -16,7 +16,7 @@
 <meta property="og:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
-<meta property="og:updated_time" content="2020-01-14T10:05:16.000Z">
+<meta property="og:updated_time" content="2020-01-14T12:04:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Python with Docker">
 <meta name="twitter:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T10:05:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T12:04:56.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -181,7 +181,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    5 minutes read (About 736 words)
+                    7 minutes read (About 1076 words)
                 </span>
                 
                 
@@ -247,7 +247,33 @@
 </li>
 </ol>
 <p>Now, we are done. We are already inside the Docker container. Then we install Miniconda.</p>
-<h2 id="Installing-Miniconda"><a href="#Installing-Miniconda" class="headerlink" title="Installing Miniconda"></a>Installing Miniconda</h2><h1 id="2-Docker-Basic-Logic-Flow"><a href="#2-Docker-Basic-Logic-Flow" class="headerlink" title="2. Docker Basic Logic Flow"></a>2. Docker Basic Logic Flow</h1><p><img src="/Documents/Docker/docker_logic.png" alt="Docker basic logic flow"></p>
+<h2 id="Installing-Miniconda"><a href="#Installing-Miniconda" class="headerlink" title="Installing Miniconda"></a>Installing Miniconda</h2><ol>
+<li><p>Because there is no necessary tools in the image, we need to install them first. Also, the image probably has no apt package cache, we need to run:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+<p> then, install <code>wget</code> command-line tool:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install wget</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Download the latest 64-bit Python 3 Miniconda install script:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+<p> Now run the install script:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+<p> You will first be asked to review the software license agreement. Assuming you choose to agree, you will then be asked to choose an install location for Miniconda. The default is to install in the root of your home directory <code>~/miniconda3</code> or <code>/root/miniconda3</code>. We recommend going with this default unless you have a particular reason to do otherwise.</p>
+<p> Append the Miniconda binaries directory to <code>PATH</code> in manually in <code>~/.bash_env</code> using</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"export PATH=\""</span>\<span class="hljs-variable">$PATH</span><span class="hljs-string">":<span class="hljs-variable">$HOME</span>/miniconda3/bin\""</span> &gt;&gt; ~/.bash_env</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>For those who this appears a bit opaque to and want to know what is going on see here <sup id="a1"><a href="#f1">1</a></sup>.</p>
+<p>We now need to <code>source</code> the updated <code>~/.bash_env</code> so that the PATH variable in the current terminal session is updated:</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">source</span> ~/.bash_env</span><br></pre></td></tr></table></figure>
+<p>From the next time you log in all future terminal sessions should have the updated <code>PATH</code> loaded by default.</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><b id="f1"><strong>[1]</strong></b> The <code>echo</code> command causes the following text to be streamed to an output (standard terminal output by default). Here we use the append redirection operator <code>&gt;&gt;</code> to redirect the <code>echo</code> output to a file <code>~/.bash_env</code>, with it being appended to the end of the current file. The text actually added is <code>export PATH=&quot;$PATH:[your-home-directory]/miniconda/bin&quot;</code> with the <code>\&quot;</code> being used to escape the quote characters. The <code>export</code> command defines system-wide environment variables (more rigorously those inherited by child shells) with <code>PATH</code> being the environment variable defining where <code>bash</code> searches for executables as a colon-seperated list of directories. Here we add the Miniconda binary directory to the end of the current <code>PATH</code> definition. <a href="#a1">↩</a></p>
+<hr>
+<h1 id="2-Docker-Basic-Logic-Flow"><a href="#2-Docker-Basic-Logic-Flow" class="headerlink" title="2. Docker Basic Logic Flow"></a>2. Docker Basic Logic Flow</h1><p><img src="/Documents/Docker/docker_logic.png" alt="Docker basic logic flow"></p>
+<hr>
 <h1 id="3-Docker-command"><a href="#3-Docker-command" class="headerlink" title="3. Docker command"></a>3. Docker command</h1><h2 id="Check-docker-version"><a href="#Check-docker-version" class="headerlink" title="Check docker version"></a>Check docker version</h2><ul>
 <li><p>Usage: <code>docker version</code></p>
 </li>
