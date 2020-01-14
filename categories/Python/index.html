@@ -175,7 +175,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T08:20:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T08:30:48.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -188,7 +188,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    a minute read (About 185 words)
+                    2 minutes read (About 255 words)
                 </span>
                 
                 
@@ -220,14 +220,14 @@
         <div class="content">
             <a id="more"></a>
 <h1 id="1-Docker-Basic-Logic-Flow"><a href="#1-Docker-Basic-Logic-Flow" class="headerlink" title="1. Docker Basic Logic Flow"></a>1. Docker Basic Logic Flow</h1><p><img src="/Documents/Docker/docker_logic.png" alt="Docker basic logic flow"></p>
-<h1 id="2-Docker-command"><a href="#2-Docker-command" class="headerlink" title="2. Docker command"></a>2. Docker command</h1><h2 id="2-1-Check-docker-version"><a href="#2-1-Check-docker-version" class="headerlink" title="2.1 Check docker version"></a>2.1 Check docker version</h2><ul>
+<h1 id="2-Docker-command"><a href="#2-Docker-command" class="headerlink" title="2. Docker command"></a>2. Docker command</h1><h2 id="Check-docker-version"><a href="#Check-docker-version" class="headerlink" title="Check docker version"></a>Check docker version</h2><ul>
 <li><p>Usage: <code>docker version</code></p>
 </li>
 <li><p>Example:</p>
   <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ docker version</span><br><span class="line"></span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line">Version:           19.03.5</span><br><span class="line">API version:       1.40</span><br><span class="line">Go version:        go1.12.12</span><br><span class="line">Git commit:        633a0ea</span><br><span class="line">Built:             Wed Nov 13 07:22:37 2019</span><br><span class="line">OS/Arch:           windows/amd64</span><br><span class="line">Experimental:      <span class="hljs-literal">false</span></span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line">Engine:</span><br><span class="line">Version:          19.03.5</span><br><span class="line">API version:      1.40 (minimum version 1.12)</span><br><span class="line">Go version:       go1.12.12</span><br><span class="line">Git commit:       633a0ea</span><br><span class="line">Built:            Wed Nov 13 07:29:19 2019</span><br><span class="line">OS/Arch:          linux/amd64</span><br><span class="line">Experimental:     <span class="hljs-literal">false</span></span><br><span class="line">containerd:</span><br><span class="line">Version:          v1.2.10</span><br><span class="line">GitCommit:        b34a5c8af56e510852c35414db4c1f4fa6172339</span><br><span class="line">runc:</span><br><span class="line">Version:          1.0.0-rc8+dev</span><br><span class="line">GitCommit:        3e425f80a8c931f88e6d94a8c831b9d5aa481657</span><br><span class="line">docker-init:</span><br><span class="line">Version:          0.18.0</span><br><span class="line">GitCommit:        fec3683</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="2-2-List-Containers"><a href="#2-2-List-Containers" class="headerlink" title="2.2 List Containers"></a>2.2 List Containers</h2><ul>
+<h2 id="List-Containers"><a href="#List-Containers" class="headerlink" title="List Containers"></a>List Containers</h2><ul>
 <li><p>Usage: </p>
   <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps [options]</span><br></pre></td></tr></table></figure>
 </li>
@@ -261,9 +261,30 @@
 </tbody>
 </table>
 <ul>
-<li>Example:<br>  Running <code>docker ps</code>  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES</span><br><span class="line">4c01db0b339c        ubuntu:12.04                 bash                   17 seconds ago       Up 16 seconds       3300-3310/tcp       webapp</span><br><span class="line">d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db</span><br></pre></td></tr></table></figure></li>
+<li>Example:<br>  Running <code>docker ps</code>  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES</span><br><span class="line">4c01db0b339c        ubuntu:12.04                 bash                   17 seconds ago       Up 16 seconds       3300-3310/tcp       webapp</span><br><span class="line">d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-
+<h2 id="Search-Images"><a href="#Search-Images" class="headerlink" title="Search Images"></a>Search Images</h2><ul>
+<li><p>Usage:<br>  Search the Docker Hub for images</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search [OPTIONS] TERM</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search debian</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>More info: <a href="https://docs.docker.com/engine/reference/commandline/search/" target="_blank" rel="noopener">url for documentation</a></p>
+</li>
+</ul>
+<h2 id="Pull-Images"><a href="#Pull-Images" class="headerlink" title="Pull Images"></a>Pull Images</h2><ul>
+<li><p>Usage:<br>  Pull an image or a repository from a registry</p>
+  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull debian</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>More info: <a href="https://docs.docker.com/engine/reference/commandline/pull/" target="_blank" rel="noopener">url</a></p>
+</li>
+</ul>
+<h1 id="Using-Python-with-Docker"><a href="#Using-Python-with-Docker" class="headerlink" title="Using Python with Docker"></a>Using Python with Docker</h1>
         </div>
         
         
