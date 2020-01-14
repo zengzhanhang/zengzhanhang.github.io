@@ -16,7 +16,7 @@
 <meta property="og:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
-<meta property="og:updated_time" content="2020-01-14T12:08:40.000Z">
+<meta property="og:updated_time" content="2020-01-14T12:20:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Python with Docker">
 <meta name="twitter:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T12:08:40.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T12:20:08.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -181,7 +181,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    7 minutes read (About 1080 words)
+                    9 minutes read (About 1365 words)
                 </span>
                 
                 
@@ -223,8 +223,8 @@
 <h1 id="1-running-Python-Deep-Learning-with-Docker"><a href="#1-running-Python-Deep-Learning-with-Docker" class="headerlink" title="1. running Python (Deep Learning) with Docker"></a>1. running Python (Deep Learning) with Docker</h1><p>A common headache in software projects is ensuring the correct versions of all dependencies are available on the current development system. Often you may be working on several distinct projects simultaneously each with its own potentially conflicting dependencies on external libraries. Additionally you may be working across multiple different machines (for example a personal laptop and University computers) with possibly different operating systems. Further, you may not have root-level access to a system you are working on and so not be able to install software at a system-wide level and system updates may cause library versions to be changed to incompatible versions.</p>
 <p>One way of overcoming these issues is to use project-specific virtual environments. In this context a virtual environment or machine are isolated development environments where the external dependencies of a project can be installed and managed independent of the system-wide versions (and those of the environments of other projects).</p>
 <p>Here, we use <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> to create a virtual machine to run <a href="https://www.python.org/" target="_blank" rel="noopener">python 3</a>.</p>
-<h2 id="Running-Docker-container"><a href="#Running-Docker-container" class="headerlink" title="Running Docker container"></a>Running Docker container</h2><hr>
-<p><em>Note: Make sure the <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> has been installed on your personal PC or other devices. The installation instructions can be found on the official documentation, for <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank" rel="noopener">Windows</a>, <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">Mac</a>, <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community-1" target="_blank" rel="noopener">Ubuntu</a></em>.</p>
+<hr>
+<h2 id="Running-Docker-container"><a href="#Running-Docker-container" class="headerlink" title="Running Docker container"></a>Running Docker container</h2><p><em>Note: Make sure the <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> has been installed on your personal PC or other devices. The installation instructions can be found on the official documentation, for <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank" rel="noopener">Windows</a>, <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">Mac</a>, <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community-1" target="_blank" rel="noopener">Ubuntu</a></em>.</p>
 <ol>
 <li><p>Open a bash terminal.</p>
 </li>
@@ -248,8 +248,8 @@
 </li>
 </ol>
 <p>Now, we are done. We are already inside the Docker container. Then we install Miniconda.</p>
-<h2 id="Installing-Miniconda"><a href="#Installing-Miniconda" class="headerlink" title="Installing Miniconda"></a>Installing Miniconda</h2><hr>
-<ol>
+<hr>
+<h2 id="Installing-Miniconda"><a href="#Installing-Miniconda" class="headerlink" title="Installing Miniconda"></a>Installing Miniconda</h2><ol>
 <li><p>Because there is no necessary tools in the image, we need to install them first. Also, the image probably has no apt package cache, we need to run:</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
 <p> then, install <code>wget</code> command-line tool:</p>
@@ -268,7 +268,19 @@
 <p> From the next time you log in all future terminal sessions should have the updated <code>PATH</code> loaded by default.</p>
 </li>
 </ol>
-<h2 id="Creating-the-Conda-environment"><a href="#Creating-the-Conda-environment" class="headerlink" title="Creating the Conda environment"></a>Creating the Conda environment</h2><hr>
+<hr>
+<h2 id="Creating-the-Conda-environment"><a href="#Creating-the-Conda-environment" class="headerlink" title="Creating the Conda environment"></a>Creating the Conda environment</h2><p>You should now have a working Conda installation. If you run<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda --<span class="hljs-built_in">help</span></span><br></pre></td></tr></table></figure></p>
+<p><em>Note: from a terminal you should see the Conda help page displayed. If you get a <code>No command &#39;conda&#39; found</code> error you should check you have set up your <code>PATH</code> variable correctly (you can get a demonstrator to help you do this).</em></p>
+<p>Assuming Conda is working, we will now create our Conda environment:</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name vp3d python=3</span><br></pre></td></tr></table></figure>
+<p>This bootstraps a new Conda environment named <code>vp3d</code> with a minimal Python 3 install. You will be presented with a ‘package plan’ listing the packages to be installed and asked whether to proceed: type <code>y</code> then enter.</p>
+<p>We will now activate our created environment:</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">source</span> activate mlp</span><br></pre></td></tr></table></figure>
+<p>When a environment is activated its name will be prepended on to the prompt which should now look something like<code>(vp3d) [machine-name]:~$</code> on terminal.</p>
+<p><strong>You need to run this <code>source activate vp3d</code> command every time you wish to activate the <code>vp3d</code> environment in a terminal.</strong> When the environment is activated, the environment will be searched first when running commands so that e.g. <code>python</code> will launch the Python interpreter installed locally in the <code>vp3d</code> environment rather than a system-wide version.</p>
+<p>We can now install the dependencies for the specific project into the new environment, like:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install numpy scipy matplotlib jupyter</span><br></pre></td></tr></table></figure></p>
+<p>Once the installation is finished, to recover some disk space we can clear the package tarballs Conda just downloaded:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean -t</span><br></pre></td></tr></table></figure></p>
+<p>These tarballs are usually cached to allow quicker installation into additional environments however we will only be using a single environment here so there is no need to keep them on disk.</p>
 <hr>
 <p><b id="f1"><strong>[1]</strong></b> The <code>echo</code> command causes the following text to be streamed to an output (standard terminal output by default). Here we use the append redirection operator <code>&gt;&gt;</code> to redirect the <code>echo</code> output to a file <code>~/.bash_env</code>, with it being appended to the end of the current file. The text actually added is <code>export PATH=&quot;$PATH:[your-home-directory]/miniconda/bin&quot;</code> with the <code>\&quot;</code> being used to escape the quote characters. The <code>export</code> command defines system-wide environment variables (more rigorously those inherited by child shells) with <code>PATH</code> being the environment variable defining where <code>bash</code> searches for executables as a colon-seperated list of directories. Here we add the Miniconda binary directory to the end of the current <code>PATH</code> definition. <a href="#a1">↩</a></p>
 <hr>
