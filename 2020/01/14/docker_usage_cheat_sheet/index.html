@@ -16,7 +16,7 @@
 <meta property="og:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
-<meta property="og:updated_time" content="2020-01-14T12:47:44.000Z">
+<meta property="og:updated_time" content="2020-01-14T12:53:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Python with Docker">
 <meta name="twitter:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T12:47:44.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T12:53:10.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -358,18 +358,98 @@
 <li><p>Usage:<br>  Run a command in a new container, [<a href="https://docs.docker.com/engine/reference/commandline/run/" target="_blank" rel="noopener">more info</a>]</p>
   <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Options:<br>|   Name, shorthand  | Default |                     Description                    |<br>|:——————:|:——-:|:————————————————–:|<br>|    –detach , -d   |         | Run container in background and print container ID |<br>|   –publish , -p   |         | Publish a container’s port(s) to the host          |<br>| –name             |         | Assign a name to the container                     |<br>| –volume , -v      |         | Bind mount a volume                                |<br>| –interactive , -i |         | Keep STDIN open even if not attached               |<br>| –tty , -t         |         | Allocate a pseudo-TTY                              |<br>|         …        |         |                         …                        |</p>
+<li><p>Options:</p>
 </li>
-<li><p>Example:  </p>
-  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name VideoPose3D --runtime=nvidia --volume=<span class="hljs-string">"<span class="hljs-variable">$PWD</span>:/app"</span> nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04</span><br></pre></td></tr></table></figure>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name, shorthand</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">–detach , -d</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Run container in background and print container ID</td>
+</tr>
+<tr>
+<td style="text-align:center">–publish , -p</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Publish a container’s port(s) to the host</td>
+</tr>
+<tr>
+<td style="text-align:center">–name</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Assign a name to the container</td>
+</tr>
+<tr>
+<td style="text-align:center">–volume , -v</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Bind mount a volume</td>
+</tr>
+<tr>
+<td style="text-align:center">–interactive , -i</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Keep STDIN open even if not attached</td>
+</tr>
+<tr>
+<td style="text-align:center">–tty , -t</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Allocate a pseudo-TTY</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example:    <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name VideoPose3D --runtime=nvidia --volume=<span class="hljs-string">"<span class="hljs-variable">$PWD</span>:/app"</span> nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="Run-a-command-in-a-running-container"><a href="#Run-a-command-in-a-running-container" class="headerlink" title="Run a command in a running container"></a>Run a command in a running container</h2><ul>
 <li><p>Usage:<br>  docker exec [OPTIONS] CONTAINER COMMAND [ARG…], [<a href="https://docs.docker.com/engine/reference/commandline/exec/" target="_blank" rel="noopener">more info</a>]</p>
   <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">exec</span> [OPTIONS] CONTAINER COMMAND [ARG...]</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Options:<br>|   Name, shorthand  | Default |                     Description                    |<br>|:——————:|:——-:|:————————————————–:|<br>|    –detach , -d   |         | Run container in background and print container ID |<br>| –interactive , -i |         | Keep STDIN open even if not attached               |<br>| –tty , -t         |         | Allocate a pseudo-TTY                              |<br>|         …        |         |                         …                        |</p>
+<li><p>Options:</p>
 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name, shorthand</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">–detach , -d</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Run container in background and print container ID</td>
+</tr>
+<tr>
+<td style="text-align:center">–interactive , -i</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Keep STDIN open even if not attached</td>
+</tr>
+<tr>
+<td style="text-align:center">–tty , -t</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Allocate a pseudo-TTY</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li><p>Example:</p>
   <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">exec</span> -it VideoPose3D bash</span><br></pre></td></tr></table></figure>
 <p>  This will create a new Bash session in the container <code>VideoPose3D</code>. If we did not assign a name to the container, we can exec the container with <code>docker exec -it containerID bash</code>.</p>
