@@ -16,7 +16,7 @@
 <meta property="og:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
-<meta property="og:updated_time" content="2020-01-14T10:02:04.000Z">
+<meta property="og:updated_time" content="2020-01-14T10:05:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Python with Docker">
 <meta name="twitter:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T10:02:04.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T10:05:16.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -181,7 +181,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    5 minutes read (About 733 words)
+                    5 minutes read (About 736 words)
                 </span>
                 
                 
@@ -236,7 +236,7 @@
 </li>
 <li><p>Now, run the docker container with <code>docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]</code>:</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name VideoPose3D --runtime=nvidia --volume=<span class="hljs-string">"<span class="hljs-variable">$PWD</span>:/app"</span> nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04</span><br></pre></td></tr></table></figure>
-<p> Here, the tag of the ‘nvidia/cuda’ image is <em>10.1-cudnn7-devel-ubuntu16.04</em>.</p>
+<p> Here, the tag of the ‘nvidia/cuda’ image is <em>10.1-cudnn7-devel-ubuntu16.04</em> instead of <em>latest</em>.</p>
 </li>
 <li><p>List running containers:</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE                                           COMMAND             CREATED             STATUS              PORTS                   NAMES</span><br><span class="line">08f9ae536985        nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04       <span class="hljs-string">"/bin/bash"</span>         3 hours ago         Up 3 hours                                  VideoPose3D</span><br></pre></td></tr></table></figure>
