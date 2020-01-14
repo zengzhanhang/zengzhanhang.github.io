@@ -16,7 +16,7 @@
 <meta property="og:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
-<meta property="og:updated_time" content="2020-01-14T09:13:50.000Z">
+<meta property="og:updated_time" content="2020-01-14T09:57:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Python with Docker">
 <meta name="twitter:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T09:13:50.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T09:57:14.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -181,7 +181,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    3 minutes read (About 448 words)
+                    5 minutes read (About 716 words)
                 </span>
                 
                 
@@ -223,6 +223,29 @@
 <h1 id="1-running-Python-Deep-Learning-with-Docker"><a href="#1-running-Python-Deep-Learning-with-Docker" class="headerlink" title="1. running Python (Deep Learning) with Docker"></a>1. running Python (Deep Learning) with Docker</h1><p>A common headache in software projects is ensuring the correct versions of all dependencies are available on the current development system. Often you may be working on several distinct projects simultaneously each with its own potentially conflicting dependencies on external libraries. Additionally you may be working across multiple different machines (for example a personal laptop and University computers) with possibly different operating systems. Further, you may not have root-level access to a system you are working on and so not be able to install software at a system-wide level and system updates may cause library versions to be changed to incompatible versions.</p>
 <p>One way of overcoming these issues is to use project-specific virtual environments. In this context a virtual environment or machine are isolated development environments where the external dependencies of a project can be installed and managed independent of the system-wide versions (and those of the environments of other projects).</p>
 <p>Here, we use <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> to create a virtual machine to run <a href="https://www.python.org/" target="_blank" rel="noopener">python 3</a>.</p>
+<h2 id="Running-Docker-container"><a href="#Running-Docker-container" class="headerlink" title="Running Docker container"></a>Running Docker container</h2><p><em>Note: Make sure the <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> has been installed on your personal PC or other devices. The installation instructions can be found on the official documentation, for <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank" rel="noopener">Windows</a>, <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">Mac</a>, <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community-1" target="_blank" rel="noopener">Ubuntu</a></em>.</p>
+<ul>
+<li><p>Open a bash terminal.</p>
+</li>
+<li><p>We first need to pull the latest <em>nvidia/cuda</em> docker image from the remote repo: </p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nvidia/cuda</span><br></pre></td></tr></table></figure>
+<p>  we can use command <code>docker search cuda</code> to search docker images.</p>
+</li>
+<li><p>Using <code>docker images</code> confirms whether the image was successfully pulled:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br><span class="line"></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">ubuntu              latest              549b9b86cb8d        3 weeks ago         64.2MB</span><br><span class="line">nvidia/cuda         latest              9e47e9dfcb9a        5 weeks ago         2.83GB</span><br><span class="line">nginx               latest              231d40e811cd        7 weeks ago         126MB</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Now, run the docker container with <code>docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]</code>:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name VideoPose3D --runtime=nvidia --volume=<span class="hljs-string">"<span class="hljs-variable">$PWD</span>:/app"</span> nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04</span><br></pre></td></tr></table></figure>
+<p>  Here, the tag of the ‘nvidia/cuda’ image is <em>10.1-cudnn7-devel-ubuntu16.04</em>.</p>
+</li>
+<li><p>List running containers:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE                                           COMMAND             CREATED             STATUS              PORTS                   NAMES</span><br><span class="line">08f9ae536985        nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04       <span class="hljs-string">"/bin/bash"</span>         3 hours ago         Up 3 hours                                  VideoPose3D</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Next, execute an interactive bash shell on the container.</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">exec</span> -it VideoPose3D bash</span><br></pre></td></tr></table></figure>
+<p>  This will create a new Bash session in the container <code>VideoPose3D</code>. If we did not assign a name to the container, we can exec the container with <code>docker exec -it containerID bash</code>.</p>
+</li>
+</ul>
 <h1 id="2-Docker-Basic-Logic-Flow"><a href="#2-Docker-Basic-Logic-Flow" class="headerlink" title="2. Docker Basic Logic Flow"></a>2. Docker Basic Logic Flow</h1><p><img src="/Documents/Docker/docker_logic.png" alt="Docker basic logic flow"></p>
 <h1 id="3-Docker-command"><a href="#3-Docker-command" class="headerlink" title="3. Docker command"></a>3. Docker command</h1><h2 id="Check-docker-version"><a href="#Check-docker-version" class="headerlink" title="Check docker version"></a>Check docker version</h2><ul>
 <li><p>Usage: <code>docker version</code></p>
@@ -513,7 +536,11 @@
         <a class="is-flex" href="#1-running-Python-Deep-Learning-with-Docker">
         <!-- <span class="has-mr-6">1</span> 注释为不编号-->
         <span>1. running Python (Deep Learning) with Docker</span>
-        </a></li><li>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Running-Docker-container">
+        <!-- <span class="has-mr-6">1.1</span> 注释为不编号-->
+        <span>Running Docker container</span>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#2-Docker-Basic-Logic-Flow">
         <!-- <span class="has-mr-6">2</span> 注释为不编号-->
         <span>2. Docker Basic Logic Flow</span>
