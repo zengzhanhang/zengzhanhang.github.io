@@ -16,7 +16,7 @@
 <meta property="og:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
-<meta property="og:updated_time" content="2020-01-14T12:53:10.000Z">
+<meta property="og:updated_time" content="2020-01-15T03:15:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Python with Docker">
 <meta name="twitter:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-14T12:53:10.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-14</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-15T03:15:10.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-15</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -257,10 +257,12 @@
 </li>
 <li><p>Download the latest 64-bit Python 3 Miniconda install script:</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-<p> Now run the install script:</p>
+</li>
+<li><p>Now run the install script:</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
 <p> You will first be asked to review the software license agreement. Assuming you choose to agree, you will then be asked to choose an install location for Miniconda. The default is to install in the root of your home directory <code>~/miniconda3</code> or <code>/root/miniconda3</code>. We recommend going with this default unless you have a particular reason to do otherwise.</p>
-<p> Append the Miniconda binaries directory to <code>PATH</code> in manually in <code>~/.bash_env</code> using</p>
+</li>
+<li><p>Append the Miniconda binaries directory to <code>PATH</code> in manually in <code>~/.bash_env</code> using</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"export PATH=\""</span>\<span class="hljs-variable">$PATH</span><span class="hljs-string">":<span class="hljs-variable">$HOME</span>/miniconda3/bin\""</span> &gt;&gt; ~/.bash_env</span><br></pre></td></tr></table></figure>
 <p> For those who this appears a bit opaque to and want to know what is going on see here <sup id="a1"><a href="#f1">1</a></sup>.</p>
 <p> We now need to <code>source</code> the updated <code>~/.bash_env</code> so that the PATH variable in the current terminal session is updated:</p>
