@@ -16,7 +16,7 @@
 <meta property="og:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
-<meta property="og:updated_time" content="2020-01-15T03:15:10.000Z">
+<meta property="og:updated_time" content="2020-01-16T03:00:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Python with Docker">
 <meta name="twitter:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
                 <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-15T03:15:10.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-15</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-16T03:00:28.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-16</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -181,7 +181,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    11 minutes read (About 1615 words)
+                    11 minutes read (About 1616 words)
                 </span>
                 
                 
@@ -277,7 +277,7 @@
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name vp3d python=3</span><br></pre></td></tr></table></figure>
 <p>This bootstraps a new Conda environment named <code>vp3d</code> with a minimal Python 3 install. You will be presented with a ‘package plan’ listing the packages to be installed and asked whether to proceed: type <code>y</code> then enter.</p>
 <p>We will now activate our created environment:</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">source</span> activate mlp</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">source</span> activate vp3d</span><br></pre></td></tr></table></figure>
 <p>When a environment is activated its name will be prepended on to the prompt which should now look something like<code>(vp3d) [machine-name]:~$</code> on terminal.</p>
 <p><strong>You need to run this <code>source activate vp3d</code> command every time you wish to activate the <code>vp3d</code> environment in a terminal.</strong> When the environment is activated, the environment will be searched first when running commands so that e.g. <code>python</code> will launch the Python interpreter installed locally in the <code>vp3d</code> environment rather than a system-wide version.</p>
 <p>We can now install the dependencies for the specific project into the new environment, like:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install numpy scipy matplotlib jupyter</span><br></pre></td></tr></table></figure></p>
