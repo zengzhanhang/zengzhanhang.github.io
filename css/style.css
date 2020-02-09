@@ -403,7 +403,7 @@ img.thumbnail {
 .content code {
   color: #ff3860;
 /* background: transparent */
-  padding: 0 4px;
+  padding: 1.75px 4px;
 }
 .content blockquote footer strong + cite {
   margin-left: 0.5em;

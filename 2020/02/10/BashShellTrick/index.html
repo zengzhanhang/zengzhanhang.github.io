@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
 <meta property="og:description" content="Download Google Drive files with WGETExample Google Drive shared file:  https://drive.google.com/open?id=[ThisIsFileID] For general usage (not a big file)Example command: wget --no-check-certificate &amp;">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://zengzhanhang.github.io/Documents/LinuxTrick/bash-logo.png">
-<meta property="og:updated_time" content="2020-02-09T17:50:02.000Z">
+<meta property="og:image" content="https://zengzhanhang.github.io/Documents/LinuxTrick/bash-logo.jpg">
+<meta property="og:updated_time" content="2020-02-09T18:20:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cheatsheet：Useful Trick with Linux Command">
 <meta name="twitter:description" content="Download Google Drive files with WGETExample Google Drive shared file:  https://drive.google.com/open?id=[ThisIsFileID] For general usage (not a big file)Example command: wget --no-check-certificate &amp;">
-<meta name="twitter:image" content="https://zengzhanhang.github.io/Documents/LinuxTrick/bash-logo.png">
+<meta name="twitter:image" content="https://zengzhanhang.github.io/Documents/LinuxTrick/bash-logo.jpg">
 
 
 
@@ -152,7 +152,7 @@
     
     <div class="card-image">
         <span class="image is-7by1">
-            <img class="thumbnail" src="/Documents/LinuxTrick/bash-logo.png" alt="Cheatsheet：Useful Trick with Linux Command">
+            <img class="thumbnail" src="/Documents/LinuxTrick/bash-logo.jpg" alt="Cheatsheet：Useful Trick with Linux Command">
         </span>
     </div>
     
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-02-09T17:27:02.000Z">2020-02-10</time> -->
                 <time class="level-item has-text-grey" datetime="2020-02-09T17:27:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-09T17:50:02.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-10</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-09T18:20:46.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-10</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -181,7 +181,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    a minute read (About 124 words)
+                    a minute read (About 144 words)
                 </span>
                 
                 
@@ -216,13 +216,15 @@
             
         </h1> -->
         <div class="content">
-            <h2 id="Download-Google-Drive-files-with-WGET"><a href="#Download-Google-Drive-files-with-WGET" class="headerlink" title="Download Google Drive files with WGET"></a>Download Google Drive files with WGET</h2><p>Example Google Drive shared file: </p>
+            <h1 id="Download-Google-Drive-files-with-WGET"><a href="#Download-Google-Drive-files-with-WGET" class="headerlink" title="Download Google Drive files with WGET"></a>Download Google Drive files with WGET</h1><p>Example Google Drive shared file: </p>
 <p><code>https://drive.google.com/open?id=[ThisIsFileID]</code></p>
-<h3 id="For-general-usage-not-a-big-file"><a href="#For-general-usage-not-a-big-file" class="headerlink" title="For general usage (not a big file)"></a>For general usage (not a big file)</h3><p>Example command:</p>
+<h2 id="For-general-usage-not-a-big-file"><a href="#For-general-usage-not-a-big-file" class="headerlink" title="For general usage (not a big file)"></a>For general usage (not a big file)</h2><p>Example command:</p>
 <p><code>wget --no-check-certificate &#39;https://docs.google.com/uc?export=download&amp;id=FILEID&#39; -O &quot;**FILENAME**&quot;</code></p>
-<p>Where, the <strong>FileID</strong> is the <strong>[ThisISFiledID]</strong> shwon above.</p>
-<h3 id="Download-big-files"><a href="#Download-big-files" class="headerlink" title="Download big files"></a>Download big files</h3><p>command for download any big file from google drive (for big file we need confirm download)</p>
+<p>Where, the <code>FILEID</code> is the <strong>[ThisISFiledID]</strong> shwon above.</p>
+<h2 id="Download-big-files"><a href="#Download-big-files" class="headerlink" title="Download big files"></a>Download big files</h2><p>Command for download any big file from google drive (for big file we need confirm download)</p>
 <p><code>wget --load-cookies /tmp/cookies.txt &quot;https://docs.google.com/uc?export=download&amp;confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate &#39;https://docs.google.com/uc?export=download&amp;id=FILEID&#39; -O- | sed -rn &#39;s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p&#39;)&amp;id=FILEID&quot; -O &quot;FILENAME&quot; &amp;&amp; rm -rf /tmp/cookies.txt</code></p>
+<p>Also, subsititute <code>FILEID</code> and <code>FILENAME</code>. Note that tere are 2 <code>FILEID</code>.</p>
+<p><em>Reference</em>: <a href="https://gist.github.com/iamtekeste/3cdfd0366ebfd2c0d805" target="_blank" rel="noopener">https://gist.github.com/iamtekeste/3cdfd0366ebfd2c0d805</a></p>
 
         </div>
         
