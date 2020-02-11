@@ -16,7 +16,7 @@
 <meta property="og:description" content="Cheatsheet for Linux usage">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://zengzhanhang.github.io/Documents/LinuxTrick/bash-logo.jpg">
-<meta property="og:updated_time" content="2020-02-10T06:00:22.000Z">
+<meta property="og:updated_time" content="2020-02-11T08:19:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Useful Trick with Linux Command">
 <meta name="twitter:description" content="Cheatsheet for Linux usage">
@@ -168,7 +168,7 @@
                 <!-- <time class="level-item has-text-grey" datetime="2020-02-09T17:27:02.000Z">2020-02-10</time> -->
                 <time class="level-item has-text-grey" datetime="2020-02-09T17:27:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-10</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-10T06:00:22.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-10</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-11T08:19:10.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-11</time>
                 
                 <!-- 
                 <div class="level-item">
@@ -181,7 +181,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    a minute read (About 149 words)
+                    2 minutes read (About 328 words)
                 </span>
                 
                 
@@ -220,7 +220,7 @@
 <p>Cheatsheet for Linux usage</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="1-Download-Google-Drive-files-with-WGET"><a href="#1-Download-Google-Drive-files-with-WGET" class="headerlink" title="1. Download Google Drive files with WGET"></a>1. Download Google Drive files with WGET</h1><p>Example Google Drive shared file: </p>
+<h1 id="1-Download-Google-Drive-files-with-wget"><a href="#1-Download-Google-Drive-files-with-wget" class="headerlink" title="1. Download Google Drive files with wget"></a>1. Download Google Drive files with wget</h1><p>Example Google Drive shared file: </p>
 <p><code>https://drive.google.com/open?id=[ThisIsFileID]</code></p>
 <hr>
 <h2 id="For-general-usage-not-a-big-file"><a href="#For-general-usage-not-a-big-file" class="headerlink" title="For general usage (not a big file)"></a>For general usage (not a big file)</h2><p>Example command:</p>
@@ -231,6 +231,22 @@
 <p><code>wget --load-cookies /tmp/cookies.txt &quot;https://docs.google.com/uc?export=download&amp;confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate &#39;https://docs.google.com/uc?export=download&amp;id=FILEID&#39; -O- | sed -rn &#39;s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p&#39;)&amp;id=FILEID&quot; -O &quot;FILENAME&quot; &amp;&amp; rm -rf /tmp/cookies.txt</code></p>
 <p>Also, subsititute <code>FILEID</code> and <code>FILENAME</code>. Note that tere are 2 <code>FILEID</code>.</p>
 <p><em>Reference</em>: <a href="https://gist.github.com/iamtekeste/3cdfd0366ebfd2c0d805" target="_blank" rel="noopener">https://gist.github.com/iamtekeste/3cdfd0366ebfd2c0d805</a></p>
+<hr>
+<h1 id="2-Download-files-from-the-requested-login-page-with-wget"><a href="#2-Download-files-from-the-requested-login-page-with-wget" class="headerlink" title="2. Download files from the requested login page with wget"></a>2. Download files from the requested login page with wget</h1><p>Example: </p>
+<p>Download <code>HumanEvaI</code> data on its official website, <a href="http://humaneva.is.tue.mpg.de/datasets_human_1" target="_blank" rel="noopener">http://humaneva.is.tue.mpg.de/datasets_human_1</a>.</p>
+<hr>
+<p>Two steps:</p>
+<ol>
+<li><p>Log in to the server.  This only needs to be done once.</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget --save-cookies cookies.txt \</span><br><span class="line">    --keep-session-cookies \</span><br><span class="line">    --post-data &apos;user=foo&amp;password=bar&apos; \</span><br><span class="line">    --delete-after \</span><br><span class="line">    &quot;http://humaneva.is.tue.mpg.de/sessions&quot;</span><br></pre></td></tr></table></figure>
+<p> Make sure the <code>--post-data</code> parameter is properly percent-encoded (especially ampersands!) or the request will probably fail. Also make sure that user and password are the correct keys; you can find out the correct keys by sleuthing the HTML of the login page (look into your browser’s “inspect element” feature and find the name attribute on the username and password fields).</p>
+<p> Thus, the <code>--post-data</code> parameter for the HumanEvaI website should be: <code>--post-data &#39;login=foo&amp;password=bar&#39; \</code></p>
+</li>
+<li><p>Now grab the page or pages we care about.</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget --load-cookies cookies.txt \</span><br><span class="line">    http://server.com/interesting/article.php</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><em>Reference</em>: <a href="https://stackoverflow.com/questions/1324421/how-to-get-past-the-login-page-with-wget" target="_blank" rel="noopener">https://stackoverflow.com/questions/1324421/how-to-get-past-the-login-page-with-wget</a></p>
 <hr>
 
         </div>
@@ -460,9 +476,9 @@
                 Catalogue
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-Download-Google-Drive-files-with-WGET">
+        <a class="is-flex" href="#1-Download-Google-Drive-files-with-wget">
         <!-- <span class="has-mr-6">1</span> 注释为不编号-->
-        <span>1. Download Google Drive files with WGET</span>
+        <span>1. Download Google Drive files with wget</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#For-general-usage-not-a-big-file">
         <!-- <span class="has-mr-6">1.1</span> 注释为不编号-->
@@ -471,7 +487,11 @@
         <a class="is-flex" href="#Download-big-files">
         <!-- <span class="has-mr-6">1.2</span> 注释为不编号-->
         <span>Download big files</span>
-        </a></li></ul></li></ul>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-Download-files-from-the-requested-login-page-with-wget">
+        <!-- <span class="has-mr-6">2</span> 注释为不编号-->
+        <span>2. Download files from the requested login page with wget</span>
+        </a></li></ul>
         </div>
     </div>
 </div>
