@@ -1,0 +1,45 @@
+A:link {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #009966; TEXT-DECORATION: underline
+}
+TD {
+	FONT-SIZE: 9pt; LINE-HEIGHT: 16px
+}
+.input3 {
+	font-family:Verdana,Tahoma,ËÎÌו;
+        font-size: 12px;
+        line-height: 15px;
+	border: 1px solid #8E8E8E;
+	BACKGROUND: #ffffff;
+}
+
+.input {
+	font-family:Verdana,Tahoma,ËÎÌו;
+        font-size: 12px;
+        line-height: 15px;
+	border: 1px solid B8ECFD;
+	BACKGROUND: 7BC8D8;
+}
+
+.input2 {
+	font-family:Verdana,Tahoma,ËÎÌו;
+        font-size: 12px;
+        line-height: 15px;
+	border: 1px solid F0F9C2;
+	BACKGROUND: D1D797;
+}
+
+.big {
+	font-size: 14px;
+}
+
+.big2 {
+	font-size: 12px;
+	COLOR: #FF0000;
+	font-weight: bold;
+}
