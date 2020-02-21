@@ -1,8 +1,0 @@
-Sitemap: https://zengzhanhang.github.io/sitemap.xml
-
-User-agent: *
-Disallow: 
-Disallow: /js/
-Disallow: /images/
-Disallow: /Documents/
-Disallow: /css/
