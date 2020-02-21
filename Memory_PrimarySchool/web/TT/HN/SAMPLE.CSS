@@ -1,0 +1,69 @@
+.bigcell {
+	FONT-SIZE: 14px; LINE-HEIGHT: 150%; FONT-FAMILY: "宋体"; TEXT-DECORATION: underline
+}
+TD {
+	FONT-SIZE: 9pt; LINE-HEIGHT: 150%
+}
+A {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #000000
+}
+.fontblack {
+	FONT-SIZE: 9pt; COLOR: #000000
+}
+.fontwhite {
+	FONT-SIZE: 9pt; COLOR: #ffffff
+}
+.sm {
+	FONT-SIZE: 9pt; TEXT-DECORATION: none
+}
+.sm2 {
+	FONT-SIZE: 12px
+}
+.md1 {
+	FONT-SIZE: 10pt; TEXT-DECORATION: none
+}
+.md2 {
+	FONT-SIZE: 13px
+}
+.big1 {
+	FONT-SIZE: 14px
+}
+.big2 {
+	FONT-SIZE: 10.3pt
+}
+.p140 {
+	FONT-SIZE: 14px
+}
+.number_sm {
+	FONT-SIZE: 9px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"
+}
+.number_md {
+	FONT-SIZE: 10px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"
+}
+.number_big {
+	FONT-SIZE: 12px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"
+}
+.style1 {
+	COLOR: #ff0000
+}
+.data {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "宋体"; TEXT-DECORATION: none
+}
+.linka01 {
+	FONT-SIZE: 12px; COLOR: #666666; FONT-FAMILY: "宋体"; TEXT-DECORATION: none
+}
+.weather {
+	FONT-SIZE: 12px; COLOR: #ff6600; FONT-FAMILY: "宋体"; TEXT-DECORATION: none
+}
+.biga {
+	FONT-SIZE: 14px; COLOR: #ffffff; FONT-FAMILY: "宋体"; TEXT-DECORATION: none
+}
+.big02 {
+	FONT-SIZE: 12px; COLOR: #669999; FONT-FAMILY: "宋体"; TEXT-DECORATION: none
+}
+.sssss {
+	FONT-WEIGHT: bold; COLOR: #666666; LINE-HEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: #8996b1; TEXT-DECORATION: none; bigfont: 14px
+}
