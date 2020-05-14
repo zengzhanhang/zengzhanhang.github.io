@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>DenseNet — Dense卷积网络（图像分类） - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。 作者 | Sik-Ho Tsang (原文：Review: DenseNet — Dense Convolutional Network (Image Classification))编译 | Xiaowen">
+<meta name="keywords" content="CV,Image Classification">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DenseNet — Dense卷积网络（图像分类）">
+<meta property="og:url" content="https://zengzhanhang.github.io/2019/07/21/densenet/index.html">
+<meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
+<meta property="og:description" content="【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。 作者 | Sik-Ho Tsang (原文：Review: DenseNet — Dense Convolutional Network (Image Classification))编译 | Xiaowen">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-01-15T04:51:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DenseNet — Dense卷积网络（图像分类）">
+<meta name="twitter:description" content="【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。 作者 | Sik-Ho Tsang (原文：Review: DenseNet — Dense Convolutional Network (Image Classification))编译 | Xiaowen">
+<meta name="twitter:image" content="https://zengzhanhang.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/thumbnail.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.png" alt="DenseNet — Dense卷积网络（图像分类）" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/notes_TOC">Notes - 数据科学知识手册</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Zhanhang&#39;s GitHub" href="https://github.com/zengzhanhang">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>DenseNet — Dense卷积网络（图像分类）
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-bottom: 0;">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2019-07-21T06:57:55.000Z">2019-07-21</time> -->
+                <time class="level-item has-text-grey" datetime="2019-07-21T06:57:55.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-21</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-15T04:51:44.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-15</time>
+                
+                <!-- 
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/CV/">CV</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/ReadingNote/">ReadingNote</a>
+                </div>
+                 -->
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    12 minutes read (About 1799 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-top: 0;">
+            <div class="level-left">
+                
+                <div class="level-item">
+                    <i class="fas fa-folder-open has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/categories/CV/">CV</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/ReadingNote/">ReadingNote</a>
+                </div>
+                
+                
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/CV/">CV</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Image-Classification/">Image Classification</a>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                DenseNet — Dense卷积网络（图像分类）
+            
+        </h1> -->
+        <div class="content">
+            <blockquote>
+<p>【导读】本文对Dense卷积网络的发展进行了综述。这是2017年的CVPR最佳论文奖，并拥有2000多篇论文引用。它由康威尔大学、清华大学和facebook AI共同合作完成。</p>
+<p>作者 | Sik-Ho Tsang (原文：<a href="https://towardsdatascience.com/review-densenet-image-classification-b6631a8ef803" target="_blank" rel="noopener">Review: DenseNet — Dense Convolutional Network (Image Classification)</a>)<br>编译 | Xiaowen</p>
+</blockquote>
+<a id="more"></a>
+<p>该译文转载自：<a href="https://mp.weixin.qq.com/s/F2GRDen0v2zbnHlB-xHioA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/F2GRDen0v2zbnHlB-xHioA</a></p>
+<hr>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li><a href="#1-Dense-Block">Dense Block</a></li>
+<li><a href="#2-DenseNet-结构">DenseNet 结构</a></li>
+<li><a href="#3-DenseNet-的优势">DenseNet 的优势</a></li>
+<li><a href="#4-CIFAR-amp-SVHN-小规模数据集结果">CIFAR &amp; SVHN 小规模数据集结果</a></li>
+<li><a href="#5-ImageNet-大规模数据集结果">ImageNet 大规模数据集结果</a></li>
+<li><a href="#6-特征复用的进一步分析">特征复用的进一步分析</a></li>
+</ol>
+<hr>
+<h1 id="1-Dense-Block"><a href="#1-Dense-Block" class="headerlink" title="1. Dense Block"></a>1. Dense Block</h1><p><img src="/Documents/ReadingNote/DenseNet/StandardCNN.png" alt="Standard ConvNet Concept"></p>
+<p>在 <strong>andard ConvNet</strong> 中，输入图像经过多次卷积，得到高层次特征。</p>
+<p><img src="/Documents/ReadingNote/DenseNet/ResNet.png" alt="ResNet Concept"></p>
+<p>在 <strong>ResNet</strong> 中，提出了恒等映射（ <strong>identity mapping</strong> ）来促进梯度传播，同时使用使用 <strong>Element-wise addition</strong> 。它可以看作是将状态从一个 ResNet 模块传递到另一个 ResNet 模块的算法。 (It can be viewed as algorithms with a state passed from one ResNet module to another one.)</p>
+<p><img src="/Documents/ReadingNote/DenseNet/DenseNet.png" alt="One Dense Block in DenseNet"></p>
+<p>在 <strong>DenseNet</strong> 中，每个层从前面的所有层获得额外的输入，并将自己的特征映射传递到后续的所有层，使用级联(<strong>Concatenation</strong>)方式，每一层都在接受来自前几层的“集体知识（collective knowledge）”。(Concatenation is used. Each layer is receiving a “collective knowledge” from all preceding layers.)</p>
+<p><img src="/Documents/ReadingNote/DenseNet/k_growthDenseBlock.png" alt="Dense Block in DenseNet with Growth Rate k"></p>
+<p>由于每个层从前面的所有层接收特征映射，所以网络可以更薄、更紧凑，即信道数可以更少。增长速率k是每个层的附加信道数。</p>
+<p>因此，它具有较高的计算效率和存储效率。下图显示了前向传播中级联的概念：</p>
+<p><img src="/Documents/ReadingNote/DenseNet/DenseNet.gif" alt="Concatenation during Forward Propagation"></p>
+<hr>
+<h1 id="2-DenseNet-结构"><a href="#2-DenseNet-结构" class="headerlink" title="2. DenseNet 结构"></a>2. DenseNet 结构</h1><h2 id="2-1-基础-DenseNet-组成层"><a href="#2-1-基础-DenseNet-组成层" class="headerlink" title="2.1 基础 DenseNet 组成层"></a>2.1 基础 DenseNet 组成层</h2><p><img src="/Documents/ReadingNote/DenseNet/compositionlayer.gif" alt="Composition Layer"></p>
+<p>对于每个组成层使用 <strong>Pre-Activation Batch Norm (BN)</strong> 和 <strong>ReLU</strong>，然后用k通道的输出特征映射进行 $\boldsymbol{3 \times 3}$ <strong>卷积</strong>，例如，将$x_0$、$x_1$、$x_2$、$x_3$ 转换为 $x_4$。这是     <strong><em>Pre-Activation ResNet</em></strong> 的想法。</p>
+<h2 id="2-2-DenseNet-B-Bottleneck-层"><a href="#2-2-DenseNet-B-Bottleneck-层" class="headerlink" title="2.2 DenseNet-B (Bottleneck 层)"></a>2.2 DenseNet-B (Bottleneck 层)</h2><p><img src="/Documents/ReadingNote/DenseNet/DenseNet_b.png" alt="DenseNet-B"></p>
+<p>为了降低模型的复杂度和规模，在 <strong>BN-ReLU-3×3 conv</strong> 之前进行了 <strong>BN-ReLU-1×1 conv</strong> .</p>
+<h2 id="2-3-具有转换层（transition-layer）的多Dense块"><a href="#2-3-具有转换层（transition-layer）的多Dense块" class="headerlink" title="2.3 具有转换层（transition layer）的多Dense块"></a>2.3 具有转换层（transition layer）的多Dense块</h2><p><img src="/Documents/ReadingNote/DenseNet/multipleDenseBlock.png" alt="Multiple Dense Blocks"></p>
+<ul>
+<li><p>采用1×1 Conv和2×2平均池化作为相邻 dense block 之间的转换层。</p>
+</li>
+<li><p>特征映射大小在 dense block 中是相同的，因此它们可以很容易地连接在一起。</p>
+</li>
+<li><p>在最后一个 dense block 的末尾，执行一个全局平均池化，然后附加一个 Softmax 分类器。</p>
+</li>
+</ul>
+<h2 id="2-4-DenseNet-BC-进一步压缩"><a href="#2-4-DenseNet-BC-进一步压缩" class="headerlink" title="2.4 DenseNet-BC (进一步压缩)"></a>2.4 DenseNet-BC (进一步压缩)</h2><ul>
+<li><p><strong>如果 Dense Block 包含 $m$ 个特征映射，则转换层（transition layer）生成 $\theta_m$ 输出特征映射</strong>，其中 $0 &lt; \theta \leq 1$ 称为压缩因子。</p>
+</li>
+<li><p>当 $\theta = 1$ 时，跨转换层的特征映射数保持不变。$\boldsymbol{\theta &lt; 1}$ 的 DenseNet 称为 <strong>DenseNet-C</strong>，在实验中采用 $\theta = 0.5$ 。</p>
+</li>
+<li><p>当同时使用 <strong>bottleneck</strong> 和 $\boldsymbol{\theta &lt; 1}$ 时的转换层时，该模型称为 <strong>DenseNet-BC</strong> 模型。</p>
+</li>
+<li><p>最后，训练 <strong>with/without B/C</strong> 和不同 <strong>L 层</strong> 和 <strong>k growth rate</strong> 的 DenseNet。</p>
+</li>
+</ul>
+<hr>
+<h1 id="3-DenseNet-的优势"><a href="#3-DenseNet-的优势" class="headerlink" title="3. DenseNet 的优势"></a>3. DenseNet 的优势</h1><h2 id="3-1-Strong-Gradient-Flow"><a href="#3-1-Strong-Gradient-Flow" class="headerlink" title="3.1 Strong Gradient Flow"></a>3.1 Strong Gradient Flow</h2><p><img src="/Documents/ReadingNote/DenseNet/DeepSupervision.png" alt="Implicit “Deep Supervision”"></p>
+<p>误差信号可以更直接地传播到早期的层中。这是一种隐含的深度监督，因为早期的层可以从最终的分类层直接获得监督。</p>
+<h2 id="3-2-Parameter-amp-Computational-Efficiency"><a href="#3-2-Parameter-amp-Computational-Efficiency" class="headerlink" title="3.2 Parameter &amp; Computational Efficiency"></a>3.2 Parameter &amp; Computational Efficiency</h2><p><img src="/Documents/ReadingNote/DenseNet/parameterefficient.png" alt="Number of Parameters for ResNet and DenseNet"></p>
+<p>对于每个层，RetNet 中的参数与c×c成正比，而 DenseNet 中的参数与1×k×k成正比。</p>
+<p>由于 k &lt;&lt; C, 所以 DenseNet 比 ResNet 的size更小。</p>
+<h2 id="3-3-More-Diversified-Features"><a href="#3-3-More-Diversified-Features" class="headerlink" title="3.3 More Diversified Features"></a>3.3 More Diversified Features</h2><p><img src="/Documents/ReadingNote/DenseNet/Features.png" alt="More Diversified Features in DenseNet"></p>
+<p>由于 DenseNet 中的每一层都接收前面的所有层作为输入，因此特征更加多样化，并且倾向于有更丰富的模式。</p>
+<h2 id="3-4-Maintains-Low-Complexity-Features"><a href="#3-4-Maintains-Low-Complexity-Features" class="headerlink" title="3.4 Maintains Low Complexity Features"></a>3.4 Maintains Low Complexity Features</h2><p><img src="/Documents/ReadingNote/DenseNet/CNN.png" alt="Standard ConvNet"></p>
+<p>在标准ConvNet中，分类器使用最复杂的特征。</p>
+<p><img src="/Documents/ReadingNote/DenseNet/Dense.png" alt="DenseNet"></p>
+<p>在 DenseNet 中，分类器使用所有复杂级别的特征。它倾向于给出更平滑的决策边界。它还解释了为什么 DenseNet 在训练数据不足时表现良好。</p>
+<hr>
+<h1 id="4-CIFAR-amp-SVHN-小规模数据集结果"><a href="#4-CIFAR-amp-SVHN-小规模数据集结果" class="headerlink" title="4. CIFAR &amp; SVHN 小规模数据集结果"></a>4. CIFAR &amp; SVHN 小规模数据集结果</h1><h2 id="4-1-CIFAR-10"><a href="#4-1-CIFAR-10" class="headerlink" title="4.1 CIFAR-10"></a>4.1 CIFAR-10</h2><p><img src="/Documents/ReadingNote/DenseNet/CIFAR10_results.png" alt="CIFAR-10 Results"></p>
+<p>Pre-Activation ResNet is used in detailed comparison.</p>
+<ul>
+<li><p>数据增强（C10+），测试误差：</p>
+<ol>
+<li>Small-size ResNet-110: 6.41%</li>
+<li>Large-size ResNet-1001 (10.2M parameters): 4.62%</li>
+<li>State-of-the-art (SOTA) 4.2%</li>
+<li>Small-size DenseNet-BC (L=100, k=12) (Only 0.8M parameters): 4.5%</li>
+<li>Large-size DenseNet (L=250, k=24): 3.6%</li>
+</ol>
+</li>
+<li><p>无数据增强（C10），测试误差：</p>
+<ol>
+<li>Small-size ResNet-110: 11.26%</li>
+<li>Large-size ResNet-1001 (10.2M parameters): 10.56%</li>
+<li>State-of-the-art (SOTA) 7.3%</li>
+<li>Small-size DenseNet-BC (L=100, k=12) (Only 0.8M parameters): 5.9%</li>
+<li>Large-size DenseNet (L=250, k=24): 4.2%</li>
+</ol>
+</li>
+</ul>
+<p>在 <a href="https://towardsdatascience.com/resnet-with-identity-mapping-over-1000-layers-reached-image-classification-bb50a42af03e" target="_blank" rel="noopener">Pre-Activation ResNet</a> 中出现严重的过拟合，而 DenseNet 在训练数据不足时表现良好，因为DenseNet 使用了复杂的特征。</p>
+<p><img src="/Documents/ReadingNote/DenseNet/Results.png" alt="C10+: Different DenseNet Variants (Left), DenseNet vs ResNet (Middle), Training and Testing Curves of DenseNet and ResNet (Right)"></p>
+<ul>
+<li>左：DenseNet-BC 获得最佳效果。</li>
+<li>中：Pre-Activation ResNet 已经比 alexnet 和 vggnet 获得更少的参数，DenseNet-BC(k=12)的参数比 Pre-Activation ResNet 少3×10，测试误差相同。</li>
+<li>右：与 Pre-Activation ResNet-1001有10.2m 参数相比，0.8 参数的 DenseNet-BC-100 具有相似的测试误差。</li>
+</ul>
+<h2 id="4-2-CIFAR-100"><a href="#4-2-CIFAR-100" class="headerlink" title="4.2 CIFAR-100"></a>4.2 CIFAR-100</h2><p>CIFAR-100类似的趋势如下：</p>
+<p><img src="/Documents/ReadingNote/DenseNet/CIFAR100_results.png" alt="CIFAR-100 Results"></p>
+<h2 id="4-3-Detailed-Results"><a href="#4-3-Detailed-Results" class="headerlink" title="4.3 Detailed Results"></a>4.3 Detailed Results</h2><p><img src="/Documents/ReadingNote/DenseNet/Details_results.png" alt="Detailed Results, + means data augmentation"></p>
+<p>SVHN 是街景房屋编号的数据集。蓝色代表最好的效果。DenseNet-BC 不能得到比基本 DenseNet 更好的结果，作者认为 SVHN 是一项相对容易的任务，非常深的模型可能会过拟合。</p>
+<hr>
+<h1 id="5-ImageNet-大规模数据集结果"><a href="#5-ImageNet-大规模数据集结果" class="headerlink" title="5. ImageNet 大规模数据集结果"></a>5. ImageNet 大规模数据集结果</h1><p><img src="/Documents/ReadingNote/DenseNet/imagenetresults.png" alt="Different DenseNet Top-1 and Top-5 Error Rates with Single-Crop (10-Crop) Results"></p>
+<p><img src="/Documents/ReadingNote/DenseNet/results2.png" alt="ImageNet Validation Set Results Compared with Original ResNet"></p>
+<ul>
+<li>左：20M参数的DenseNet-201与大于40M参数的ResNet-101产生类似的验证错误。</li>
+<li>右：相似的计算次数趋势(GOLOPS)。</li>
+<li>底部：DenseNet-264(k=48)最高误差为20.27%，前5误差为5.17%。</li>
+</ul>
+<hr>
+<h1 id="6-特征复用的进一步分析"><a href="#6-特征复用的进一步分析" class="headerlink" title="6. 特征复用的进一步分析"></a>6. 特征复用的进一步分析</h1><p><img src="/Documents/ReadingNote/DenseNet/results3.png" alt="Heat map on the average absolute weights of how Target layer (l) reuses the source layer (s)"></p>
+<ul>
+<li>从非常早期的层中提取的特征被同一 Dense Block 中的较深层直接使用。</li>
+<li>转换层的权重也分布在前面的所有层中。</li>
+<li>第二和第三 dense block 内的各层一贯地将最小权重分配给转换层的输出。(第一行)</li>
+<li>在最终分类层，权重似乎集中在最终 feature map 上。一些更高级的特性在网络中产生得很晚。</li>
+</ul>
+<hr>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[2017 CVPR] [DenseNet]<br><a href="http://openaccess.thecvf.com/content_cvpr_2017/html/Huang_Densely_Connected_Convolutional_CVPR_2017_paper.html" target="_blank" rel="noopener">Densely Connected Convolutional Networks</a></p>
+<hr>
+<p>原文链接：<br><a href="https://towardsdatascience.com/review-densenet-image-classification-b6631a8ef803" target="_blank" rel="noopener">https://towardsdatascience.com/review-densenet-image-classification-b6631a8ef803</a></p>
+<hr>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>Title: </strong><a href="https://zengzhanhang.github.io/2019/07/21/densenet/">DenseNet — Dense卷积网络（图像分类）</a></li>
+            <li><strong>Author: </strong><a href="https://zengzhanhang.github.io">Zhanhang ZENG (展航)</a></li>
+            <li><strong>Link: </strong><a href="https://zengzhanhang.github.io/2019/07/21/densenet/">https://zengzhanhang.github.io/2019/07/21/densenet/</a></li>
+            <li><strong>Date: </strong>2019-07-21</li>
+            <li><strong>Statement: </strong>All articles in this blog, unless otherwise stated, are based on the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> license. <!-- Please indicate the source of reprint. -->
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/CV/">CV</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Image-Classification/">Image Classification</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div style="text-align:center">
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/QRcode/alipay.jpg" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="/images/QRcode/WeChatPay.jpg" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/31/Human-Pose-Estimation-Review/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Human Pose Estimation Literature Review</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/18/deepmedic/">
+                <span class="level-item">DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://zengzhanhang.github.io/2019/07/21/densenet/';
+        this.page.identifier = '2019/07/21/densenet/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'xiao-shu-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/icon(square)-min.png" alt="Zhanhang Zeng (展航)">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Zhanhang Zeng (展航)
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Statistics, Machine Learning &amp; Ai
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Edinburgh, the United Kingdom</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded follow-button" href="https://github.com/zengzhanhang" target="_blank">
+                <i class="fab fa-github"></i>&nbsp;&nbsp;
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Linkedin" href="https://www.linkedin.com/in/zhanhang-zeng-801a67185/">
+                
+                <i class="fab fa-linkedin-in"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/zengzhanhang">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://www.facebook.com/zengzhanhang">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Instagram" href="https://www.instagram.com/cengzhanhang">
+                
+                <i class="fab fa-instagram"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Weibo" href="https://www.weibo.com/zengzhanhang">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<!-- <div class="card widget" id="toc"> -->
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu" style="max-height: 600px; overflow: auto;">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#目录">
+        <!-- <span class="has-mr-6">1</span> 注释为不编号-->
+        <span>目录</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-Dense-Block">
+        <!-- <span class="has-mr-6">2</span> 注释为不编号-->
+        <span>1. Dense Block</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-DenseNet-结构">
+        <!-- <span class="has-mr-6">3</span> 注释为不编号-->
+        <span>2. DenseNet 结构</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-基础-DenseNet-组成层">
+        <!-- <span class="has-mr-6">3.1</span> 注释为不编号-->
+        <span>2.1 基础 DenseNet 组成层</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-DenseNet-B-Bottleneck-层">
+        <!-- <span class="has-mr-6">3.2</span> 注释为不编号-->
+        <span>2.2 DenseNet-B (Bottleneck 层)</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-具有转换层（transition-layer）的多Dense块">
+        <!-- <span class="has-mr-6">3.3</span> 注释为不编号-->
+        <span>2.3 具有转换层（transition layer）的多Dense块</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-4-DenseNet-BC-进一步压缩">
+        <!-- <span class="has-mr-6">3.4</span> 注释为不编号-->
+        <span>2.4 DenseNet-BC (进一步压缩)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-DenseNet-的优势">
+        <!-- <span class="has-mr-6">4</span> 注释为不编号-->
+        <span>3. DenseNet 的优势</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-Strong-Gradient-Flow">
+        <!-- <span class="has-mr-6">4.1</span> 注释为不编号-->
+        <span>3.1 Strong Gradient Flow</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-Parameter-amp-Computational-Efficiency">
+        <!-- <span class="has-mr-6">4.2</span> 注释为不编号-->
+        <span>3.2 Parameter &amp; Computational Efficiency</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-More-Diversified-Features">
+        <!-- <span class="has-mr-6">4.3</span> 注释为不编号-->
+        <span>3.3 More Diversified Features</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-Maintains-Low-Complexity-Features">
+        <!-- <span class="has-mr-6">4.4</span> 注释为不编号-->
+        <span>3.4 Maintains Low Complexity Features</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-CIFAR-amp-SVHN-小规模数据集结果">
+        <!-- <span class="has-mr-6">5</span> 注释为不编号-->
+        <span>4. CIFAR &amp; SVHN 小规模数据集结果</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-CIFAR-10">
+        <!-- <span class="has-mr-6">5.1</span> 注释为不编号-->
+        <span>4.1 CIFAR-10</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-CIFAR-100">
+        <!-- <span class="has-mr-6">5.2</span> 注释为不编号-->
+        <span>4.2 CIFAR-100</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-3-Detailed-Results">
+        <!-- <span class="has-mr-6">5.3</span> 注释为不编号-->
+        <span>4.3 Detailed Results</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#5-ImageNet-大规模数据集结果">
+        <!-- <span class="has-mr-6">6</span> 注释为不编号-->
+        <span>5. ImageNet 大规模数据集结果</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-特征复用的进一步分析">
+        <!-- <span class="has-mr-6">7</span> 注释为不编号-->
+        <span>6. 特征复用的进一步分析</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <!-- <span class="has-mr-6">8</span> 注释为不编号-->
+        <span>Reference</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.png" alt="DenseNet — Dense卷积网络（图像分类）" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Zhanhang ZENG (展航)&nbsp;
+                All Rights Reserved
+                <br>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                Visited by <span id="busuanzi_value_site_uv">0</span> users
+                </span>
+                <span id="busuanzi_container_site_pv">
+                    Totally, <span id="busuanzi_value_site_pv">0</span> page views
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <!-- <i class="fab fa-creative-commons,fab fa-creative-commons-by,fab fa-creative-commons-nc,fab fa-creative-commons-sa"></i> -->
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Zhanhang&#39;s GitHub" href="https://github.com/zengzhanhang">
+                        
+                        <!-- <i class="fab fa-github"></i> -->
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<!-- <script src="/js/baidu_push.js" async="true"></script> -->
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

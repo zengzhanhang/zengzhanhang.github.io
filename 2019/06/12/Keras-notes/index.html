@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Keras 笔记 - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="To take notes about the essential Keras elements to build basic neural networks. The explainations of each section haven’t finished yet.">
+<meta name="keywords" content="DeepLearning,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Keras 笔记">
+<meta property="og:url" content="https://zengzhanhang.github.io/2019/06/12/Keras-notes/index.html">
+<meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
+<meta property="og:description" content="To take notes about the essential Keras elements to build basic neural networks. The explainations of each section haven’t finished yet.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-10-17T04:29:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Keras 笔记">
+<meta name="twitter:description" content="To take notes about the essential Keras elements to build basic neural networks. The explainations of each section haven’t finished yet.">
+<meta name="twitter:image" content="https://zengzhanhang.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/thumbnail.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.png" alt="Keras 笔记" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/notes_TOC">Notes - 数据科学知识手册</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Zhanhang&#39;s GitHub" href="https://github.com/zengzhanhang">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>Keras 笔记
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-bottom: 0;">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2019-06-12T06:37:02.000Z">2019-06-12</time> -->
+                <time class="level-item has-text-grey" datetime="2019-06-12T06:37:02.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-06-12</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-10-17T04:29:04.000Z"><i class="far fa-calendar-check">&nbsp;</i>2019-10-17</time>
+                
+                <!-- 
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                 -->
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    6 minutes read (About 836 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-top: 0;">
+            <div class="level-left">
+                
+                <div class="level-item">
+                    <i class="fas fa-folder-open has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/DeepLearning/">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Python/">Python</a>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Keras 笔记
+            
+        </h1> -->
+        <div class="content">
+            <blockquote>
+<p>To take notes about the essential Keras elements to build basic neural networks. The explainations of each section haven’t finished yet.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="1-Single-Layer-Neural-Network-Linear-Regression"><a href="#1-Single-Layer-Neural-Network-Linear-Regression" class="headerlink" title="1. Single Layer Neural Network (Linear Regression)"></a>1. Single Layer Neural Network (Linear Regression)</h1><blockquote>
+<p>单层神经网络相当于（非）线性回归模型，第一个例子是构建一个最简单一元线性回归模型。</p>
+</blockquote>
+<ol>
+<li><p><strong>创建数据</strong><br> 单层神经网络模型需要数据进行训练，因此我们使用 <code>numpy</code> 创建一些人造数据，且我们的 $y$ 为 $y = ax+b$ 。</p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf</span><br><span class="line"><span class="hljs-keyword">from</span> tensorflow.keras <span class="hljs-keyword">import</span> layers</span><br><span class="line"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</span><br><span class="line">plt.style.use(<span class="hljs-string">'seaborn'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># create data</span></span><br><span class="line">X = np.linspace(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">200</span>)</span><br><span class="line">np.random.shuffle(X) <span class="hljs-comment">#randomize the data</span></span><br><span class="line">Y = <span class="hljs-number">2</span>*X + <span class="hljs-number">10</span> + np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">0.05</span>, (<span class="hljs-number">200</span>,))</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># plot data</span></span><br><span class="line">plt.scatter(X, Y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>构建神经网络</strong></p>
+<ol>
+<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/models/Sequential" target="_blank" rel="noopener">tf.keras.models.Sequential()</a></p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.models.Sequential(</span><br><span class="line">    layers=<span class="hljs-literal">None</span>,</span><br><span class="line">    name=<span class="hljs-literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p> 用Keras创建神经网络，我们首先需要用 <code>tf.keras.models.Sequential()</code> 来建立网络，这里面只有一个argument，即 <code>layers</code>。这里添加神经层的方法有两种，一种是建立 <code>model</code> 的时候直接放入神经层，另一种是通过 <code>model.add</code> 来添加。如：</p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># option 1</span></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Dense(<span class="hljs-number">1</span>, activation = <span class="hljs-literal">None</span>, use_bias = <span class="hljs-literal">True</span>)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># option 2</span></span><br><span class="line">model = tf.keras.models.Sequential()</span><br><span class="line">model.add(tf.keras.layers.Dense(<span class="hljs-number">1</span>, activation = <span class="hljs-literal">None</span>, use_bias = <span class="hljs-literal">True</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense" target="_blank" rel="noopener">tf.keras.layers.Dense()</a></p>
+<p> 上面的例子中我们给 <code>model</code> 添加了一个 <code>tf.keras.layers.Dense()</code>, 它代表最典型的全连接神经网络层，即每个输入节点连接到每个输出节点。</p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.layers.Dense(</span><br><span class="line">    units,</span><br><span class="line">    activation=<span class="hljs-literal">None</span>,</span><br><span class="line">    use_bias=<span class="hljs-literal">True</span>,</span><br><span class="line">    kernel_initializer=<span class="hljs-string">'glorot_uniform'</span>,</span><br><span class="line">    bias_initializer=<span class="hljs-string">'zeros'</span>,</span><br><span class="line">    kernel_regularizer=<span class="hljs-literal">None</span>,</span><br><span class="line">    bias_regularizer=<span class="hljs-literal">None</span>,</span><br><span class="line">    activity_regularizer=<span class="hljs-literal">None</span>,</span><br><span class="line">    kernel_constraint=<span class="hljs-literal">None</span>,</span><br><span class="line">    bias_constraint=<span class="hljs-literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p> <strong>Arguments:</strong></p>
+<ul>
+<li><code>units</code>: 正整数，输出空间的维数。</li>
+<li><code>activation</code>：要使用的激活功能。如果未指定任何内容，则不应用激活（即 “linear” activation：a（x）= x）。</li>
+<li><code>use_bias</code>：Boolean，该层是否使用bias vector。</li>
+<li>…其他看文档: <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense" target="_blank" rel="noopener">https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense</a></li>
+</ul>
+</li>
+<li><p>models.Sequential().compile()</p>
+<p> 给 <code>model</code> 添加完神经层后，必须进行 <code>model.compile()</code> 才能继续后续的模型训练，并且在 <code>model.compile</code> 的时候需要指定 <code>optimizer</code> 和 <code>loss</code>。</p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">model.compile(</span><br><span class="line">    optimizer,</span><br><span class="line">    loss=<span class="hljs-literal">None</span>,</span><br><span class="line">    metrics=<span class="hljs-literal">None</span>,</span><br><span class="line">    loss_weights=<span class="hljs-literal">None</span>,</span><br><span class="line">    sample_weight_mode=<span class="hljs-literal">None</span>,</span><br><span class="line">    weighted_metrics=<span class="hljs-literal">None</span>,</span><br><span class="line">    target_tensors=<span class="hljs-literal">None</span>,</span><br><span class="line">    distribute=<span class="hljs-literal">None</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p> <strong>Arguments:</strong></p>
+<ul>
+<li><code>optimizer</code>：String（优化器名称）或优化器实例。请参阅<a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers" target="_blank" rel="noopener">tf.keras.optimizers</a>。</li>
+<li><code>loss</code>：String（目标函数的名称）或目标函数。见<a href="https://www.tensorflow.org/api_docs/python/tf/losses" target="_blank" rel="noopener">tf.losses</a>。</li>
+<li><code>metrics</code>：模型在训练和测试期间要评估的度量列表。通常，您将使用 <code>metrics = [&#39;accuracy&#39;]</code>。</li>
+<li>…其他看文档：<a href="https://www.tensorflow.org/api_docs/python/tf/keras/models/Sequential" target="_blank" rel="noopener">https://www.tensorflow.org/api_docs/python/tf/keras/models/Sequential</a></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<ol start="3">
+<li><strong>完整例子</strong><iframe src="https://zengzhanhang.github.io/Documents/Keras/Single_Layer_Neural_Network_for_Linear_Regression.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+</li>
+</ol>
+<h1 id="2-Multiple-Layer-Neural-Network"><a href="#2-Multiple-Layer-Neural-Network" class="headerlink" title="2. Multiple Layer Neural Network"></a>2. Multiple Layer Neural Network</h1><iframe src="https://zengzhanhang.github.io/Documents/Keras/Multiple_Layer_Neural_Network_for_Classification.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h1 id="3-Convolutional-Neural-Network"><a href="#3-Convolutional-Neural-Network" class="headerlink" title="3. Convolutional Neural Network"></a>3. Convolutional Neural Network</h1><iframe src="https://zengzhanhang.github.io/Documents/Keras/Convolutional_Neural_Network.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h1 id="4-Recurrent-Neural-Network"><a href="#4-Recurrent-Neural-Network" class="headerlink" title="4. Recurrent Neural Network"></a>4. Recurrent Neural Network</h1><h2 id="4-1-RNN"><a href="#4-1-RNN" class="headerlink" title="4.1 RNN"></a>4.1 RNN</h2><iframe src="https://zengzhanhang.github.io/Documents/Keras/RNN_Classifier.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h2 id="4-2-LSTM"><a href="#4-2-LSTM" class="headerlink" title="4.2 LSTM"></a>4.2 LSTM</h2><iframe src="https://zengzhanhang.github.io/Documents/Keras/RNN_LSTM_Regressor.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h1 id="5-Generative-Adversarial-Network"><a href="#5-Generative-Adversarial-Network" class="headerlink" title="5. Generative Adversarial Network"></a>5. Generative Adversarial Network</h1><iframe src="https://zengzhanhang.github.io/Documents/Keras/Generative_Adversarial_Networks.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li>TensorFlow Tutorial：<a href="https://www.tensorflow.org/tutorials/" target="_blank" rel="noopener">https://www.tensorflow.org/tutorials/</a></li>
+<li>TensorFlow Guide：<a href="https://www.tensorflow.org/guide/" target="_blank" rel="noopener">https://www.tensorflow.org/guide/</a></li>
+</ol>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>Title: </strong><a href="https://zengzhanhang.github.io/2019/06/12/Keras-notes/">Keras 笔记</a></li>
+            <li><strong>Author: </strong><a href="https://zengzhanhang.github.io">Zhanhang ZENG (展航)</a></li>
+            <li><strong>Link: </strong><a href="https://zengzhanhang.github.io/2019/06/12/Keras-notes/">https://zengzhanhang.github.io/2019/06/12/Keras-notes/</a></li>
+            <li><strong>Date: </strong>2019-06-12</li>
+            <li><strong>Statement: </strong>All articles in this blog, unless otherwise stated, are based on the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> license. <!-- Please indicate the source of reprint. -->
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/DeepLearning/">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Python/">Python</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div style="text-align:center">
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/QRcode/alipay.jpg" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="/images/QRcode/WeChatPay.jpg" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/18/deepmedic/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">DeepMedic - multi-sacle 3D CNN with CRF for brain lesion segmentation</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/31/StatisticalLearning/">
+                <span class="level-item">统计学习 - Statistical Learning</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://zengzhanhang.github.io/2019/06/12/Keras-notes/';
+        this.page.identifier = '2019/06/12/Keras-notes/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'xiao-shu-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/icon(square)-min.png" alt="Zhanhang Zeng (展航)">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Zhanhang Zeng (展航)
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Statistics, Machine Learning &amp; Ai
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Edinburgh, the United Kingdom</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded follow-button" href="https://github.com/zengzhanhang" target="_blank">
+                <i class="fab fa-github"></i>&nbsp;&nbsp;
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Linkedin" href="https://www.linkedin.com/in/zhanhang-zeng-801a67185/">
+                
+                <i class="fab fa-linkedin-in"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/zengzhanhang">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://www.facebook.com/zengzhanhang">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Instagram" href="https://www.instagram.com/cengzhanhang">
+                
+                <i class="fab fa-instagram"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Weibo" href="https://www.weibo.com/zengzhanhang">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<!-- <div class="card widget" id="toc"> -->
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu" style="max-height: 600px; overflow: auto;">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Single-Layer-Neural-Network-Linear-Regression">
+        <!-- <span class="has-mr-6">1</span> 注释为不编号-->
+        <span>1. Single Layer Neural Network (Linear Regression)</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-Multiple-Layer-Neural-Network">
+        <!-- <span class="has-mr-6">2</span> 注释为不编号-->
+        <span>2. Multiple Layer Neural Network</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-Convolutional-Neural-Network">
+        <!-- <span class="has-mr-6">3</span> 注释为不编号-->
+        <span>3. Convolutional Neural Network</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-Recurrent-Neural-Network">
+        <!-- <span class="has-mr-6">4</span> 注释为不编号-->
+        <span>4. Recurrent Neural Network</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-RNN">
+        <!-- <span class="has-mr-6">4.1</span> 注释为不编号-->
+        <span>4.1 RNN</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-LSTM">
+        <!-- <span class="has-mr-6">4.2</span> 注释为不编号-->
+        <span>4.2 LSTM</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#5-Generative-Adversarial-Network">
+        <!-- <span class="has-mr-6">5</span> 注释为不编号-->
+        <span>5. Generative Adversarial Network</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <!-- <span class="has-mr-6">6</span> 注释为不编号-->
+        <span>Reference</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.png" alt="Keras 笔记" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Zhanhang ZENG (展航)&nbsp;
+                All Rights Reserved
+                <br>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                Visited by <span id="busuanzi_value_site_uv">0</span> users
+                </span>
+                <span id="busuanzi_container_site_pv">
+                    Totally, <span id="busuanzi_value_site_pv">0</span> page views
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <!-- <i class="fab fa-creative-commons,fab fa-creative-commons-by,fab fa-creative-commons-nc,fab fa-creative-commons-sa"></i> -->
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Zhanhang&#39;s GitHub" href="https://github.com/zengzhanhang">
+                        
+                        <!-- <i class="fab fa-github"></i> -->
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<!-- <script src="/js/baidu_push.js" async="true"></script> -->
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Using Python with Docker - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
+<meta name="keywords" content="Python,General">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using Python with Docker">
+<meta property="og:url" content="https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/index.html">
+<meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
+<meta property="og:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
+<meta property="og:updated_time" content="2020-01-16T03:00:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Using Python with Docker">
+<meta name="twitter:description" content="Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.">
+<meta name="twitter:image" content="https://zengzhanhang.github.io/Documents/Docker/docker.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/thumbnail.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.png" alt="Using Python with Docker" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/notes_TOC">Notes - 数据科学知识手册</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Zhanhang&#39;s GitHub" href="https://github.com/zengzhanhang">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/Documents/Docker/docker.png" alt="Using Python with Docker">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>Using Python with Docker
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-bottom: 0;">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z">2020-01-14</time> -->
+                <time class="level-item has-text-grey" datetime="2020-01-14T07:22:18.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-01-14</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-01-16T03:00:28.000Z"><i class="far fa-calendar-check">&nbsp;</i>2020-01-16</time>
+                
+                <!-- 
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                 -->
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    11 minutes read (About 1616 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-top: 0;">
+            <div class="level-left">
+                
+                <div class="level-item">
+                    <i class="fas fa-folder-open has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/General/">General</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Python/">Python</a>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Using Python with Docker
+            
+        </h1> -->
+        <div class="content">
+            <blockquote>
+<p>Notes for running deep learning model with python inside Docker containers, and basic usage of Docker.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="1-running-Python-Deep-Learning-with-Docker"><a href="#1-running-Python-Deep-Learning-with-Docker" class="headerlink" title="1. running Python (Deep Learning) with Docker"></a>1. running Python (Deep Learning) with Docker</h1><p>A common headache in software projects is ensuring the correct versions of all dependencies are available on the current development system. Often you may be working on several distinct projects simultaneously each with its own potentially conflicting dependencies on external libraries. Additionally you may be working across multiple different machines (for example a personal laptop and University computers) with possibly different operating systems. Further, you may not have root-level access to a system you are working on and so not be able to install software at a system-wide level and system updates may cause library versions to be changed to incompatible versions.</p>
+<p>One way of overcoming these issues is to use project-specific virtual environments. In this context a virtual environment or machine are isolated development environments where the external dependencies of a project can be installed and managed independent of the system-wide versions (and those of the environments of other projects).</p>
+<p>Here, we use <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> to create a virtual machine to run <a href="https://www.python.org/" target="_blank" rel="noopener">python 3</a>.</p>
+<hr>
+<h2 id="Running-Docker-container"><a href="#Running-Docker-container" class="headerlink" title="Running Docker container"></a>Running Docker container</h2><p><em>Note: Make sure the <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> has been installed on your personal PC or other devices. The installation instructions can be found on the official documentation, for <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank" rel="noopener">Windows</a>, <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="noopener">Mac</a>, <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community-1" target="_blank" rel="noopener">Ubuntu</a></em>.</p>
+<ol>
+<li><p>Open a bash terminal.</p>
+</li>
+<li><p>We first need to pull the latest <em>nvidia/cuda</em> docker image from the remote repo: </p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nvidia/cuda</span><br></pre></td></tr></table></figure>
+<p> we can use command <code>docker search cuda</code> to search docker images.</p>
+</li>
+<li><p>Using <code>docker images</code> confirms whether the image was successfully pulled:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br><span class="line"></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">ubuntu              latest              549b9b86cb8d        3 weeks ago         64.2MB</span><br><span class="line">nvidia/cuda         latest              9e47e9dfcb9a        5 weeks ago         2.83GB</span><br><span class="line">nginx               latest              231d40e811cd        7 weeks ago         126MB</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Now, run the docker container with <code>docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]</code>:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name VideoPose3D --runtime=nvidia --volume=<span class="hljs-string">"<span class="hljs-variable">$PWD</span>:/app"</span> nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04</span><br></pre></td></tr></table></figure>
+<p> Here, the tag of the ‘nvidia/cuda’ image is <em>10.1-cudnn7-devel-ubuntu16.04</em> instead of <em>latest</em>.</p>
+</li>
+<li><p>List running containers:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE                                           COMMAND             CREATED             STATUS              PORTS                   NAMES</span><br><span class="line">08f9ae536985        nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04       <span class="hljs-string">"/bin/bash"</span>         3 hours ago         Up 3 hours                                  VideoPose3D</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Next, execute an interactive bash shell on the container.</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">exec</span> -it VideoPose3D bash</span><br></pre></td></tr></table></figure>
+<p> This will create a new Bash session in the container <code>VideoPose3D</code>. If we did not assign a name to the container, we can exec the container with <code>docker exec -it containerID bash</code>.</p>
+</li>
+</ol>
+<p>Now, we are done. We are already inside the Docker container. Then we install Miniconda.</p>
+<hr>
+<h2 id="Installing-Miniconda"><a href="#Installing-Miniconda" class="headerlink" title="Installing Miniconda"></a>Installing Miniconda</h2><ol>
+<li><p>Because there is no necessary tools in the image, we need to install them first. Also, the image probably has no apt package cache, we need to run:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+<p> then, install <code>wget</code> command-line tool:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install wget</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Download the latest 64-bit Python 3 Miniconda install script:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Now run the install script:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+<p> You will first be asked to review the software license agreement. Assuming you choose to agree, you will then be asked to choose an install location for Miniconda. The default is to install in the root of your home directory <code>~/miniconda3</code> or <code>/root/miniconda3</code>. We recommend going with this default unless you have a particular reason to do otherwise.</p>
+</li>
+<li><p>Append the Miniconda binaries directory to <code>PATH</code> in manually in <code>~/.bash_env</code> using</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"export PATH=\""</span>\<span class="hljs-variable">$PATH</span><span class="hljs-string">":<span class="hljs-variable">$HOME</span>/miniconda3/bin\""</span> &gt;&gt; ~/.bash_env</span><br></pre></td></tr></table></figure>
+<p> For those who this appears a bit opaque to and want to know what is going on see here <sup id="a1"><a href="#f1">1</a></sup>.</p>
+<p> We now need to <code>source</code> the updated <code>~/.bash_env</code> so that the PATH variable in the current terminal session is updated:</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">source</span> ~/.bash_env</span><br></pre></td></tr></table></figure>
+<p> From the next time you log in all future terminal sessions should have the updated <code>PATH</code> loaded by default.</p>
+</li>
+</ol>
+<hr>
+<h2 id="Creating-the-Conda-environment"><a href="#Creating-the-Conda-environment" class="headerlink" title="Creating the Conda environment"></a>Creating the Conda environment</h2><p>You should now have a working Conda installation. If you run<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda --<span class="hljs-built_in">help</span></span><br></pre></td></tr></table></figure></p>
+<p><em>Note: from a terminal you should see the Conda help page displayed. If you get a <code>No command &#39;conda&#39; found</code> error you should check you have set up your <code>PATH</code> variable correctly (you can get a demonstrator to help you do this).</em></p>
+<p>Assuming Conda is working, we will now create our Conda environment:</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name vp3d python=3</span><br></pre></td></tr></table></figure>
+<p>This bootstraps a new Conda environment named <code>vp3d</code> with a minimal Python 3 install. You will be presented with a ‘package plan’ listing the packages to be installed and asked whether to proceed: type <code>y</code> then enter.</p>
+<p>We will now activate our created environment:</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">source</span> activate vp3d</span><br></pre></td></tr></table></figure>
+<p>When a environment is activated its name will be prepended on to the prompt which should now look something like<code>(vp3d) [machine-name]:~$</code> on terminal.</p>
+<p><strong>You need to run this <code>source activate vp3d</code> command every time you wish to activate the <code>vp3d</code> environment in a terminal.</strong> When the environment is activated, the environment will be searched first when running commands so that e.g. <code>python</code> will launch the Python interpreter installed locally in the <code>vp3d</code> environment rather than a system-wide version.</p>
+<p>We can now install the dependencies for the specific project into the new environment, like:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install numpy scipy matplotlib jupyter</span><br></pre></td></tr></table></figure></p>
+<p>Once the installation is finished, to recover some disk space we can clear the package tarballs Conda just downloaded:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean -t</span><br></pre></td></tr></table></figure></p>
+<p>These tarballs are usually cached to allow quicker installation into additional environments however we will only be using a single environment here so there is no need to keep them on disk.</p>
+<hr>
+<p><b id="f1"><strong>[1]</strong></b> The <code>echo</code> command causes the following text to be streamed to an output (standard terminal output by default). Here we use the append redirection operator <code>&gt;&gt;</code> to redirect the <code>echo</code> output to a file <code>~/.bash_env</code>, with it being appended to the end of the current file. The text actually added is <code>export PATH=&quot;$PATH:[your-home-directory]/miniconda/bin&quot;</code> with the <code>\&quot;</code> being used to escape the quote characters. The <code>export</code> command defines system-wide environment variables (more rigorously those inherited by child shells) with <code>PATH</code> being the environment variable defining where <code>bash</code> searches for executables as a colon-seperated list of directories. Here we add the Miniconda binary directory to the end of the current <code>PATH</code> definition. <a href="#a1">↩</a></p>
+<hr>
+<h1 id="2-Docker-Basic-Logic-Flow"><a href="#2-Docker-Basic-Logic-Flow" class="headerlink" title="2. Docker Basic Logic Flow"></a>2. Docker Basic Logic Flow</h1><p><img src="/Documents/Docker/docker_logic.png" alt="Docker basic logic flow"></p>
+<hr>
+<h1 id="3-Docker-command"><a href="#3-Docker-command" class="headerlink" title="3. Docker command"></a>3. Docker command</h1><h2 id="Check-docker-version"><a href="#Check-docker-version" class="headerlink" title="Check docker version"></a>Check docker version</h2><ul>
+<li><p>Usage: <code>docker version</code></p>
+</li>
+<li><p>Example:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ docker version</span><br><span class="line"></span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line">Version:           19.03.5</span><br><span class="line">API version:       1.40</span><br><span class="line">Go version:        go1.12.12</span><br><span class="line">Git commit:        633a0ea</span><br><span class="line">Built:             Wed Nov 13 07:22:37 2019</span><br><span class="line">OS/Arch:           windows/amd64</span><br><span class="line">Experimental:      <span class="hljs-literal">false</span></span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line">Engine:</span><br><span class="line">Version:          19.03.5</span><br><span class="line">API version:      1.40 (minimum version 1.12)</span><br><span class="line">Go version:       go1.12.12</span><br><span class="line">Git commit:       633a0ea</span><br><span class="line">Built:            Wed Nov 13 07:29:19 2019</span><br><span class="line">OS/Arch:          linux/amd64</span><br><span class="line">Experimental:     <span class="hljs-literal">false</span></span><br><span class="line">containerd:</span><br><span class="line">Version:          v1.2.10</span><br><span class="line">GitCommit:        b34a5c8af56e510852c35414db4c1f4fa6172339</span><br><span class="line">runc:</span><br><span class="line">Version:          1.0.0-rc8+dev</span><br><span class="line">GitCommit:        3e425f80a8c931f88e6d94a8c831b9d5aa481657</span><br><span class="line">docker-init:</span><br><span class="line">Version:          0.18.0</span><br><span class="line">GitCommit:        fec3683</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Search-Images"><a href="#Search-Images" class="headerlink" title="Search Images"></a>Search Images</h2><ul>
+<li><p>Usage:<br>  Search the Docker Hub for images, [<a href="https://docs.docker.com/engine/reference/commandline/search/" target="_blank" rel="noopener">more info</a>]</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search [OPTIONS] TERM</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search debian</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Pull-Images"><a href="#Pull-Images" class="headerlink" title="Pull Images"></a>Pull Images</h2><ul>
+<li><p>Usage:<br>  Pull an image or a repository from a registry, [<a href="https://docs.docker.com/engine/reference/commandline/pull/" target="_blank" rel="noopener">more info</a>]</p>
+  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull debian</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="List-Images"><a href="#List-Images" class="headerlink" title="List Images"></a>List Images</h2><ul>
+<li><p>Usage:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images [OPTIONS] [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example: running <code>docker images</code>.</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br><span class="line"></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">ubuntu              latest              549b9b86cb8d        3 weeks ago         64.2MB</span><br><span class="line">nvidia/cuda         latest              9e47e9dfcb9a        5 weeks ago         2.83GB</span><br><span class="line">nginx               latest              231d40e811cd        7 weeks ago         126MB</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="List-Containers"><a href="#List-Containers" class="headerlink" title="List Containers"></a>List Containers</h2><ul>
+<li><p>Usage: </p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps [options]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Options: </p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name, shorthand</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">–all , -a</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Show all containers (default shows just running)</td>
+</tr>
+<tr>
+<td style="text-align:center">–last , -n</td>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">Show n last created containers (includes all states)</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example: running <code>docker ps</code>  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES</span><br><span class="line">4c01db0b339c        ubuntu:12.04                 bash                   17 seconds ago       Up 16 seconds       3300-3310/tcp       webapp</span><br><span class="line">d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Run-Containers"><a href="#Run-Containers" class="headerlink" title="Run Containers"></a>Run Containers</h2><ul>
+<li><p>Usage:<br>  Run a command in a new container, [<a href="https://docs.docker.com/engine/reference/commandline/run/" target="_blank" rel="noopener">more info</a>]</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Options:</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name, shorthand</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">–detach , -d</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Run container in background and print container ID</td>
+</tr>
+<tr>
+<td style="text-align:center">–publish , -p</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Publish a container’s port(s) to the host</td>
+</tr>
+<tr>
+<td style="text-align:center">–name</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Assign a name to the container</td>
+</tr>
+<tr>
+<td style="text-align:center">–volume , -v</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Bind mount a volume</td>
+</tr>
+<tr>
+<td style="text-align:center">–interactive , -i</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Keep STDIN open even if not attached</td>
+</tr>
+<tr>
+<td style="text-align:center">–tty , -t</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Allocate a pseudo-TTY</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example:    <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name VideoPose3D --runtime=nvidia --volume=<span class="hljs-string">"<span class="hljs-variable">$PWD</span>:/app"</span> nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Run-a-command-in-a-running-container"><a href="#Run-a-command-in-a-running-container" class="headerlink" title="Run a command in a running container"></a>Run a command in a running container</h2><ul>
+<li><p>Usage:<br>  docker exec [OPTIONS] CONTAINER COMMAND [ARG…], [<a href="https://docs.docker.com/engine/reference/commandline/exec/" target="_blank" rel="noopener">more info</a>]</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">exec</span> [OPTIONS] CONTAINER COMMAND [ARG...]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Options:</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name, shorthand</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">–detach , -d</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Run container in background and print container ID</td>
+</tr>
+<tr>
+<td style="text-align:center">–interactive , -i</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Keep STDIN open even if not attached</td>
+</tr>
+<tr>
+<td style="text-align:center">–tty , -t</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Allocate a pseudo-TTY</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Example:</p>
+  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">exec</span> -it VideoPose3D bash</span><br></pre></td></tr></table></figure>
+<p>  This will create a new Bash session in the container <code>VideoPose3D</code>. If we did not assign a name to the container, we can exec the container with <code>docker exec -it containerID bash</code>.</p>
+</li>
+</ul>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>Title: </strong><a href="https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/">Using Python with Docker</a></li>
+            <li><strong>Author: </strong><a href="https://zengzhanhang.github.io">Zhanhang ZENG (展航)</a></li>
+            <li><strong>Link: </strong><a href="https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/">https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/</a></li>
+            <li><strong>Date: </strong>2020-01-14</li>
+            <li><strong>Statement: </strong>All articles in this blog, unless otherwise stated, are based on the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> license. <!-- Please indicate the source of reprint. -->
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/General/">General</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Python/">Python</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div style="text-align:center">
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/QRcode/alipay.jpg" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="/images/QRcode/WeChatPay.jpg" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/10/BashShellTrick/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Useful Trick with Linux Command</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/01/05/gnn_review/">
+                <span class="level-item">图神经网络 (Graph Neural Networks)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://zengzhanhang.github.io/2020/01/14/docker_usage_cheat_sheet/';
+        this.page.identifier = '2020/01/14/docker_usage_cheat_sheet/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'xiao-shu-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/icon(square)-min.png" alt="Zhanhang Zeng (展航)">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Zhanhang Zeng (展航)
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Statistics, Machine Learning &amp; Ai
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Edinburgh, the United Kingdom</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded follow-button" href="https://github.com/zengzhanhang" target="_blank">
+                <i class="fab fa-github"></i>&nbsp;&nbsp;
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Linkedin" href="https://www.linkedin.com/in/zhanhang-zeng-801a67185/">
+                
+                <i class="fab fa-linkedin-in"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/zengzhanhang">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://www.facebook.com/zengzhanhang">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Instagram" href="https://www.instagram.com/cengzhanhang">
+                
+                <i class="fab fa-instagram"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Weibo" href="https://www.weibo.com/zengzhanhang">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<!-- <div class="card widget" id="toc"> -->
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu" style="max-height: 600px; overflow: auto;">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-running-Python-Deep-Learning-with-Docker">
+        <!-- <span class="has-mr-6">1</span> 注释为不编号-->
+        <span>1. running Python (Deep Learning) with Docker</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Running-Docker-container">
+        <!-- <span class="has-mr-6">1.1</span> 注释为不编号-->
+        <span>Running Docker container</span>
+        </a></li><li>
+        <a class="is-flex" href="#Installing-Miniconda">
+        <!-- <span class="has-mr-6">1.2</span> 注释为不编号-->
+        <span>Installing Miniconda</span>
+        </a></li><li>
+        <a class="is-flex" href="#Creating-the-Conda-environment">
+        <!-- <span class="has-mr-6">1.3</span> 注释为不编号-->
+        <span>Creating the Conda environment</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-Docker-Basic-Logic-Flow">
+        <!-- <span class="has-mr-6">2</span> 注释为不编号-->
+        <span>2. Docker Basic Logic Flow</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-Docker-command">
+        <!-- <span class="has-mr-6">3</span> 注释为不编号-->
+        <span>3. Docker command</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Check-docker-version">
+        <!-- <span class="has-mr-6">3.1</span> 注释为不编号-->
+        <span>Check docker version</span>
+        </a></li><li>
+        <a class="is-flex" href="#Search-Images">
+        <!-- <span class="has-mr-6">3.2</span> 注释为不编号-->
+        <span>Search Images</span>
+        </a></li><li>
+        <a class="is-flex" href="#Pull-Images">
+        <!-- <span class="has-mr-6">3.3</span> 注释为不编号-->
+        <span>Pull Images</span>
+        </a></li><li>
+        <a class="is-flex" href="#List-Images">
+        <!-- <span class="has-mr-6">3.4</span> 注释为不编号-->
+        <span>List Images</span>
+        </a></li><li>
+        <a class="is-flex" href="#List-Containers">
+        <!-- <span class="has-mr-6">3.5</span> 注释为不编号-->
+        <span>List Containers</span>
+        </a></li><li>
+        <a class="is-flex" href="#Run-Containers">
+        <!-- <span class="has-mr-6">3.6</span> 注释为不编号-->
+        <span>Run Containers</span>
+        </a></li><li>
+        <a class="is-flex" href="#Run-a-command-in-a-running-container">
+        <!-- <span class="has-mr-6">3.7</span> 注释为不编号-->
+        <span>Run a command in a running container</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.png" alt="Using Python with Docker" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Zhanhang ZENG (展航)&nbsp;
+                All Rights Reserved
+                <br>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                Visited by <span id="busuanzi_value_site_uv">0</span> users
+                </span>
+                <span id="busuanzi_container_site_pv">
+                    Totally, <span id="busuanzi_value_site_pv">0</span> page views
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <!-- <i class="fab fa-creative-commons,fab fa-creative-commons-by,fab fa-creative-commons-nc,fab fa-creative-commons-sa"></i> -->
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Zhanhang&#39;s GitHub" href="https://github.com/zengzhanhang">
+                        
+                        <!-- <i class="fab fa-github"></i> -->
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<!-- <script src="/js/baidu_push.js" async="true"></script> -->
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

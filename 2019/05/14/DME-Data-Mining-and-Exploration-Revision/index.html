@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>DME - Data Mining and Exploration (INFR 11007) Review - 小树的面包店 | ZhanhangZeng&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="This is my review note of the DME course (Data Mining and Exploration (INFR11007), 2019) at the University of Edinburgh. Remeber to read the ‘Lab’ section of each chapter">
+<meta name="keywords" content="CoursesReview,DataMining">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DME - Data Mining and Exploration (INFR 11007) Review">
+<meta property="og:url" content="https://zengzhanhang.github.io/2019/05/14/DME-Data-Mining-and-Exploration-Revision/index.html">
+<meta property="og:site_name" content="小树的面包店 | ZhanhangZeng&#39;s Blog">
+<meta property="og:description" content="This is my review note of the DME course (Data Mining and Exploration (INFR11007), 2019) at the University of Edinburgh. Remeber to read the ‘Lab’ section of each chapter">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://zengzhanhang.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-05-07T09:30:32.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DME - Data Mining and Exploration (INFR 11007) Review">
+<meta name="twitter:description" content="This is my review note of the DME course (Data Mining and Exploration (INFR11007), 2019) at the University of Edinburgh. Remeber to read the ‘Lab’ section of each chapter">
+<meta name="twitter:image" content="https://zengzhanhang.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/thumbnail.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo1.png" alt="DME - Data Mining and Exploration (INFR 11007) Review" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/notes_TOC">Notes - 数据科学知识手册</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Zhanhang&#39;s GitHub" href="https://github.com/zengzhanhang">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-bookmark" style="margin-right: 0.25cm"></i>DME - Data Mining and Exploration (INFR 11007) Review
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-bottom: 0;">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2019-05-14T08:00:45.000Z">2019-05-14</time> -->
+                <time class="level-item has-text-grey" datetime="2019-05-14T08:00:45.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-05-14</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-05-07T09:30:32.401Z"><i class="far fa-calendar-check">&nbsp;</i>2020-05-07</time>
+                
+                <!-- 
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/DataMining/">DataMining</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/University-of-Edinburgh/">University of Edinburgh</a>
+                </div>
+                 -->
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    33 minutes read (About 4972 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto" style="margin-top: 0;">
+            <div class="level-left">
+                
+                <div class="level-item">
+                    <i class="fas fa-folder-open has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/categories/DataMining/">DataMining</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/University-of-Edinburgh/">University of Edinburgh</a>
+                </div>
+                
+                
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/CoursesReview/">CoursesReview</a>,&nbsp;<a class="has-link-grey -link" href="/tags/DataMining/">DataMining</a>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                DME - Data Mining and Exploration (INFR 11007) Review
+            
+        </h1> -->
+        <div class="content">
+            <blockquote>
+<p>This is my review note of the DME course (<a href="https://www.inf.ed.ac.uk/teaching/courses/dme/" target="_blank" rel="noopener">Data Mining and Exploration (INFR11007)</a>, 2019) at the University of Edinburgh. Remeber to read the ‘Lab’ section of each chapter</p>
+</blockquote>
+<div style="text-align:center"><br><img src="/images/DME/DME_process.png" alt="Data Analysis Process" title="Data Analysis Process"><br></div>
+
+<a id="more"></a>
+<h1 id="1-Exploratory-Data-Analysis"><a href="#1-Exploratory-Data-Analysis" class="headerlink" title="1. Exploratory Data Analysis"></a>1. Exploratory Data Analysis</h1><h2 id="1-1-Numberical-Data-Description"><a href="#1-1-Numberical-Data-Description" class="headerlink" title="1.1 Numberical Data Description"></a>1.1 Numberical Data Description</h2><h3 id="1-1-1-Location"><a href="#1-1-1-Location" class="headerlink" title="1.1.1 Location"></a>1.1.1 Location</h3><ul>
+<li><p><strong>Non-robust Measure</strong></p>
+<ul>
+<li>Sample Mean (arithmetic mean or average): $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$<ul>
+<li>for random variable: $\mathbb{E}[x] = \int xp(x) dx$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Robust Measure</strong></p>
+<ul>
+<li><p>Median: </p>
+
+    $$
+    median(x) = 
+    \begin{cases}
+    x_{[(n+1)\mathbin{/}2]}& \text{; if $n$ is odd}\\
+    \frac{1}{2}[x_{(n\mathbin{/}2)}+x_{(n\mathbin{/}2)+1}]& \text{; if $n$ is even}            
+    \end{cases}
+    $$
+    
+</li>
+<li><p>Mode: Value that occurs most frequent</p>
+</li>
+<li>$\alpha_{th}$ Sample Quantile (rough data point, i.e. $q_{\alpha} \approx x_{([n\alpha])}$)<ul>
+<li>$Q_{1} = q_{0.25}$, $Q_{2} = q_{0.5}$, $Q_{3} = q_{0.75}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Example</strong><br>Data_1=[0, 1, 1, 1, 2, 3, 4, 4, 5, 9]<br>Data_2=[0, 1, 1, 1, 2, 3, 4, 4, 5, 9000]</p>
+<table>
+<thead>
+<tr>
+<th>DataSet</th>
+<th style="text-align:center">Mean</th>
+<th style="text-align:center">Median</th>
+<th style="text-align:center">$Q_{1}$</th>
+<th style="text-align:center">$Q_{3}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data 1</td>
+<td style="text-align:center">3.0</td>
+<td style="text-align:center">2.5</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">4.0</td>
+</tr>
+<tr>
+<td>Data 2</td>
+<td style="text-align:center">902.1</td>
+<td style="text-align:center">2.5</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">4.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-1-2-Scale"><a href="#1-1-2-Scale" class="headerlink" title="1.1.2 Scale"></a>1.1.2 Scale</h3><ul>
+<li><p><strong>Non-robust Measure</strong></p>
+<ul>
+<li>Sample Variance: $Var(x) = \frac{1}{n}\sum_{i=1}^{n} (x_{i} - \hat{x})^2$<ul>
+<li>for random variable: $Var[x] = \int [x-\mathbb{E}[x]]^2 dx$</li>
+</ul>
+</li>
+<li>Standard Deviation: $Std(x) = \sqrt{Var(x)}$</li>
+</ul>
+</li>
+<li><p><strong>Robust Measure</strong></p>
+<ul>
+<li>Median Absolute Deviation(MAD): $$MAD(x) = median[|x_{i} - median(x)|]$$</li>
+<li>IQR(interquartile range): $$IQR = Q_{3} - Q_{1}$$</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-3-Shape"><a href="#1-1-3-Shape" class="headerlink" title="1.1.3 Shape:"></a>1.1.3 Shape:</h3><ul>
+<li><p><strong>Non-robust Measure</strong></p>
+<ul>
+<li>Skewness: measures the asymmetry of data $$skew(x) = \frac{1}{n} \sum_{i=1}^{n}[\frac{x_{i}-\hat{x}}{std(x)}]^{3}$$ </li>
+<li>Kurtosis: measures how heavy the tails of distribution are, in other word, measures how often x takes on values that are considerable larger or smaller than its standard deviation.<br>$$kurt(x) = \frac{1}{n} \sum_{i=1}^{n}[\frac{x_{i}-\hat{x}}{std(x)}]^{4}$$ </li>
+</ul>
+</li>
+<li><p><strong>Robust Measure</strong></p>
+<ul>
+<li>Galtons’s measure of skewness: $$skew(x) = \frac{(Q_{3}-Q_{2})-(Q_{2}-Q_{1})}{Q_{3}-Q_{1}}$$</li>
+<li>Robust kurtosis: $$kurt(x) = \frac{(q_{7/8}-q_{5/8})-(q_{3/8}-q_{1/8})}{Q_{3}-Q_{1}}$$</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-4-Multivariate-Measure"><a href="#1-1-4-Multivariate-Measure" class="headerlink" title="1.1.4 Multivariate Measure:"></a>1.1.4 Multivariate Measure:</h3><ul>
+<li><p>Sample Covariance:<br>  $$Cov(x, y) = \frac{1}{n}\sum_{i=1}^{n} (x_{i} - \hat{x}) (y_{i} - \hat{y})$$</p>
+<ul>
+<li>for random variable: $Cov[x, y] = \mathbb{E}[(x-\mathbb{E}[x])(y-\mathbb{E}[y])] = \mathbb{E}[xy]-\mathbb{E}[x]\mathbb{E}[y]$</li>
+</ul>
+</li>
+<li><p>Pearson’s Correlation Coefficient:$$\rho(x,y) = \frac{\text{cov}(x,y)}{Std(x) Std(y)}$$</p>
+<ul>
+<li>$\rho=0$ doesn’t mean statistical independent, since it only measures linear correlation</li>
+<li>$-1 \le \rho \le 1$</li>
+<li>Simple way to measure non-linear correlation: $\rho(g(x),g(y)) = \frac{\text{cov}(g(x),g(y))}{Std(g(x)) Std(g(y))}$</li>
+</ul>
+</li>
+<li><p>Covariance Matrix: $$Cov[X] = \mathbb{E}[(X-\mathbb{E}[X])(X-\mathbb{E}[X])^{T}]$$</p>
+<ul>
+<li>Eigenvalue decomposition: $Cov[X] = U\Lambda U^{T}$</li>
+<li>$\sum_{i=1}^{d}Var[x_{i}]=trace(Var[X])=\sum_{i=1}^{d} \lambda_{i}$</li>
+<li>$cov[Ax+b] = Acov[x]A^{T}$</li>
+</ul>
+</li>
+<li><p>Correlation Matrix:$$\rho(X) = diag\left( \frac{1}{std(X)} \right) Cov[X]diag\left( \frac{1}{std(X)} \right)$$</p>
+</li>
+<li><p>Rank Correlation - Kendall’s $\tau$: $$\tau(x,y) = \frac{n_{c}(x,y) - n_{d}(x,y)}{n(n-1)/2}$$</p>
+<ul>
+<li>$n_c$: total number of concordant pairs, $n_d$: total number of disconcordant pairs</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-Data-Visualisation"><a href="#1-2-Data-Visualisation" class="headerlink" title="1.2 Data Visualisation"></a>1.2 Data Visualisation</h2><h2 id="1-3-Data-Preprocessing"><a href="#1-3-Data-Preprocessing" class="headerlink" title="1.3 Data Preprocessing:"></a>1.3 Data Preprocessing:</h2><h3 id="1-3-1-Standardisation"><a href="#1-3-1-Standardisation" class="headerlink" title="1.3.1 Standardisation:"></a>1.3.1 Standardisation:</h3><p>Normalising data to have 0 (sample) mean and unit (sample) variance:</p>
+<ul>
+<li>Centering Matrix:<br>  $$C_n = I_{n} - \frac{1}{n} 1_n 1_n^{T}$$<ul>
+<li>Where, $1_n = [1, 1, \dots, 1]^T$</li>
+<li>Multiplying it from <ul>
+<li>right: removes sample mean of each row, i.e., $X = \tilde{X}C_{n}$</li>
+<li>left: removes sample mean of each column</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-2-Outlier-Detection"><a href="#1-3-2-Outlier-Detection" class="headerlink" title="1.3.2 Outlier Detection:"></a>1.3.2 Outlier Detection:</h3><ul>
+<li>Tukey’s fences: $[Q_1 - k(Q_3 - Q_1), Q_3 + k(Q_3 - Q_1)] = [Q_1 - k \times IQR, Q_3 + k \times  IQR]$<ul>
+<li>Typically, $k = 1.5$ for outlier removal</li>
+</ul>
+</li>
+</ul>
+<div style="width:50%;height:50%"><br><div style="text-align:center"><br><img src="/images/DME/Boxplot_vs_PDF.svg" alt="Box Plot for outliers removal" title="Outlier detection example"><br></div><br></div>
+
+<h2 id="1-4-Lab-for-Chapter-1"><a href="#1-4-Lab-for-Chapter-1" class="headerlink" title="1.4 Lab for Chapter.1"></a>1.4 Lab for Chapter.1</h2><iframe src="https://zengzhanhang.github.io/Documents/DME/01_Lab_1_Visualisation_solution.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h1 id="2-Principal-Component-Analysis-PCA"><a href="#2-Principal-Component-Analysis-PCA" class="headerlink" title="2. Principal Component Analysis(PCA)"></a>2. Principal Component Analysis(PCA)</h1><h2 id="2-1-PCA-by-Variance-Maximisation"><a href="#2-1-PCA-by-Variance-Maximisation" class="headerlink" title="2.1 PCA by Variance Maximisation"></a>2.1 PCA by Variance Maximisation</h2><h3 id="2-1-1-Sequential-Approach"><a href="#2-1-1-Sequential-Approach" class="headerlink" title="2.1.1 Sequential Approach"></a>2.1.1 Sequential Approach</h3><p>Principal Component(PC) direction: $\boldsymbol{w}$, projected data: $\boldsymbol{w}^{T} \boldsymbol{x}$</p>
+<ul>
+<li><p>The First Principal Component Direction:</p>
+  
+    $$
+    \begin{aligned}
+    & \underset{\boldsymbol{w_{1}}}{\text{maximise}}
+    & & \boldsymbol{w_{1}}^T \Sigma \boldsymbol{w_{1}} = Var(z_{1}) \\
+    & \text{subject to}
+    & & ||\boldsymbol{w_{1}} = 1||
+    \end{aligned}
+    $$
+    
+<p>  According to the eigenvalue decomposition of convariance matrix $\Sigma$: $\Sigma = U \Lambda U^{T}$</p>
+<p>  Let $\boldsymbol{w_{1}} = \sum_{i=1}^{n} a_{i} \boldsymbol{u_{i}} = U \boldsymbol{a}$, then </p>
+  
+    $$
+    \begin{aligned}
+    & \boldsymbol{w_{1}}^T \Sigma \boldsymbol{w_{1}} = \sum_{i=1}^{n} a_{i}^{2} \lambda_{i} \\
+    & ||\boldsymbol{w_{1}}|| = \boldsymbol{w_{1}}^{T} \boldsymbol{w_{1}} = \sum_{i=1}^{n} a_{i}^{2} = 1
+    \end{aligned}
+    $$
+    
+<p>  Thus, the optimisation problem can be written as: </p>
+  
+    $$
+    \begin{aligned}
+    & {\text{maximise}}
+    & & \sum_{i=1}^{n} a_{i}^{2} \lambda_{i} \\
+    & \text{subject to}
+    & & \sum_{i=1}^{n} a_{i}^{2} = 1
+    \end{aligned}
+    $$
+    
+<p>  $\boldsymbol{a} = (1, 0, \dots, 0)^T$  is the unique solution, if $lambda_{1} &gt; \lambda{i}$.</p>
+<p>  So the first PC direction is<br>  $$\boldsymbol{w_{1}} = U \boldsymbol{a} = \boldsymbol{u_{1}}$$<br>  , where the first PC direction given by the first eigen vector, $\boldsymbol{u_{1}}$, of  $\Sigma$  corresponding to the first(largest) eigen value $\lambda_{1}$.</p>
+<ul>
+<li>$Var(z_{1})= \boldsymbol{w_{1}}^T \Sigma \boldsymbol{w_{1}} = \lambda_{1}$</li>
+<li>$\mathbb{E}(z_{1}) = \mathbb{E}(\boldsymbol{w_{1}}^{T} \boldsymbol{x}) = \boldsymbol{w_{1}}^{T} \mathbb{E}(\boldsymbol{x}) = 0$</li>
+<li>First PC scores: $\boldsymbol{z_{1}}^{T} = \boldsymbol{w_{1}}^{T} X_{d \times n}$</li>
+</ul>
+</li>
+<li><p>Subsequent PC Direction $\boldsymbol{w_{m}}$:</p>
+  
+    $$
+    \begin{aligned}
+    & \underset{\boldsymbol{w_{m}}}{\text{maximise}}
+    & & \boldsymbol{w_{m}}^T \Sigma \boldsymbol{w_{m}} \\
+    & \text{subject to}
+    & & ||\boldsymbol{w_{m}} = 1|| \\
+    & 
+    & & \boldsymbol{w_{m}}^{T}\boldsymbol{w_{i}} = 0 & & i = 1, 2, \dots, m-1
+    \end{aligned}
+    $$
+    
+<p>  Solution: similar to the previous procedure</p>
+<p>  $\boldsymbol{w_{m}} = \boldsymbol{u_{m}}$ is the m-th PC direction given by the m-th eigen vector of $\Sigma$ corresponding to the m-th largest eigen value $\lambda_{m}$.</p>
+<ul>
+<li>$Var(z_{m}) = \lambda_{m}$,  $\mathbb{E}(z_{m}) = 0$</li>
+</ul>
+</li>
+<li><p>PCs (scores) uncorrelated:</p>
+  
+    $$
+    \begin{aligned}
+    Cov(z_i, z_j) & = \mathbb{E}(z_i z_j) - \mathbb{E}(z_i) \mathbb{E}(z_j)\\
+                  & = \mathbb{E}(\boldsymbol{w_{i}}^{T} \boldsymbol{x} \boldsymbol{w_{j}}^{T} \boldsymbol{x}) - 0\\
+                  & = \boldsymbol{w_{j}}^{T} \mathbb{E}(\boldsymbol{x} \boldsymbol{x}) \boldsymbol{w_{j}}^{T}\\
+                  & = \boldsymbol{w_{j}}^{T} \Sigma \boldsymbol{w_{j}}^{T} \\
+                  & = \boldsymbol{e_{i}}^T U^T U \Lambda U^T U \boldsymbol{e_{j}} \\
+                  & = 0
+    \end{aligned}
+    $$
+    
+</li>
+<li><p>Fraction of variance explained $= \frac{\sum_{i}^{k} \lambda_{i}}{\sum_{i}^{d} \lambda_{i}}$</p>
+<ul>
+<li>how much variability in data is captured by the first k principal components.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-2-Simultaneous-Approach"><a href="#2-1-2-Simultaneous-Approach" class="headerlink" title="2.1.2 Simultaneous Approach"></a>2.1.2 Simultaneous Approach</h3><ul>
+<li>
+  $$
+  \begin{aligned}
+  & \text{maximise}
+  & & \sum_{i=1}^{k}\boldsymbol{w_{i}}^T \Sigma \boldsymbol{w_{i}} \\
+  & \text{subject to}
+  & & ||\boldsymbol{w_{i}} = 1|| & & i = 1, 2, \dots, m-1\\
+  & 
+  & & \boldsymbol{w_{i}}^{T}\boldsymbol{w_{j}} = 0 & & i \neq j
+  \end{aligned}
+  $$
+  
+<ul>
+<li>Subtle technical point: the sequential approach corresponds to solving this optimisation problem in greedy manner(algorithm), which doesn’t guarantee to yield optimal solution.</li>
+<li>However, sequential approach and simultaneous yield same results.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-PCA-by-Minimisation-of-Approximation-Error"><a href="#2-2-PCA-by-Minimisation-of-Approximation-Error" class="headerlink" title="2.2 PCA by Minimisation of Approximation Error"></a>2.2 PCA by Minimisation of Approximation Error</h2><ul>
+<li><p>Projection Matrix: </p>
+
+  $$
+  P = \sum_{i=1}^{k}\boldsymbol{w_{i}} \boldsymbol{w_{i}}^{T} = W_{k} W_{k}^{T}
+  $$
+  
+<p>, where $W_{k} = (\boldsymbol{w_{1}}, \dots, \boldsymbol{w_{k}})$ is $d \times k$ matrix .</p>
+</li>
+<li><p>Approximating $\boldsymbol{x}$ into subspace $\boldsymbol{\hat{x}} = P \boldsymbol{x} = \sum_{i=1}^{k}\boldsymbol{w_{i}} \boldsymbol{w_{i}}^{T} \boldsymbol{x}$</p>
+</li>
+<li><p>Approximation Error: $\mathbb{E}||\boldsymbol{x} - P \boldsymbol{x}||^2 = \mathbb{E}||\boldsymbol{x} - W_{k} W_{k}^T \boldsymbol{x}||^2 = \mathbb{E}||\boldsymbol{x} - \sum_{i=1}^{k}\boldsymbol{w_k} \boldsymbol{w_k}^T \boldsymbol{x}||^2$ </p>
+</li>
+<li><p>Optimisation Problem: </p>
+
+  $$
+  \begin{aligned}
+  & \text{minimise}
+  & & \mathbb{E}||\boldsymbol{x} - \sum_{i=1}^{k}\boldsymbol{w_k} \boldsymbol{w_k}^T \boldsymbol{x}||^2 \\
+  & \text{subject to}
+  & & ||\boldsymbol{w_{i}} = 1|| & & i = 1, 2, \dots, k\\
+  & 
+  & & \boldsymbol{w_{i}}^{T}\boldsymbol{w_{j}} = 0 & & i \neq j
+  \end{aligned}
+  $$
+  
+</li>
+<li><p>So,</p>
+<ul>
+<li>the optimal PC directions $\boldsymbol{w_{i}}$ are the first k eigen vectors $\boldsymbol{u_{i}}$ of $\Sigma$</li>
+<li>The optimal projection matrix is $P = U_k U_{k}^{T}$</li>
+<li>$\boldsymbol{\hat{x}} = P \boldsymbol{x} = U_{k} U_{k}^{T} \boldsymbol{x} = \sum_{i=1}^{k} \boldsymbol{u_{i}} \boldsymbol{u_{i}}^{T} \boldsymbol{x} = \sum_{i=1}^{k} \boldsymbol{u_{i}} z_{i}$</li>
+<li>$\mathbb{E}||\boldsymbol{x} - U_{k} U_{k}^T \boldsymbol{x}||^2 = \sum_{i=1}^{d} \lambda_{i} - \sum_{i=1}^{k} \lambda_{i} = \sum_{i=k+1}^{d} \lambda_{i}$, which means minimising expected error = maximising variance explained.</li>
+</ul>
+</li>
+<li><p>Relative Approximation Error: </p>
+
+  $$
+  \frac{\mathbb{E}||\boldsymbol{x} - U_{k} U_{k}^T \boldsymbol{x}||^2}{\mathbb{E}||\boldsymbol{x}||^2} = 1 - \frac{\sum_{i=1}^{k} \lambda_{i}}{\sum_{i=1}^{d} \lambda_{i}} = 1 - \text{fraction of variance explained}
+  $$
+  
+</li>
+</ul>
+<h2 id="2-3-PCA-by-Low-Rank-Matrix-Approximation"><a href="#2-3-PCA-by-Low-Rank-Matrix-Approximation" class="headerlink" title="2.3 PCA by Low Rank Matrix Approximation"></a>2.3 PCA by Low Rank Matrix Approximation</h2><h3 id="2-3-1-Approximation-from-Data-Matrix"><a href="#2-3-1-Approximation-from-Data-Matrix" class="headerlink" title="2.3.1 Approximation from Data Matrix"></a>2.3.1 Approximation from Data Matrix</h3><ul>
+<li>Let $X_{d \times n} = (\boldsymbol{x_1}, \boldsymbol{x_2}, \dots, \boldsymbol{x_n})$, where $\boldsymbol{x}$ is $d \times 1$ matrix (d-dimension). </li>
+<li>Express $X$ via its Singular Value Decomposition(SVD): $X = U S V^{T}$<ul>
+<li>, where $U_{d \times d}$ and $V_{n \times n}$ are orthonormal. $S$ is zero everwhere, but first r diagonal elements.</li>
+</ul>
+</li>
+<li><p>Optimisation Problem:</p>
+
+  $$
+  \begin{aligned}
+  & \text{minimise}
+  & & \sum_{ij} \left[ (X)_{ij} - (M)_{ij} \right]^2 = ||X - \hat{X}||_{F}  \\
+  & \text{subject to}
+  & & rank(M) = k\\
+  \end{aligned}
+  $$
+  
+</li>
+<li><p>So,</p>
+<ul>
+<li>Optimal solution: $\hat{X} = \sum_{i=1}^{k} \boldsymbol{u_i} \boldsymbol{s_i} \boldsymbol{v_i}^{T} = U_K S_K V_K^T$ ((truncated singular value decomposition).</li>
+<li>left singular vectors $\boldsymbol{u_i}$ are eigen vectors of $\Sigma$, so $\boldsymbol{u_i}$ are PC directions.</li>
+<li>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$:   $\lambda_i = \frac{s_i^2}{n}$. (<a href="#1-s-i-2-related-to-eigen-values-lambda-i-of-Sigma">Proof in Appendix A</a>)</li>
+<li>PC scores: $\boldsymbol{z_i}^T = \boldsymbol{u_i}^T X = s_i \boldsymbol{v_i}^T$<ul>
+<li>Proof: $\boldsymbol{z_i}^T = \boldsymbol{u_i}^T X = \boldsymbol{u_i}^T U S V^T = \boldsymbol{u_i}^T \sum_{j=1}^{r}\boldsymbol{u_j} s_j \boldsymbol{v_j}^T = s_i \boldsymbol{v_i}^T$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-2-Approximation-from-Sample-Covariance-Matrix"><a href="#2-3-2-Approximation-from-Sample-Covariance-Matrix" class="headerlink" title="2.3.2 Approximation from Sample Covariance Matrix"></a>2.3.2 Approximation from Sample Covariance Matrix</h3><ul>
+<li><p>Optimisation Problem:</p>
+
+  $$
+  \begin{aligned}
+  & \text{minimise}
+  & & ||\Sigma - M||_{F}  \\
+  & \text{subject to}
+  & & rank(M) = k\\
+  & 
+  & & M^T = M
+  \end{aligned}
+  $$
+  
+<ul>
+<li>Optimal solution: $M = \hat{\Sigma} = U_k \Lambda_k U_k^T = \Sigma^T$, i.e., $\sum_{i=1}^{k}\lambda_i \boldsymbol{u_i} \boldsymbol{u_i}^T$</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-3-Approximation-from-Gram-Matrix"><a href="#2-3-3-Approximation-from-Gram-Matrix" class="headerlink" title="2.3.3 Approximation from Gram Matrix"></a>2.3.3 Approximation from Gram Matrix</h3><ul>
+<li><p>Gram Matrix:<br>$$G = X^T X \text{, where} (G)_{ij} = \boldsymbol{x_i}^T\boldsymbol{x_j}$$</p>
+<ul>
+<li>Gram Matrix is positive semi-definite</li>
+</ul>
+</li>
+<li><p>According the SVD of $X$:</p>
+
+  $$
+  G = X^T X = (USV^T)^T(USV^T) = V S^T U^T U S V^T = VS^T SV^T = V \tilde{\Lambda} V^T = \sum_{i=1}^{n} s_i^2 \boldsymbol{v_i} \boldsymbol{v_i}^T
+  $$
+  
+</li>
+<li><p>Thus, the best rank k approximation of $G$ is $\hat{G} = \sum_{i=1}^{k} \boldsymbol{v_i} s_i^2  \boldsymbol{v_i}^T$.</p>
+</li>
+<li>Denote $\tilde{\Lambda} = S^T S$ is the top k eigen value of $G$, $V_k = (\boldsymbol{v_1}, \boldsymbol{v_2}, \dots, \boldsymbol{v_k})_{n \times k}$
+  $$
+  Z_k = \sqrt{\tilde{\Lambda}_k} V_k^T
+  $$
+  
+</li>
+</ul>
+<h3 id="2-3-4-Probabilistic-PCA-PPCA"><a href="#2-3-4-Probabilistic-PCA-PPCA" class="headerlink" title="2.3.4 Probabilistic PCA (PPCA)"></a>2.3.4 Probabilistic PCA (PPCA)</h3><ul>
+<li><p>Advantages:</p>
+<ol>
+<li>PPCA can samples artificial data points (generative model).</li>
+<li>Formulation allows us to deal with missing data.</li>
+</ol>
+</li>
+<li><p>Probabilistic Model:</p>
+
+  $$
+  Z \sim \mathcal{N}(0,\,I_k)\\
+  \epsilon \sim \mathcal{N}(0, \, \sigma^2 I_d)\\
+  \underset{d \times 1}{\boldsymbol{x}} = \underset{d \times k}{W} \; \underset{k \times 1}{\boldsymbol{z}} + \underset{d \times 1}{\boldsymbol{\mu}} + \underset{d \times 1}{\boldsymbol{\epsilon}}
+  $$
+  
+</li>
+<li><p>Joint, Conditional and Observation Distribution</p>
+<ul>
+<li><p>Conditional Distribution:</p>
+
+  $$
+  p(\boldsymbol{x}|\boldsymbol{z}) = \mathcal{N}(\boldsymbol{x};\; W \boldsymbol{z} + \boldsymbol{\mu},\; \sigma^2I_{d})
+  $$
+    
+</li>
+<li><p>Joint Distribution:</p>
+
+  $$
+  \begin{aligned}
+  p(\boldsymbol{z},\; \boldsymbol{x}) & = p(\boldsymbol{x}|\boldsymbol{z})p(\boldsymbol{z}) = \mathcal{N}(\boldsymbol{x};\; W \boldsymbol{z} + \boldsymbol{u},\; \sigma^2I_{d}) \mathcal{N}(\boldsymbol{z};\; 0,\; I_k)\\
+     & = \frac{1}{const}exp \left[ -\frac{1}{2} [(\boldsymbol{x} - W \boldsymbol{z} - \boldsymbol{\mu})^{T} (\frac{1}{\sigma^2}I_{d}) (\boldsymbol{x} - W \boldsymbol{z} - \boldsymbol{\mu}) + \boldsymbol{z}^{T} \boldsymbol{z}] \right]
+  \end{aligned}
+  $$
+    
+</li>
+</ul>
+<blockquote>
+<p><strong>Important Equations:</strong></p>
+<blockquote>
+<p>For multivariate normal distribution:</p>
+  
+    $$
+    \begin{aligned}
+    -\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^T \Sigma^{-1} (\boldsymbol{x}-\boldsymbol{\mu}) & = -\frac{1}{2}\boldsymbol{x}^T \Sigma^{-1} \boldsymbol{x} + \boldsymbol{x}^{T} \Sigma^{-1}\mu + const\\
+      & = -\frac{1}{2}\boldsymbol{x}^T A \boldsymbol{x} + \boldsymbol{x}^{T} \xi + const
+    \end{aligned}
+    $$
+     
+<p>  Thus, $\Sigma = A^{-1}$ and $\boldsymbol{\mu} = \Sigma \  \xi$  .</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>Observation Distribution:
+  $$
+  p(\boldsymbol{x}) = \mathcal{N}(\boldsymbol{x}; \; \boldsymbol{\mu}, \; W W^{T} + \sigma^2 I)
+  $$
+    
+</li>
+</ul>
+</li>
+<li><p>Maximum Likelihood:<br>The maximum likelihood solutions are shown by <a href="https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/1467-9868.00196" target="_blank" rel="noopener">Tipping and Bishop, 1999</a>: </p>
+
+  $$
+  W_{ML} = U_k (\Lambda_k - \sigma^2 I)^{\frac{1}{2}} R\\
+  \sigma_{ML}^2 = \frac{1}{d-k} \sum_{i=k+1}^{d}\lambda_{i}
+  $$
+    
+<ul>
+<li>$U_k$   are $k$ principal eigenvectors of $\hat{\Sigma} = Cov(X) = \frac{1}{n}X X^T$  .</li>
+<li>$\Lambda_k$   is diagonal matrix with eighenvalues.</li>
+<li>$R$   is arbitrary orthogonal matrix, interpreted as a rotation in the latent space, indicating not unique solutions.</li>
+<li>Another option to find $W$ and $\sigma^2$ is EM algorithm.</li>
+</ul>
+</li>
+<li><p>Relation to PCA:</p>
+<ul>
+<li><p>The closest thing to PCA mapping is the posterior distribution $p(\boldsymbol{z}| \; \boldsymbol{x})$. To find it, we can fix $\boldsymbol{x}$ as a constant in the joint distribution $p(\boldsymbol{z},\; \boldsymbol{x})$ and use the <strong>important equation</strong> just mentioned above.</p>
+
+    $$
+    p(\boldsymbol{z}| \; \boldsymbol{x} = \mathcal{N}(\boldsymbol{z}; \; M^{-1} W^{T} (\boldsymbol{x} - \boldsymbol{\mu}), \; \sigma^2 M^{-1})
+    $$
+      
+<p>, where $M = W^T W + \sigma^2 I$  .</p>
+</li>
+<li><p>PCA projection $\hat{\boldsymbol{x}}$: </p>
+
+    $$
+    \hat{\boldsymbol{x}} = W_{ML} \mathbb{E}(\boldsymbol{z}|\; \boldsymbol{x}) = W_{ML} M_{ML}^{-1} W_{ML}^{T} \boldsymbol{x}
+    $$  
+    
+<p>, where $M_{ML} = W_{ML}^{T} W_{ML} + \sigma^{2}I \;$ and $\; W_{ML} = U_k (\Lambda_k - \sigma^2 I)^{\frac{1}{2}}$  .</p>
+</li>
+<li><p>For $\sigma^2 \rightarrow 0$, we recover the PCA projection $\hat{\boldsymbol{x}}$:</p>
+
+  $$
+  \begin{aligned}
+  W_{ML} M_{ML}^{-1} W_{ML}^{T} \boldsymbol{x} 
+  & = U_k \Lambda_k^{1/2} ((U_k \Lambda_k^{1/2})^T (U_k \Lambda_k^{1/2}))^{-1} (U_k \Lambda_k^{1/2})^{T} \boldsymbol{x}\\
+  & = U_k U_k^T \boldsymbol{x}
+  \end{aligned}
+  $$  
+  
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-Lab-for-Chapter-2"><a href="#2-4-Lab-for-Chapter-2" class="headerlink" title="2.4 Lab for Chapter.2"></a>2.4 Lab for Chapter.2</h2><iframe src="https://zengzhanhang.github.io/Documents/DME/02_Lab_2_Principal_component_analysis_solution.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h1 id="3-Dimensionality-Reduction"><a href="#3-Dimensionality-Reduction" class="headerlink" title="3. Dimensionality Reduction"></a>3. Dimensionality Reduction</h1><h2 id="3-1-Linear-Dimensionality-Reduction"><a href="#3-1-Linear-Dimensionality-Reduction" class="headerlink" title="3.1 Linear Dimensionality Reduction"></a>3.1 Linear Dimensionality Reduction</h2><h3 id="3-1-1-From-Data-Matrix"><a href="#3-1-1-From-Data-Matrix" class="headerlink" title="3.1.1 From Data Matrix"></a>3.1.1 From Data Matrix</h3><ul>
+<li><p>Observed (uncentered) data: $\tilde{X} = (\boldsymbol{x_1}, \boldsymbol{x_2}, \dots, \boldsymbol{x_n})_{d \times n}$</p>
+</li>
+<li><p>Center data: $X =  \tilde{X} C_n$ , where $C_n = I_{n} - \frac{1}{n} 1_n 1_n^{T}\ $  .</p>
+</li>
+<li><p><strong>Option 1</strong> - compute PC scores via eigen values decomposition:</p>
+  
+    $$
+    \begin{aligned}
+    \Sigma & = \frac{1}{n}X X^T = U \Lambda U^T
+    \end{aligned}
+    $$
+    
+<ul>
+<li><p>Denote $U_k$ with the first $k$ eigen vectors of $\Sigma$ corresponding to the top $k$ eigen values: $U_k = (\boldsymbol{u_1}, \boldsymbol{u_2}, \dots, \boldsymbol{u_k})_{d \times k}$</p>
+</li>
+<li><p>PC scores:</p>
+
+    $$
+    \begin{aligned}
+    \underset{k \times 1}{\boldsymbol{z}_i} = \underset{k \times d}{U_k^T} \; \underset{d \times 1}{\boldsymbol{x}_i} , & & \underset{k \times n}{Z} = \underset{k \times d}{U_k^T} \; \underset{d \times n }{X}
+    \end{aligned}
+    $$
+    
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Option 2</strong> - compute PC scores via Gram Matrix:
+  $$
+  \begin{aligned}
+  G = X^T X = (USV^T)^T(USV^T) = V S^T U^T U S V^T = VS^T SV^T = V \tilde{\Lambda} V^T 
+  \end{aligned}\\
+  \begin{aligned}
+  \underset{k \times n}{Z} = \underset{k \times k}{\sqrt{\tilde{\Lambda}}} \underset{k \times n}{V_k^T}, & & V_k = (\boldsymbol{v}_1, \dots, \boldsymbol{v}_k)
+  \end{aligned}
+  $$
+  
+</li>
+</ul>
+<h3 id="3-1-2-From-Inner-Product"><a href="#3-1-2-From-Inner-Product" class="headerlink" title="3.1.2 From Inner Product"></a>3.1.2 From Inner Product</h3>
+$$
+\begin{aligned}
+(G)_{ij} = \boldsymbol{x}_i^T \boldsymbol{x}_j & & X = \tilde{X} C_n & & \tilde{G} = \tilde{X}^T \tilde{X} 
+\end{aligned}\\
+G = X^T X = C_n \tilde{X}^T \tilde{X} C_n = C_n \tilde{G} C_n
+$$
+
+<h3 id="3-1-3-From-Distance-Matrix"><a href="#3-1-3-From-Distance-Matrix" class="headerlink" title="3.1.3 From Distance Matrix"></a>3.1.3 From Distance Matrix</h3><ul>
+<li>If only given squared distance $\delta_{ij}^2$ between data points $\tilde{\boldsymbol{x_i}}$ and $\tilde{\boldsymbol{x_j}} \ $.</li>
+</ul>
+
+$$
+\delta_{ij}^2 = ||\tilde{\boldsymbol{x_i}} - \tilde{\boldsymbol{x_j}}||^2 = (\tilde{\boldsymbol{x_i}} - \tilde{\boldsymbol{x_j}})^T (\tilde{\boldsymbol{x_i}} - \tilde{\boldsymbol{x_j}})
+$$
+
+<ul>
+<li>Distance Matrix $\Delta$ contains elements $\delta_{ij} \ $.</li>
+</ul>
+
+$$
+\delta_{ij}^2 = ||(\tilde{\boldsymbol{x_i}} -\mu) - (\tilde{\boldsymbol{x_j}} - \mu)||^2 = ||\boldsymbol{x_i} - \boldsymbol{x_j}||^2 = (\boldsymbol{x_i} - \boldsymbol{x_j})^T(\boldsymbol{x_i} - \boldsymbol{x_j})\\
+\delta_{ij}^2 = ||\boldsymbol{x_i}||^2 + ||\boldsymbol{x_j}||^2 -2\boldsymbol{x_i}^T \boldsymbol{x_j}
+$$
+
+<ul>
+<li>Center the distance:</li>
+</ul>
+
+$$
+(C_n \Delta C_n)_{ij} = (\Delta C_n)_{ij} - \frac{1}{n} \sum_{i} (\Delta C_n)_{ij} = - 2\boldsymbol{x_i}^T \boldsymbol{x_j}\\
+G = -\frac{1}{2}C_n \Delta C_n
+$$
+
+<h2 id="3-2-Non-linear-Dimensionalisty-Reduction-via-Kernel-PCA"><a href="#3-2-Non-linear-Dimensionalisty-Reduction-via-Kernel-PCA" class="headerlink" title="3.2 (Non-linear) Dimensionalisty Reduction via Kernel PCA"></a>3.2 (Non-linear) Dimensionalisty Reduction via Kernel PCA</h2><ul>
+<li><p>To obtain new data matrix $\Phi$ using the transforming function $\phi(\boldsymbol{x}_i)$.</p>
+
+$$
+\Phi = (\phi_1, \phi_2, \dots, \phi_n) = (\phi(\boldsymbol{x}_1), \phi(\boldsymbol{x}_2), dots, \phi(\boldsymbol{x}_n))
+$$
+
+</li>
+<li><p><strong>Kernel Trick</strong>: inner product of some functions can be computed as:</p>
+</li>
+</ul>
+
+$$
+\phi(\boldsymbol{x}_i)^T \phi(\boldsymbol{x}_j) = k(\boldsymbol{x}_i, \boldsymbol{x}_j)
+$$
+
+<ul>
+<li><p>uncentered Gram Matrix $G$ of $\Phi$ with elements $(\tilde{G})_{ij}$:</p>
+
+$$
+\tilde{G})_{ij} = \phi(\boldsymbol{x}_i)^T \phi(\boldsymbol{x}_j) = k(\boldsymbol{x}_i, \boldsymbol{x}_j)
+$$
+
+<ul>
+<li>Polynomial kernel: $k(\boldsymbol{x}_i, \boldsymbol{x}_j) = (\boldsymbol{x}_i^T \boldsymbol{x}_j)^\alpha$<br>Gaussian kernel: $k(\boldsymbol{x}_i, \boldsymbol{x}_j) = exp \left( - \frac{||\boldsymbol{x_i} - \boldsymbol{x}_j||^2}{2 \sigma^2} \right)$</li>
+</ul>
+</li>
+<li><p>Then applying methods in <a href="#From-Inner-Product">Sec 3.1.2</a> and <a href="#From-Data-Matrix">Sec 3.1.1</a> to compute PC scores.</p>
+</li>
+</ul>
+<h2 id="3-3-Multidimensional-Scaling-MDS"><a href="#3-3-Multidimensional-Scaling-MDS" class="headerlink" title="3.3 Multidimensional Scaling (MDS)"></a>3.3 Multidimensional Scaling (MDS)</h2><h3 id="3-3-1-Metric-MDS"><a href="#3-3-1-Metric-MDS" class="headerlink" title="3.3.1 Metric MDS"></a>3.3.1 Metric MDS</h3><ul>
+<li><p>Assumption: the numerical values of dissimilarities (e.g. Euclidean distance) carry information.</p>
+</li>
+<li><p>Optimisation Problem:</p>
+
+$$
+\begin{aligned}
+\text{minimise}& & w_{ij}(||\boldsymbol{z}_i - \boldsymbol{z}_j|| - \delta_{ij})^2
+\end{aligned}
+$$
+
+<ul>
+<li>$\delta_{ij}$ are dissimilarities between two data items, e.g. Euclidean Distance.</li>
+<li>$||\boldsymbol{z}_i - \boldsymbol{z}_j|| \ $ is Euclidean distance betweeen $\boldsymbol{z}_i \ $ and $\ \boldsymbol{z}_j \ $, i.e., $\ \sqrt{(\boldsymbol{z}_i - \boldsymbol{z}_j)^T (\boldsymbol{z}_i - \boldsymbol{z}_j)} \ $.</li>
+<li>$w_{ij} \ $ are some weights specified by users.</li>
+<li>if $\ w_{ij} = \frac{1}{\delta_{ij}} \ $, the MDS is called Sammon nonlinear mapping emphasing the faithful representation of samll dissimilarities.</li>
+<li>Solved by gradient descent.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-2-Non-metric-MDS"><a href="#3-3-2-Non-metric-MDS" class="headerlink" title="3.3.2 Non-metric MDS"></a>3.3.2 Non-metric MDS</h3><ul>
+<li>Assumption: only relationship between $\ \delta_{ij} \ $ matters, i.e., whether $\ \delta_{12} &gt; \delta_{13}\ $ or $\ \delta_{12} &lt; \delta_{13}\ $ .</li>
+<li><p>Optimisation Problem:</p>
+
+$$
+\begin{aligned}
+\underset{\boldsymbol{z_1}, \boldsymbol{z_2}, \dots, \boldsymbol{z_n}, f}{\text{minimise}}& & \sum_{i \le j} w_{ij} (||\boldsymbol{z}_i - \boldsymbol{z}_j|| - f(\delta_{ij}))^2
+\end{aligned}
+$$
+
+<ul>
+<li>Actual values of $\ \delta_{ij} \ $ do not matter.</li>
+<li>$f \ $ is monotonic (non-decreasing) function converting dissimilarities to distances.</li>
+<li>Solved by iterating between optimisation w.r.t $\ \boldsymbol{z}_i \ $ and optimisation w.r.t $\ f \ $, which can be done by regression.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-3-Classical-MDS"><a href="#3-3-3-Classical-MDS" class="headerlink" title="3.3.3 Classical MDS:"></a>3.3.3 Classical MDS:</h3><ul>
+<li>Assumption: numerical values of $\ \delta_{ij} \ $ matter.</li>
+<li>Dissimilarities $\ \delta_{ij} \ $ are (squared) Eucldiean distance between some unknown vectors.</li>
+<li>Distance matrix $\ \Delta \ $ is formed by $\ \delta_{ij} \ $</li>
+<li>Using the method in <a href="#From-Distance-Matrix">Sec 3.1.3</a>:<ol>
+<li>Compute hypothetical Gram matrix $\ G’ \ $ of unknown centered data points.
+    $$
+    \begin{aligned}
+    G = -\frac{1}{2}C_n \Delta C_n ,& & C_n = I_{n} - \frac{1}{n} 1_n 1_n^{T}
+    \end{aligned}
+    $$
+    </li>
+<li>Compute top k eigen values $\ \sigma_k^2 \ $ and corresponding eigen vectors $\ \boldsymbol{v}_k \ $ of $\ G \ $ and form $\ \tilde{\Lambda}_k = diag(\sigma_1^2, \sigma_2^2, \dots, \sigma_k^2) \ $ and $\ V_k = (\boldsymbol{v}_1, \boldsymbol{v}_2, \dots, \boldsymbol{v}_k)_{n \times k}$</li>
+<li>$\underset{k \times n}{Z} = \underset{k \times k}{\sqrt{\tilde{\Lambda}}} \; \underset{k \times n}{V_k^T}$</li>
+</ol>
+</li>
+<li>$\Delta \ $ is not necessary positive semi-definite, thus, some eigen values might be negative.<ul>
+<li><strong>Solution</strong>: choose $\ k \ $small enough to avoid negative eigen values.</li>
+</ul>
+</li>
+<li>Classical MDS solution for $\ k’ &lt; k \ $ is directly given by the first $\ k’ \ $ corordinates of $\ k \ $ dimensional $\ \boldsymbol{z} \ $.<ul>
+<li>Alternative approximate negative definite $\ \Delta \ $ by:
+    $$
+    \begin{aligned}
+    & \text{minimise}& & ||(-\frac{1}{2}C_n \Delta C_n) - M^T M||_F\\
+    & \text{subject to}& & rank(M^T M) = k
+    \end{aligned}
+    $$
+    
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-4-Isometric-Features-Mapping-Isomap"><a href="#3-3-4-Isometric-Features-Mapping-Isomap" class="headerlink" title="3.3.4 Isometric Features Mapping (Isomap)"></a>3.3.4 Isometric Features Mapping (Isomap)</h3><ul>
+<li><p>Steps of Isomap</p>
+<ol>
+<li>Construct the neighbourhood graph via ‘<em>k nearest neighbour</em>‘ or <em>all data points within a certain (Euclidean) distance</em>.</li>
+<li>Construct the shortest path (distances) as geodesic distance</li>
+<li>Construct the low dimensional embeding of these data via MDS so as to represent these data.</li>
+</ol>
+</li>
+<li><p><em>Geodesic distance</em> is measured by the shortest distance between them when only allowed to travel on the data manifold from one neighbouring data point to the next.</p>
+</li>
+<li>Isomap well represents the circular structure when learned graph is connected.</li>
+</ul>
+<h2 id="3-4-Lab-for-Chapter-3"><a href="#3-4-Lab-for-Chapter-3" class="headerlink" title="3.4 Lab for Chapter.3"></a>3.4 Lab for Chapter.3</h2><iframe src="https://zengzhanhang.github.io/Documents/DME/03_Lab_3_Unsupervised_dimensionality_reduction_solution.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h1 id="4-Predictive-Modelling-and-Generalization"><a href="#4-Predictive-Modelling-and-Generalization" class="headerlink" title="4. Predictive Modelling and Generalization"></a>4. Predictive Modelling and Generalization</h1><h2 id="4-1-Prediction-and-Training-Loss"><a href="#4-1-Prediction-and-Training-Loss" class="headerlink" title="4.1 Prediction and Training Loss"></a>4.1 Prediction and Training Loss</h2><h3 id="4-1-1-Prediction-Loss"><a href="#4-1-1-Prediction-Loss" class="headerlink" title="4.1.1 Prediction Loss"></a>4.1.1 Prediction Loss</h3>
+$$
+\mathcal{J}(h) = \mathbb{E}_{\hat{y}, \ y} \left[ \mathcal{L}(\hat{y}, \ y) \right] = \mathbb{E}_{\boldsymbol{x}, \ y} \left[ \mathcal{L}(h(\boldsymbol{x}), \ y) \right]
+$$
+
+<ul>
+<li>The term $\ \mathbb{E}_{\boldsymbol{x}, \ y} \ $ means expectation w.r.t $\ p(\boldsymbol{x},\ y) \ $ .</li>
+</ul>
+<h3 id="4-1-2-Training-Loss"><a href="#4-1-2-Training-Loss" class="headerlink" title="4.1.2 Training Loss"></a>4.1.2 Training Loss</h3>
+$$
+\mathcal{J}_{\lambda}^{*} = \underset{\theta}{min} \ \mathcal{J}_{\lambda}(\theta) = \frac{1}{n} \sum_{i=1}^{n}  \left[ \mathcal{L}(h(\boldsymbol{x}_i; \ \theta), \ y_i) \right]
+$$
+
+<h2 id="4-2-Generalisation-Performance"><a href="#4-2-Generalisation-Performance" class="headerlink" title="4.2 Generalisation Performance"></a>4.2 Generalisation Performance</h2><h3 id="4-2-1-Generalisation-Loss"><a href="#4-2-1-Generalisation-Loss" class="headerlink" title="4.2.1 Generalisation Loss"></a>4.2.1 Generalisation Loss</h3><ul>
+<li><p>For <strong>prediction function</strong></p>
+
+$$
+\mathcal{J}(\hat{h}) = \mathbb{E}_{\boldsymbol{x}, \ y} \left[ \mathcal{L}(\hat{h}(\boldsymbol{x}), \ y) \right]
+$$
+
+<ul>
+<li>Done with held-out data</li>
+</ul>
+</li>
+<li><p>For <strong>algorithm</strong></p>
+
+$$
+\bar{\mathcal{J}}(\mathcal{A}) = \mathbb{E}_{D^{train}}\left[ \mathcal{J}(\hat{h}) \right] = \mathbb{E}_{D^{train}}\left[ \mathcal{J}(\mathcal{A}(D^{train})) \right]
+$$
+
+<ul>
+<li>See <a href="/images/DME/lecture-notes.pdf">DME Lecture Notes</a> for more details.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-2-Overfitting-and-Underfitting"><a href="#4-2-2-Overfitting-and-Underfitting" class="headerlink" title="4.2.2 Overfitting and Underfitting"></a>4.2.2 Overfitting and Underfitting</h3><blockquote>
+<ul>
+<li>Overfitting: Reducing the model complexity, the prediction loss decreases.</li>
+<li>Underfitting: Increasing the model complexity, the prediction loss decreases.  </li>
+</ul>
+</blockquote>
+<ul>
+<li><p>Solutions: <strong>Model Selection</strong> or <strong>Regularisation</strong> . </p>
+</li>
+<li><p>Regularisation: </p>
+  
+    $$
+    \begin{aligned}
+    & \text{minimise} & & \mathcal{J}_{\boldsymbol{\lambda}}(\boldsymbol{\theta}) + \lambda_{reg} R(\boldsymbol{\theta})
+    \end{aligned}
+    $$
+    
+<ul>
+<li>L2 regularisation: $\; \; \; R(\boldsymbol{\theta}) = \sum_{i} \theta_i^2 \; $</li>
+<li>L1 regularisation: $\; \; \; R(\boldsymbol{\theta}) = \sum_{i} |\theta_i| \; $</li>
+</ul>
+</li>
+<li>Either <strong>model complexity</strong> and <strong>size of training data</strong> matter generalisation performance, See <a href="/images/DME/example1.pdf">4.2.3 Example</a> on DME Lecture Notes.</li>
+</ul>
+<h2 id="4-3-Estimating-the-Generalisation-Performance"><a href="#4-3-Estimating-the-Generalisation-Performance" class="headerlink" title="4.3 Estimating the Generalisation Performance"></a>4.3 Estimating the Generalisation Performance</h2><p>We typically need to estimate the generalisation performance twice: Once for hyperparameter selection, and once for ﬁnal performance evaluation.</p>
+<h3 id="4-3-1-Methods-for-Estimating-the-Generalisation-Performance"><a href="#4-3-1-Methods-for-Estimating-the-Generalisation-Performance" class="headerlink" title="4.3.1 Methods for Estimating the Generalisation Performance"></a>4.3.1 Methods for Estimating the Generalisation Performance</h3><h4 id="Held-out-Approach"><a href="#Held-out-Approach" class="headerlink" title="Held-out Approach"></a><strong>Held-out Approach</strong></h4><ul>
+<li>Prediction function:  
+    $$
+    \begin{aligned}
+    \hat{h} = \mathcal{A}(D^{train})
+    \end{aligned}
+    $$
+    </li>
+<li><p>Prediction Loss on Testing/ Validation Sets $\ \tilde{D} \ $.</p>
+  
+    $$
+    \begin{aligned}
+    \hat{\mathcal{J}}(\hat{h}: \  \tilde{D}) = \frac{1}{n}\sum_{i=1}^{n}\mathcal{L} \left( \hat{h}(\tilde{\boldsymbol{x}}_i, \  \tilde{y}_i) \right)
+    \end{aligned}
+    $$
+    
+<ol>
+<li>Common split ratios $\ n/ \tilde{n} \ $: 60/40, 70/30 or 80/20 .</li>
+<li>If the number of (hyper-)parameters is large, let more data on training set.</li>
+<li>Split randomly.</li>
+<li>Stratification: classes are presented in same proportion  in both sets.</li>
+<li>Drawback: estimated prediction loss may varies strongly in different $\ \tilde{D} \ $, unless $\ \tilde{n} \ $ is large. <strong>Solve by Cross-Validation</strong></li>
+</ol>
+</li>
+</ul>
+<h4 id="Cross-Validation-Approach"><a href="#Cross-Validation-Approach" class="headerlink" title="Cross-Validation  Approach"></a><strong>Cross-Validation  Approach</strong></h4><div style="text-align:center"><br><img src="/images/DME/cross_validation.png" alt="Sketch of K-fold cross-validation for K = 5." title="Sketch of K-fold cross-validation for K = 5."><br></div>
+
+<ol>
+<li><p><strong>K-fold</strong>: Construct k pairs of $\ D^{train} \ $ and $\ D^{val} \ $.</p>
+ 
+    $$
+    \begin{aligned}
+    & D^{train} = D_{i \neq k} & & D^{val} = D_k
+    \end{aligned}
+    $$
+    
+</li>
+<li><p><strong>K Prediction functions</strong>: obtained by using k training sets . </p>
+ 
+    $$
+    \begin{aligned}
+    \hat{h}_k = \mathcal{A}(D_{k}^{train})
+    \end{aligned}
+    $$
+    
+</li>
+<li><p><strong>K performance Estimations</strong>: evaluated on k validation sets .</p>
+ 
+    $$
+    \begin{aligned}
+    \hat{\mathcal{J}}_k = \hat{\mathcal{J}}(\hat{h}_k : \ D_k^{val})
+    \end{aligned}
+    $$
+    
+</li>
+<li><p><strong>Cross Validation (CV) Score</strong>: averaging all k $\ \hat{\mathcal{J}}_k \ $</p>
+ 
+    $$
+    \begin{aligned}
+    CV = \frac{1}{K} \sum_{k=1}^{K}\hat{\mathcal{J}}_k \left(\mathcal{A} (D_k^{train}: D_k^{val}) \right) = \hat{{\bar{\mathcal{J}}}} (\mathcal{A})
+    \end{aligned}
+    $$
+    
+</li>
+</ol>
+<ul>
+<li><p>Estimate <strong>Variability</strong> of CV score</p>
+  
+    $$
+    \begin{aligned}
+    Var(CV) \approx \frac{1}{k} Var(\hat{\mathcal{J}}_k), &  & Var{\hat{\mathcal{J}}} = \frac{1}{k} = (\hat{\mathcal{J}}_k - CV) ^2  
+    \end{aligned}
+    $$
+    
+</li>
+<li><p><strong>LOOCV</strong> (Leave-One-Out Cross-Validation): $\ D^{val} \ $ contains only one data point.</p>
+<ul>
+<li>Generally expensive, but for some problems, the computation can be done quickly. For a further discussion of the choice of K, see e.g. Section 7.10 in the textbook by Hastie, Tibshirani, and Friedman <a href="https://web.stanford.edu/~hastie/Papers/ESLII.pdf" target="_blank" rel="noopener">(2009)</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-2-Hyperparameters-Selection-and-Performance-Evaluation"><a href="#4-3-2-Hyperparameters-Selection-and-Performance-Evaluation" class="headerlink" title="4.3.2 Hyperparameters Selection and Performance Evaluation:"></a>4.3.2 Hyperparameters Selection and Performance Evaluation:</h3><h4 id="Option-1-Two-Times-Held-out"><a href="#Option-1-Two-Times-Held-out" class="headerlink" title="Option 1 - Two Times Held-out"></a><strong>Option 1</strong> - Two Times Held-out</h4><ol>
+<li>Split off some testing data to evaluate the final performance., e.g. typically, $\ D^{test} \ $ = 20 % of $\ D \ $.</li>
+<li>Split remaining data into $\ D^{train} \ $, $\ D^{val} \ $, e.g. 80/20 ratio.</li>
+<li>Tuning parameters $\ \boldsymbol{\lambda} \ $ on $\ D^{train} \ $, return a set of $\ \hat{\boldsymbol{\lambda}} \ $ . 
+    $$
+    \begin{aligned}
+    \hat{h}_{\boldsymbol{\lambda}} = \mathcal{A}_{\boldsymbol{\lambda}} (D^{train}) 
+    \end{aligned}
+    $$
+    </li>
+<li>Compute prediction loss $\ PL({\boldsymbol{\lambda}}) \ $ on $\ D^{val} \ $. 
+    $$
+    \begin{aligned}
+    PL(\boldsymbol{\lambda}) = \hat{\mathcal{J}} (\hat{h}_{\boldsymbol{\lambda}}: \ D^{val})
+    \end{aligned}
+    $$
+    
+ and choosing the $\ \boldsymbol{\lambda} \ $ by minimising $\ PL(\boldsymbol{\lambda}) \ $ 
+    $$
+    \begin{aligned}
+    \hat{\boldsymbol{\lambda}} = \underset{\boldsymbol{\lambda}}{\text{argmin }} PL(\boldsymbol{\lambda})
+    \end{aligned}
+    $$
+    </li>
+<li>Using $\ \hat{\boldsymbol{\lambda}} \ $, re-estimate $\ \boldsymbol{\theta} \ $ on the union of $\ D^{train} \ $ and $\ D^{val} \ $. 
+    $$
+    \begin{aligned}
+    \hat{h} = \mathcal{A}_{\hat{\boldsymbol{\lambda}}} = \left( D^{train} U D^{val} \right)
+    \end{aligned}
+    $$
+    </li>
+<li>Compute prediction loss on $\ D^{test} \ $. 
+    $$
+    \begin{aligned}
+    \hat{\mathcal{J}} = \hat{\mathcal{J}}(\hat{h}:\ D^{test})
+    \end{aligned}
+    $$
+    </li>
+<li>Re-estimate $\ \hat{h} \ $ on all data $\ D \ $</li>
+</ol>
+<h4 id="Option-2-Cross-validation-Held-out"><a href="#Option-2-Cross-validation-Held-out" class="headerlink" title="Option 2 - Cross-validation + Held-out"></a><strong>Option 2</strong> - Cross-validation + Held-out</h4><ol>
+<li>Split of $\ D^{test} \ $, e.g. $\ D^{test} \ $ = 20 % of $\ D \ $.</li>
+<li>Compute CV score on remaining data $\ D^{train} \ $. 
+    $$
+    EPL(\boldsymbol{\lambda}) = CV
+    $$
+    </li>
+<li>Choose $\ \hat{\boldsymbol{\lambda}} = \underset{\boldsymbol{\lambda}}{\text{argmin }}EPL(\boldsymbol{\lambda}) \ $ </li>
+<li>Re-estimate $\ \boldsymbol{\theta} \ $ on $\ D^{train} \ $ using $\ \hat{\boldsymbol{\lambda}} \ $. 
+    $$
+    \hat{h} = \mathcal{A}_{\boldsymbol{\lambda}} (D^{train})
+    $$
+    </li>
+<li>Compute prediction loss on $\ D^{test} \ $.</li>
+<li>Re-estimate $\ \hat{h} \ $ on all data $\ D \ $</li>
+</ol>
+<h2 id="4-4-Loss-Functions-in-Predictive-Models"><a href="#4-4-Loss-Functions-in-Predictive-Models" class="headerlink" title="4.4 Loss Functions in Predictive Models."></a>4.4 Loss Functions in Predictive Models.</h2><h3 id="4-4-1-Regression"><a href="#4-4-1-Regression" class="headerlink" title="4.4.1 Regression"></a>4.4.1 Regression</h3>
+$$
+\begin{aligned}
+& L(\hat{y},\ y) = \frac{1}{2}\left( \hat{y} - y \right)^2
+& & \text{(Square Loss)}\\
+& L(\hat{y},\ y) = | \hat{y} - y |
+& & \text{(Absolute Loss)}\\
+& L(\hat{y},\ y) = 
+    \begin{cases}
+        \frac{1}{2}\left( \hat{y} - y \right)^2 & \text{if } | \hat{y} - y |< \delta\\
+        \delta | \hat{y} - y | - \frac{1}{2} \delta^2 & \text{otherwise}
+    \end{cases}
+& & \text{(Huber Loss)}
+\end{aligned}
+$$
+
+<h3 id="4-4-2-Classification"><a href="#4-4-2-Classification" class="headerlink" title="4.4.2 Classification"></a>4.4.2 Classification</h3><h4 id="4-4-2-1-Non-differentiable-Loss-Function"><a href="#4-4-2-1-Non-differentiable-Loss-Function" class="headerlink" title="4.4.2.1 Non-differentiable Loss Function"></a>4.4.2.1 Non-differentiable Loss Function</h4><ul>
+<li><p>Assume k different classes, loss function $\ L(\hat{y}, \ y) \ $ can be represented as $\ k \times k \ $ matrix.</p>
+  
+    $$
+    L(\hat{y}, \ y) = 
+    \begin{bmatrix}
+        L(1,1) & L(1,2) &  \dots  & L(1,k) \\
+        L(2,1) & L(2,2) &  \dots  & L(2,k) \\
+        \vdots & \vdots &  \ddots & \vdots \\
+        L(k,1) & L(k,2) &  \dots  & L(k,k)
+    \end{bmatrix}
+    $$
+    
+<ul>
+<li>The diagonal $\ L(i,i) \ $ are zero as correct prediction.</li>
+<li>The off-diagonal $\ L(i,j) \ $ are positive: loss incurred when predicting ‘i’ instead of ‘j’</li>
+</ul>
+</li>
+<li><p>Zero-One loss:</p>
+<ul>
+<li>If $\ L(i,\ j) = 1 \ $ for $\ i \neq j \ $, and 0 otherwise  
+        $$
+        L(\hat{y}, \ y) = 
+        \begin{cases}
+            1 & i \neq j\\
+            0 & otherwise
+        \end{cases}
+        $$
+        </li>
+<li>The expected prediction loss:  
+        $$
+        \begin{aligned}
+        \mathcal{J}(h) & = \mathbb{E}_{\boldsymbol{x}, \ y} L \left(h(\boldsymbol{x}), \ y)  \right)\\
+        & = \mathbb{E}_{\hat{y}, \ y} L \left(\hat{y}, \ y)  \right)\\
+        & = \sum_{i, j} L(i,\ j) p(i,\ j)\\
+        & = \sum_{i \neq j} p(i, \ j)\\
+        & = \mathbb{P}(y \neq \hat{y})
+        \end{aligned}
+        $$
+        
+  , where $\ p(i,\ j) = p(\hat{y} = i, \ y = j) \ $<ul>
+<li>Known as ‘missclassification rate’</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Binary Classification</p>
+</li>
+</ul>
+<div style="text-align:center"><br><img src="/images/DME/binary_classification.png" alt="Possible events and their probabilities in binary classiﬁcation." title="Possible events and their probabilities in binary classiﬁcation."><br></div>
+
+<ul>
+<li><p>receiver operating characteristic curve (<a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="noopener">ROC curve</a>)</p>
+<ul>
+<li><p>Minimising the false-positive (or false-negative) rate alone is not a very meaningful strategy: The reason is that the trivial classiﬁer $\ h(x) = \hat{y} = −1 \ $ would be the optimal solution. But for such a classiﬁer the true-positive rate would be zero. </p>
+</li>
+<li><p>ROC curve visualise a generally a trade-oﬀ between true-positive rate (<strong>TPR</strong>) and false-positive rates (<strong>FPR</strong>).</p>
+</li>
+</ul>
+</li>
+</ul>
+<div style="text-align:center"><br><img src="/images/DME/ROC.png" alt="Plotting the false-positive rate (“cost”) of a classiﬁer versus its true-positive rate (“benefit”). Adapted from https://en.wikipedia.org/wiki/Receiver_operating_characteristic" title="ROC curve"><br></div>
+
+<h4 id="4-4-2-2-Diﬀerentiable-Loss-Functions"><a href="#4-4-2-2-Diﬀerentiable-Loss-Functions" class="headerlink" title="4.4.2.2 Diﬀerentiable Loss Functions"></a>4.4.2.2 Diﬀerentiable Loss Functions</h4><p>For simplicity, we consider here binary classiﬁcation only. Let us assume that $\  \hat{y} ∈{−1,1} \ $ is given by<br>
+$$
+\hat{y}(\boldsymbol{x}) = sign(h(\boldsymbol{x}))
+$$
+<br>, where $\ h(\boldsymbol{x})\ $ is real-valued.</p>
+
+$$
+\text{correct classiﬁcation of } \boldsymbol{x} ⇐⇒ yh(\boldsymbol{x}) > 0. 
+$$
+
+<ul>
+<li>Loss Function:   
+    $$
+    \begin{aligned}
+    & L(\hat{y},\ y) = 
+        \begin{cases}
+            1 & \text{if } y h(\boldsymbol{x} < 0)\\
+            0 & \text{otherwise.}
+        \end{cases}
+    & & \text{(Zero-One Loss)}\\
+    & L(\hat{y},\ y) = (h(\boldsymbol{x}) - y)^2 = (1 - y h(\boldsymbol{x}))^2
+    & & \text{(Square Loss)}\\
+    & L(\hat{y},\ y) = log \left( 1 + exp(- y h(\boldsymbol{x})) \right)
+    & & \text{(Log Loss)}\\
+    & L(\hat{y},\ y) = exp(- y h(\boldsymbol{x}))
+    & & \text{(Exponential Loss)}\\
+    & L(\hat{y},\ y) = max \left( 0, \ 1 - y h(\boldsymbol{x}) \right)
+    & & \text{(Hinge Loss)}\\
+    & L(\hat{y},\ y) = max \left( 0, \ 1 - y h(\boldsymbol{x}) \right)^2
+    & & \text{(Square Hinge Loss)}\\
+    & L(\hat{y},\ y) =
+    \begin{cases}
+        - 4 y h(\boldsymbol{x}) & \text{if } y h(\boldsymbol{x}) < -1\\
+        max \left( 0, \ 1 - y h(\boldsymbol{x}) \right)^2 & \text{otherwise}
+    \end{cases}
+    & & \text{(Huberised Square Hinge Loss)}
+    \end{aligned}
+    $$
+    
+</li>
+</ul>
+<h2 id="4-5-Lab-for-Chapter-4"><a href="#4-5-Lab-for-Chapter-4" class="headerlink" title="4.5 Lab for Chapter.4"></a>4.5 Lab for Chapter.4</h2><iframe src="https://zengzhanhang.github.io/Documents/DME/04_Lab_4_Performance_evaluation_model_selection_solution.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<h1 id="Appendix-A"><a href="#Appendix-A" class="headerlink" title="Appendix A"></a>Appendix A</h1><h2 id="s-i-2-related-to-eigen-values-lambda-i-of-Sigma"><a href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma" class="headerlink" title="$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$"></a>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</h2><p>Assume $X$ centered, then, according the SVD of $X$, the covariance matrix is<br>
+$$
+\begin{aligned}
+\Sigma & = \frac{1}{n}X X^T \\
+       & = \frac{1}{n}U S V^T (U S V^T)^T = \frac{1}{n} U (\frac{1}{n}S S^T) U^T\\
+       & = U \Lambda U^T
+\end{aligned}
+$$
+</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1]: Michael E Tipping and Christopher M Bishop. “Probabilistic principal component analysis”. In: Journal of the Royal Statistical Society: Series B (Statistical Methodology) 61.3 (1999), pp. 611–622</p>
+<p>[2]: T. Hastie, R. Tibshirani, and J.H. Friedman. The Elements of Statistical Learning. Springer, 2009. </p>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>Title: </strong><a href="https://zengzhanhang.github.io/2019/05/14/DME-Data-Mining-and-Exploration-Revision/">DME - Data Mining and Exploration (INFR 11007) Review</a></li>
+            <li><strong>Author: </strong><a href="https://zengzhanhang.github.io">Zhanhang ZENG (展航)</a></li>
+            <li><strong>Link: </strong><a href="https://zengzhanhang.github.io/2019/05/14/DME-Data-Mining-and-Exploration-Revision/">https://zengzhanhang.github.io/2019/05/14/DME-Data-Mining-and-Exploration-Revision/</a></li>
+            <li><strong>Date: </strong>2019-05-14</li>
+            <li><strong>Statement: </strong>All articles in this blog, unless otherwise stated, are based on the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> license. <!-- Please indicate the source of reprint. -->
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/CoursesReview/">CoursesReview</a>,&nbsp;<a class="has-link-grey -link" href="/tags/DataMining/">DataMining</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div style="text-align:center">
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/QRcode/alipay.jpg" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="/images/QRcode/WeChatPay.jpg" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/31/StatisticalLearning/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">统计学习 - Statistical Learning</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/12/OpenCV-Cheat-Sheet/">
+                <span class="level-item">OpenCV Cheat Sheet (Python)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://zengzhanhang.github.io/2019/05/14/DME-Data-Mining-and-Exploration-Revision/';
+        this.page.identifier = '2019/05/14/DME-Data-Mining-and-Exploration-Revision/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'xiao-shu-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/icon(square)-min.png" alt="Zhanhang Zeng (展航)">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Zhanhang Zeng (展航)
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Statistics, Machine Learning &amp; Ai
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Edinburgh, the United Kingdom</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded follow-button" href="https://github.com/zengzhanhang" target="_blank">
+                <i class="fab fa-github"></i>&nbsp;&nbsp;
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Linkedin" href="https://www.linkedin.com/in/zhanhang-zeng-801a67185/">
+                
+                <i class="fab fa-linkedin-in"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/zengzhanhang">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://www.facebook.com/zengzhanhang">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Instagram" href="https://www.instagram.com/cengzhanhang">
+                
+                <i class="fab fa-instagram"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Weibo" href="https://www.weibo.com/zengzhanhang">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<!-- <div class="card widget" id="toc"> -->
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu" style="max-height: 600px; overflow: auto;">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Exploratory-Data-Analysis">
+        <!-- <span class="has-mr-6">1</span> 注释为不编号-->
+        <span>1. Exploratory Data Analysis</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-Numberical-Data-Description">
+        <!-- <span class="has-mr-6">1.1</span> 注释为不编号-->
+        <span>1.1 Numberical Data Description</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-1-Location">
+        <!-- <span class="has-mr-6">1.1.1</span> 注释为不编号-->
+        <span>1.1.1 Location</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-1-2-Scale">
+        <!-- <span class="has-mr-6">1.1.2</span> 注释为不编号-->
+        <span>1.1.2 Scale</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-1-3-Shape">
+        <!-- <span class="has-mr-6">1.1.3</span> 注释为不编号-->
+        <span>1.1.3 Shape:</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-1-4-Multivariate-Measure">
+        <!-- <span class="has-mr-6">1.1.4</span> 注释为不编号-->
+        <span>1.1.4 Multivariate Measure:</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#1-2-Data-Visualisation">
+        <!-- <span class="has-mr-6">1.2</span> 注释为不编号-->
+        <span>1.2 Data Visualisation</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-Data-Preprocessing">
+        <!-- <span class="has-mr-6">1.3</span> 注释为不编号-->
+        <span>1.3 Data Preprocessing:</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-3-1-Standardisation">
+        <!-- <span class="has-mr-6">1.3.1</span> 注释为不编号-->
+        <span>1.3.1 Standardisation:</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-2-Outlier-Detection">
+        <!-- <span class="has-mr-6">1.3.2</span> 注释为不编号-->
+        <span>1.3.2 Outlier Detection:</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#1-4-Lab-for-Chapter-1">
+        <!-- <span class="has-mr-6">1.4</span> 注释为不编号-->
+        <span>1.4 Lab for Chapter.1</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-Principal-Component-Analysis-PCA">
+        <!-- <span class="has-mr-6">2</span> 注释为不编号-->
+        <span>2. Principal Component Analysis(PCA)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-PCA-by-Variance-Maximisation">
+        <!-- <span class="has-mr-6">2.1</span> 注释为不编号-->
+        <span>2.1 PCA by Variance Maximisation</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-1-Sequential-Approach">
+        <!-- <span class="has-mr-6">2.1.1</span> 注释为不编号-->
+        <span>2.1.1 Sequential Approach</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-1-2-Simultaneous-Approach">
+        <!-- <span class="has-mr-6">2.1.2</span> 注释为不编号-->
+        <span>2.1.2 Simultaneous Approach</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-2-PCA-by-Minimisation-of-Approximation-Error">
+        <!-- <span class="has-mr-6">2.2</span> 注释为不编号-->
+        <span>2.2 PCA by Minimisation of Approximation Error</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-PCA-by-Low-Rank-Matrix-Approximation">
+        <!-- <span class="has-mr-6">2.3</span> 注释为不编号-->
+        <span>2.3 PCA by Low Rank Matrix Approximation</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-3-1-Approximation-from-Data-Matrix">
+        <!-- <span class="has-mr-6">2.3.1</span> 注释为不编号-->
+        <span>2.3.1 Approximation from Data Matrix</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-2-Approximation-from-Sample-Covariance-Matrix">
+        <!-- <span class="has-mr-6">2.3.2</span> 注释为不编号-->
+        <span>2.3.2 Approximation from Sample Covariance Matrix</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-3-Approximation-from-Gram-Matrix">
+        <!-- <span class="has-mr-6">2.3.3</span> 注释为不编号-->
+        <span>2.3.3 Approximation from Gram Matrix</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-4-Probabilistic-PCA-PPCA">
+        <!-- <span class="has-mr-6">2.3.4</span> 注释为不编号-->
+        <span>2.3.4 Probabilistic PCA (PPCA)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-4-Lab-for-Chapter-2">
+        <!-- <span class="has-mr-6">2.4</span> 注释为不编号-->
+        <span>2.4 Lab for Chapter.2</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-Dimensionality-Reduction">
+        <!-- <span class="has-mr-6">3</span> 注释为不编号-->
+        <span>3. Dimensionality Reduction</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-Linear-Dimensionality-Reduction">
+        <!-- <span class="has-mr-6">3.1</span> 注释为不编号-->
+        <span>3.1 Linear Dimensionality Reduction</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-1-From-Data-Matrix">
+        <!-- <span class="has-mr-6">3.1.1</span> 注释为不编号-->
+        <span>3.1.1 From Data Matrix</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-1-2-From-Inner-Product">
+        <!-- <span class="has-mr-6">3.1.2</span> 注释为不编号-->
+        <span>3.1.2 From Inner Product</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-1-3-From-Distance-Matrix">
+        <!-- <span class="has-mr-6">3.1.3</span> 注释为不编号-->
+        <span>3.1.3 From Distance Matrix</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-2-Non-linear-Dimensionalisty-Reduction-via-Kernel-PCA">
+        <!-- <span class="has-mr-6">3.2</span> 注释为不编号-->
+        <span>3.2 (Non-linear) Dimensionalisty Reduction via Kernel PCA</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-Multidimensional-Scaling-MDS">
+        <!-- <span class="has-mr-6">3.3</span> 注释为不编号-->
+        <span>3.3 Multidimensional Scaling (MDS)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-3-1-Metric-MDS">
+        <!-- <span class="has-mr-6">3.3.1</span> 注释为不编号-->
+        <span>3.3.1 Metric MDS</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-2-Non-metric-MDS">
+        <!-- <span class="has-mr-6">3.3.2</span> 注释为不编号-->
+        <span>3.3.2 Non-metric MDS</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-3-Classical-MDS">
+        <!-- <span class="has-mr-6">3.3.3</span> 注释为不编号-->
+        <span>3.3.3 Classical MDS:</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-4-Isometric-Features-Mapping-Isomap">
+        <!-- <span class="has-mr-6">3.3.4</span> 注释为不编号-->
+        <span>3.3.4 Isometric Features Mapping (Isomap)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-4-Lab-for-Chapter-3">
+        <!-- <span class="has-mr-6">3.4</span> 注释为不编号-->
+        <span>3.4 Lab for Chapter.3</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-Predictive-Modelling-and-Generalization">
+        <!-- <span class="has-mr-6">4</span> 注释为不编号-->
+        <span>4. Predictive Modelling and Generalization</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-Prediction-and-Training-Loss">
+        <!-- <span class="has-mr-6">4.1</span> 注释为不编号-->
+        <span>4.1 Prediction and Training Loss</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-1-Prediction-Loss">
+        <!-- <span class="has-mr-6">4.1.1</span> 注释为不编号-->
+        <span>4.1.1 Prediction Loss</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-1-2-Training-Loss">
+        <!-- <span class="has-mr-6">4.1.2</span> 注释为不编号-->
+        <span>4.1.2 Training Loss</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-2-Generalisation-Performance">
+        <!-- <span class="has-mr-6">4.2</span> 注释为不编号-->
+        <span>4.2 Generalisation Performance</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-2-1-Generalisation-Loss">
+        <!-- <span class="has-mr-6">4.2.1</span> 注释为不编号-->
+        <span>4.2.1 Generalisation Loss</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-2-Overfitting-and-Underfitting">
+        <!-- <span class="has-mr-6">4.2.2</span> 注释为不编号-->
+        <span>4.2.2 Overfitting and Underfitting</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-3-Estimating-the-Generalisation-Performance">
+        <!-- <span class="has-mr-6">4.3</span> 注释为不编号-->
+        <span>4.3 Estimating the Generalisation Performance</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-3-1-Methods-for-Estimating-the-Generalisation-Performance">
+        <!-- <span class="has-mr-6">4.3.1</span> 注释为不编号-->
+        <span>4.3.1 Methods for Estimating the Generalisation Performance</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-3-2-Hyperparameters-Selection-and-Performance-Evaluation">
+        <!-- <span class="has-mr-6">4.3.2</span> 注释为不编号-->
+        <span>4.3.2 Hyperparameters Selection and Performance Evaluation:</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-4-Loss-Functions-in-Predictive-Models">
+        <!-- <span class="has-mr-6">4.4</span> 注释为不编号-->
+        <span>4.4 Loss Functions in Predictive Models.</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-4-1-Regression">
+        <!-- <span class="has-mr-6">4.4.1</span> 注释为不编号-->
+        <span>4.4.1 Regression</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-4-2-Classification">
+        <!-- <span class="has-mr-6">4.4.2</span> 注释为不编号-->
+        <span>4.4.2 Classification</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-5-Lab-for-Chapter-4">
+        <!-- <span class="has-mr-6">4.5</span> 注释为不编号-->
+        <span>4.5 Lab for Chapter.4</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Appendix-A">
+        <!-- <span class="has-mr-6">5</span> 注释为不编号-->
+        <span>Appendix A</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#s-i-2-related-to-eigen-values-lambda-i-of-Sigma">
+        <!-- <span class="has-mr-6">5.1</span> 注释为不编号-->
+        <span>$s_i^2$ related to eigen values $\lambda_i$ of $\Sigma$</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Reference">
+        <!-- <span class="has-mr-6">6</span> 注释为不编号-->
+        <span>Reference</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo1.png" alt="DME - Data Mining and Exploration (INFR 11007) Review" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Zhanhang ZENG (展航)&nbsp;
+                All Rights Reserved
+                <br>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                Visited by <span id="busuanzi_value_site_uv">0</span> users
+                </span>
+                <span id="busuanzi_container_site_pv">
+                    Totally, <span id="busuanzi_value_site_pv">0</span> page views
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <!-- <i class="fab fa-creative-commons,fab fa-creative-commons-by,fab fa-creative-commons-nc,fab fa-creative-commons-sa"></i> -->
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Zhanhang&#39;s GitHub" href="https://github.com/zengzhanhang">
+                        
+                        <!-- <i class="fab fa-github"></i> -->
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<!-- <script src="/js/baidu_push.js" async="true"></script> -->
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
