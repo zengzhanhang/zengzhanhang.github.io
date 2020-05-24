@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>大数据技术原理与应用 - (4). 分布式数据库 HBase - 小树的面包店 | Zhanhang Zeng&#039;s Blog</title><meta description="【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库 第六章 - 云数据库  HBase 是针对 Google BigTable 的开源实现，是一个高可靠、高性能、面向列、可伸缩的分布式数据块，主"><meta property="og:type" content="blog"><meta property="og:title" content="大数据技术原理与应用 - (4). 分布式数据库 HBase"><meta property="og:url" content="https://zengzhanhang.github.io/2020/05/21/intro2BigData4/"><meta property="og:site_name" content="小树的面包店 | Zhanhang Zeng&#039;s Blog"><meta property="og:description" content="【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库 第六章 - 云数据库  HBase 是针对 Google BigTable 的开源实现，是一个高可靠、高性能、面向列、可伸缩的分布式数据块，主"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://zengzhanhang.github.io/notes/BigData/assets/thumbnail.jpg"><meta property="article:published_time" content="2020-05-21T02:55:45.000Z"><meta property="article:modified_time" content="2020-05-23T15:37:02.366Z"><meta property="article:author" content="Zhanhang (展航) ZENG"><meta property="article:tag" content="Big Data"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/notes/BigData/assets/thumbnail.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zengzhanhang.github.io/2020/05/21/intro2BigData4/"},"headline":"小树的面包店 | Zhanhang Zeng's Blog","image":["https://zengzhanhang.github.io/notes/BigData/assets/thumbnail.jpg"],"datePublished":"2020-05-21T02:55:45.000Z","dateModified":"2020-05-23T15:37:02.366Z","author":{"@type":"Person","name":"Zhanhang (展航) ZENG"},"description":"【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库 第六章 - 云数据库  HBase 是针对 Google BigTable 的开源实现，是一个高可靠、高性能、面向列、可伸缩的分布式数据块，主"}</script><link rel="canonical" href="https://zengzhanhang.github.io/2020/05/21/intro2BigData4/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?3a6a069adc986db638814c1b4a9e5ce6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-167464294-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-167464294-1');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="/img/logo1.png" alt="小树的面包店 | Zhanhang Zeng&#039;s Blog" height="28"><img class="logo-img-dark" src="/img/logo1.png" alt="小树的面包店 | Zhanhang Zeng&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/notes_TOC">Notes - 数据科学知识手册</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="Zhanhang&#039;s GitHub" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="thumbnail" src="/notes/BigData/assets/thumbnail.jpg" alt="大数据技术原理与应用 - (4). 分布式数据库 HBase"></span></div><article class="card-content article" role="article"><h1 class="title is-3 is-size-4-mobile">大数据技术原理与应用 - (4). 分布式数据库 HBase</h1><div class="article-meta size-small is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time class="level-item" dateTime="2020-05-21T02:55:45.000Z" title="2020-05-21T02:55:45.000Z">2020-05-21</time></span><span class="level-item"><i class="far fa-calendar-check"> </i><time class="level-item" dateTime="2020-05-23T15:37:02.366Z" title="2020-05-23T15:37:02.366Z">Edit: 2020-05-23</time></span><span class="level-item"><i class="fas fa-user"> </i>Zhanhang (展航) ZENG</span><span class="level-item"><i class="far fa-clock"></i> 18 minutes read (About 2632 words)</span><span class="level-item" id="busuanzi_container_page_pv"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span> visits</span></div><div class="level-left is-uppercase mt-2"><span class="level-item"><i class="fas fa-folder-open has-text-grey"></i> <a class="link-muted" href="/categories/Big-Data/">Big Data</a></span><span class="level-item"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted mr-2" rel="tag" href="/tags/Big-Data/">Big Data</a></span></div></div><div class="content"><div class="notification is-warning">
+<p><strong>【第二篇】 - 大数据存储与管理</strong>, 《大数据技术原理与应用, 林子雨》</p>
+<p>本篇介绍大数据存储与管理相关技术的概念与原理，包括</p>
+<ul>
+<li>第三章 - <a href="https://zengzhanhang.github.io/2020/05/19/intro2BigData3/">Hadoop 分布式文件系统 (HDFS)</a></li>
+<li>第四章 - <a href="#"><strong>分布式数据库 (HBase)</strong></a></li>
+<li>第五章 - <a href="#">NoSQL 数据库</a></li>
+<li>第六章 - <a href="#">云数据库</a></li>
+</ul>
+<p>HBase 是针对 Google BigTable 的开源实现，是一个高可靠、高性能、面向列、可伸缩的分布式数据块，主要用来存储非结构化和半结构化的松散数据。</p>
+<p>本章介绍 HBase 与关系型数据库的区别、访问接口、数据模型、实现原理和运行机制。</p>
+</div>
+<a id="more"></a>
+<h1 id="HBase-简介"><a href="#HBase-简介" class="headerlink" title="HBase 简介"></a>HBase 简介</h1><p>HBase 是针对 Google BigTable 的开源实现，是一个高可靠、高性能、面向列、可伸缩的分布式数据块，主要用来存储非结构化和半结构化的松散数据。</p>
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch4/HBase与其他部分的关系.png" alt="Hadoop 生态系统中 HBase 与其他部分的关系" title="Hadoop 生态系统中 HBase 与其他部分的关系" style="width: 75%;"/><br></div>
+
+<h2 id="HBase-与传统数据库的区别"><a href="#HBase-与传统数据库的区别" class="headerlink" title="HBase 与传统数据库的区别"></a>HBase 与传统数据库的区别</h2><table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="width:80px"></div></th>
+<th style="text-align:left"><div style="text-align:center">传统关系数据库</div></th>
+<th style="text-align:left"><div style="text-align:center">HBase</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数据类型</td>
+<td style="text-align:left">关系模型，具有丰富的数据类型和存储方式。</td>
+<td style="text-align:left">采用了更加简单的数据模型，它把数据存储为<strong>未经解释的字符串</strong>。</td>
+</tr>
+<tr>
+<td style="text-align:center">数据操作</td>
+<td style="text-align:left">包含了丰富的操作，如增删改查等，还会涉及复杂的多表连接。</td>
+<td style="text-align:left">不存在表与表的关系，只有简单的插入、查询、删除、清空等操作。</td>
+</tr>
+<tr>
+<td style="text-align:center">存储模式</td>
+<td style="text-align:left">基于行模式存储，元组或行会被连续地存储在磁盘页中。在读取数据时，需要顺序扫描每个元组。</td>
+<td style="text-align:left">基于列存储的，每个列族都由几个文件保存，不同列族的文件是分离的。</td>
+</tr>
+<tr>
+<td style="text-align:center">数据索引</td>
+<td style="text-align:left">通常可以针对不同列构建复杂的多个索引 (主索引 + 多个二级索引)，以提高数据访问性能。</td>
+<td style="text-align:left">只有一个索引——行键。</td>
+</tr>
+<tr>
+<td style="text-align:center">数据维护</td>
+<td style="text-align:left">更新操作会用最新的当前值去替换记录中原来的旧值，旧值被覆盖后就不会存在。</td>
+<td style="text-align:left">HBase中执行更新操作时，并不会删除数据旧的版本，而是生成一个新的版本，旧有的版本仍然保留。</td>
+</tr>
+<tr>
+<td style="text-align:center">可伸缩性</td>
+<td style="text-align:left">很难实现横向扩展 (增加机器)，纵向扩展 (升级内存、cpu 等) 的空间也比较有限。</td>
+<td style="text-align:left">为了实现灵活的水平扩展而开发的，能够轻易地通过在集群中增加或者减少硬件数量来实现性能的伸缩。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="HBase-访问接口"><a href="#HBase-访问接口" class="headerlink" title="HBase 访问接口"></a>HBase 访问接口</h2><table>
+<thead>
+<tr>
+<th><div style="width:120; text-align:center">类型</div></th>
+<th><div style="text-align:center">特点</div></th>
+<th><div style="text-align:center">场合</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Native Java API</td>
+<td>最常规和高效的访问方式</td>
+<td>适合 Hadoop MapReduce 作业并行批处理 HBase 表数据</td>
+</tr>
+<tr>
+<td>HBase Shell</td>
+<td>HBase 的命令行工具，最简单的接口</td>
+<td>适合 HBase 管理使用</td>
+</tr>
+<tr>
+<td>Thrift Gateway</td>
+<td>利用 Thrift 序列化技术，支持 C++、PHP、Python 等多种语言</td>
+<td>适合其他异构系统在线访问 HBase 表数据</td>
+</tr>
+<tr>
+<td>REST Gateway</td>
+<td>解除了语言限制</td>
+<td>支持 REST 风格的 Http API 访问 HBase</td>
+</tr>
+<tr>
+<td><strong>Pig</strong></td>
+<td>使用 Pig Latin 流式编程语言来处理 HBase 中的数据</td>
+<td>适合做数据统计</td>
+</tr>
+<tr>
+<td><strong>Hive</strong></td>
+<td>简单</td>
+<td>当需要以<strong>类似 SQL 语言方式来访问 HBase</strong> 的时候</td>
+</tr>
+</tbody>
+</table>
+<h1 id="HBase-数据模型"><a href="#HBase-数据模型" class="headerlink" title="HBase 数据模型"></a>HBase 数据模型</h1><ul>
+<li>HBase 是一个稀疏、多维度、排序的映射表，这张表的索引是行键 (Row Key)、列族 (Column Family)、列限定符 (Column Qualifier) 和时间戳 (Timestamp) 来进行索引</li>
+<li>每个值是一个未经解释的字符串，没有数据类型</li>
+<li>用户在表中存储数据，每一行都有一个可排序的行键和任意多的列</li>
+<li>表在水平方向由一个或者多个列族组成，一个列族中可以包含任意多个列，同一个列族里面的数据存储在一起</li>
+<li>列族支持动态扩展，可以很轻松地添加一个列族或列，无需预先定义列的数量以及类型，所有列均以字符串形式存储，用户需要自行进行数据类型转换</li>
+<li>HBase中执行更新操作时，并不会删除数据旧的版本，而是生成一个新的版本，旧有的版本仍然保留（这是和HDFS只允许追加不允许修改的特性相关的）</li>
+</ul>
+<h2 id="数据模型的相关概念"><a href="#数据模型的相关概念" class="headerlink" title="数据模型的相关概念"></a>数据模型的相关概念</h2><table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="text-align:center; width:80px">概念</div></th>
+<th><div style="text-align:center">描述</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">表</td>
+<td>HBase 采用表来组织数据，表由行和列组成，列划分为若干了列族。</td>
+</tr>
+<tr>
+<td style="text-align:center">行</td>
+<td>表由若干行组成，行由行键 (Row Key) 来标识。访问方式：1) 单个行键访问；2) 行键区间访问；3) 全表扫描</td>
+</tr>
+<tr>
+<td style="text-align:center">列族</td>
+<td>1. 表被份组成许多列族的集合，它是基本访问控制单元。列族需要在创建时定义好，数量不能太多，不能频繁修改，存储在一个列族下的所有数据都属于同一数据类型。<br>2. 表中的列都归属于某个列族下，数据存放在列族的某个列下。</td>
+</tr>
+<tr>
+<td style="text-align:center">列限定符</td>
+<td>列族中的数据通过列限定符 (或列) 来定位。不用事先定义，无需再不同行间保持一致，没有数据类型。</td>
+</tr>
+<tr>
+<td style="text-align:center">单元格</td>
+<td>单元格 (cell) 存储的数据没有数据类型 (未经解释的字符串) ，格中可以保存一个数据的多个版本，每个版本对应一个不同的时间戳。</td>
+</tr>
+<tr>
+<td style="text-align:center">时间戳</td>
+<td>每次对一个单元格执行操作 (新建、修改、删除) 时，HBase 都会隐式地自动生成并存储一个时间戳，用于定位格中不同版本地数据。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据坐标"><a href="#数据坐标" class="headerlink" title="数据坐标"></a>数据坐标</h2><p>HBase 用<strong>四维坐标定位</strong>一个单元格: <strong>[行键, 列族, 列限定符, 时间戳]</strong>。</p>
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch4/HBase数据模型的一个实例.png" alt="HBase 数据模型的一个实例" title="HBase 数据模型的一个实例" style="width: 50%;"/><br></div>
+
+<p>如果把思维坐标当作整体，可以视为 “键”，单元格中的数据视为 “值” 的话，HBase可以看作一个键值数据库。</p>
+<center><div style="width:80%; text-align:center">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">键</th>
+<th style="text-align:center">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[“201505003”, “Info”, “email”, “1174184619081”]</td>
+<td style="text-align:center">“<a href="mailto:xie@qq.com">xie@qq.com</a>“</td>
+</tr>
+<tr>
+<td style="text-align:center">[“201505003”, “Info”, “email”, “1174184620720”]</td>
+<td style="text-align:center">“<a href="mailto:you@163.com">you@163.com</a>“</td>
+</tr>
+</tbody>
+</table>
+</div></center>
+<h2 id="视图概念"><a href="#视图概念" class="headerlink" title="视图概念"></a>视图概念</h2><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch4/HBase数据的概念视图.png" alt="HBase 数据的概念视图" title="HBase 数据的概念视图" style="width: 65%;"/><br></div>
+
+<p>HBase 表的概念试图中，每行都包含相同的列族，但是行不需要在每个列族里存储数据。从这个角度看，HBase 表是一个稀疏的映射关系，即里面存在很多空的单元格。</p>
+<h2 id="物理视图"><a href="#物理视图" class="headerlink" title="物理视图"></a>物理视图</h2><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch4/HBase数据的物理视图.png" alt="HBase 数据的物理视图" title="HBase 数据的物理视图" style="width: 65%;"/><br></div>
+
+<p>物理存储层面，HBase 采用了基于列的存储方式，不像传统关系型数据库那样采用基于行存储的方式，这是 HBase 与传统数据库的重要区别。因此概念视图中的数据在物理层面实际上被存成了两个小片段，也就是 HBase 表按照 <code>contents</code> 和 <code>anchor</code> 两个列族分别存放，属于同一列族的数据保存在一起，同时每个列族一存放的还有行键和时间戳。</p>
+<h1 id="面向列的存储"><a href="#面向列的存储" class="headerlink" title="面向列的存储"></a>面向列的存储</h1><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch4/行式数据库与列式数据库示意图.png" alt="行式数据库与列式数据库示意图" title="行式数据库与列式数据库示意图" style="width: 70%;"/><br></div>
+
+<p>列式数据库采用 DSM (Decomposition Storage Model) 存储模型，DSM 会对关系进行垂直分解，并为每个属性分配一个子关系。因此，一个具有 $n$ 个属性的关系会被分解为 $n$ 个子关系，每个子关系单独存储，每个子关系只有当前相应的属性被请求时，才会被访问。<br>DSM 是以关系数据库中的属性或列为单位进行存储的，关系中多个元组的同一属性值会被存储在一起，而一个元组中的不同属性值通常会被存放在不同的磁盘页中。 HBase 是以列族为单位进行分解，而不是每个列都不单独存储。</p>
+<ul>
+<li><p><strong>行存储</strong>：数据按行存储在底层文件系统中。通常，每一行会被分配固定的空间。</p>
+<ul>
+<li>优点：有利于增加、修改整行记录等操作；有理由数据的读取操作。</li>
+<li>缺点：单列查询时，会读取一些不必要的数据。</li>
+</ul>
+</li>
+<li><p><strong>列存储</strong>：数据以列为单位，存储在底层文件系统中。</p>
+<ul>
+<li>优点：有利于面向单列数据的读取、统计等操作。</li>
+<li>缺点：整行读取时，可能需要多次I/O操作。</li>
+</ul>
+</li>
+</ul>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>行式数据库：适合小批量得数据处理，如联机事务型数据处理。主要用于如银行个人信息数据库之类得场景，对数据不出错要求较高。</li>
+<li>列式数据库：适合批量数据处理和即席查询 (Ad-Hoc Query)。主要用于数据挖掘、决策支持、地理信息系统等查询密集型系统中，因为每次查询都不必遍历所有数据库。</li>
+</ul>
+<p><strong>为什么列式存储适合数据分析</strong></p>
+<ul>
+<li>因为分析中常常是以一个一个属性 (也就是列) 进行分析的，而列式数存储可以直接取出需要分析的那一列数据。相反地，行式数据库中如果需要取出某一列 (例如性别、年龄) 进行分析，需要扫描整个数据包才能取出对应数据。</li>
+</ul>
+<h1 id="HBase-存储原理"><a href="#HBase-存储原理" class="headerlink" title="HBase 存储原理"></a>HBase 存储原理</h1><h2 id="HBase-功能组件"><a href="#HBase-功能组件" class="headerlink" title="HBase 功能组件"></a>HBase 功能组件</h2><p>HBase的实现包括三个主要的功能组件：</p>
+<ol>
+<li>库函数：链接到每个客户端</li>
+<li>一个 Master 服务器<ul>
+<li>负责管理和维护 HBase 表的分区信息，如一个表被分成了哪些 Region 和被存放到哪台 Region 服务器。</li>
+<li>负责维护 Region 服务器列表，如监测 Region 服务器，确保它们之间负载均衡；对故障 Region 服务器中存储的 Region 进行重新分配。</li>
+<li>处理模式变化，如表和列族的创建。</li>
+</ul>
+</li>
+<li>多个 Region 服务器<ul>
+<li>负责存储和维护分配给自己的 Region。</li>
+<li>处理来自客户端的读写请求。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>客户端并不依赖 Master，而是通过 Zookeeper 来获得 Region 位置信息，大多数客户端甚至从来不和 Master 通信，这种设计方式使得 Master 负载很小。</li>
+</ul>
+<h2 id="表和-Region"><a href="#表和-Region" class="headerlink" title="表和 Region"></a>表和 Region</h2></div><ul class="post-copyright"><li><strong>Title: </strong><a href="/2020/05/21/intro2BigData4/">大数据技术原理与应用 - (4). 分布式数据库 HBase</a></li><li><strong>Author: </strong><a href="/">Zhanhang (展航) ZENG</a></li><li><strong>Link: </strong><a href="/2020/05/21/intro2BigData4/">https://zengzhanhang.github.io/2020/05/21/intro2BigData4/</a></li><li><strong>Released Date: </strong>2020-05-21</li><li><strong>Last update: </strong>2020-05-23</li><li><strong>Statement: </strong>All articles in this blog, unless otherwise stated, are based on the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> license.</li></ul><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex mb-4"><div class="level-start"><div class="article-tags size-small is-uppercase"><span class="mr-2"><i class="fas fa-tags has-text-grey"></i> #</span><a class="link-muted mr-2" rel="tag" href="/tags/Big-Data/">Big Data</a></div></div><div class="level-start"><div style="text-align:center"></div></div></div><div style="text-align:center"><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ebfed406b62a000122baf21&amp;product=inline-share-buttons" defer></script></div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/QRcode/alipay.jpg" alt="Alipay"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/QRcode/WeChatPay.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/19/intro2BigData3/"><span class="level-item">大数据技术原理与应用 - (3). 分布式文件系统 HDFS</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: '1ee41525271205735bd54d39810dbddd',
+            repo: 'zengzhanhang.github.io',
+            owner: 'zengzhanhang',
+            clientID: '13624a11c95a2d5eed31',
+            clientSecret: '67d97a17e7f385cf24a8a24e3bbfaa1e8fcc20c4',
+            admin: ["zengzhanhang"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: 'last',
+            
+            
+            enableHotKey: true
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="is-rounded" src="/img/icon(square)-min.png" alt="Zhanhang (Kyle) Zeng"></figure><p class="title is-size-4 is-block line-height-inherit">Zhanhang (Kyle) Zeng</p><p class="is-size-6 is-block">Statistics, Machine Learning &amp; Ai</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Edinburgh, Scotland</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">11</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">17</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded follow-button" href="https://github.com/zengzhanhang" target="_blank" rel="noopener"><i class="fab fa-github"></i>  Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Linkedin" href="https://www.linkedin.com/in/zhanhang-zeng-801a67185/"><i class="fab fa-linkedin-in"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://www.facebook.com/zengzhanhang"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/cengzhanhang"><i class="fab fa-instagram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://www.weibo.com/zengzhanhang"><i class="fab fa-weibo"></i></a></div></div></div><div class="card widget is-sticky" id="toc"><div class="card-content"><div class="menu catalogue-other-setting"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="is-flex" href="#HBase-简介"><span class="mr-2">1</span><span>HBase 简介</span></a><ul class="menu-list"><li><a class="is-flex" href="#HBase-与传统数据库的区别"><span class="mr-2">1.1</span><span>HBase 与传统数据库的区别</span></a></li><li><a class="is-flex" href="#HBase-访问接口"><span class="mr-2">1.2</span><span>HBase 访问接口</span></a></li></ul></li><li><a class="is-flex" href="#HBase-数据模型"><span class="mr-2">2</span><span>HBase 数据模型</span></a><ul class="menu-list"><li><a class="is-flex" href="#数据模型的相关概念"><span class="mr-2">2.1</span><span>数据模型的相关概念</span></a></li><li><a class="is-flex" href="#数据坐标"><span class="mr-2">2.2</span><span>数据坐标</span></a></li><li><a class="is-flex" href="#视图概念"><span class="mr-2">2.3</span><span>视图概念</span></a></li><li><a class="is-flex" href="#物理视图"><span class="mr-2">2.4</span><span>物理视图</span></a></li></ul></li><li><a class="is-flex" href="#面向列的存储"><span class="mr-2">3</span><span>面向列的存储</span></a></li><li><a class="is-flex" href="#HBase-存储原理"><span class="mr-2">4</span><span>HBase 存储原理</span></a><ul class="menu-list"><li><a class="is-flex" href="#HBase-功能组件"><span class="mr-2">4.1</span><span>HBase 功能组件</span></a></li><li><a class="is-flex" href="#表和-Region"><span class="mr-2">4.2</span><span>表和 Region</span></a></li></ul></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="/img/logo1.png" alt="小树的面包店 | Zhanhang Zeng&#039;s Blog" height="28"><img class="logo-img-dark" src="/img/logo1.png" alt="小树的面包店 | Zhanhang Zeng&#039;s Blog" height="28"></a><p class="size-small"><span>&copy; 2020 Zhanhang (展航) ZENG</span>  All Rights Reserved<br>Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span>    <span id="busuanzi_container_site_pv">Totally, <span id="busuanzi_value_site_pv">0</span> page views</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><i class="fab fa-creative-commons"></i> <i class="fab fa-creative-commons-by"></i> <i class="fab fa-creative-commons-nc"></i> <i class="fab fa-creative-commons-sa"></i> </a><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Zhanhang&#039;s GitHub" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'https://zengzhanhang.github.io',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><script src="/js/main.js" defer></script><script src="/js/imaegoo/universe.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

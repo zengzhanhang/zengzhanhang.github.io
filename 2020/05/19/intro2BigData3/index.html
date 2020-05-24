@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>大数据技术原理与应用 - (3). 分布式文件系统 HDFS - 小树的面包店 | Zhanhang Zeng&#039;s Blog</title><meta description="【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库 第六章 - 云数据库  Hadoop 分布式文件系统 (Hadoop Distributed File System, HDFS) 是真的 G"><meta property="og:type" content="blog"><meta property="og:title" content="大数据技术原理与应用 - (3). 分布式文件系统 HDFS"><meta property="og:url" content="https://zengzhanhang.github.io/2020/05/19/intro2BigData3/"><meta property="og:site_name" content="小树的面包店 | Zhanhang Zeng&#039;s Blog"><meta property="og:description" content="【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库 第六章 - 云数据库  Hadoop 分布式文件系统 (Hadoop Distributed File System, HDFS) 是真的 G"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://zengzhanhang.github.io/notes/BigData/assets/thumbnail.jpg"><meta property="article:published_time" content="2020-05-19T09:56:59.000Z"><meta property="article:modified_time" content="2020-05-21T06:39:23.226Z"><meta property="article:author" content="Zhanhang (展航) ZENG"><meta property="article:tag" content="Big Data"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/notes/BigData/assets/thumbnail.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zengzhanhang.github.io/2020/05/19/intro2BigData3/"},"headline":"小树的面包店 | Zhanhang Zeng's Blog","image":["https://zengzhanhang.github.io/notes/BigData/assets/thumbnail.jpg"],"datePublished":"2020-05-19T09:56:59.000Z","dateModified":"2020-05-21T06:39:23.226Z","author":{"@type":"Person","name":"Zhanhang (展航) ZENG"},"description":"【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库 第六章 - 云数据库  Hadoop 分布式文件系统 (Hadoop Distributed File System, HDFS) 是真的 G"}</script><link rel="canonical" href="https://zengzhanhang.github.io/2020/05/19/intro2BigData3/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?3a6a069adc986db638814c1b4a9e5ce6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-167464294-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-167464294-1');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="/img/logo1.png" alt="小树的面包店 | Zhanhang Zeng&#039;s Blog" height="28"><img class="logo-img-dark" src="/img/logo1.png" alt="小树的面包店 | Zhanhang Zeng&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/notes_TOC">Notes - 数据科学知识手册</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="Zhanhang&#039;s GitHub" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="thumbnail" src="/notes/BigData/assets/thumbnail.jpg" alt="大数据技术原理与应用 - (3). 分布式文件系统 HDFS"></span></div><article class="card-content article" role="article"><h1 class="title is-3 is-size-4-mobile">大数据技术原理与应用 - (3). 分布式文件系统 HDFS</h1><div class="article-meta size-small is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time class="level-item" dateTime="2020-05-19T09:56:59.000Z" title="2020-05-19T09:56:59.000Z">2020-05-19</time></span><span class="level-item"><i class="far fa-calendar-check"> </i><time class="level-item" dateTime="2020-05-21T06:39:23.226Z" title="2020-05-21T06:39:23.226Z">Edit: 2020-05-21</time></span><span class="level-item"><i class="fas fa-user"> </i>Zhanhang (展航) ZENG</span><span class="level-item"><i class="far fa-clock"></i> 22 minutes read (About 3367 words)</span><span class="level-item" id="busuanzi_container_page_pv"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span> visits</span></div><div class="level-left is-uppercase mt-2"><span class="level-item"><i class="fas fa-folder-open has-text-grey"></i> <a class="link-muted" href="/categories/Big-Data/">Big Data</a></span><span class="level-item"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted mr-2" rel="tag" href="/tags/Big-Data/">Big Data</a></span></div></div><div class="content"><div class="notification is-warning">
+<p><strong>【第二篇】 - 大数据存储与管理</strong>, 《大数据技术原理与应用, 林子雨》</p>
+<p>本篇介绍大数据存储与管理相关技术的概念与原理，包括</p>
+<ul>
+<li>第三章 - <a href="https://zengzhanhang.github.io/2020/05/19/intro2BigData3/"><strong>Hadoop 分布式文件系统 (HDFS)</strong></a></li>
+<li>第四章 - <a href="#">分布式数据库 (HBase)</a></li>
+<li>第五章 - <a href="#">NoSQL 数据库</a></li>
+<li>第六章 - <a href="#">云数据库</a></li>
+</ul>
+<p>Hadoop 分布式文件系统 (Hadoop Distributed File System, HDFS) 是真的 Google File System (GFS) 的开源实现，它是 Hadoop 两大核心组件之一，提供了在廉价服务器集群中进行大规模分布式存储的能力。</p>
+<p>本章介绍分布式文件系统的基本概念、结构和设计需求，然后介绍 HDFS 的相关概念、体系结构、存储原理和读写过程。</p>
+</div>
+<a id="more"></a>
+<h1 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h1><p>分布式文件系统 (Distributed File System) 是一种通过网络实现文件在多台主机 (集群) 上进行分布式存储的文件系统。</p>
+<h2 id="计算机集群结构"><a href="#计算机集群结构" class="headerlink" title="计算机集群结构"></a>计算机集群结构</h2><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch3/计算机集群的基本架构.png" alt="计算机集群的基本架构" title="计算机集群的基本架构" style="width: 75%;"/><br></div>
+
+<ul>
+<li>分布式文件系统把文件分布存储到多个计算机节点（如上图节点 $x$ 和 $y$）上，成千上万的计算机节点构成计算机集群。</li>
+<li>每个机架可以放许多节点（计算机）。</li>
+<li>同一机架上的节点通过网络互联（常用吉比特以太网）。</li>
+<li>不同机架之间采用另一级（更快）网络活交换机互连。</li>
+</ul>
+<h2 id="分布式文件系统的结构"><a href="#分布式文件系统的结构" class="headerlink" title="分布式文件系统的结构"></a>分布式文件系统的结构</h2><p>分布式文件系统在物理结构上是由计算机集群中的多个节点构成的，这些节点分为两类: <strong>名称结点 (NameNode)</strong> 和 <strong>数据节点 (DataNode)</strong>。</p>
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch3/大规模文件系统的整体架构.png" alt="大规模文件系统的整体架构" title="大规模文件系统的整体架构" style="width: 75%;"/><br></div>
+
+<h1 id="HDFS-简介"><a href="#HDFS-简介" class="headerlink" title="HDFS 简介"></a>HDFS 简介</h1><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch3/hdfsarchitecture.png" alt="HDFS 架构" title="HDFS 架构" style="width: 75%;"/><br></div>
+
+<p>HDFS 是 Master/ Slave architecture (主从架构)。一个 HDFS 集群包括一个 NameNode，也就是一个 Master，和多个 DataNode，也就是 Slave。</p>
+<p>在 HDFS 中，一个文件将会被拆分成多个 Block（blocksize 默认 128MB，也可以设置更高），这些 block 被存储在一系列 DataNodes 上。</p>
+<p>典型的部署是一台专门的机器运行 NameNode，集群的其他机器运行 DataNode</p>
+<blockquote>
+<p>A typical deployment has a dedicated machine that runs only the NameNode software. Each of the other machines in the cluster runs one instance of the DataNode software. The architecture does not preclude running multiple DataNodes on the same machine but in a real deployment that is rarely the case. <sup><a href="https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html">[来源:  Apache Hadoop 3.2.1 - HDFS Architecture 文档]</a></sup></p>
+</blockquote>
+<p>HDFS 要实现一下目标: </p>
+<ul>
+<li>兼容廉价的硬件设备</li>
+<li>流数据读写</li>
+<li>大数据集</li>
+<li>简单的文件模型</li>
+<li>强大的跨平台兼容性</li>
+</ul>
+<p>HDFS 局限性: </p>
+<ul>
+<li><strong>不适合低延迟数据访问</strong>。由于自身面向大规模数据批处理需求设计，高数据吞吐率同时意味着高响应延迟，因此不适合要求低延迟（实时反馈）的应用场景。</li>
+<li><strong>无法高效存储大量小文件</strong>。小文件指大小远远小于一个 Block 大小（通常 128 MB）的文件。<ul>
+<li>NameNode 管理文件系统的 metadata，这些 metadata 保存在内存中，从而客户端能够快速获取文件实际存储位置。大量小文件意味着 NameNode 需要花大量的内存来保存这类大量小文件 metadata，<strong>大大降低了 metadata 的索引效率</strong>。</li>
+<li>对于 MapReduce，大量小文件意味着会产生过多的 Map 任务，导致<strong>线程管理开销大大增加</strong>。</li>
+<li>本身访问大量小文件的速度远远低于访问几个大文件的速度，因为需要不断从一个 DataNode 跳到另一个 DataNode。</li>
+</ul>
+</li>
+<li><strong>不支持多用户写入及任意修改文件</strong>。HDFS 只允许一个文件有一个写入者，且只允许对文件进行追加操作，不执行随机写操作。</li>
+</ul>
+<h1 id="HDFS-相关概念"><a href="#HDFS-相关概念" class="headerlink" title="HDFS 相关概念"></a>HDFS 相关概念</h1><p>HDFS 相关概念包括块 (Block), 名称节点 (NameNode), 数据节点 (DataNode), 第二名称节点 (Secondary NameNode)。</p>
+<h2 id="Block-块"><a href="#Block-块" class="headerlink" title="Block - 块"></a>Block - 块</h2><p>传统文件系统中，为了提高磁盘读写效率，一般采用数据块为单位，而非字节。</p>
+<ul>
+<li><p>Hadoop 分布式文件系统 (HDFS) 与之区别与联系:</p>
+<ul>
+<li>联系：同样采用了数据<strong>块</strong>的概念</li>
+<li>区别：为了最小化寻址开销，HDFS 的块比传统文件系统的块大。HDFS 默认一个块 64MB。</li>
+</ul>
+</li>
+<li><p>HDFS 采用抽象的块概念带来的好处:</p>
+<ul>
+<li><strong>支持大规模文件存储</strong>：文件以块为单位进行存储，<u>一个大规模文件可以被分拆成若干个文件块，不同的文件块可以被分发到不同的节点上</u>，因此，一个文件的大小不会受到单个节点的存储容量的限制，可以远远大于网络中任意节点的存储容量</li>
+<li><strong>简化系统设计</strong>：首先，大大简化了存储管理，因为文件块大小是固定的，这样就可以很容易计算出一个节点可以存储多少文件块；其次，方便了元数据的管理，元数据不需要和文件块一起存储，可以由其他系统负责管理元数据</li>
+<li><strong>适合数据备份</strong>：每个文件块都可以冗余存储到多个节点上，大大提高了系统的容错性和可用性</li>
+</ul>
+</li>
+<li>Blocksize d的考虑:<ul>
+<li><strong>大 Block 的好处</strong>: 访问 HDFS 要三级寻址 (元数据目录、数据节点、从数据节点取数据)。设置大的块可以将寻址开销分摊到较多的数据中，<u>降低了单位数据的寻址开销</u>。 </li>
+<li><strong>过大 Block 的坏处</strong>: 在后续 MapReduce 中 Map 任务一次只处理一个块中的数据，如果启动的 Map 任务太少，就<u>降低了作业并行处理的速度</u>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="NameNode"><a href="#NameNode" class="headerlink" title="NameNode"></a>NameNode</h2><ul>
+<li>NameNode (名称节点) 或称为 ‘主节点’ (Master Node)。</li>
+<li>负责文件和目录的创建、删除、重命名等。</li>
+<li>管理 DataNode 和文件块 (Block) 的映射关系。</li>
+<li>客户端只有访问 NameNode 才能请求 Block 的位置，进而读取相应数据。</li>
+<li>NameNode 负责管理分布式文件系统的 NameSpace (命名空间)，保存了两个核心的数据结果，即 <strong>FsImage</strong> 和 <strong>EditLog</strong>。<ul>
+<li><strong>FsImage</strong>: 维护文件系统树和文件树中所有的文件和文件夹的 metadata。 </li>
+<li><strong>EditLog</strong>: 记录所有针对文件的创建、删除、重命名等操作。</li>
+</ul>
+</li>
+</ul>
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch3/HDFS主要组件的功能.png" alt="HDFS主要组件的功能" title="HDFS主要组件的功能" style="width: 75%;"/><br></div>
+
+<p>NameNode 启动过程和后续：</p>
+<ol>
+<li>将 FsImage 的内容加载到内存当中，然后执行 EditLog 中的各项操作，使内存中的 metadata 保持最新。</li>
+<li>步骤1. 完成后，会创建一个新的 FsImage 和 空的 EditLog <em>(启动完成)</em>。</li>
+<li>NameNode 正常运作后，后续 HDFS 的更新操作会被写进 新的空的 EditLog 中。</li>
+</ol>
+<h2 id="DataNode"><a href="#DataNode" class="headerlink" title="DataNode"></a>DataNode</h2><ul>
+<li>DataNode (数据节点) 或称为 ‘从节点’ (Slave Node)。</li>
+<li>负责数据的存储和读取。<ul>
+<li><strong>存储</strong>: 由 NameNode 分配存储位置，然后客户端直接写入相应的 DataNode</li>
+<li><strong>读取</strong>: 客户端从 NameNode 获得 DataNode 和 Block 的映射关系，然后到相应位置访问 Block。</li>
+</ul>
+</li>
+<li>定期向 NameNode 发送心跳信息，汇报自身及所有 block 信息，和健康状况；</li>
+</ul>
+<h3 id="数据冗余存储"><a href="#数据冗余存储" class="headerlink" title="数据冗余存储"></a>数据冗余存储</h3><p>HDFS 采用了<strong>多副本</strong>方式对数据进行<strong>冗余存储</strong>，保证了系统的容错性和可用性。一个数据块的多个副本会被分布到不同的 DataNode 上，如下图所示。 </p>
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch3/hdfsdatanodes.png" alt="HDFS 数据块多副本存储" title="HDFS 数据块多副本存储" style="width: 75%;"/><br></div>
+
+<p>冗余存储好处：</p>
+<ul>
+<li>加快数据传输速度。当多个客户端需要同时访问同一个文件，可以让 Client 从不同的数据块中读取数据。</li>
+<li>容易检查数据错误。</li>
+<li>保证数据可靠性。单个 DataNode 故障不会导致数据丢失。</li>
+</ul>
+<h3 id="数据存取策略"><a href="#数据存取策略" class="headerlink" title="数据存取策略"></a>数据存取策略</h3><h4 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h4><p>HDFS 默认的冗余复制因子是 3, i.e., 每个 block 会同时保存到 3 个 DataNode中。</p>
+<ul>
+<li>第一个副本，集群挑选一个磁盘不太满、Cpu 不太忙的 DataNode 存放。</li>
+<li>第二个副本，存放在<strong>相同</strong>机架 (rack) 上的不同 DataNode 中。</li>
+<li>第三个副本，存放在<strong>不同</strong>机架 (rack) 上的其他 DataNode 中。</li>
+<li>如果还有更多副本，随机选择 DataNode 存放。</li>
+</ul>
+<h4 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h4><p>Client 优先选择在同一机架上的 DataNode 来读取数据块副本。如果数据块副本不在同一机架，则随机选择 DataNode 进行读取。</p>
+<h2 id="SecondaryNameNode"><a href="#SecondaryNameNode" class="headerlink" title="SecondaryNameNode"></a>SecondaryNameNode</h2><p>SecondaryNameNode (第二名称节点) 的功能</p>
+<ol>
+<li>解决 EditLog 不断增大的问题</li>
+<li>作为 NameNode 的冷备份</li>
+</ol>
+<h3 id="解决-EditLog-不断增大"><a href="#解决-EditLog-不断增大" class="headerlink" title="解决 EditLog 不断增大"></a>解决 EditLog 不断增大</h3><p>SecondaryNameNode 定期对 EditLog 和 FsImage 进行合并操作，以减小 EditLog 文件大小，缩短 NameNode 重启时间。</p>
+
+<div class="level">
+<div class="level-start" style="width: 80%;">
+    <img src="/notes/BigData/assets/ch3/第二名称节点工作过程示意图.png" alt="第二名称节点工作过程示意图" title="第二名称节点工作过程示意图" style="width: 100%;"/>
+</div>
+
+
+
+<div class="level-end" style="width: 100%;">
+
+<ol>
+<li>SecondaryNameNode 定期和 NameNode 通信，请求其停止使用 EditLog 文件，暂时将新的写操作写到一个新的文件 edit.new 上，这个操作是瞬间完成，上层写日志的函数完全感觉不到差别；</li>
+<li>SecondaryNameNode 通过 HTTP GET 方式从 NameNode 上获取到 FsImage 和 EditLog 文件，并下载到本地的相应目录下；</li>
+<li>SecondaryNameNode 将下载下来的 FsImage 载入到内存，然后一条一条地执行 EditLog 文件中的各项更新操作，使得内存中的 FsImage 保持最新；这个过程就是 EditLog 和 FsImage文件合并；</li>
+<li>SecondaryNameNode 执行完（3）操作之后，会通过 post 方式将新的 FsImage 文件发送到 NameNode 节点上</li>
+<li>NameNode 将从 SecondaryNameNode 接收到的新的 FsImage 替换旧的 FsImage 文件，同时将 edit.new 替换 EditLog 文件，通过这个过程EditLog就变小了
+</div>
+</div>
+
+</li>
+</ol>
+<h3 id="NameNode-冷备份"><a href="#NameNode-冷备份" class="headerlink" title="NameNode 冷备份"></a>NameNode 冷备份</h3><p>上述合并的过程可以看出，SecondaryNameNode 会定期执行合并操作得到新的 FsImage。从这个角度来看，SecondaryNameNode 相当于周期性地保存了 NameNode 中的 metadata 信息。</p>
+<h2 id="HDFS-体系结构"><a href="#HDFS-体系结构" class="headerlink" title="HDFS 体系结构"></a>HDFS 体系结构</h2><h3 id="HDFS-命名空间管理"><a href="#HDFS-命名空间管理" class="headerlink" title="HDFS 命名空间管理"></a>HDFS 命名空间管理</h3><p>HDFS 的命名空间包含目录、文件、和块。命名空间管理是指命名空间支持对 HDFS 中的目录、文件和块做类似文件系统的创建、修改、删除等基本操作。</p>
+<h3 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h3><p>所有 HDFS 通信协议都是构建在 TCP/IP 协议基础之上的。</p>
+<ul>
+<li>客户端 (Client) 通过一个可配置的端口向 NameNode 主动发起 TCP 链接，并使用客户端协议与 NameNode 交互。</li>
+<li>客户端与 DataNode 的交互通过 RPC (Remote Procedure Call) 来实现。</li>
+</ul>
+<!-- ### HDFS 体系结构局限
+- 命名空间限制。NameNode 能够容纳的对象 (文件、块) 受内存大小限制。
+- 性能瓶颈。整个 DFS 吞吐量受限于单个 NameNode 吞吐量。
+- 隔离问题。只有一个 NameNode，无法对不同应用程序进行隔离。
+- 可用性。NameNode唯一，发生故障即整个系统不可用。 -->
+<h1 id="HDFS-数据读写过程"><a href="#HDFS-数据读写过程" class="headerlink" title="HDFS 数据读写过程"></a>HDFS 数据读写过程</h1><h2 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h2><figure class="highlight java"><figcaption><span>HDFS 读数据</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader ;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration ;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileSystem ;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path ;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FSDataInputStream ;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Chapter3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">            FileSystem fs = FileSystem.get(conf);</span><br><span class="line">            Path filename = <span class="keyword">new</span> Path(<span class="string">"hdfs://localhost:9000/user/hadoop/test.txt"</span>);</span><br><span class="line">            FSDataInputStream is = fs.open(filename);</span><br><span class="line">            BufferedReader d = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">            String content = d.readLine(); <span class="comment">//读取文件一行</span></span><br><span class="line">            System.out.println(content);</span><br><span class="line">            d.close(); <span class="comment">//关闭文件</span></span><br><span class="line">            fs.close(); <span class="comment">//关闭hdfs</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch3/HDFS读数据.png" alt="HDFS 读数据过程" title="HDFS 读数据过程" style="width: 85%;"/><br></div>
+
+
+
+<h2 id="写数据"><a href="#写数据" class="headerlink" title="写数据"></a>写数据</h2><figure class="highlight java"><figcaption><span>HDFS 写数据</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileSystem;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FSDataOutputStream;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Chapter3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">            FileSystem fs = FileSystem.get(conf);</span><br><span class="line">            <span class="keyword">byte</span>[] buff = <span class="string">"Hello world"</span>.getBytes(); <span class="comment">// 要写入的内容</span></span><br><span class="line">            String filename = <span class="string">"hdfs://localhost:9000/user/hadoop/test.txt"</span>; <span class="comment">//要写入的文件名</span></span><br><span class="line">            FSDataOutputStream os = fs.create(<span class="keyword">new</span> Path(filename));</span><br><span class="line">            os.write(buff,<span class="number">0</span>,buff.length);</span><br><span class="line">            System.out.println(<span class="string">"Create:"</span>+ filename);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch3/HDFS写数据.png" alt="HDFS 写数据过程" title="HDFS 写数据过程" style="width: 85%;"/><br></div>
+
+<h1 id="HDFS-编程实现"><a href="#HDFS-编程实现" class="headerlink" title="HDFS 编程实现"></a>HDFS 编程实现</h1><h2 id="常用-Shell-命令"><a href="#常用-Shell-命令" class="headerlink" title="常用 Shell 命令"></a>常用 Shell 命令</h2><ul>
+<li>三种写法<ol>
+<li><code>hadoop fs</code>: 适用于任何不同的文件系统，比如本地文件系统和HDFS文件系统</li>
+<li><code>hadoop dfs</code>: 只能适用于HDFS文件系统</li>
+<li><code>hdfs dfs</code>: 只能适用于HDFS文件系统</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight bash"><figcaption><span>HDFS 的 Shell 统一格式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs [genericOptions] [commandOptions]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>hadoop version</code>: 打印 Hadoop 版本信息</li>
+<li><code>hadoop fs -ls &lt;path&gt;</code>: 显示 <path> 指定的文件的详细信息</li>
+<li><code>hadoop fs -mkdir &lt;path&gt;</code>: 创建 <path> 指定的文件夹</li>
+<li><code>hadoop fs -cat &lt;path&gt;</code>: 将 <path> 指定的文件的内容输出到标准输出 (stdout)</li>
+<li><code>hadoop fs -tail [-f] &lt;path&gt;</code>: 将 <path> 指定的文件最后 1KB 的内容输出到标准输出 (stdout)</li>
+<li><code>haoop fs -put &lt;localsrc&gt; &lt;dest&gt;</code>: 将本地文件系统的 <localsrc> 复制到 Hadoop 文件系统。与 <code>copyFromLocal</code> 类似</li>
+<li><code>hadoop fs -copyFromLocal &lt;localsrc&gt; &lt;dest&gt;</code>: 将本地源文件 <localsrc> 复制到路径 <dest> 指定的文件或文件夹中</li>
+<li><code>hadoop fs -get &lt;src&gt; &lt;localdest&gt;</code>: 将 hadoop 文件系统的 <src> 复制到本地文件系统 <localdest>。</li>
+<li><code>hadoop fs -copyToLocal &lt;hdfs source&gt; &lt;localdst&gt;</code>: 类似上面 <code>get</code> 与 <code>copyFromLocal</code> 相反</li>
+<li><code>hadoop fs -chmod [-R] &lt;mode&gt; &lt;path&gt;</code>: 将 <path> 指定的文件的权限更改为 <mode>。这个命令只适用于超级用户和文件的所有者。</li>
+<li><code>hadoop fs -mv &lt;src&gt; &lt;dest&gt;</code>: 将文件从源路径 <src> 移动到目标路径 <dest></li>
+<li><code>hadoop fs -cp &lt;src&gt; &lt;dest&gt;</code>: 将文件从源路径 <src> 复制到目标路径 <dest></li>
+<li><code>hadoop fs -rm [-r] &lt;path&gt;</code>: 删除 <path> 指定文件，只能删除空目录和文件，输入 <code>-r</code> 是递归删除</li>
+</ul>
+</div><ul class="post-copyright"><li><strong>Title: </strong><a href="/2020/05/19/intro2BigData3/">大数据技术原理与应用 - (3). 分布式文件系统 HDFS</a></li><li><strong>Author: </strong><a href="/">Zhanhang (展航) ZENG</a></li><li><strong>Link: </strong><a href="/2020/05/19/intro2BigData3/">https://zengzhanhang.github.io/2020/05/19/intro2BigData3/</a></li><li><strong>Released Date: </strong>2020-05-19</li><li><strong>Last update: </strong>2020-05-21</li><li><strong>Statement: </strong>All articles in this blog, unless otherwise stated, are based on the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> license.</li></ul><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex mb-4"><div class="level-start"><div class="article-tags size-small is-uppercase"><span class="mr-2"><i class="fas fa-tags has-text-grey"></i> #</span><a class="link-muted mr-2" rel="tag" href="/tags/Big-Data/">Big Data</a></div></div><div class="level-start"><div style="text-align:center"></div></div></div><div style="text-align:center"><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ebfed406b62a000122baf21&amp;product=inline-share-buttons" defer></script></div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/QRcode/alipay.jpg" alt="Alipay"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/QRcode/WeChatPay.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/05/21/intro2BigData4/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">大数据技术原理与应用 - (4). 分布式数据库 HBase</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/17/intro2BigData2/"><span class="level-item">大数据技术原理与应用 - (2). 大数据处理框架 Hadoop</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: '5ce9da87e8fa740387b026d0897e6fa6',
+            repo: 'zengzhanhang.github.io',
+            owner: 'zengzhanhang',
+            clientID: '13624a11c95a2d5eed31',
+            clientSecret: '67d97a17e7f385cf24a8a24e3bbfaa1e8fcc20c4',
+            admin: ["zengzhanhang"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: 'last',
+            
+            
+            enableHotKey: true
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="is-rounded" src="/img/icon(square)-min.png" alt="Zhanhang (Kyle) Zeng"></figure><p class="title is-size-4 is-block line-height-inherit">Zhanhang (Kyle) Zeng</p><p class="is-size-6 is-block">Statistics, Machine Learning &amp; Ai</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Edinburgh, Scotland</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">11</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">17</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded follow-button" href="https://github.com/zengzhanhang" target="_blank" rel="noopener"><i class="fab fa-github"></i>  Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Linkedin" href="https://www.linkedin.com/in/zhanhang-zeng-801a67185/"><i class="fab fa-linkedin-in"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://www.facebook.com/zengzhanhang"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/cengzhanhang"><i class="fab fa-instagram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://www.weibo.com/zengzhanhang"><i class="fab fa-weibo"></i></a></div></div></div><div class="card widget is-sticky" id="toc"><div class="card-content"><div class="menu catalogue-other-setting"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="is-flex" href="#分布式文件系统"><span class="mr-2">1</span><span>分布式文件系统</span></a><ul class="menu-list"><li><a class="is-flex" href="#计算机集群结构"><span class="mr-2">1.1</span><span>计算机集群结构</span></a></li><li><a class="is-flex" href="#分布式文件系统的结构"><span class="mr-2">1.2</span><span>分布式文件系统的结构</span></a></li></ul></li><li><a class="is-flex" href="#HDFS-简介"><span class="mr-2">2</span><span>HDFS 简介</span></a></li><li><a class="is-flex" href="#HDFS-相关概念"><span class="mr-2">3</span><span>HDFS 相关概念</span></a><ul class="menu-list"><li><a class="is-flex" href="#Block-块"><span class="mr-2">3.1</span><span>Block - 块</span></a></li><li><a class="is-flex" href="#NameNode"><span class="mr-2">3.2</span><span>NameNode</span></a></li><li><a class="is-flex" href="#DataNode"><span class="mr-2">3.3</span><span>DataNode</span></a><ul class="menu-list"><li><a class="is-flex" href="#数据冗余存储"><span class="mr-2">3.3.1</span><span>数据冗余存储</span></a></li><li><a class="is-flex" href="#读取"><span class="mr-2">3.3.2</span><span>读取</span></a></li></ul></li><li><a class="is-flex" href="#SecondaryNameNode"><span class="mr-2">3.4</span><span>SecondaryNameNode</span></a><ul class="menu-list"><li><a class="is-flex" href="#解决-EditLog-不断增大"><span class="mr-2">3.4.1</span><span>解决 EditLog 不断增大</span></a></li><li><a class="is-flex" href="#NameNode-冷备份"><span class="mr-2">3.4.2</span><span>NameNode 冷备份</span></a></li></ul></li><li><a class="is-flex" href="#HDFS-体系结构"><span class="mr-2">3.5</span><span>HDFS 体系结构</span></a><ul class="menu-list"><li><a class="is-flex" href="#HDFS-命名空间管理"><span class="mr-2">3.5.1</span><span>HDFS 命名空间管理</span></a></li><li><a class="is-flex" href="#通信协议"><span class="mr-2">3.5.2</span><span>通信协议</span></a></li></ul></li></ul></li><li><a class="is-flex" href="#HDFS-数据读写过程"><span class="mr-2">4</span><span>HDFS 数据读写过程</span></a><ul class="menu-list"><li><a class="is-flex" href="#读数据"><span class="mr-2">4.1</span><span>读数据</span></a></li><li><a class="is-flex" href="#写数据"><span class="mr-2">4.2</span><span>写数据</span></a></li></ul></li><li><a class="is-flex" href="#HDFS-编程实现"><span class="mr-2">5</span><span>HDFS 编程实现</span></a><ul class="menu-list"><li><a class="is-flex" href="#常用-Shell-命令"><span class="mr-2">5.1</span><span>常用 Shell 命令</span></a></li></ul></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="/img/logo1.png" alt="小树的面包店 | Zhanhang Zeng&#039;s Blog" height="28"><img class="logo-img-dark" src="/img/logo1.png" alt="小树的面包店 | Zhanhang Zeng&#039;s Blog" height="28"></a><p class="size-small"><span>&copy; 2020 Zhanhang (展航) ZENG</span>  All Rights Reserved<br>Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span>    <span id="busuanzi_container_site_pv">Totally, <span id="busuanzi_value_site_pv">0</span> page views</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><i class="fab fa-creative-commons"></i> <i class="fab fa-creative-commons-by"></i> <i class="fab fa-creative-commons-nc"></i> <i class="fab fa-creative-commons-sa"></i> </a><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Zhanhang&#039;s GitHub" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'https://zengzhanhang.github.io',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><script src="/js/main.js" defer></script><script src="/js/imaegoo/universe.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
