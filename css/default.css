@@ -11737,9 +11737,19 @@ body.night {
   max-height: 650px;
   overflow: auto;
 }
-body.pace-done {
-  background-image: url("img/bg.jpg.jpg");
+body {
+  background-image: url("/img/bg.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
+}
+body .navbar,
+body .footer,
+body .card {
+  background-color: rgba(255,255,255,0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+body .card:hover {
+  background-color: rgba(255,255,255,0.9);
 }
