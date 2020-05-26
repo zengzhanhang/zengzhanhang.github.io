@@ -11754,7 +11754,7 @@ body .card {
   background-color: rgba(255,255,255,0.95);
 }
 body .card:hover {
-  background-color: rgba(255,255,255,0.97);
+  background-color: rgba(255,255,255,0.98);
 }
 body {
   counter-reset: card;
