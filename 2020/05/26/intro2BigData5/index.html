@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>大数据技术原理与应用 - (5). NoSQL 数据库 - Zhanhang Zeng&#039;s Blog | 小树的个人博客</title><meta description="【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库  NoSQL (Not only SQL) 是一种不同于关系数据库的数据库管理系统设计方式。"><meta property="og:type" content="blog"><meta property="og:title" content="大数据技术原理与应用 - (5). NoSQL 数据库"><meta property="og:url" content="https://zengzhanhang.com/2020/05/26/intro2BigData5/"><meta property="og:site_name" content="Zhanhang Zeng&#039;s Blog | 小树的个人博客"><meta property="og:description" content="【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库  NoSQL (Not only SQL) 是一种不同于关系数据库的数据库管理系统设计方式。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://zengzhanhang.com/notes/BigData/assets/thumbnail.jpg"><meta property="article:published_time" content="2020-05-26T09:55:28.000Z"><meta property="article:modified_time" content="2020-05-26T14:55:52.135Z"><meta property="article:author" content="Zhanhang (展航) ZENG"><meta property="article:tag" content="Big Data"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/notes/BigData/assets/thumbnail.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zengzhanhang.com/2020/05/26/intro2BigData5/"},"headline":"Zhanhang Zeng's Blog | 小树的个人博客","image":["https://zengzhanhang.com/notes/BigData/assets/thumbnail.jpg"],"datePublished":"2020-05-26T09:55:28.000Z","dateModified":"2020-05-26T14:55:52.135Z","author":{"@type":"Person","name":"Zhanhang (展航) ZENG"},"description":"【第二篇】 - 大数据存储与管理, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据存储与管理相关技术的概念与原理，包括  第三章 - Hadoop 分布式文件系统 (HDFS) 第四章 - 分布式数据库 (HBase) 第五章 - NoSQL 数据库  NoSQL (Not only SQL) 是一种不同于关系数据库的数据库管理系统设计方式。"}</script><link rel="canonical" href="https://zengzhanhang.com/2020/05/26/intro2BigData5/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?3a6a069adc986db638814c1b4a9e5ce6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-167464294-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-167464294-1');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="/img/logo_light.png" alt="Zhanhang Zeng&#039;s Blog | 小树的个人博客" height="28"><img class="logo-img-dark" src="/img/logo_dark.png" alt="Zhanhang Zeng&#039;s Blog | 小树的个人博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/notes_TOC">Notes - 数据科学知识手册</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="Zhanhang&#039;s GitHub" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="thumbnail" src="/notes/BigData/assets/thumbnail.jpg" alt="大数据技术原理与应用 - (5). NoSQL 数据库"></span></div><article class="card-content article" role="article"><h1 class="title is-3 is-size-4-mobile">大数据技术原理与应用 - (5). NoSQL 数据库</h1><div class="article-meta size-small is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time class="level-item" dateTime="2020-05-26T09:55:28.000Z" title="2020-05-26T09:55:28.000Z">2020-05-26</time></span><span class="level-item"><i class="far fa-calendar-check"> </i><time class="level-item" dateTime="2020-05-26T14:55:52.135Z" title="2020-05-26T14:55:52.135Z">Edit: 2020-05-26</time></span><span class="level-item"><i class="fas fa-user"> </i>Zhanhang (展航) ZENG</span><span class="level-item"><i class="far fa-clock"></i> 30 minutes read (About 4477 words)</span><span class="level-item" id="busuanzi_container_page_pv"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span> visits</span></div><div class="level-left is-uppercase mt-2"><span class="level-item"><i class="fas fa-folder-open has-text-grey"></i> <a class="link-muted" href="/categories/Big-Data/">Big Data</a></span><span class="level-item"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted mr-2" rel="tag" href="/tags/Big-Data/">Big Data</a></span></div></div><div class="content"><div class="notification is-warning">
+<p><strong>【第二篇】 - 大数据存储与管理</strong>, 《大数据技术原理与应用, 林子雨》</p>
+<p>本篇介绍大数据存储与管理相关技术的概念与原理，包括</p>
+<ul>
+<li>第三章 - <a href="https://zengzhanhang.com/2020/05/19/intro2BigData3/">Hadoop 分布式文件系统 (HDFS)</a></li>
+<li>第四章 - <a href="https://zengzhanhang.com/2020/05/21/intro2BigData4/">分布式数据库 (HBase)</a></li>
+<li>第五章 - <a href="https://zengzhanhang.com/2020/05/26/intro2BigData5/"><strong>NoSQL 数据库</strong></a></li>
+</ul>
+<p>NoSQL (Not only SQL) 是一种不同于关系数据库的数据库管理系统设计方式。</p>
+</div>
+<a id="more"></a>
+<p>NoSQL（Not only SQL）表示关系和非关系型数据库各有优缺点，彼此都无法互相取代。NoSQL 是一种不同于关系数据库的数据库管理系统设计方式，是对非关系型数据库的统称，它所采用的数据模型并非传统关系数据库的关系模型，而是类似键/值、列族、文档等非关系型模型。</p>
+<p>NoSQL 特点:</p>
+<ol>
+<li>灵活的可扩展性</li>
+<li>灵活的数据模型</li>
+<li>与云计算紧密融合</li>
+</ol>
+<h1 id="NoSQL与关系数据库的比较"><a href="#NoSQL与关系数据库的比较" class="headerlink" title="NoSQL与关系数据库的比较"></a>NoSQL与关系数据库的比较</h1><p>RDBMS即关系数据库管理系统 (Relational Database Management System) 。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="width:100px">比较标准</div></th>
+<th><div style="text-align:center">关系型数据库  (RDBMS)</div></th>
+<th><div style="text-align:center">NoSQL</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数据库原理</td>
+<td>RDBMS有关系代数理论作为基础</td>
+<td>NoSQL没有统一的理论基础</td>
+</tr>
+<tr>
+<td style="text-align:center">数据规模</td>
+<td>RDBMS很难实现横向扩展，纵向扩展的空间也比较有限，性能会随着数据规模的增大而降低</td>
+<td>可以很容易通过添加更多设备来支持更大规模的数据</td>
+</tr>
+<tr>
+<td style="text-align:center">数据库模式</td>
+<td>需要定义数据库模式，严格遵守数据定义和相关约束条件</td>
+<td>不存在数据库模式，可以自由灵活定义并存储各种不同类型的数据</td>
+</tr>
+<tr>
+<td style="text-align:center">查询效率</td>
+<td>借助于索引机制可以实现快速查询（包括记录查询和范围查询）</td>
+<td>没有面向复杂查询的索引，虽然NoSQL可以使用MapReduce来加速查询，但是，在复杂查询方面的性能仍然不如RDBMS</td>
+</tr>
+<tr>
+<td style="text-align:center">一致性</td>
+<td>严格遵守事务ACID模型，可以保证事务强一致性</td>
+<td>NoSQL数据库放松了对事务ACID四性的要求，而是遵守BASE模型，只能保证最终一致性</td>
+</tr>
+<tr>
+<td style="text-align:center">数据完整性</td>
+<td>可以很容易实现数据完整性，比如通过主键或者非空约束来实现实体完整性，通过主键、外键来实现参照完整性，通过约束或者触发器来实现用户自定义完整性</td>
+<td>无法实现</td>
+</tr>
+<tr>
+<td style="text-align:center">扩展性</td>
+<td>很难实现横向扩展，纵向扩展的空间也比较有限</td>
+<td>NoSQL在设计之初就充分考虑了横向扩展的需求，可以很容易通过添加廉价设备实现扩展</td>
+</tr>
+<tr>
+<td style="text-align:center">可用性</td>
+<td>RDBMS在任何时候都以保证数据一致性为优先目标，其次才是优化系统性能，随着数据规模的增大，RDBMS为了保证严格的一致性，只能提供相对较弱的可用性</td>
+<td>大多数NoSQL都能提供较高的可用性</td>
+</tr>
+<tr>
+<td style="text-align:center">标准化</td>
+<td>RDBMS已经标准化（SQL）</td>
+<td>NoSQL还没有行业标准，不同的NoSQL数据库都有自己的查询语言，很难规范应用程序接口</td>
+</tr>
+<tr>
+<td style="text-align:center">技术支持</td>
+<td>RDBMS经过几十年的发展，已经非常成熟，Oracle等大型厂商都可以提供很好的技术支持</td>
+<td>NoSQL在技术支持方面仍然处于起步阶段，还不成熟，缺乏有力的技术支持</td>
+</tr>
+<tr>
+<td style="text-align:center">可维护性</td>
+<td>RDBMS需要专门的数据库管理员(DBA)维护</td>
+<td>NoSQL数据库虽然没有DBMS复杂，也难以维护</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><strong>关系数据库</strong> <ul>
+<li>优势：以完善的关系代数理论作为基础，有严格的标准，支持事务ACID四性，借助索引机制可以实现高效的查询，技术成熟，有专业公司的技术支持 </li>
+<li>劣势：可扩展性较差，无法较好支持海量数据存储，数据模型过于死板、无法较好支持Web2.0应用，事务机制影响了系统的整体性能等 </li>
+</ul>
+</li>
+<li><strong>NoSQL数据库</strong><ul>
+<li>优势：可以支持超大规模数据存储，灵活的数据模型可以很好地支持Web2.0应用，具有强大的横向扩展能力等 </li>
+<li>劣势：缺乏数学理论基础，复杂查询性能不高，大都不能实现事务强一致性，很难实现数据完整性，技术尚不成熟，缺乏专业团队的技术支持，维护较困难等</li>
+</ul>
+</li>
+</ol>
+<p>关系数据库和NoSQL数据库各有优缺点，彼此无法取代</p>
+<ul>
+<li><strong>关系数据库</strong>应用场景：电信、银行等领域的关键业务系统，需要保证强事务一致性</li>
+<li><strong>NoSQL数据库</strong>应用场景：互联网企业、传统企业的非关键业务（比如数据分析）</li>
+</ul>
+<h1 id="NoSQL-四大类型"><a href="#NoSQL-四大类型" class="headerlink" title="NoSQL 四大类型"></a>NoSQL 四大类型</h1><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch5/NoSQL四大类型.jpg" alt="NoSQL 四大类型" title="NoSQL 四大类型" style="width: 75%;"/><br></div>
+
+<h2 id="键值数据库"><a href="#键值数据库" class="headerlink" title="键值数据库"></a>键值数据库</h2><p>键值数据库 (Key-Value Database) 会使用一个哈希表，这个表中由一个特定的 Key 和一个指针指向特定的 Value。</p>
+<ol>
+<li>数据模型<ul>
+<li>键/值对</li>
+<li>键是一个字符串对象</li>
+<li>值可以是任意类型的数据，比如整型、字符型、数组、列表、集合等</li>
+</ul>
+</li>
+<li>典型应用<ul>
+<li>涉及频繁读写、拥有简单数据模型的应用</li>
+<li>内容缓存，比如会话、配置文件、参数、购物车等</li>
+<li>存储配置和用户数据信息的移动应用</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>扩展性好，灵活性好，大量写操作时性能高</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>无法存储结构化信息，条件查询效率较低</li>
+</ul>
+</li>
+<li>不适用情形<ul>
+<li>不是通过键而是通过值来查：键值数据库根本没有通过值查询的途径</li>
+<li>需要存储数据之间的关系：在键值数据库中，不能通过两个或两个以上的键来关联数据</li>
+<li>需要事务的支持：在一些键值数据库中，产生故障时，不可以回滚</li>
+</ul>
+</li>
+<li>使用者<ul>
+<li>百度云数据库（Redis）、GitHub（Riak）、BestBuy（Riak）、Twitter（Redis和Memcached）、StackOverFlow（Redis）、Instagram （Redis）、Youtube（Memcached）、Wikipedia（Memcached）</li>
+</ul>
+</li>
+</ol>
+<h2 id="列族数据库"><a href="#列族数据库" class="headerlink" title="列族数据库"></a>列族数据库</h2><ol>
+<li>数据模型<ul>
+<li>列族</li>
+</ul>
+</li>
+<li>典型应用<ul>
+<li>分布式数据存储与管理</li>
+<li>数据在地理上分布于多个数据中心的应用程序</li>
+<li>可以容忍副本中存在短期不一致情况的应用程序</li>
+<li>拥有动态字段的应用程序</li>
+<li>拥有潜在大量数据的应用程序，大到几百TB的数据</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>查找速度快，可扩展性强，容易进行分布式扩展，复杂性低</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>功能较少，大都不支持强事务一致性</li>
+</ul>
+</li>
+<li>不适用情形<ul>
+<li>需要ACID事务支持的情形，Cassandra等产品就不适用</li>
+</ul>
+</li>
+<li>使用者<ul>
+<li>Ebay（Cassandra）、Instagram（Cassandra）、NASA（Cassandra）、Twitter（Cassandra and HBase）、Facebook（HBase）、Yahoo!（HBase）</li>
+</ul>
+</li>
+</ol>
+<h2 id="文档数据库"><a href="#文档数据库" class="headerlink" title="文档数据库"></a>文档数据库</h2><ol>
+<li>数据模型<ul>
+<li>键/值</li>
+<li>值（value）是版本化的文档</li>
+</ul>
+</li>
+<li>典型应用<ul>
+<li>存储、索引并管理面向文档的数据或者类似的半结构化数据</li>
+<li>比如，用于后台具有大量读写操作的网站、使用JSON数据结构的应用、使用嵌套结构等非规范化数据的应用程序</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>性能好（高并发），灵活性高，复杂性低，数据结构灵活</li>
+<li>提供嵌入式文档功能，将经常查询的数据存储在同一个文档中</li>
+<li>既可以根据键来构建索引，也可以根据内容构建索引</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>缺乏统一的查询语法</li>
+</ul>
+</li>
+<li>不适用情形<ul>
+<li>在不同的文档上添加事务。文档数据库并不支持文档间的事务，如果对这方面有需求则不应该选用这个解决方案</li>
+</ul>
+</li>
+<li>使用者<ul>
+<li>百度云数据库（MongoDB）、SAP （MongoDB）、Codecademy （MongoDB）、Foursquare （MongoDB）、NBC News （RavenDB）</li>
+</ul>
+</li>
+</ol>
+<h2 id="图形数据库"><a href="#图形数据库" class="headerlink" title="图形数据库"></a>图形数据库</h2><ol>
+<li>数据模型<ul>
+<li>图结构</li>
+</ul>
+</li>
+<li>典型应用<ul>
+<li>专门用于处理具有高度相互关联关系的数据，比较适合于社交网络、模式识别、依赖分析、推荐系统以及路径寻找等问题</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>灵活性高，支持复杂的图形算法，可用于构建复杂的关系图谱</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>复杂性高，只能支持一定的数据规模</li>
+</ul>
+</li>
+<li>使用者<ul>
+<li>Adobe（Neo4J）、Cisco（Neo4J）、T-Mobile（Neo4J）</li>
+</ul>
+</li>
+</ol>
+<h1 id="NoSQL-的三大基石"><a href="#NoSQL-的三大基石" class="headerlink" title="NoSQL 的三大基石"></a>NoSQL 的三大基石</h1><p>NoSQL 三大基石包括 <strong>CAP</strong>、<strong>BASE</strong>和<strong>最终一致性</strong>。</p>
+<h2 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h2><p>CAP指的是：</p>
+<ul>
+<li><strong>C (Consistency)：一致性</strong>。是指任何一个读操作总是能够读到之前完成的写操作的结果，也就是在分布式环境中，多点的数据是一致的，或者说，所有节点在同一时间具有相同的数据</li>
+<li><strong>A (Availability)：可用性</strong>。是指快速获取数据，可以在确定的时间内返回操作结果，保证每个请求不管成功或者失败都有响应；</li>
+<li><strong>P (Tolerance of Network Partition)：分区容忍性</strong>。是指当出现网络分区的情况时（即系统中的一部分节点无法和其他节点进行通信），分离的系统也能够正常运行，也就是说，系统中任意信息的丢失或失败不会影响系统的继续运作。</li>
+</ul>
+<p>CAP理论告诉我们，一个分布式系统不可能同时满足一致性、可用性和分区容忍性这三个需求，最多只能同时满足其中两个。</p>
+<p>当处理CAP的问题时，可以有几个明显的选择：</p>
+<ol>
+<li><strong>CA: 也就是强调一致性（C）和可用性（A）</strong>，放弃分区容忍性（P），最简单的做法是把所有与事务相关的内容都放到同一台机器上。很显然，这种做法会严重影响系统的可扩展性。传统的关系数据库（MySQL、SQL Server和PostgreSQL），都采用了这种设计原则，因此，扩展性都比较差</li>
+<li><strong>CP: 也就是强调一致性（C）和分区容忍性（P）</strong>，放弃可用性（A），当出现网络分区的情况时，受影响的服务需要等待数据一致，因此在等待期间就无法对外提供服务</li>
+<li><strong>AP: 也就是强调可用性（A）和分区容忍性（P）</strong>，放弃一致性（C），允许系统返回不一致的数据</li>
+</ol>
+<h2 id="BASE"><a href="#BASE" class="headerlink" title="BASE"></a>BASE</h2><p>说起BASE（Basically Availble, Soft-state, Eventual consistency），不得不谈到ACID。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ACID</th>
+<th style="text-align:center">BASE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">原子性 (<strong>A</strong>tomicity)</td>
+<td style="text-align:center">基本可用 (<strong>B</strong>asically <strong>A</strong>vailable)</td>
+</tr>
+<tr>
+<td style="text-align:center">一致性 (<strong>C</strong>onsistency)</td>
+<td style="text-align:center">软状态/柔性事务 (<strong>S</strong>oft state)</td>
+</tr>
+<tr>
+<td style="text-align:center">隔离性 (<strong>I</strong>solation)</td>
+<td style="text-align:center">最终一致性 (<strong>E</strong>ventual consistency)</td>
+</tr>
+<tr>
+<td style="text-align:center">持久性 (<strong>D</strong>urable)</td>
+</tr>
+</tbody>
+</table>
+<p>一个数据库事务具有 <strong>ACID</strong> 四性：</p>
+<ul>
+<li><strong>A (Atomicity)</strong>: 原子性，是指事务必须是原子工作单元，对于其数据修改，要么全都执行，要么全都不执行</li>
+<li><strong>C (Consistency)</strong>: 一致性，是指事务在完成时，必须使所有的数据都保持一致状态</li>
+<li><strong>I (Isolation)</strong>: 隔离性，是指由并发事务所做的修改必须与任何其它并发事务所做的修改隔离</li>
+<li><strong>D (Durability)</strong>: 持久性，是指事务完成之后，它对于系统的影响是永久性的，该修改即使出现致命的系统故障也将一直保持</li>
+</ul>
+<p><strong>BASE</strong> 的基本含义是基本可用 (Basically Availble)、软状态 (Soft-state) 和最终一致性 (Eventual consistency)：</p>
+<ul>
+<li>基本可用<br>基本可用，是指一个分布式系统的一部分发生问题变得不可用时，其他部分仍然可以正常使用，也就是允许分区失败的情形出现</li>
+<li>软状态<br>“软状态（soft-state）”是与“硬状态（hard-state）”相对应的一种提法。数据库保存的数据是“硬状态”时，可以保证数据一致性，即保证数据一直是正确的。“软状态”是指状态可以有一段时间不同步，具有一定的滞后性</li>
+<li>最终一致性<br>一致性的类型包括强一致性和弱一致性，二者的主要区别在于高并发的数据访问操作下，后续操作是否能够获取最新的数据。对于强一致性而言，当执行完一次更新操作后，后续的其他读操作就可以保证读到更新后的最新数据；反之，如果不能保证后续访问读到的都是更新后的最新数据，那么就是弱一致性。而最终一致性只不过是弱一致性的一种特例，允许后续的访问操作可以暂时读不到更新后的数据，但是经过一段时间之后，必须最终读到更新后的数据。</li>
+</ul>
+<h2 id="最终一致性"><a href="#最终一致性" class="headerlink" title="最终一致性"></a>最终一致性</h2><p>最终一致性根据更新数据后各进程访问到数据的时间和方式的不同，又可以区分为：</p>
+<ul>
+<li><strong>因果一致性</strong>：如果进程A通知进程 B 它已更新了一个数据项，那么进程 B 的后续访问将获得A写入的最新值。而与进程 A 无因果关系的进程 C 的访问，仍然遵守一般的最终一致性规则</li>
+<li><strong>“读己之所写”一致性</strong>：可以视为因果一致性的一个特例。当进程 A 自己执行一个更新操作之后，它自己总是可以访问到更新过的值，绝不会看到旧值</li>
+<li><strong>单调读一致性</strong>：如果进程已经看到过数据对象的某个值，那么任何后续访问都不会返回在那个值之前的值</li>
+<li><strong>会话一致性</strong>：它把访问存储系统的进程放到会话 (session) 的上下文中，只要会话还存在，系统就保证“读己之所写”一致性。如果由于某些失败情形令会话终止，就要建立新的会话，而且系统保证不会延续到新的会话</li>
+<li><strong>单调写一致性</strong>：系统保证来自同一个进程的写操作顺序执行。系统必须保证这种程度的一致性，否则就非常难以编程了</li>
+</ul>
+<h2 id="如何实现各种类型的一致性？"><a href="#如何实现各种类型的一致性？" class="headerlink" title="如何实现各种类型的一致性？"></a>如何实现各种类型的一致性？</h2><p>对于分布式数据系统：</p>
+<ul>
+<li>N — 数据复制的份数</li>
+<li>W — 更新数据是需要保证写完成的节点数</li>
+<li>R — 读取数据的时候需要读取的节点数</li>
+</ul>
+<p>如果 W+R&gt;N，写的节点和读的节点重叠，则是强一致性。例如对于典型的一主一备同步复制的关系型数据库，N=2,W=2,R=1，则不管读的是主库还是备库的数据，都是一致的。一般设定是 R+W = N+1，这是保证强一致性的最小设定。</p>
+<p>如果 W+R&lt;=N，则是弱一致性。例如对于一主一备异步复制的关系型数据库，N=2,W=1,R=1，则如果读的是备库，就可能无法读取主库已经更新过的数据，所以是弱一致性。</p>
+<p>对于分布式系统，为了保证高可用性，一般设置 N&gt;=3。不同的 N,W,R 组合，是在可用性和一致性之间取一个平衡，以适应不同的应用场景。</p>
+<p>如果 N=W,R=1，任何一个写节点失效，都会导致写失败，因此可用性会降低，但是由于数据分布的N个节点是同步写入的，因此可以保证强一致性。 实例：HBase 是借助其底层的HDFS来实现其数据冗余备份的。HDFS 采用的就是强一致性保证。在数据没有完全同步到 N 个节点前，写操作是不会返回成功的。也就是说它的 W＝N，而读操作只需要读到一个值即可，也就是说它 R＝1。</p>
+<p>像 Voldemort，Cassandra和Riak 这些类 Dynamo 的系统，通常都允许用户按需要设置 N，R，W 三个值，即使是设置成 W＋R&lt;= N 也是可以的。也就是说他允许用户在强一致性和最终一致性之间自由选择。而在用户选择了最终一致性，或者是 W &lt; N 的强一致性时，则总会出现一段“各个节点数据不同步导致系统处理不一致的时间”。为了提供最终一致性的支持，这些系统会提供一些工具来使数据更新被最终同步到所有相关节点。</p>
+<h1 id="从-NoSQL-到-NewSQL-数据库"><a href="#从-NoSQL-到-NewSQL-数据库" class="headerlink" title="从 NoSQL 到 NewSQL 数据库"></a>从 NoSQL 到 NewSQL 数据库</h1><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch5/大数据引发数据处理架构的变革.png" alt="大数据引发数据处理架构的变革" title="大数据引发数据处理架构的变革" style="width: 85%;"/><br></div>
+
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch5/关系数据库_NoSQL_NewSQL.png" alt="关系数据库、NoSQL 和 NewSQL 数据库产品分类" title="关系数据库、NoSQL 和 NewSQL 数据库产品分类" style="width: 85%;"/><br></div>
+</div><ul class="post-copyright"><li><strong>Title: </strong><a href="/2020/05/26/intro2BigData5/">大数据技术原理与应用 - (5). NoSQL 数据库</a></li><li><strong>Author: </strong><a href="/">Zhanhang (展航) ZENG</a></li><li><strong>Link: </strong><a href="/2020/05/26/intro2BigData5/">https://zengzhanhang.com/2020/05/26/intro2BigData5/</a></li><li><strong>Released Date: </strong>2020-05-26</li><li><strong>Last update: </strong>2020-05-26</li><li><strong>Statement: </strong>All articles in this blog, unless otherwise stated, are based on the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> license.</li></ul><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex mb-2"><div class="level-start"><div class="article-tags size-small is-uppercase"><span class="mr-2"><i class="fas fa-tags has-text-grey"></i> #</span><a class="link-muted mr-2" rel="tag" href="/tags/Big-Data/">Big Data</a></div></div><div class="level-start"><div style="text-align:center"></div></div></div><div style="text-align:center"><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ebfed406b62a000122baf21&amp;product=inline-share-buttons" defer></script></div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/QRcode/alipay.jpg" alt="Alipay"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/QRcode/WeChatPay.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/21/intro2BigData4/"><span class="level-item">大数据技术原理与应用 - (4). 分布式数据库 HBase</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: 'aa39c471d469101835190311e9dfc9bc',
+            repo: 'zengzhanhang.github.io',
+            owner: 'zengzhanhang',
+            clientID: '13624a11c95a2d5eed31',
+            clientSecret: '67d97a17e7f385cf24a8a24e3bbfaa1e8fcc20c4',
+            admin: ["zengzhanhang"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: 'last',
+            
+            
+            enableHotKey: true
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="is-rounded" src="/img/icon(square)-min.png" alt="Zhanhang (Kyle) Zeng"></figure><p class="title is-size-4 is-block line-height-inherit">Zhanhang (Kyle) Zeng</p><p class="is-size-6 is-block">Statistics, Machine Learning &amp; Ai</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Edinburgh, Scotland</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">11</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">17</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded follow-button" href="https://github.com/zengzhanhang" target="_blank" rel="noopener"><i class="fab fa-github"></i>  Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Linkedin" href="https://www.linkedin.com/in/zhanhang-zeng-801a67185/"><i class="fab fa-linkedin-in"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://www.facebook.com/zengzhanhang"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/cengzhanhang"><i class="fab fa-instagram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://www.weibo.com/zengzhanhang"><i class="fab fa-weibo"></i></a></div></div></div><div class="card widget is-sticky" id="toc"><div class="card-content"><div class="menu catalogue-other-setting"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="is-flex" href="#NoSQL与关系数据库的比较"><span class="mr-2">1</span><span>NoSQL与关系数据库的比较</span></a></li><li><a class="is-flex" href="#NoSQL-四大类型"><span class="mr-2">2</span><span>NoSQL 四大类型</span></a><ul class="menu-list"><li><a class="is-flex" href="#键值数据库"><span class="mr-2">2.1</span><span>键值数据库</span></a></li><li><a class="is-flex" href="#列族数据库"><span class="mr-2">2.2</span><span>列族数据库</span></a></li><li><a class="is-flex" href="#文档数据库"><span class="mr-2">2.3</span><span>文档数据库</span></a></li><li><a class="is-flex" href="#图形数据库"><span class="mr-2">2.4</span><span>图形数据库</span></a></li></ul></li><li><a class="is-flex" href="#NoSQL-的三大基石"><span class="mr-2">3</span><span>NoSQL 的三大基石</span></a><ul class="menu-list"><li><a class="is-flex" href="#CAP"><span class="mr-2">3.1</span><span>CAP</span></a></li><li><a class="is-flex" href="#BASE"><span class="mr-2">3.2</span><span>BASE</span></a></li><li><a class="is-flex" href="#最终一致性"><span class="mr-2">3.3</span><span>最终一致性</span></a></li><li><a class="is-flex" href="#如何实现各种类型的一致性？"><span class="mr-2">3.4</span><span>如何实现各种类型的一致性？</span></a></li></ul></li><li><a class="is-flex" href="#从-NoSQL-到-NewSQL-数据库"><span class="mr-2">4</span><span>从 NoSQL 到 NewSQL 数据库</span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="/img/logo_light.png" alt="Zhanhang Zeng&#039;s Blog | 小树的个人博客" height="28"><img class="logo-img-dark" src="/img/logo_dark.png" alt="Zhanhang Zeng&#039;s Blog | 小树的个人博客" height="28"></a><p class="size-small"><span>&copy; 2020 Zhanhang (展航) ZENG</span>  All Rights Reserved<br>Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span>    <span id="busuanzi_container_site_pv">Totally, <span id="busuanzi_value_site_pv">0</span> page views</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><i class="fab fa-creative-commons"></i> <i class="fab fa-creative-commons-by"></i> <i class="fab fa-creative-commons-nc"></i> <i class="fab fa-creative-commons-sa"></i> </a><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Zhanhang&#039;s GitHub" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'https://zengzhanhang.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><script src="/js/main.js" defer></script><script src="/js/imaegoo/universe.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
