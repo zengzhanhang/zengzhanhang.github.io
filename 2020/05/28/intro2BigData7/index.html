@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>大数据技术原理与应用 - (7). MapReduce - Zhanhang Zeng&#039;s Blog | 小树的个人博客</title><meta description="【第三篇】 - 大数据处理与分析, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据处理与分析的相关技术，包括  第7章 - MapReduce 第8章 - Hadoop 再探讨 第9章 - Spark 第10章 - 流计算 第11章 - 图计算 第12章 - 数据可视化  MapReduce 是一种并行编程模型，用于大规模数据集 (大于 1 TB) 的并行运算，它将复杂的、运行于大规模集群上"><meta property="og:type" content="blog"><meta property="og:title" content="大数据技术原理与应用 - (7). MapReduce"><meta property="og:url" content="https://zengzhanhang.com/2020/05/28/intro2BigData7/"><meta property="og:site_name" content="Zhanhang Zeng&#039;s Blog | 小树的个人博客"><meta property="og:description" content="【第三篇】 - 大数据处理与分析, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据处理与分析的相关技术，包括  第7章 - MapReduce 第8章 - Hadoop 再探讨 第9章 - Spark 第10章 - 流计算 第11章 - 图计算 第12章 - 数据可视化  MapReduce 是一种并行编程模型，用于大规模数据集 (大于 1 TB) 的并行运算，它将复杂的、运行于大规模集群上"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://zengzhanhang.com/notes/BigData/assets/thumbnail.jpg"><meta property="article:published_time" content="2020-05-28T09:29:26.000Z"><meta property="article:modified_time" content="2020-05-28T13:37:36.081Z"><meta property="article:author" content="Zhanhang (Kyle) ZENG"><meta property="article:tag" content="Big Data"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/notes/BigData/assets/thumbnail.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zengzhanhang.com/2020/05/28/intro2BigData7/"},"headline":"Zhanhang Zeng's Blog | 小树的个人博客","image":["https://zengzhanhang.com/notes/BigData/assets/thumbnail.jpg"],"datePublished":"2020-05-28T09:29:26.000Z","dateModified":"2020-05-28T13:37:36.081Z","author":{"@type":"Person","name":"Zhanhang (Kyle) ZENG"},"description":"【第三篇】 - 大数据处理与分析, 《大数据技术原理与应用, 林子雨》 本篇介绍大数据处理与分析的相关技术，包括  第7章 - MapReduce 第8章 - Hadoop 再探讨 第9章 - Spark 第10章 - 流计算 第11章 - 图计算 第12章 - 数据可视化  MapReduce 是一种并行编程模型，用于大规模数据集 (大于 1 TB) 的并行运算，它将复杂的、运行于大规模集群上"}</script><link rel="canonical" href="https://zengzhanhang.com/2020/05/28/intro2BigData7/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?3a6a069adc986db638814c1b4a9e5ce6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-167464294-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-167464294-1');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="/img/logo_light.png" alt="Zhanhang Zeng&#039;s Blog | 小树的个人博客" height="28"><img class="logo-img-dark" src="/img/logo_dark.png" alt="Zhanhang Zeng&#039;s Blog | 小树的个人博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/notes_TOC">Notes - 数据科学知识手册</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="Zhanhang&#039;s GitHub" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="thumbnail" src="/notes/BigData/assets/thumbnail.jpg" alt="大数据技术原理与应用 - (7). MapReduce"></span></div><article class="card-content article" role="article"><h1 class="title is-3 is-size-4-mobile">大数据技术原理与应用 - (7). MapReduce</h1><div class="article-meta size-small is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time class="level-item" dateTime="2020-05-28T09:29:26.000Z" title="2020-05-28T09:29:26.000Z">2020-05-28</time></span><span class="level-item"><i class="far fa-calendar-check"> </i><time class="level-item" dateTime="2020-05-28T13:37:36.081Z" title="2020-05-28T13:37:36.081Z">Edit: 2020-05-28</time></span><span class="level-item"><i class="fas fa-user"> </i>Zhanhang (Kyle) ZENG</span><span class="level-item"><i class="far fa-clock"></i> 15 minutes read (About 2262 words)</span><span class="level-item" id="busuanzi_container_page_pv"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span> visits</span></div><div class="level-left is-uppercase mt-2"><span class="level-item"><i class="fas fa-folder-open has-text-grey"></i> <a class="link-muted" href="/categories/Big-Data/">Big Data</a></span><span class="level-item"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted mr-2" rel="tag" href="/tags/Big-Data/">Big Data</a></span></div></div><div class="content"><div class="notification is-warning">
+<p><strong>【第三篇】 - 大数据处理与分析</strong>, 《大数据技术原理与应用, 林子雨》</p>
+<p>本篇介绍大数据处理与分析的相关技术，包括</p>
+<ul>
+<li>第7章 - <a href="#"><strong>MapReduce</strong></a></li>
+<li>第8章 - <a href="#">Hadoop 再探讨</a></li>
+<li>第9章 - <a href="#">Spark</a></li>
+<li>第10章 - <a href="#">流计算</a></li>
+<li>第11章 - <a href="#">图计算</a></li>
+<li>第12章 - <a href="#">数据可视化</a></li>
+</ul>
+<p>MapReduce 是一种并行编程模型，用于大规模数据集 (大于 1 TB) 的并行运算，它将复杂的、运行于大规模集群上的并行计算过程高度抽象到两个函数: <strong>Map</strong> 和 <em>Reduce</em>。</p>
+</div>
+<a id="more"></a>
+<h1 id="MapReduce-概述"><a href="#MapReduce-概述" class="headerlink" title="MapReduce 概述"></a>MapReduce 概述</h1><h2 id="MapReduce-模型简介"><a href="#MapReduce-模型简介" class="headerlink" title="MapReduce 模型简介"></a>MapReduce 模型简介</h2><ul>
+<li>MapReduce 将复杂的、运行于大规模集群上的并行计算过程高度地抽象到了两个函数: Map 和 Reduce</li>
+<li>编程容易，不需要掌握分布式并行编程细节，也可以很容易把自己的程序运行在分布式系统上，完成海量数据的计算</li>
+<li>MapReduce 采用 <strong>“分而治之”</strong> 策略，一个存储在分布式文件系统中的大规模数据集，会被切分成许多独立的分片 (split)，这些分片可以被多个 Map 任务并行处理</li>
+<li>MapReduce 设计的一个理念就是 <strong>“计算向数据靠拢”</strong>，而不是“数据向计算靠拢”，因为，移动数据需要大量的网络传输开销</li>
+<li>MapReduce 框架采用了 Master/ Slave 架构，包括一个 Master 和若干个 Slave。Master 上运行 JobTracker，Slave 上运行 TaskTracker</li>
+<li>Hadoop 框架是用 Java 实现的，但是，MapReduce 应用程序则不一定要用 Java 来写</li>
+</ul>
+<p>适合用 MapReduce 来处理的数据集需要满足一个<strong>前提条件</strong>：待处理的数据集可以分解成许多小的数据集，而且每一个小数据集都可以完全并行地进行处理。</p>
+<h2 id="Map-和-Reduce-函数"><a href="#Map-和-Reduce-函数" class="headerlink" title="Map 和 Reduce 函数"></a>Map 和 Reduce 函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="width:100px">函数</div></th>
+<th><div style="text-align:center">输入</div></th>
+<th><div style="text-align:center">输出</div></th>
+<th><div style="text-align:center">说明</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Map</td>
+<td>$&lt;k_1, v_1&gt;$ <br> 如: <br>&lt;行号, “a b c”&gt;</td>
+<td>List($&lt;k_2, v_2&gt;$) 如: <br>&lt;”a”, 1&gt;<br> &lt;”b”, 1&gt; <br> &lt;”c”, 1&gt;</td>
+<td>1.将小数据集进一步解析成一批 $&lt;key,value&gt;$ 对，输入Map函数中进行处理 <br> 2.每一个输入的 $&lt;k1,v1&gt;$ 会输出一批 $&lt;k2,v2&gt;$。$&lt;k2,v2&gt;$ 是计算的中间结果</td>
+</tr>
+<tr>
+<td style="text-align:center">Reduce</td>
+<td>$&lt;k_2, List(v_2)&gt;$ <br> 如: <br>&lt; “a”, &lt;1,1,1&gt; &gt;</td>
+<td>$&lt;k_3, v_3&gt;$ 如: <br> &lt;”a”, 3&gt;</td>
+<td>输入的中间结果 $&lt;k2,List(v2)&gt; $中的 $List(v2)$ 表示是一批属于同一个 $k_2$ 的 $value$</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Map 函数将输入地元素转换成 $&lt;key, value&gt;$ 形式地键值对，键和值地类型也是任意的，其中键不同于一般的标志属性，即键没有唯一性，不能作为输出地身份标识。</li>
+</ul>
+<h1 id="MapReduce-体系结构"><a href="#MapReduce-体系结构" class="headerlink" title="MapReduce 体系结构"></a>MapReduce 体系结构</h1><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/MapReduce体系结构.png" alt="MapReduce 体系结构" title="MapReduce 体系结构" style="width: 100%;"/><br></div>
+
+<p>MapReduce 主要有以下 4 个部分组成：</p>
+<ol>
+<li><strong>Client</strong><ul>
+<li>用户编写的 MapReduce 程序通过 Client 提交到 JobTracker 端</li>
+<li>用户可通过 Client 提供的一些接口查看作业运行状态</li>
+</ul>
+</li>
+<li><strong>JobTracker</strong><ul>
+<li>JobTracker 负责资源监控和作业调度</li>
+<li>JobTracker 监控所有 TaskTracker 与 Job 的健康状况，一旦发现失败，就将相应的任务转移到其他节点</li>
+<li>JobTracker 会跟踪任务的执行进度、资源使用量等信息，并将这些信息告诉任务调度器 (TaskScheduler)，而调度器会在资源出现空闲时，选择合适的任务去使用这些资源</li>
+</ul>
+</li>
+<li><strong>TaskTracker</strong><ul>
+<li>TaskTracker 会周期性地通过“心跳”将本节点上资源的使用情况和任务的运行进度汇报给 JobTracker，同时接收 JobTracker 发送过来的命令并执行相应的操作 (如启动新任务、杀死任务等)</li>
+<li>TaskTracker 使用 “slot” 等量划分本节点上的资源量 (CPU、内存等)。一个 Task 获取到一个 slot 后才有机会运行，而 Hadoop 调度器的作用就是将各个TaskTracker 上的空闲 slot 分配给 Task 使用。slot 分为 Map slot 和 Reduce slot 两种，分别供 MapTask 和 Reduce Task 使用</li>
+</ul>
+</li>
+<li><strong>Task</strong><ul>
+<li>Task 分为 Map Task 和 Reduce Task 两种，均由 TaskTracker 启动</li>
+</ul>
+</li>
+</ol>
+<h1 id="MapReduce-工作流程"><a href="#MapReduce-工作流程" class="headerlink" title="MapReduce 工作流程"></a>MapReduce 工作流程</h1><h2 id="工作流程概述"><a href="#工作流程概述" class="headerlink" title="工作流程概述"></a>工作流程概述</h2><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/MapReduce工作流程.png" alt="MapReduce 工作流程" title="MapReduce 工作流程" style="width: 80%;"/><br></div>
+
+<p>MapReduce 的核心思想是<strong>“分而治之”</strong>。如上图所示，把一个大的数据拆分成许多小的数据块再多台机器上并行处理，对于一个大 MapReduce 作业：</p>
+<ol>
+<li>首先会被拆分成许多个 Map 任务在多台机器上并行执行，每个 Map 任务通常运行在数据存储的节点上，以避免额外的数据传输开销。</li>
+<li>Map 任务结束后，会生成以 $&lt;key, value&gt;$ 形式的中间结果。</li>
+<li>这些中间结果会被分到多个 Reduce 任务在多台机器上执行，具有相同 $key$ 的 $&lt;key, value&gt;$ 会被发送到同一个 Reduce 任务那里</li>
+<li>Reduce 任务会对中间结果进行汇总计算得到最后结果，并输出到分布式文件系统中。</li>
+</ol>
+<p>需要指出：</p>
+<ul>
+<li>不同的 Map 任务之间不会进行通信</li>
+<li>不同的 Reduce 任务之间也不会发生任何信息交换</li>
+<li>用户不能显式地从一台机器向另一台机器发送消息</li>
+<li>所有的数据交换都是通过 MapReduce 框架自身去实现的</li>
+</ul>
+<h2 id="MapReduce-各个执行阶段"><a href="#MapReduce-各个执行阶段" class="headerlink" title="MapReduce 各个执行阶段"></a>MapReduce 各个执行阶段</h2><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/MapReduce各个执行阶段.png" alt="MapReduce 各个执行阶段" title="MapReduce 各个执行阶段" style="width: 100%;"/><br></div>
+
+<p>下面是 MapReduce 算法的执行过程</p>
+<ol>
+<li>MapReduce 框架使用 <code>InputFormat</code> 模块做 Map 前的预处理，比如验证输入的格式是否符合输入的定义；然后，将输入文件切分为<strong>逻辑上</strong>的多个 <code>InputSplit</code>，<code>InputSlit</code> 是 MapReduce 对文件进行处理和运算的输入单位，只是一个逻辑概念。</li>
+<li>由于 <code>InputSplit</code> 并非物理切分，因此需要 <code>RecordReader (RR)</code> 根据 <code>InputSplit</code> 中的信息来处理 <code>InputSplit</code> 中的具体记录，加载数据并转换为适合 Map 任务读取的键值对，输入给 Map 任务</li>
+<li>Map 任务会根据用户自定义的映射规则，输出一系列的 $&lt;key, value&gt;$ 作为中间结果。</li>
+<li>对 Map 输出的中间结果 $&lt;key, value&gt;$ 进行 <strong>Shuffle</strong> 操作得到有序的 $&lt;key, value-list&gt;$</li>
+<li>Reduce 以一系列 $&lt;key, value-list&gt;$ 中间结果作为输入，执行用户定义的逻辑，输出结果给 <code>OutputFormat</code> 模块。</li>
+<li><code>OutputFormat</code> 模块会验证输出目录是否已经存在以及输出结果类型是否符合配置文件中的配置类型，如果都满足，就输出 Reduce 的结果到分布式文件系统。</li>
+</ol>
+<h3 id="Split-分片-的解释"><a href="#Split-分片-的解释" class="headerlink" title="Split (分片) 的解释"></a>Split (分片) 的解释</h3><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/Split解释.png" alt="Split 解释" title="Split 解释" style="width: 85%;"/><br></div>
+
+<p>执行过程中的第 1 步提到 <code>InputSplit</code> 只是一个<strong>逻辑概念，并非物理切分</strong>:</p>
+<ul>
+<li>HDFS 以固定大小的 block 为基本单位存储数据，而对于 MapReduce 而言，其处理单位是 split。split 是一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。它的划分方法完全由用户自己决定。</li>
+</ul>
+<p><strong>Map 任务的数量</strong></p>
+<ul>
+<li>Hadoop 为每个 split 创建一个 Map 任务，split 的多少决定了 Map 任务的数目。大多数情况下，理想的分片大小是一个 HDFS 块。</li>
+</ul>
+<p><strong>Reduce 任务的数量</strong></p>
+<ul>
+<li>最优的 Reduce 任务个数取决于集群中可用的 Reduce 任务槽 (Reduce slot) 的数目</li>
+<li>通常设置比 Reduce 任务槽数目稍微小一些的 Reduce 任务个数 (这样可以预留一些系统资源处理可能发生的错误)</li>
+</ul>
+<h2 id="Shuffle-过程详解"><a href="#Shuffle-过程详解" class="headerlink" title="Shuffle 过程详解"></a>Shuffle 过程详解</h2><p>Shuffle 是指对 Map 输出结果进行一系列的分区 (Portiton)、排序 (Sort)、合并 (Combine)、归并 (Merge) 等处理并交给 Reduce 的过程。</p>
+<div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/Shuffle过程.png" alt="Shuffle 过程" title="Shuffle 过程" style="width: 85%;"/><br></div>
+
+<h3 id="Map-端的-Shuffle-过程"><a href="#Map-端的-Shuffle-过程" class="headerlink" title="Map 端的 Shuffle 过程"></a>Map 端的 Shuffle 过程</h3><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/Map端的Shuffle过程.png" alt="Map 端的 Shuffle 过程" title="Map 端的 Shuffle 过程" style="width: 40%;"/><br></div>
+
+<p>Map 的输出结果首先被写入缓存，当缓存满时，就启动溢写操作，把缓存中的数据写入磁盘文件、并清空缓存。</p>
+<ul>
+<li>当启动溢写操作时，首先需要吧缓存中的数据进行<strong>分区 (Portition)</strong>，然后对每个分区的数据进行<strong>排序 (Sort)</strong> 和<strong>合并 (Combine)</strong>，之后再写入磁盘。</li>
+<li>每次溢写操作会生成一个新的磁盘文件，随着 Map 任务的执行，会生成多个磁盘溢写文件。</li>
+<li>在 Map 任务全部结束前，这些溢写文件会被<strong>归并 (Merge)</strong> 成一个大的磁盘文件，然后通知相应的 Reduce 任务来领取属于自己的数据。</li>
+</ul>
+<blockquote>
+<p>Combine 和 Merge 的区别: 两个键值对 &lt;”a”, 1&gt; 和 &lt;”a”, 1&gt;，</p>
+<ul>
+<li>如果合并，会得到 &lt;”a”, 2&gt;，</li>
+<li>如果归并，会得到 &lt;”a”, &lt;1, 1&gt;&gt;</li>
+</ul>
+</blockquote>
+<h3 id="Reduce-端的-Shuffle-过程"><a href="#Reduce-端的-Shuffle-过程" class="headerlink" title="Reduce 端的 Shuffle 过程"></a>Reduce 端的 Shuffle 过程</h3><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/Reduce端的Shuffle过程.png" alt="Reduce 端的 Shuffle 过程" title="Reduce 端的 Shuffle 过程" style="width: 100%;"/><br></div>
+
+<ul>
+<li>Reduce 任务通过 RPC 向 JobTracker 询问 Map 任务是否已经完成，若完成，则领取数据</li>
+<li>Reduce 领取数据先放入缓存，来自不同 Map 机器，先<strong>归并 (Merge)</strong>，再<strong>合并 (Combine)</strong>，写入磁盘</li>
+<li>多个溢写文件归并成一个或多个大文件，文件中的键值对是排序的</li>
+<li>当数据很少时，不需要溢写到磁盘，直接在缓存中归并，然后输出给Reduce</li>
+</ul>
+<h2 id="MapReduce-应用程序执行过程"><a href="#MapReduce-应用程序执行过程" class="headerlink" title="MapReduce 应用程序执行过程"></a>MapReduce 应用程序执行过程</h2><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/MapReduce应用程序执行过程.png" alt="MapReduce 应用程序执行过程" title="MapReduce 应用程序执行过程" style="width: 100%;"/><br></div>
+
+<h2 id="MapRduce-过程详解"><a href="#MapRduce-过程详解" class="headerlink" title="MapRduce 过程详解"></a>MapRduce 过程详解</h2><div style="text-align:center"><br>    <img src="/notes/BigData/assets/ch7/MapRduce过程详解1.png" alt="" title="MapReduce 过程详解" style="width: 100%;"/><br>    <img src="/notes/BigData/assets/ch7/MapRduce过程详解1.png" alt="MapReduce 过程详解" title="MapReduce 过程详解" style="width: 100%;"/><br></div>
+
+<h1 id="实例分析：WordCount"><a href="#实例分析：WordCount" class="headerlink" title="实例分析：WordCount"></a>实例分析：WordCount</h1></div><ul class="post-copyright"><li><strong>Title: </strong><a href="/2020/05/28/intro2BigData7/">大数据技术原理与应用 - (7). MapReduce</a></li><li><strong>Author: </strong><a href="/">Zhanhang (Kyle) ZENG</a></li><li><strong>Link: </strong><a href="/2020/05/28/intro2BigData7/">https://zengzhanhang.com/2020/05/28/intro2BigData7/</a></li><li><strong>Released Date: </strong>2020-05-28</li><li><strong>Last update: </strong>2020-05-28</li><li><strong>Statement: </strong>All articles in this blog, unless otherwise stated, are based on the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> license.</li></ul><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex mb-2"><div class="level-start"><div class="article-tags size-small is-uppercase"><span class="mr-2"><i class="fas fa-tags has-text-grey"></i> #</span><a class="link-muted mr-2" rel="tag" href="/tags/Big-Data/">Big Data</a></div></div><div class="level-start"><div style="text-align:center"></div></div></div><div style="text-align:center"><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ebfed406b62a000122baf21&amp;product=inline-share-buttons" defer></script></div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/QRcode/alipay.jpg" alt="Alipay"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/QRcode/WeChatPay.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/26/intro2BigData5/"><span class="level-item">大数据技术原理与应用 - (5). NoSQL 数据库</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: '22472128972144462f02c397077c66d7',
+            repo: 'zengzhanhang.github.io',
+            owner: 'zengzhanhang',
+            clientID: '13624a11c95a2d5eed31',
+            clientSecret: '67d97a17e7f385cf24a8a24e3bbfaa1e8fcc20c4',
+            admin: ["zengzhanhang"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: 'last',
+            
+            
+            enableHotKey: true
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="is-rounded" src="/img/icon(square)-min.png" alt="Zhanhang (Kyle) Zeng"></figure><p class="title is-size-4 is-block line-height-inherit">Zhanhang (Kyle) Zeng</p><p class="is-size-6 is-block">Statistics, Machine Learning &amp; Ai</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Edinburgh, Scotland</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">18</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">11</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">17</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded follow-button" href="https://github.com/zengzhanhang" target="_blank" rel="noopener"><i class="fab fa-github"></i>  Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Linkedin" href="https://www.linkedin.com/in/zhanhang-zeng-801a67185/"><i class="fab fa-linkedin-in"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://www.facebook.com/zengzhanhang"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/cengzhanhang"><i class="fab fa-instagram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://www.weibo.com/zengzhanhang"><i class="fab fa-weibo"></i></a></div></div></div><div class="card widget is-sticky" id="toc"><div class="card-content"><div class="menu catalogue-other-setting"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="is-flex" href="#MapReduce-概述"><span class="mr-2">1</span><span>MapReduce 概述</span></a><ul class="menu-list"><li><a class="is-flex" href="#MapReduce-模型简介"><span class="mr-2">1.1</span><span>MapReduce 模型简介</span></a></li><li><a class="is-flex" href="#Map-和-Reduce-函数"><span class="mr-2">1.2</span><span>Map 和 Reduce 函数</span></a></li></ul></li><li><a class="is-flex" href="#MapReduce-体系结构"><span class="mr-2">2</span><span>MapReduce 体系结构</span></a></li><li><a class="is-flex" href="#MapReduce-工作流程"><span class="mr-2">3</span><span>MapReduce 工作流程</span></a><ul class="menu-list"><li><a class="is-flex" href="#工作流程概述"><span class="mr-2">3.1</span><span>工作流程概述</span></a></li><li><a class="is-flex" href="#MapReduce-各个执行阶段"><span class="mr-2">3.2</span><span>MapReduce 各个执行阶段</span></a><ul class="menu-list"><li><a class="is-flex" href="#Split-分片-的解释"><span class="mr-2">3.2.1</span><span>Split (分片) 的解释</span></a></li></ul></li><li><a class="is-flex" href="#Shuffle-过程详解"><span class="mr-2">3.3</span><span>Shuffle 过程详解</span></a><ul class="menu-list"><li><a class="is-flex" href="#Map-端的-Shuffle-过程"><span class="mr-2">3.3.1</span><span>Map 端的 Shuffle 过程</span></a></li><li><a class="is-flex" href="#Reduce-端的-Shuffle-过程"><span class="mr-2">3.3.2</span><span>Reduce 端的 Shuffle 过程</span></a></li></ul></li><li><a class="is-flex" href="#MapReduce-应用程序执行过程"><span class="mr-2">3.4</span><span>MapReduce 应用程序执行过程</span></a></li><li><a class="is-flex" href="#MapRduce-过程详解"><span class="mr-2">3.5</span><span>MapRduce 过程详解</span></a></li></ul></li><li><a class="is-flex" href="#实例分析：WordCount"><span class="mr-2">4</span><span>实例分析：WordCount</span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="/img/logo_light.png" alt="Zhanhang Zeng&#039;s Blog | 小树的个人博客" height="28"><img class="logo-img-dark" src="/img/logo_dark.png" alt="Zhanhang Zeng&#039;s Blog | 小树的个人博客" height="28"></a><p class="size-small"><span>&copy; 2020 Zhanhang (Kyle) ZENG</span>  All Rights Reserved<br>Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span>    <span id="busuanzi_container_site_pv">Totally, <span id="busuanzi_value_site_pv">0</span> page views</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><i class="fab fa-creative-commons"></i> <i class="fab fa-creative-commons-by"></i> <i class="fab fa-creative-commons-nc"></i> <i class="fab fa-creative-commons-sa"></i> </a><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Zhanhang&#039;s GitHub" href="https://github.com/zengzhanhang"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'https://zengzhanhang.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><script src="/js/main.js" defer></script><script src="/js/imaegoo/universe.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
